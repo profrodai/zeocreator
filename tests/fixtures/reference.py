@@ -345,6 +345,7 @@ def build_reference_snapshot() -> ReferenceSnapshot:
             assignment=assignment,
             publication=profile_by_id[assignment.publication_id],
             synthesis=synthesis_by_id[assignment.publication_id],
+            dossier=None,
             creative_direction="Create a clear, useful, evidence-led piece for the intended audience.",
             delivery_requirements=REQUIREMENTS,
             producer_extension=None,

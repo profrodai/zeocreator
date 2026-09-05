@@ -7,7 +7,8 @@ from pydantic import ValidationError
 from zeo_core.contracts import CapabilityStatus
 from zeo_core.tools import invoke_sync
 
-from zeo_creator.capabilities._newsroom_examples import NOW, WINDOW, dossier, observation
+from zeo_creator.capabilities._examples import REQUIREMENTS, publication
+from zeo_creator.capabilities._newsroom_examples import NOW, WINDOW, agenda, dossier, observation
 from zeo_creator.capabilities._specialization_examples import (
     article_draft,
     article_plan,
@@ -18,10 +19,17 @@ from zeo_creator.capabilities._specialization_examples import (
     newsletter_plan,
 )
 from zeo_creator.capabilities.commentary_workflows import ReviewCommentaryRequest
+from zeo_creator.capabilities.create_content_brief import CreateContentBriefRequest
 from zeo_creator.capabilities.extract_editorial_signals import ExtractEditorialSignalsRequest
 from zeo_creator.capabilities.journalism_workflows import ReviewNewsArticleRequest
+from zeo_creator.capabilities.plan_content_portfolio import PlanContentPortfolioRequest
 from zeo_creator.capabilities.plan_editorial_agenda import PlanEditorialAgendaRequest
 from zeo_creator.contracts.commentary import CommentaryDraft
+from zeo_creator.contracts.editorial import (
+    ContentRequirement,
+    PortfolioConstraints,
+    PublicationObjective,
+)
 from zeo_creator.contracts.journalism import HighRiskClassification, NewsArticlePlan
 from zeo_creator.contracts.newsroom import (
     PublicationSlot,
@@ -202,3 +210,46 @@ def test_newsletter_canary_has_html_plain_text_and_lineage() -> None:
     assert draft.html_content.media_type == "text/html"
     assert draft.plain_text_content.media_type == "text/plain"
     assert draft.source_refs
+
+
+def test_frozen_dossier_and_agenda_feed_the_existing_production_boundary() -> None:
+    profile = publication()
+    frozen = dossier()
+    editorial_agenda = agenda()
+    portfolio_result = _invoke(
+        "creator.plan_content_portfolio@1.0.0",
+        PlanContentPortfolioRequest(
+            organization_id=profile.organization_id,
+            profiles=(profile,),
+            editorial_agendas=(editorial_agenda,),
+            story_dossiers=(frozen,),
+            objectives=(
+                PublicationObjective(
+                    publication_id=profile.publication_id,
+                    objective="Explain the verified development",
+                    desired_audience_action="Understand what changed",
+                ),
+            ),
+            constraints=PortfolioConstraints(
+                requirements=(ContentRequirement(content_kind="news.article", quantity=1),)
+            ),
+            planning_window=WINDOW,
+            due_at=NOW + timedelta(hours=4),
+            created_at=NOW,
+        ),
+    )
+    assert portfolio_result.status is CapabilityStatus.success
+    assignment = portfolio_result.data.plan.assignments[0]
+    brief_result = _invoke(
+        "creator.create_content_brief@1.0.0",
+        CreateContentBriefRequest(
+            assignment=assignment,
+            publication=profile,
+            dossier=frozen,
+            creative_direction="Produce a concise verified explainer.",
+            delivery_requirements=REQUIREMENTS,
+            created_at=NOW,
+        ),
+    )
+    assert brief_result.status is CapabilityStatus.success
+    assert brief_result.data.brief.source_refs == frozen.verified_claims[0].evidence_refs

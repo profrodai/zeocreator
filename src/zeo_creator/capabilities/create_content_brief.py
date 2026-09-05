@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from zeo_core.contracts import CapabilityExample, CapabilityResult, EffectKind
 from zeo_core.tools import ToolContext, capability
 
@@ -10,6 +10,7 @@ from zeo_creator.capabilities._examples import brief_request
 from zeo_creator.contracts.common import CreatorModel
 from zeo_creator.contracts.editorial import EditorialAssignment
 from zeo_creator.contracts.evidence import ResearchSynthesis
+from zeo_creator.contracts.newsroom import StoryDossier
 from zeo_creator.contracts.production import AttestationRequirement, ContentBrief, ExtensionPayload
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.errors import CreatorDomainError
@@ -19,12 +20,19 @@ from zeo_creator.services.briefing import create_brief
 class CreateContentBriefRequest(CreatorModel):
     assignment: EditorialAssignment
     publication: PublicationProfile
-    synthesis: ResearchSynthesis
+    synthesis: ResearchSynthesis | None = None
+    dossier: StoryDossier | None = None
     creative_direction: str = Field(min_length=1)
     delivery_requirements: tuple[AttestationRequirement, ...] = Field(min_length=1)
     producer_extension: ExtensionPayload | None = None
     created_at: datetime
     content_revision: int = Field(default=1, ge=1)
+
+    @model_validator(mode="after")
+    def one_evidence_package(self) -> CreateContentBriefRequest:
+        if (self.synthesis is None) == (self.dossier is None):
+            raise ValueError("provide exactly one synthesis or story dossier")
+        return self
 
 
 class CreateContentBriefResponse(CreatorModel):
@@ -56,6 +64,7 @@ def create_content_brief(
             assignment=request.assignment,
             publication=request.publication,
             synthesis=request.synthesis,
+            dossier=request.dossier,
             creative_direction=request.creative_direction,
             delivery_requirements=request.delivery_requirements,
             producer_extension=request.producer_extension,

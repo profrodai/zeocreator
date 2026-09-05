@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from zeo_core.contracts import CapabilityExample, CapabilityResult, EffectKind
 from zeo_core.tools import ToolContext, capability
 
@@ -15,15 +15,18 @@ from zeo_creator.contracts.editorial import (
     PublicationObjective,
 )
 from zeo_creator.contracts.evidence import ResearchSynthesis, ResearchWindow
+from zeo_creator.contracts.newsroom import EditorialAgenda, StoryDossier
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.errors import CreatorDomainError
-from zeo_creator.services.planning import plan_portfolio
+from zeo_creator.services.planning import plan_portfolio, plan_portfolio_from_agendas
 
 
 class PlanContentPortfolioRequest(CreatorModel):
     organization_id: str = Field(min_length=1)
     profiles: tuple[PublicationProfile, ...] = Field(min_length=1)
-    syntheses: tuple[ResearchSynthesis, ...] = Field(min_length=1)
+    syntheses: tuple[ResearchSynthesis, ...] = ()
+    editorial_agendas: tuple[EditorialAgenda, ...] = ()
+    story_dossiers: tuple[StoryDossier, ...] = ()
     content_history: tuple[ContentHistoryEntry, ...] = ()
     objectives: tuple[PublicationObjective, ...] = Field(min_length=1)
     constraints: PortfolioConstraints
@@ -31,6 +34,16 @@ class PlanContentPortfolioRequest(CreatorModel):
     due_at: datetime
     created_at: datetime
     revision: int = Field(default=1, ge=1)
+
+    @model_validator(mode="after")
+    def one_editorial_source_mode(self) -> PlanContentPortfolioRequest:
+        synthesis_mode = bool(self.syntheses)
+        agenda_mode = bool(self.editorial_agendas or self.story_dossiers)
+        if synthesis_mode == agenda_mode:
+            raise ValueError("provide either syntheses or agendas with dossiers")
+        if agenda_mode and (not self.editorial_agendas or not self.story_dossiers):
+            raise ValueError("agenda mode requires editorial_agendas and story_dossiers")
+        return self
 
 
 class PlanContentPortfolioResponse(CreatorModel):
@@ -58,18 +71,32 @@ def plan_content_portfolio(
 ) -> CapabilityResult[PlanContentPortfolioResponse]:
     del ctx
     try:
-        plan = plan_portfolio(
-            organization_id=request.organization_id,
-            profiles=request.profiles,
-            syntheses=request.syntheses,
-            content_history=request.content_history,
-            objectives=request.objectives,
-            constraints=request.constraints,
-            planning_window=request.planning_window,
-            due_at=request.due_at,
-            created_at=request.created_at,
-            revision=request.revision,
-        )
+        if request.editorial_agendas:
+            plan = plan_portfolio_from_agendas(
+                organization_id=request.organization_id,
+                profiles=request.profiles,
+                agendas=request.editorial_agendas,
+                dossiers=request.story_dossiers,
+                content_history=request.content_history,
+                objectives=request.objectives,
+                planning_window=request.planning_window,
+                due_at=request.due_at,
+                created_at=request.created_at,
+                revision=request.revision,
+            )
+        else:
+            plan = plan_portfolio(
+                organization_id=request.organization_id,
+                profiles=request.profiles,
+                syntheses=request.syntheses,
+                content_history=request.content_history,
+                objectives=request.objectives,
+                constraints=request.constraints,
+                planning_window=request.planning_window,
+                due_at=request.due_at,
+                created_at=request.created_at,
+                revision=request.revision,
+            )
     except CreatorDomainError as exc:
         return CapabilityResult.fail(msg=str(exc), code=exc.code, exception=exc)
     return CapabilityResult.ok(
