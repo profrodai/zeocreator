@@ -1,15 +1,13 @@
 """Evidence provenance and publication-scoped research synthesis contracts."""
 
-from datetime import datetime
-
 from pydantic import Field, model_validator
 
-from zeo_creator.contracts.common import CreatorModel, DurableArtifact
+from zeo_creator.contracts.common import CreatorModel, DurableArtifact, UtcDatetime
 
 
 class ResearchWindow(CreatorModel):
-    starts_at: datetime
-    ends_at: datetime
+    starts_at: UtcDatetime
+    ends_at: UtcDatetime
 
     @model_validator(mode="after")
     def ordered(self) -> ResearchWindow:
@@ -31,7 +29,7 @@ class EvidenceItem(DurableArtifact):
     source_kind: str = Field(min_length=1)
     source_ref: str = Field(min_length=1)
     connection_ref: str = Field(min_length=1)
-    observed_at: datetime
+    observed_at: UtcDatetime
     author_or_origin: str = Field(min_length=1)
     title: str = Field(min_length=1)
     excerpt_or_summary: str = Field(min_length=1)
@@ -55,3 +53,16 @@ class ResearchSynthesis(DurableArtifact):
     evidence_refs: tuple[str, ...] = ()
     coverage_gaps: tuple[str, ...] = ()
     content_history_refs: tuple[str, ...] = ()
+
+    @model_validator(mode="after")
+    def claims_belong_to_evidence_set(self) -> ResearchSynthesis:
+        allowed = set(self.evidence_refs)
+        unknown = {
+            evidence_ref
+            for claim in self.candidate_claims
+            for evidence_ref in claim.evidence_refs
+            if evidence_ref not in allowed
+        }
+        if unknown:
+            raise ValueError("candidate claims reference evidence absent from synthesis")
+        return self

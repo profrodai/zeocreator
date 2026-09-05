@@ -1,10 +1,10 @@
 """Publication-scoped performance observation and assessment contracts."""
 
-from datetime import datetime
+from enum import StrEnum
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
-from zeo_creator.contracts.common import CreatorModel, DurableArtifact
+from zeo_creator.contracts.common import CreatorModel, DurableArtifact, UtcDatetime
 from zeo_creator.contracts.distribution import ProviderKind
 from zeo_creator.contracts.evidence import ResearchWindow
 
@@ -16,7 +16,15 @@ class MetricsQuery(CreatorModel):
     connection_ref: str = Field(min_length=1)
     destination_account_ref: str = Field(min_length=1)
     observation_window: ResearchWindow
-    operation_refs: tuple[str, ...] = ()
+    operation_refs: tuple[str, ...] = Field(min_length=1)
+
+
+class MetricAggregation(StrEnum):
+    COUNT = "count"
+    SUM = "sum"
+    AVERAGE = "average"
+    RATE = "rate"
+    UNIQUE = "unique"
 
 
 class MetricObservation(DurableArtifact):
@@ -24,11 +32,27 @@ class MetricObservation(DurableArtifact):
     provider_kind: ProviderKind
     connection_ref: str = Field(min_length=1)
     destination_account_ref: str = Field(min_length=1)
-    observed_at: datetime
+    observed_at: UtcDatetime
     artifact_ref: str = Field(min_length=1)
     publication_operation_ref: str = Field(min_length=1)
     metric_name: str = Field(min_length=1)
     metric_value: float
+    unit: str = Field(min_length=1)
+    aggregation: MetricAggregation
+    denominator: str | None = None
+    attribution_window: ResearchWindow
+    objective_mapping: str = Field(min_length=1)
+    baseline: float | None = None
+    target: float | None = None
+    normalized_rate: float | None = None
+    provider_definition: str = Field(min_length=1)
+    provider_definition_version: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def rate_has_denominator(self) -> MetricObservation:
+        if self.aggregation == MetricAggregation.RATE and not self.denominator:
+            raise ValueError("rate metrics require a denominator")
+        return self
 
 
 class DailyPerformanceAssessment(DurableArtifact):

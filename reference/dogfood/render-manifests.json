@@ -1,222 +1,944 @@
 [
   {
-    "artifact_digest": "sha256:bee0daf93ed5777f6e0cf551f7caacc33f2580587a74df2fab0ab58198bfe0a8",
-    "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
-    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
-    "brief_content_digest": "sha256:2704530c81bc0add87f68037eecf8b5d527b2d3b65b34160c2c4fa933e2ac853",
-    "brief_id": "brief_a072daeb7fa3dcf4dd3e",
-    "content_digest": "sha256:ed8674ea6ba0cec212b63746ce303990ccd3957a96bf4812026e829317dc8ed0",
+    "artifact_digest": "sha256:152f31400039b60a93b2c63d356d90d414cc53a9b544cb6b3d9a9a7e92d4070d",
+    "artifact_digest_proof": {
+      "algorithm": "sha256",
+      "byte_length": 92,
+      "digest": "sha256:152f31400039b60a93b2c63d356d90d414cc53a9b544cb6b3d9a9a7e92d4070d",
+      "evidence_ref": "retrieval://artifact_0418349476cba91410d7",
+      "retrieved_at": "2026-09-05T08:00:00Z",
+      "storage_ref": "artifact://ducktyper/brief_f57dd847627f60c69e29",
+      "tool_identity": "ducktyper.synthetic-verifier",
+      "tool_version": "1.0.0"
+    },
+    "artifact_ref": "artifact_0418349476cba91410d7",
+    "attestations": [
+      {
+        "check_id": "element.script",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.script",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.scene_beats",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.scene_beats",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.dialogue",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.dialogue",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.voice_over",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.voice_over",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.on_screen_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.on_screen_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.character_actions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.character_actions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.setting",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.setting",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.audio_direction",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.audio_direction",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.ending",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/element.ending",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "content.extracted_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/content.extracted_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "media.decode",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/media.decode",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "video.duration",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/video.duration",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "audio.track",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/audio.track",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.website.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/destination.website.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.linkedin.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_0418349476cba91410d7/destination.linkedin.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      }
+    ],
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
+    "brief_content_digest": "sha256:09f91940fd3b6f7f38b912db38ce54f68728b2f89cce5201997c6fb78c80d1ea",
+    "brief_id": "brief_f57dd847627f60c69e29",
+    "content_digest": "sha256:7a0986641f4be9126adb1764984350deb7425d0ba69262cf140bf810c2ed03b5",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
-    "included_elements": [
-      "script",
-      "scene_beats",
-      "dialogue",
-      "voice_over",
-      "on_screen_text",
-      "character_actions",
-      "setting",
-      "audio_direction",
-      "ending"
-    ],
     "input_refs": [
-      "brief_a072daeb7fa3dcf4dd3e",
-      "artifact_a9c6396ba2b4968cd44c"
+      "brief_f57dd847627f60c69e29",
+      "artifact_0418349476cba91410d7"
     ],
-    "manifest_id": "manifest_a9c6396ba2b4968cd44c",
+    "manifest_id": "manifest_0418349476cba91410d7",
     "organization_id": "ducktyper-dogfood",
     "publication_id": "profrod.ai",
     "rendered_claim_ids": [
       "claim_8407fb300deb32515a8c"
     ],
     "revision": 1,
-    "schema_version": "1.0.0",
-    "technical_checks": {
-      "decodable": true,
-      "dimensions": true,
-      "duration": true
-    }
+    "schema_version": "1.0.0"
   },
   {
-    "artifact_digest": "sha256:6c1a066c38e8b3aa960d604ec9a9e9cfc66329afd1a5f9152644f914277aae9c",
-    "artifact_ref": "artifact_8149998ba5cac80ebb12",
-    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
-    "brief_content_digest": "sha256:d4bcf1eed467fd6d2bf764676b8feed1018e5e628726bd4cdc9f3dd1e23fe9ef",
-    "brief_id": "brief_c740c7b4799e30c9f33e",
-    "content_digest": "sha256:c1f18ceb3f5c174de00622ee2ea415f7365b646f32f48923e7cd99c9603da240",
+    "artifact_digest": "sha256:b2d5772cb81fcd7df7a969b20392cd10df9f6ef3a16cf0e0a20ef637f22b0561",
+    "artifact_digest_proof": {
+      "algorithm": "sha256",
+      "byte_length": 92,
+      "digest": "sha256:b2d5772cb81fcd7df7a969b20392cd10df9f6ef3a16cf0e0a20ef637f22b0561",
+      "evidence_ref": "retrieval://artifact_e4ecf6fec6883084de6a",
+      "retrieved_at": "2026-09-05T08:00:00Z",
+      "storage_ref": "artifact://ducktyper/brief_4f0e7c1d8038e8e5365b",
+      "tool_identity": "ducktyper.synthetic-verifier",
+      "tool_version": "1.0.0"
+    },
+    "artifact_ref": "artifact_e4ecf6fec6883084de6a",
+    "attestations": [
+      {
+        "check_id": "element.information_hierarchy",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.information_hierarchy",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.metrics",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.metrics",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.labels",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.labels",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.motion_sequence",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.motion_sequence",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.visual_metaphor",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.visual_metaphor",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.screen_regions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.screen_regions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.narration",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.narration",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.highlight_events",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/element.highlight_events",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "content.extracted_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/content.extracted_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "media.decode",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/media.decode",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "visual.dimensions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/visual.dimensions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "motion.sequence",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/motion.sequence",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.website.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/destination.website.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.linkedin.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_e4ecf6fec6883084de6a/destination.linkedin.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      }
+    ],
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
+    "brief_content_digest": "sha256:7e6c3b6e00dde57e2cd1d94991a6b8f3e703139ed40764c532dfdbf4a6fcec45",
+    "brief_id": "brief_4f0e7c1d8038e8e5365b",
+    "content_digest": "sha256:f926302479002390658e7ad00eff676f53fb11393a634aa02d7874af01467b28",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
-    "included_elements": [
-      "information_hierarchy",
-      "metrics",
-      "labels",
-      "motion_sequence",
-      "visual_metaphor",
-      "screen_regions",
-      "narration",
-      "highlight_events"
-    ],
     "input_refs": [
-      "brief_c740c7b4799e30c9f33e",
-      "artifact_8149998ba5cac80ebb12"
+      "brief_4f0e7c1d8038e8e5365b",
+      "artifact_e4ecf6fec6883084de6a"
     ],
-    "manifest_id": "manifest_8149998ba5cac80ebb12",
+    "manifest_id": "manifest_e4ecf6fec6883084de6a",
     "organization_id": "ducktyper-dogfood",
     "publication_id": "profrod.ai",
     "rendered_claim_ids": [
       "claim_1f3529356b5a9a080f7e"
     ],
     "revision": 1,
-    "schema_version": "1.0.0",
-    "technical_checks": {
-      "decodable": true,
-      "dimensions": true,
-      "duration": true
-    }
+    "schema_version": "1.0.0"
   },
   {
-    "artifact_digest": "sha256:736ff56410419de52073d296fa15651fa241d087f7936f39aaddb906af8f2f19",
-    "artifact_ref": "artifact_2dabeddb5c8662a762ab",
-    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
-    "brief_content_digest": "sha256:d64a9c90b4648c179b770fb8a0e7fbd5de9d5815abfdcf6f5f42f3843157728b",
-    "brief_id": "brief_b80021c5388692b9f9ab",
-    "content_digest": "sha256:6fd818f57e80eac188c773f0e1d0998ac1e81bf267dd9cdaa525dddfb98d068c",
+    "artifact_digest": "sha256:3009a3c5333a466bb5dac91160e1c338ed162b6009991f30ee5f919fbed2a736",
+    "artifact_digest_proof": {
+      "algorithm": "sha256",
+      "byte_length": 92,
+      "digest": "sha256:3009a3c5333a466bb5dac91160e1c338ed162b6009991f30ee5f919fbed2a736",
+      "evidence_ref": "retrieval://artifact_cf60524343121721e676",
+      "retrieved_at": "2026-09-05T08:00:00Z",
+      "storage_ref": "artifact://ducktyper/brief_20ba8e08b5bbdcf383e7",
+      "tool_identity": "ducktyper.synthetic-verifier",
+      "tool_version": "1.0.0"
+    },
+    "artifact_ref": "artifact_cf60524343121721e676",
+    "attestations": [
+      {
+        "check_id": "element.panel_beats",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/element.panel_beats",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.dialogue_captions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/element.dialogue_captions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.poses",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/element.poses",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.continuity_requirements",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/element.continuity_requirements",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.slide_headlines",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/element.slide_headlines",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.final_cta",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/element.final_cta",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "content.extracted_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/content.extracted_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "media.decode",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/media.decode",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "visual.dimensions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/visual.dimensions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "comic.panel_count",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/comic.panel_count",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.website.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/destination.website.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.linkedin.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_cf60524343121721e676/destination.linkedin.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      }
+    ],
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
+    "brief_content_digest": "sha256:5bf2e00a0795142f2ca755296f687767c1c8f58bdeb92dd52d75cda3aea4e921",
+    "brief_id": "brief_20ba8e08b5bbdcf383e7",
+    "content_digest": "sha256:626075b41b0d49d073ec8b612edc9e872f6a8dab98a1eb1ed5fe9b572c0fb7dd",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
-    "included_elements": [
-      "panel_beats",
-      "dialogue_captions",
-      "poses",
-      "continuity_requirements",
-      "slide_headlines",
-      "final_cta"
-    ],
     "input_refs": [
-      "brief_b80021c5388692b9f9ab",
-      "artifact_2dabeddb5c8662a762ab"
+      "brief_20ba8e08b5bbdcf383e7",
+      "artifact_cf60524343121721e676"
     ],
-    "manifest_id": "manifest_2dabeddb5c8662a762ab",
+    "manifest_id": "manifest_cf60524343121721e676",
     "organization_id": "ducktyper-dogfood",
     "publication_id": "profrod.ai",
     "rendered_claim_ids": [
       "claim_9887cb4795611866fdc9"
     ],
     "revision": 1,
-    "schema_version": "1.0.0",
-    "technical_checks": {
-      "decodable": true,
-      "dimensions": true,
-      "duration": true
-    }
+    "schema_version": "1.0.0"
   },
   {
-    "artifact_digest": "sha256:305d0b7c2db98abd4943e23797174ed40149441cc610795325db74d9d1ab8d0e",
-    "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
-    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
-    "brief_content_digest": "sha256:377aa5db2e7da36c71e21160eb35c9a815339b5cc4931db76b1e60559075b7fe",
-    "brief_id": "brief_8fbb5e120c400d53ffb2",
-    "content_digest": "sha256:7d50fe0a1af3be74874e76bf4927878f4143f2fc73ef9fc50d9960261dcb432d",
+    "artifact_digest": "sha256:321c5da1f0bd3101ff802f09abcf4d41990d5f42224e63435c89e1afcdf2b611",
+    "artifact_digest_proof": {
+      "algorithm": "sha256",
+      "byte_length": 92,
+      "digest": "sha256:321c5da1f0bd3101ff802f09abcf4d41990d5f42224e63435c89e1afcdf2b611",
+      "evidence_ref": "retrieval://artifact_1b9113fbe3b127f11c92",
+      "retrieved_at": "2026-09-05T08:00:00Z",
+      "storage_ref": "artifact://ducktyper/brief_f07ef1fc363755a84ec7",
+      "tool_identity": "ducktyper.synthetic-verifier",
+      "tool_version": "1.0.0"
+    },
+    "artifact_ref": "artifact_1b9113fbe3b127f11c92",
+    "attestations": [
+      {
+        "check_id": "element.script",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.script",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.scene_beats",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.scene_beats",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.dialogue",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.dialogue",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.voice_over",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.voice_over",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.on_screen_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.on_screen_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.character_actions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.character_actions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.setting",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.setting",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.audio_direction",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.audio_direction",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.ending",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/element.ending",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "content.extracted_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/content.extracted_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "media.decode",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/media.decode",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "video.duration",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/video.duration",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "audio.track",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/audio.track",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.website.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/destination.website.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.newsletter.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_1b9113fbe3b127f11c92/destination.newsletter.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      }
+    ],
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
+    "brief_content_digest": "sha256:644f6455257d4d8449a0c1d093dde99717d6ff83dd75f49d6e8ceacb1438e8d8",
+    "brief_id": "brief_f07ef1fc363755a84ec7",
+    "content_digest": "sha256:ee496bd8cc80caccc5b108cd04c42f32d1406b0f056fc2df30d6efc0e94a4702",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
-    "included_elements": [
-      "script",
-      "scene_beats",
-      "dialogue",
-      "voice_over",
-      "on_screen_text",
-      "character_actions",
-      "setting",
-      "audio_direction",
-      "ending"
-    ],
     "input_refs": [
-      "brief_8fbb5e120c400d53ffb2",
-      "artifact_133f9d2d5a9fea47cc6e"
+      "brief_f07ef1fc363755a84ec7",
+      "artifact_1b9113fbe3b127f11c92"
     ],
-    "manifest_id": "manifest_133f9d2d5a9fea47cc6e",
+    "manifest_id": "manifest_1b9113fbe3b127f11c92",
     "organization_id": "ducktyper-dogfood",
     "publication_id": "zeroemployee.org",
     "rendered_claim_ids": [
       "claim_2d2f8c24abefb57ef02e"
     ],
     "revision": 1,
-    "schema_version": "1.0.0",
-    "technical_checks": {
-      "decodable": true,
-      "dimensions": true,
-      "duration": true
-    }
+    "schema_version": "1.0.0"
   },
   {
-    "artifact_digest": "sha256:04920ac63404d30106e6e10ca41bf67a15e051ed302785d6ee84d1f55701932a",
-    "artifact_ref": "artifact_69a7c523ac973e6d200a",
-    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
-    "brief_content_digest": "sha256:4f9b5c7b014d4fd6fe84f3cf8e384d9942f872819cd7690e8d4e0aabdc7d61a0",
-    "brief_id": "brief_3dfa05d6507eaa5a5bcf",
-    "content_digest": "sha256:36349ebe9358c520ed6ea1470d9d3c0a554cdb258a1dfd582c90fe12449e514b",
+    "artifact_digest": "sha256:920e00cfd62f313bc964e977a94b5e12ee2a25389009d83bea4ba86ebc3db70c",
+    "artifact_digest_proof": {
+      "algorithm": "sha256",
+      "byte_length": 92,
+      "digest": "sha256:920e00cfd62f313bc964e977a94b5e12ee2a25389009d83bea4ba86ebc3db70c",
+      "evidence_ref": "retrieval://artifact_c694939889ad19b63765",
+      "retrieved_at": "2026-09-05T08:00:00Z",
+      "storage_ref": "artifact://ducktyper/brief_dc0482c85a7e56ad1963",
+      "tool_identity": "ducktyper.synthetic-verifier",
+      "tool_version": "1.0.0"
+    },
+    "artifact_ref": "artifact_c694939889ad19b63765",
+    "attestations": [
+      {
+        "check_id": "element.information_hierarchy",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.information_hierarchy",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.metrics",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.metrics",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.labels",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.labels",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.motion_sequence",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.motion_sequence",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.visual_metaphor",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.visual_metaphor",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.screen_regions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.screen_regions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.narration",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.narration",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.highlight_events",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/element.highlight_events",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "content.extracted_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/content.extracted_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "media.decode",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/media.decode",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "visual.dimensions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/visual.dimensions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "motion.sequence",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/motion.sequence",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.website.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/destination.website.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.newsletter.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_c694939889ad19b63765/destination.newsletter.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      }
+    ],
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
+    "brief_content_digest": "sha256:5c309b389fe1d4417202be63ced85095aae794757412dfa9a9c7e120ff53444e",
+    "brief_id": "brief_dc0482c85a7e56ad1963",
+    "content_digest": "sha256:d2bbe77b61d0dc4e7d4e2f68db2c40f77e1be75e426a9cd9e943316dff5815f5",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
-    "included_elements": [
-      "information_hierarchy",
-      "metrics",
-      "labels",
-      "motion_sequence",
-      "visual_metaphor",
-      "screen_regions",
-      "narration",
-      "highlight_events"
-    ],
     "input_refs": [
-      "brief_3dfa05d6507eaa5a5bcf",
-      "artifact_69a7c523ac973e6d200a"
+      "brief_dc0482c85a7e56ad1963",
+      "artifact_c694939889ad19b63765"
     ],
-    "manifest_id": "manifest_69a7c523ac973e6d200a",
+    "manifest_id": "manifest_c694939889ad19b63765",
     "organization_id": "ducktyper-dogfood",
     "publication_id": "zeroemployee.org",
     "rendered_claim_ids": [
       "claim_5aaa1a33a7ca51564f5c"
     ],
     "revision": 1,
-    "schema_version": "1.0.0",
-    "technical_checks": {
-      "decodable": true,
-      "dimensions": true,
-      "duration": true
-    }
+    "schema_version": "1.0.0"
   },
   {
-    "artifact_digest": "sha256:aeac7772f15ea044e4f5f9d398b87315c732176de28a5269e6e69260dea1aaed",
-    "artifact_ref": "artifact_18940b3934fcec873fb8",
-    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
-    "brief_content_digest": "sha256:8ff61261aafc27810d0a194c0055b051106fd142ebe38a733ddafd73e0b9984a",
-    "brief_id": "brief_f898a646b35e42eb7752",
-    "content_digest": "sha256:53b7252dd624f923a01001ca802d36de2f5fbf35127b2f73496e194c9de0dc13",
+    "artifact_digest": "sha256:011f5eb993e1561e45c85b8f428fe139f2d5850b74d872d00774fc59a7b45648",
+    "artifact_digest_proof": {
+      "algorithm": "sha256",
+      "byte_length": 92,
+      "digest": "sha256:011f5eb993e1561e45c85b8f428fe139f2d5850b74d872d00774fc59a7b45648",
+      "evidence_ref": "retrieval://artifact_568bd8a1c24ac8825cee",
+      "retrieved_at": "2026-09-05T08:00:00Z",
+      "storage_ref": "artifact://ducktyper/brief_75d4b73cf5f78f3d2eda",
+      "tool_identity": "ducktyper.synthetic-verifier",
+      "tool_version": "1.0.0"
+    },
+    "artifact_ref": "artifact_568bd8a1c24ac8825cee",
+    "attestations": [
+      {
+        "check_id": "element.panel_beats",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/element.panel_beats",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.dialogue_captions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/element.dialogue_captions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.poses",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/element.poses",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.continuity_requirements",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/element.continuity_requirements",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.slide_headlines",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/element.slide_headlines",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "element.final_cta",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/element.final_cta",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "content.extracted_text",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/content.extracted_text",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "media.decode",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/media.decode",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "visual.dimensions",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/visual.dimensions",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "comic.panel_count",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/comic.panel_count",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.website.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/destination.website.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      },
+      {
+        "check_id": "destination.newsletter.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://artifact_568bd8a1c24ac8825cee/destination.newsletter.constraints",
+        "expected_constraint": "must pass",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "ducktyper.synthetic-verifier"
+      }
+    ],
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
+    "brief_content_digest": "sha256:7e35d1e7642bd38eadf2490171f8bd66563d77a6428d43ac0c0512b0f6dcab75",
+    "brief_id": "brief_75d4b73cf5f78f3d2eda",
+    "content_digest": "sha256:ef1a1748da4a2ac9884509a6748ce5bb8b84f9ac96045c20987d9b31e327da0b",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
-    "included_elements": [
-      "panel_beats",
-      "dialogue_captions",
-      "poses",
-      "continuity_requirements",
-      "slide_headlines",
-      "final_cta"
-    ],
     "input_refs": [
-      "brief_f898a646b35e42eb7752",
-      "artifact_18940b3934fcec873fb8"
+      "brief_75d4b73cf5f78f3d2eda",
+      "artifact_568bd8a1c24ac8825cee"
     ],
-    "manifest_id": "manifest_18940b3934fcec873fb8",
+    "manifest_id": "manifest_568bd8a1c24ac8825cee",
     "organization_id": "ducktyper-dogfood",
     "publication_id": "zeroemployee.org",
     "rendered_claim_ids": [
       "claim_f7a7b195083833cd249b"
     ],
     "revision": 1,
-    "schema_version": "1.0.0",
-    "technical_checks": {
-      "decodable": true,
-      "dimensions": true,
-      "duration": true
-    }
+    "schema_version": "1.0.0"
   }
 ]

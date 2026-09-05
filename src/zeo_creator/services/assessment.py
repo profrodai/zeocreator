@@ -22,6 +22,18 @@ def assess_publication_performance(
     revision: int,
     source: MetricsSourcePort,
 ) -> DailyPerformanceAssessment:
+    if not digest_is_current(publication):
+        raise CreatorDomainError("ZEO_CREATOR_STALE_INPUT", "publication profile digest is stale")
+    if not queries:
+        raise CreatorDomainError(
+            "ZEO_CREATOR_SCOPE_MISMATCH", "at least one metrics query is required"
+        )
+    window = queries[0].observation_window
+    if any(query.observation_window != window for query in queries):
+        raise CreatorDomainError(
+            "ZEO_CREATOR_WINDOW_MISMATCH", "metrics queries must share one observation window"
+        )
+
     observations: list[MetricObservation] = []
     for query in queries:
         if query.publication_id != publication.publication_id:
@@ -39,10 +51,21 @@ def assess_publication_performance(
                 or item.connection_ref != query.connection_ref
                 or item.provider_kind != query.provider_kind
                 or item.destination_account_ref != query.destination_account_ref
+                or item.publication_operation_ref not in query.operation_refs
+                or item.attribution_window != query.observation_window
             ):
                 raise CreatorDomainError(
                     "ZEO_CREATOR_PROVENANCE_MISMATCH",
                     "metric observation does not match query scope",
+                )
+            if not (
+                query.observation_window.starts_at
+                <= item.observed_at
+                <= query.observation_window.ends_at
+            ):
+                raise CreatorDomainError(
+                    "ZEO_CREATOR_WINDOW_MISMATCH",
+                    "metric observation falls outside the requested window",
                 )
             observations.append(item)
 
@@ -58,11 +81,24 @@ def assess_publication_performance(
         summary = f"Observed {metric_summary} relative to objective: {objective}."
         confidence = "high" if len(ordered) >= 2 else "medium"
         gaps = () if len(ordered) >= 2 else ("Only one metric observation is available",)
-        strongest = max(ordered, key=lambda item: item.metric_value)
-        learnings = (f"Strongest observed signal: {strongest.metric_name}.",)
-        hypotheses = (
-            f"Hypothesis: the {strongest.metric_name} signal may reflect audience-format fit; causal evidence is not available.",
-        )
+        comparable = tuple(item for item in ordered if item.normalized_rate is not None)
+        if comparable:
+            strongest = max(comparable, key=lambda item: item.normalized_rate or 0.0)
+            learnings = (
+                f"Strongest normalized signal: {strongest.metric_name} "
+                f"({strongest.normalized_rate:g} {strongest.unit}).",
+            )
+            hypotheses = (
+                f"Hypothesis: the normalized {strongest.metric_name} signal may reflect "
+                "audience-format fit; causal evidence is not available.",
+            )
+        else:
+            learnings = ()
+            gaps = (*gaps, "No normalized metric rates are available for comparison")
+            hypotheses = (
+                "Hypothesis: metric movement may reflect audience-format fit; unlike raw "
+                "metrics cannot be ranked and causal evidence is not available.",
+            )
 
     operation_refs = tuple(sorted({item.publication_operation_ref for item in ordered}))
     artifact_refs = tuple(sorted({item.artifact_ref for item in ordered}))
@@ -74,7 +110,6 @@ def assess_publication_performance(
             }
         )
     )
-    window = queries[0].observation_window
     return DailyPerformanceAssessment(
         assessment_id=stable_id(
             "assessment",

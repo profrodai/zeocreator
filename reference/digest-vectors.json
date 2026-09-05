@@ -1,0 +1,17 @@
+[
+  {
+    "name": "unicode-and-numbers",
+    "canonical_json": "{\"literals\":[null,true,false],\"numbers\":[333333333.3333333,1e+30,4.5,0.002,1e-27],\"unicode\":\"€$\\u000f\\nA'B\\\"\\\\\\\"/\"}",
+    "sha256": "sha256:9baf429b1bbf7cc66c8625e39122468b607026b0ee817e3a2f985cf04020fa63"
+  },
+  {
+    "name": "key-order",
+    "canonical_json": "{\"a\":2,\"z\":1,\"é\":\"composed\"}",
+    "sha256": "sha256:88ebbd259570c48da7319c89c0af15febb4e08efa9d3b88533cffe6054dc7c81"
+  },
+  {
+    "name": "timestamp-utc",
+    "canonical_json": "{\"observed_at\":\"2026-09-05T08:00:00.000000Z\"}",
+    "sha256": "sha256:fbd87f9608beaf7c695a0a2b2b1068a890e219290170e452d7d9760f27a9b5ca"
+  }
+]

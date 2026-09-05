@@ -17,10 +17,10 @@
           "$ref": "#/$defs/ResearchWindow"
         },
         "operation_refs": {
-          "default": [],
           "items": {
             "type": "string"
           },
+          "minItems": 1,
           "title": "Operation Refs",
           "type": "array"
         },
@@ -44,7 +44,8 @@
         "provider_kind",
         "connection_ref",
         "destination_account_ref",
-        "observation_window"
+        "observation_window",
+        "operation_refs"
       ],
       "title": "MetricsQuery",
       "type": "object"

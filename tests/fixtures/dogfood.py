@@ -1,5 +1,6 @@
 """Deterministic two-property, six-deliverable dogfood portfolio."""
 
+import hashlib
 from datetime import UTC, datetime, timedelta
 
 from zeo_core.tools import invoke_sync
@@ -28,8 +29,14 @@ from zeo_creator.capabilities.validate_delivery import (
     ValidateDeliveryRequest,
     ValidateDeliveryResponse,
 )
-from zeo_creator.contracts.common import CreatorModel, canonical_digest, stable_id
-from zeo_creator.contracts.delivery import DeliveryReviewBundle, RenderedArtifact, RenderManifest
+from zeo_creator.contracts.common import CreatorModel, stable_id
+from zeo_creator.contracts.delivery import (
+    ArtifactDigestProof,
+    DeliveryReviewBundle,
+    RenderAttestation,
+    RenderedArtifact,
+    RenderManifest,
+)
 from zeo_creator.contracts.distribution import (
     ChannelDestination,
     ChannelPlan,
@@ -52,6 +59,7 @@ from zeo_creator.contracts.evidence import (
 )
 from zeo_creator.contracts.performance import (
     DailyPerformanceAssessment,
+    MetricAggregation,
     MetricObservation,
     MetricsQuery,
 )
@@ -284,7 +292,8 @@ def _channel_plan(brief: DucktyperBrief) -> ChannelPlan:
 
 
 def _synthetic_render(brief: DucktyperBrief) -> tuple[RenderedArtifact, RenderManifest]:
-    artifact_digest = canonical_digest({"brief": brief.content_digest, "render": "synthetic"})
+    artifact_bytes = f"synthetic render for {brief.content_digest}".encode()
+    artifact_digest = f"sha256:{hashlib.sha256(artifact_bytes).hexdigest()}"
     artifact = RenderedArtifact(
         artifact_ref=stable_id("artifact", brief.brief_id),
         artifact_digest=artifact_digest,
@@ -299,7 +308,24 @@ def _synthetic_render(brief: DucktyperBrief) -> tuple[RenderedArtifact, RenderMa
         if brief.deliverable_kind != DeliverableKind.COMIC_SLIDES
         else "application/pdf",
         storage_ref=f"artifact://ducktyper/{brief.brief_id}",
+        byte_length=len(artifact_bytes),
         extracted_text=f"{brief.hook} {brief.thesis} {brief.cta}",
+    )
+    channel_checks = (f"destination.{channel}.constraints" for channel in brief.target_channels[:2])
+    format_checks = {
+        DeliverableKind.ANIMATED_EPISODE: ("media.decode", "video.duration", "audio.track"),
+        DeliverableKind.HUD: ("media.decode", "visual.dimensions", "motion.sequence"),
+        DeliverableKind.COMIC_SLIDES: (
+            "media.decode",
+            "visual.dimensions",
+            "comic.panel_count",
+        ),
+    }[brief.deliverable_kind]
+    check_ids = (
+        *(f"element.{element}" for element in required_render_elements(brief)),
+        "content.extracted_text",
+        *format_checks,
+        *channel_checks,
     )
     manifest = RenderManifest(
         manifest_id=stable_id("manifest", brief.brief_id),
@@ -313,9 +339,29 @@ def _synthetic_render(brief: DucktyperBrief) -> tuple[RenderedArtifact, RenderMa
         artifact_ref=artifact.artifact_ref,
         artifact_digest=artifact.artifact_digest,
         brand_profile_ref=brief.brand_profile_ref,
-        included_elements=required_render_elements(brief),
+        artifact_digest_proof=ArtifactDigestProof(
+            algorithm="sha256",
+            digest=artifact.artifact_digest,
+            byte_length=artifact.byte_length,
+            storage_ref=artifact.storage_ref,
+            retrieved_at=NOW,
+            evidence_ref=f"retrieval://{artifact.artifact_ref}",
+            tool_identity="ducktyper.synthetic-verifier",
+            tool_version="1.0.0",
+        ),
         rendered_claim_ids=tuple(claim.claim_id for claim in brief.evidence_claims),
-        technical_checks={"decodable": True, "dimensions": True, "duration": True},
+        attestations=tuple(
+            RenderAttestation(
+                check_id=check_id,
+                check_version="1.0.0",
+                result=True,
+                evidence_ref=f"attestation://{artifact.artifact_ref}/{check_id}",
+                tool_identity="ducktyper.synthetic-verifier",
+                observed_value="verified",
+                expected_constraint="must pass",
+            )
+            for check_id in check_ids
+        ),
     )
     return artifact, manifest
 
@@ -353,6 +399,16 @@ def _metric_fixture(
                 publication_operation_ref=operation.operation_id,
                 metric_name=metric,
                 metric_value=value,
+                unit="ratio",
+                aggregation=MetricAggregation.RATE,
+                denominator="impressions",
+                attribution_window=PERFORMANCE_WINDOW,
+                objective_mapping="audience_engagement",
+                baseline=0.05,
+                target=0.08,
+                normalized_rate=0.12 if metric == "views" else 0.084,
+                provider_definition=f"Provider-defined {metric}",
+                provider_definition_version="2026-09-01",
             )
             for metric, value in (("views", 1200.0), ("engagements", 84.0))
         )

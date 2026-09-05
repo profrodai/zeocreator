@@ -21,6 +21,11 @@
       "title": "Brief Id",
       "type": "string"
     },
+    "byte_length": {
+      "exclusiveMinimum": 0,
+      "title": "Byte Length",
+      "type": "integer"
+    },
     "content_digest": {
       "default": "",
       "title": "Content Digest",
@@ -91,7 +96,8 @@
     "content_revision",
     "brief_content_digest",
     "media_type",
-    "storage_ref"
+    "storage_ref",
+    "byte_length"
   ],
   "title": "RenderedArtifact",
   "type": "object"

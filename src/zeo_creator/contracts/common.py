@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import hashlib
-import json
-from datetime import datetime
-from typing import Any, Self
+from datetime import UTC, datetime
+from enum import Enum
+from typing import Annotated, Any, Self
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+import rfc8785
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field, model_validator
 
 SCHEMA_VERSION = "1.0.0"
 FORBIDDEN_SECRET_TERMS = frozenset(
@@ -15,12 +16,37 @@ FORBIDDEN_SECRET_TERMS = frozenset(
 )
 
 
-def canonical_digest(value: Any) -> str:
-    """Return a deterministic SHA-256 digest for JSON-safe contract content."""
+def _utc_datetime(value: datetime) -> datetime:
+    if value.tzinfo is None or value.utcoffset() is None:
+        raise ValueError("timestamps must include a UTC offset")
+    return value.astimezone(UTC)
+
+
+UtcDatetime = Annotated[datetime, AfterValidator(_utc_datetime)]
+
+
+def _canonical_value(value: Any) -> Any:
     if isinstance(value, BaseModel):
-        value = value.model_dump(mode="json", exclude={"content_digest"})
-    payload = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    return f"sha256:{hashlib.sha256(payload.encode()).hexdigest()}"
+        value = value.model_dump(mode="python", exclude={"content_digest"})
+    if isinstance(value, datetime):
+        return _utc_datetime(value).isoformat(timespec="microseconds").replace("+00:00", "Z")
+    if isinstance(value, Enum):
+        return value.value
+    if isinstance(value, dict):
+        return {str(key): _canonical_value(child) for key, child in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_canonical_value(child) for child in value]
+    return value
+
+
+def canonical_bytes(value: Any) -> bytes:
+    """Serialize contract content with RFC 8785/JCS and UTC timestamps."""
+    return rfc8785.dumps(_canonical_value(value))
+
+
+def canonical_digest(value: Any) -> str:
+    """Return an RFC 8785/JCS SHA-256 digest for contract content."""
+    return f"sha256:{hashlib.sha256(canonical_bytes(value)).hexdigest()}"
 
 
 def stable_id(prefix: str, *parts: str) -> str:
@@ -49,12 +75,21 @@ class CreatorModel(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True, str_strip_whitespace=True)
 
+    @model_validator(mode="after")
+    def normalize_direct_timestamps(self) -> Self:
+        """Reject naïve datetimes and persist direct timestamp fields as UTC."""
+        for field_name in type(self).model_fields:
+            value = getattr(self, field_name)
+            if isinstance(value, datetime):
+                object.__setattr__(self, field_name, _utc_datetime(value))
+        return self
+
 
 class DurableArtifact(CreatorModel):
     """Fields common to durable, revisioned creator-domain artifacts."""
 
     schema_version: str = SCHEMA_VERSION
-    created_at: datetime
+    created_at: UtcDatetime
     organization_id: str = Field(min_length=1)
     publication_id: str = Field(min_length=1)
     input_refs: tuple[str, ...] = ()

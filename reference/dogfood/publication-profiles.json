@@ -6,7 +6,7 @@
       "prof_rod",
       "ducktyper"
     ],
-    "content_digest": "sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+    "content_digest": "sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
     "created_at": "2026-09-05T08:00:00Z",
     "cta_policy": "Invite builders to test the technique in a bounded project.",
     "default_channels": [
@@ -45,7 +45,7 @@
     "character_refs": [
       "zeo_operator"
     ],
-    "content_digest": "sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+    "content_digest": "sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
     "created_at": "2026-09-05T08:00:00Z",
     "cta_policy": "Invite operators to adopt one explicit control boundary.",
     "default_channels": [

@@ -43,7 +43,6 @@ def _review_with_manifest(manifest: RenderManifest):
         ({"brand_profile_ref": "profile_wrong@1"}, "ZEO_CREATOR_BRAND_MISMATCH"),
         ({"rendered_claim_ids": ("claim_not_in_brief",)}, "ZEO_CREATOR_UNSUPPORTED_CLAIM"),
         ({"brief_content_digest": "sha256:" + "0" * 64}, "ZEO_CREATOR_STALE_DIGEST"),
-        ({"included_elements": ()}, "ZEO_CREATOR_MISSING_RENDER_ELEMENT"),
     ],
 )
 def test_validation_blocks_wrong_brand_claim_digest_and_elements(
@@ -54,6 +53,23 @@ def test_validation_blocks_wrong_brand_claim_digest_and_elements(
 
     assert review.ready_for_approval is False
     assert expected_code in {finding.code for finding in review.blocking_findings}
+
+
+def test_validation_blocks_missing_render_element_attestation() -> None:
+    manifest = build_dogfood_snapshot().manifests[0]
+    changed = manifest.model_copy(
+        update={
+            "attestations": tuple(
+                item for item in manifest.attestations if item.check_id != "element.script"
+            )
+        }
+    )
+    review = _review_with_manifest(changed)
+
+    assert review.ready_for_approval is False
+    assert "ZEO_CREATOR_MISSING_RENDER_ELEMENT" in {
+        finding.code for finding in review.blocking_findings
+    }
 
 
 def test_changed_schedule_invalidates_approval() -> None:

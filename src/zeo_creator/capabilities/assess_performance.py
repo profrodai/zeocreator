@@ -38,6 +38,8 @@ class AssessPerformanceResponse(CreatorModel):
         "ZEO_CREATOR_PROVENANCE_MISMATCH",
         "ZEO_CREATOR_PUBLICATION_LEAKAGE",
         "ZEO_CREATOR_STALE_INPUT",
+        "ZEO_CREATOR_SCOPE_MISMATCH",
+        "ZEO_CREATOR_WINDOW_MISMATCH",
     ),
     requirements=METRICS_READ_REQUIREMENTS,
     tags=("creator", "performance", "read-only"),

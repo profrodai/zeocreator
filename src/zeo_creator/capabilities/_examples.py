@@ -1,15 +1,24 @@
 """Small schema-valid examples used by capability manifests."""
 
+import hashlib
 from datetime import UTC, datetime, timedelta
 
-from zeo_creator.contracts.common import canonical_digest
-from zeo_creator.contracts.delivery import RenderedArtifact, RenderManifest
+from zeo_creator.contracts.delivery import (
+    ArtifactDigestProof,
+    RenderAttestation,
+    RenderedArtifact,
+    RenderManifest,
+)
 from zeo_creator.contracts.distribution import (
     ChannelDestination,
     ChannelPlan,
     ProviderKind,
 )
-from zeo_creator.contracts.ducktyper import AnimatedEpisodePayload, DucktyperBrief
+from zeo_creator.contracts.ducktyper import (
+    AnimatedEpisodePayload,
+    DucktyperBrief,
+    required_render_elements,
+)
 from zeo_creator.contracts.editorial import (
     DeliverableKind,
     EditorialAssignment,
@@ -140,7 +149,8 @@ def brief() -> DucktyperBrief:
 
 def render() -> tuple[RenderedArtifact, RenderManifest]:
     item = brief()
-    artifact_digest = canonical_digest({"synthetic": item.brief_id})
+    artifact_bytes = f"synthetic render for {item.brief_id}".encode()
+    artifact_digest = f"sha256:{hashlib.sha256(artifact_bytes).hexdigest()}"
     artifact = RenderedArtifact(
         artifact_ref="artifact_example",
         artifact_digest=artifact_digest,
@@ -152,7 +162,16 @@ def render() -> tuple[RenderedArtifact, RenderManifest]:
         publication_id=item.publication_id,
         media_type="video/mp4",
         storage_ref="artifact://synthetic/example",
+        byte_length=len(artifact_bytes),
         extracted_text=item.thesis,
+    )
+    check_ids = (
+        *(f"element.{element}" for element in required_render_elements(item)),
+        "content.extracted_text",
+        "media.decode",
+        "video.duration",
+        "audio.track",
+        "destination.website.constraints",
     )
     manifest = RenderManifest(
         manifest_id="manifest_example",
@@ -165,19 +184,29 @@ def render() -> tuple[RenderedArtifact, RenderManifest]:
         artifact_ref=artifact.artifact_ref,
         artifact_digest=artifact.artifact_digest,
         brand_profile_ref=item.brand_profile_ref,
-        included_elements=(
-            "script",
-            "scene_beats",
-            "dialogue",
-            "voice_over",
-            "on_screen_text",
-            "character_actions",
-            "setting",
-            "audio_direction",
-            "ending",
+        artifact_digest_proof=ArtifactDigestProof(
+            algorithm="sha256",
+            digest=artifact.artifact_digest,
+            byte_length=artifact.byte_length,
+            storage_ref=artifact.storage_ref,
+            retrieved_at=NOW,
+            evidence_ref="retrieval://synthetic/example",
+            tool_identity="ducktyper.synthetic-verifier",
+            tool_version="1.0.0",
         ),
         rendered_claim_ids=(item.evidence_claims[0].claim_id,),
-        technical_checks={"playable": True},
+        attestations=tuple(
+            RenderAttestation(
+                check_id=check_id,
+                check_version="1.0.0",
+                result=True,
+                evidence_ref=f"attestation://{check_id}",
+                tool_identity="ducktyper.synthetic-verifier",
+                observed_value="verified",
+                expected_constraint="must pass",
+            )
+            for check_id in check_ids
+        ),
     )
     return artifact, manifest
 
@@ -304,6 +333,7 @@ def performance_request() -> dict[str, object]:
                 connection_ref="connection_website_example",
                 destination_account_ref="destination_example",
                 observation_window=WINDOW,
+                operation_refs=("operation_example",),
             ).model_dump(mode="json")
         ],
         "objective": "Teach reliable creator operations",

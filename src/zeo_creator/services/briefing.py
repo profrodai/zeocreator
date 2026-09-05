@@ -40,10 +40,15 @@ def create_brief(
         )
 
     evidence_refs = set(assignment.evidence_refs)
+    if not evidence_refs.issubset(synthesis.evidence_refs):
+        raise CreatorDomainError(
+            "ZEO_CREATOR_UNSUPPORTED_CLAIM",
+            "assignment evidence references must belong to the accepted synthesis",
+        )
     claims = tuple(
         claim
         for claim in synthesis.candidate_claims
-        if evidence_refs.intersection(claim.evidence_refs)
+        if set(claim.evidence_refs).issubset(evidence_refs)
     )
     if not claims or set(ref for claim in claims for ref in claim.evidence_refs) != evidence_refs:
         raise CreatorDomainError(

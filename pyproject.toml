@@ -9,10 +9,20 @@ description = "Provider-neutral creator operations capabilities built on Zeocore
 readme = "README.md"
 requires-python = ">=3.14"
 license = "MIT"
-authors = [{ name = "Zero Employee" }]
+authors = [{ name = "ProfRodAI" }]
+maintainers = [{ name = "ProfRodAI" }]
+keywords = ["creator-operations", "zeocore", "pydantic", "ducktyper"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
 dependencies = [
   "zeocore==0.6.0",
   "pydantic>=2.6.0",
+  "rfc8785==0.1.4",
   "rich>=13.8.0",
   "typer>=0.27.1",
 ]
@@ -20,6 +30,8 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/profrodai/zeocreator"
 Repository = "https://github.com/profrodai/zeocreator"
+Documentation = "https://profrodai.github.io/zeocreator/"
+Issues = "https://github.com/profrodai/zeocreator/issues"
 
 [project.scripts]
 zeo-creator = "zeo_creator.cli:main"
@@ -36,6 +48,16 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/zeo_creator"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/zeo_creator",
+  "/LICENSE",
+  "/README.md",
+  "/CHANGELOG.md",
+  "/SECURITY.md",
+  "/pyproject.toml",
+]
 
 [tool.uv]
 default-groups = ["dev"]

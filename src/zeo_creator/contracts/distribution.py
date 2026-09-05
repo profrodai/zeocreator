@@ -1,12 +1,16 @@
 """Provider-neutral publication proposals and secret-safe receipt contracts."""
 
-from datetime import datetime
 from enum import StrEnum
 
 from pydantic import Field, model_validator
 from zeo_core.contracts import EffectKind
 
-from zeo_creator.contracts.common import CreatorModel, DurableArtifact, assert_secret_safe
+from zeo_creator.contracts.common import (
+    CreatorModel,
+    DurableArtifact,
+    UtcDatetime,
+    assert_secret_safe,
+)
 
 
 class ProviderKind(StrEnum):
@@ -22,7 +26,7 @@ class ChannelDestination(CreatorModel):
     provider_kind: ProviderKind
     connection_ref: str = Field(min_length=1)
     destination_account_ref: str = Field(min_length=1)
-    scheduled_for: datetime | None = None
+    scheduled_for: UtcDatetime | None = None
 
 
 class ChannelPlan(DurableArtifact):
@@ -50,7 +54,7 @@ class ProposedPublicationOperation(DurableArtifact):
     connection_ref: str = Field(min_length=1)
     destination_account_ref: str = Field(min_length=1)
     payload: PublicationPayload
-    scheduled_for: datetime | None = None
+    scheduled_for: UtcDatetime | None = None
     required_effects: tuple[EffectKind, ...] = (
         EffectKind.WRITE,
         EffectKind.EXTERNAL_COMMUNICATION,
@@ -76,7 +80,7 @@ class PublicationReceipt(DurableArtifact):
     provider_kind: ProviderKind
     connection_ref: str = Field(min_length=1)
     provider_operation_ref: str = Field(min_length=1)
-    executed_at: datetime
+    executed_at: UtcDatetime
     outcome: str = Field(min_length=1)
     reconciliation_state: ReconciliationState
 

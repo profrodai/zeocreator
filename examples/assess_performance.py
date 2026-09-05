@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 from zeo_core.tools import invoke_sync
 
 from zeo_creator.capabilities.assess_performance import AssessPerformanceResponse
-from zeo_creator.contracts.performance import MetricObservation, MetricsQuery
+from zeo_creator.contracts.performance import MetricAggregation, MetricObservation, MetricsQuery
 from zeo_creator.registry import capability_registry
 from zeo_creator.runtime import make_context
 
@@ -27,6 +27,16 @@ class InMemoryMetricsSource:
                 publication_operation_ref="operation_example",
                 metric_name="views",
                 metric_value=1_200,
+                unit="ratio",
+                aggregation=MetricAggregation.RATE,
+                denominator="impressions",
+                attribution_window=query.observation_window,
+                objective_mapping="audience_reach",
+                baseline=0.08,
+                target=0.12,
+                normalized_rate=0.1,
+                provider_definition="Provider-defined qualified views",
+                provider_definition_version="2026-09-01",
             ),
         )
 

@@ -38,7 +38,9 @@ class ValidateDeliveryResponse(CreatorModel):
     examples=(CapabilityExample(name="valid-render", request=delivery_request()),),
     error_codes=(
         "ZEO_CREATOR_BRAND_MISMATCH",
+        "ZEO_CREATOR_ARTIFACT_DIGEST_UNVERIFIED",
         "ZEO_CREATOR_DESTINATION_MISMATCH",
+        "ZEO_CREATOR_EXTRACTED_TEXT_MISSING",
         "ZEO_CREATOR_MISSING_CLAIM_TRACE",
         "ZEO_CREATOR_MISSING_RENDER_ELEMENT",
         "ZEO_CREATOR_PROHIBITED_CLAIM",

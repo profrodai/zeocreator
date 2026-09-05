@@ -137,13 +137,42 @@
       "title": "DailyPerformanceAssessment",
       "type": "object"
     },
+    "MetricAggregation": {
+      "enum": [
+        "count",
+        "sum",
+        "average",
+        "rate",
+        "unique"
+      ],
+      "title": "MetricAggregation",
+      "type": "string"
+    },
     "MetricObservation": {
       "additionalProperties": false,
       "properties": {
+        "aggregation": {
+          "$ref": "#/$defs/MetricAggregation"
+        },
         "artifact_ref": {
           "minLength": 1,
           "title": "Artifact Ref",
           "type": "string"
+        },
+        "attribution_window": {
+          "$ref": "#/$defs/ResearchWindow"
+        },
+        "baseline": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Baseline"
         },
         "connection_ref": {
           "minLength": 1,
@@ -159,6 +188,18 @@
           "format": "date-time",
           "title": "Created At",
           "type": "string"
+        },
+        "denominator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Denominator"
         },
         "destination_account_ref": {
           "minLength": 1,
@@ -182,6 +223,23 @@
           "title": "Metric Value",
           "type": "number"
         },
+        "normalized_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Rate"
+        },
+        "objective_mapping": {
+          "minLength": 1,
+          "title": "Objective Mapping",
+          "type": "string"
+        },
         "observation_id": {
           "minLength": 1,
           "title": "Observation Id",
@@ -195,6 +253,16 @@
         "organization_id": {
           "minLength": 1,
           "title": "Organization Id",
+          "type": "string"
+        },
+        "provider_definition": {
+          "minLength": 1,
+          "title": "Provider Definition",
+          "type": "string"
+        },
+        "provider_definition_version": {
+          "minLength": 1,
+          "title": "Provider Definition Version",
           "type": "string"
         },
         "provider_kind": {
@@ -220,6 +288,23 @@
           "default": "1.0.0",
           "title": "Schema Version",
           "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "unit": {
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
         }
       },
       "required": [
@@ -234,7 +319,13 @@
         "artifact_ref",
         "publication_operation_ref",
         "metric_name",
-        "metric_value"
+        "metric_value",
+        "unit",
+        "aggregation",
+        "attribution_window",
+        "objective_mapping",
+        "provider_definition",
+        "provider_definition_version"
       ],
       "title": "MetricObservation",
       "type": "object"

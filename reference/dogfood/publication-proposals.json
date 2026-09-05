@@ -1,19 +1,19 @@
 [
   {
-    "approval_digest": "sha256:b1dea172fdc495686f6e3d51027fb39d6c481ac9c9f0b9ea1895266550d6f729",
-    "artifact_digest": "sha256:bee0daf93ed5777f6e0cf551f7caacc33f2580587a74df2fab0ab58198bfe0a8",
-    "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+    "approval_digest": "sha256:6f630fb06ad59923f6e60a56c628dfc1835d768fbb6a613cd49e7f2ba4eb0fd3",
+    "artifact_digest": "sha256:152f31400039b60a93b2c63d356d90d414cc53a9b544cb6b3d9a9a7e92d4070d",
+    "artifact_ref": "artifact_0418349476cba91410d7",
     "connection_ref": "connection_profrod.ai_website",
-    "content_digest": "sha256:1d6ed45cc89f819b2810336c98b9a7d043c7dc588c811865feec4dd970726b6f",
+    "content_digest": "sha256:2c817dc277d76534f0aadf4c09cd812162d9c287948b09488a488909e9083d25",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_profrod.ai_website",
-    "idempotency_key": "publish_bf40f81f38af26016ca2",
+    "idempotency_key": "publish_301dbeab3884f2f8c92d",
     "input_refs": [
-      "review_98eb83934f5009342e79",
-      "brief_a072daeb7fa3dcf4dd3e",
-      "artifact_a9c6396ba2b4968cd44c"
+      "review_a244e972f16dd17783aa",
+      "brief_f57dd847627f60c69e29",
+      "artifact_0418349476cba91410d7"
     ],
-    "operation_id": "operation_bf40f81f38af26016ca2",
+    "operation_id": "operation_301dbeab3884f2f8c92d",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "animated_episode: Bounded agent retries",
@@ -32,20 +32,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:b1dea172fdc495686f6e3d51027fb39d6c481ac9c9f0b9ea1895266550d6f729",
-    "artifact_digest": "sha256:bee0daf93ed5777f6e0cf551f7caacc33f2580587a74df2fab0ab58198bfe0a8",
-    "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+    "approval_digest": "sha256:6f630fb06ad59923f6e60a56c628dfc1835d768fbb6a613cd49e7f2ba4eb0fd3",
+    "artifact_digest": "sha256:152f31400039b60a93b2c63d356d90d414cc53a9b544cb6b3d9a9a7e92d4070d",
+    "artifact_ref": "artifact_0418349476cba91410d7",
     "connection_ref": "connection_profrod.ai_linkedin",
-    "content_digest": "sha256:8564c53003ab62c3fbaca48d0e2f3f6cca8c4d0f6149bd75c6d01959a49d8b24",
+    "content_digest": "sha256:142d2f2f965e40f58dd0990315742bce4d06d92763569bb75762e2bac62b1e9c",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_profrod.ai_linkedin",
-    "idempotency_key": "publish_f591b585a5316c16b526",
+    "idempotency_key": "publish_b988f10ca90bf0ad4c4e",
     "input_refs": [
-      "review_98eb83934f5009342e79",
-      "brief_a072daeb7fa3dcf4dd3e",
-      "artifact_a9c6396ba2b4968cd44c"
+      "review_a244e972f16dd17783aa",
+      "brief_f57dd847627f60c69e29",
+      "artifact_0418349476cba91410d7"
     ],
-    "operation_id": "operation_f591b585a5316c16b526",
+    "operation_id": "operation_b988f10ca90bf0ad4c4e",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "animated_episode: Bounded agent retries",
@@ -64,20 +64,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:4ba6d4242e2a37da221ca19008bf1ce0962e825661de3a20ee9ca7d2fc833253",
-    "artifact_digest": "sha256:6c1a066c38e8b3aa960d604ec9a9e9cfc66329afd1a5f9152644f914277aae9c",
-    "artifact_ref": "artifact_8149998ba5cac80ebb12",
+    "approval_digest": "sha256:4300d3159370440d26029a073c046956b4945e9179b1b26224a8e1bdd3f5c4d9",
+    "artifact_digest": "sha256:b2d5772cb81fcd7df7a969b20392cd10df9f6ef3a16cf0e0a20ef637f22b0561",
+    "artifact_ref": "artifact_e4ecf6fec6883084de6a",
     "connection_ref": "connection_profrod.ai_website",
-    "content_digest": "sha256:2a7d406ab3b3f60493d839945bd16db23f8003280e614b200bf72252627ff244",
+    "content_digest": "sha256:43a6b60a1cb68a5fda74babc552708a0bde8c93e57c0bd6b2d3f99da54192ef9",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_profrod.ai_website",
-    "idempotency_key": "publish_53dccd83c893a2a3821f",
+    "idempotency_key": "publish_2cff4a28994b05ae9caf",
     "input_refs": [
-      "review_3754e53ce9af24b66128",
-      "brief_c740c7b4799e30c9f33e",
-      "artifact_8149998ba5cac80ebb12"
+      "review_097d2580466f45999d01",
+      "brief_4f0e7c1d8038e8e5365b",
+      "artifact_e4ecf6fec6883084de6a"
     ],
-    "operation_id": "operation_53dccd83c893a2a3821f",
+    "operation_id": "operation_2cff4a28994b05ae9caf",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "hud: Typed creator handoffs",
@@ -96,20 +96,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:4ba6d4242e2a37da221ca19008bf1ce0962e825661de3a20ee9ca7d2fc833253",
-    "artifact_digest": "sha256:6c1a066c38e8b3aa960d604ec9a9e9cfc66329afd1a5f9152644f914277aae9c",
-    "artifact_ref": "artifact_8149998ba5cac80ebb12",
+    "approval_digest": "sha256:4300d3159370440d26029a073c046956b4945e9179b1b26224a8e1bdd3f5c4d9",
+    "artifact_digest": "sha256:b2d5772cb81fcd7df7a969b20392cd10df9f6ef3a16cf0e0a20ef637f22b0561",
+    "artifact_ref": "artifact_e4ecf6fec6883084de6a",
     "connection_ref": "connection_profrod.ai_linkedin",
-    "content_digest": "sha256:043bc983e7524890f80028de6597509366308c822e85b566af946cc73bb7c912",
+    "content_digest": "sha256:15b07cc8fbc6181b5d7609d13c4a0e1b568d552211b67b2830db140fa28ba251",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_profrod.ai_linkedin",
-    "idempotency_key": "publish_3a826ac1b1582f30fb12",
+    "idempotency_key": "publish_cccd0d84a59d3b4b5b95",
     "input_refs": [
-      "review_3754e53ce9af24b66128",
-      "brief_c740c7b4799e30c9f33e",
-      "artifact_8149998ba5cac80ebb12"
+      "review_097d2580466f45999d01",
+      "brief_4f0e7c1d8038e8e5365b",
+      "artifact_e4ecf6fec6883084de6a"
     ],
-    "operation_id": "operation_3a826ac1b1582f30fb12",
+    "operation_id": "operation_cccd0d84a59d3b4b5b95",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "hud: Typed creator handoffs",
@@ -128,20 +128,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:66ff831b284a9abb78e5f76f2488c5aeeda423d37532d273202752076953038c",
-    "artifact_digest": "sha256:736ff56410419de52073d296fa15651fa241d087f7936f39aaddb906af8f2f19",
-    "artifact_ref": "artifact_2dabeddb5c8662a762ab",
+    "approval_digest": "sha256:aba5fd4c4fd139ac7676c3afd64336f34f935d32673c58138378128f907d3890",
+    "artifact_digest": "sha256:3009a3c5333a466bb5dac91160e1c338ed162b6009991f30ee5f919fbed2a736",
+    "artifact_ref": "artifact_cf60524343121721e676",
     "connection_ref": "connection_profrod.ai_website",
-    "content_digest": "sha256:30f29ed347e6969b190766d03fa053498d427aea8eb6d514f8ac56c4c96bae13",
+    "content_digest": "sha256:553b039729d20f2894878eb426eb17d71df916c61186f638f627f712092dab32",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_profrod.ai_website",
-    "idempotency_key": "publish_72aad14b8f6117bcb26a",
+    "idempotency_key": "publish_f11a15334bdb6caa4f86",
     "input_refs": [
-      "review_d11ceca2c14d6faef6d1",
-      "brief_b80021c5388692b9f9ab",
-      "artifact_2dabeddb5c8662a762ab"
+      "review_37654a6ee05b8a6831dd",
+      "brief_20ba8e08b5bbdcf383e7",
+      "artifact_cf60524343121721e676"
     ],
-    "operation_id": "operation_72aad14b8f6117bcb26a",
+    "operation_id": "operation_f11a15334bdb6caa4f86",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "comic_slides: Evidence-led demos",
@@ -160,20 +160,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:66ff831b284a9abb78e5f76f2488c5aeeda423d37532d273202752076953038c",
-    "artifact_digest": "sha256:736ff56410419de52073d296fa15651fa241d087f7936f39aaddb906af8f2f19",
-    "artifact_ref": "artifact_2dabeddb5c8662a762ab",
+    "approval_digest": "sha256:aba5fd4c4fd139ac7676c3afd64336f34f935d32673c58138378128f907d3890",
+    "artifact_digest": "sha256:3009a3c5333a466bb5dac91160e1c338ed162b6009991f30ee5f919fbed2a736",
+    "artifact_ref": "artifact_cf60524343121721e676",
     "connection_ref": "connection_profrod.ai_linkedin",
-    "content_digest": "sha256:3698aa013f0f5cdd4676df5a2e8a60394ae3cb5260b28dd296b80143a82cf942",
+    "content_digest": "sha256:7c5fd8c0435ecd13481073a295fb03405eee7faa1aae0e0fcdeb4ba8acce4310",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_profrod.ai_linkedin",
-    "idempotency_key": "publish_5e2e2f24266a117ae507",
+    "idempotency_key": "publish_94b6a9e834bb5c5d2c53",
     "input_refs": [
-      "review_d11ceca2c14d6faef6d1",
-      "brief_b80021c5388692b9f9ab",
-      "artifact_2dabeddb5c8662a762ab"
+      "review_37654a6ee05b8a6831dd",
+      "brief_20ba8e08b5bbdcf383e7",
+      "artifact_cf60524343121721e676"
     ],
-    "operation_id": "operation_5e2e2f24266a117ae507",
+    "operation_id": "operation_94b6a9e834bb5c5d2c53",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "comic_slides: Evidence-led demos",
@@ -192,20 +192,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:611397f9195030c0df0dfd8ee2e2b2631ca1de02eb03a37440f9cbf737cfaea2",
-    "artifact_digest": "sha256:305d0b7c2db98abd4943e23797174ed40149441cc610795325db74d9d1ab8d0e",
-    "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+    "approval_digest": "sha256:75a26374c9d1a632c0e17301668706d421db2f010ce29096c599e0136233b6ec",
+    "artifact_digest": "sha256:321c5da1f0bd3101ff802f09abcf4d41990d5f42224e63435c89e1afcdf2b611",
+    "artifact_ref": "artifact_1b9113fbe3b127f11c92",
     "connection_ref": "connection_zeroemployee.org_website",
-    "content_digest": "sha256:6f17157067605248b3233425d07b32da7ff4254e92fc95f474ad1e9f4627db3d",
+    "content_digest": "sha256:153c96e902a8e3a9a80cef50b4eab7e632e5215e815fedbb92da1959b3d5e152",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_zeroemployee.org_website",
-    "idempotency_key": "publish_a835892ac16c540b5565",
+    "idempotency_key": "publish_ca8cdf734c6917532c9c",
     "input_refs": [
-      "review_e6ebae805e35e9e31782",
-      "brief_8fbb5e120c400d53ffb2",
-      "artifact_133f9d2d5a9fea47cc6e"
+      "review_008e54f6453a498b7d92",
+      "brief_f07ef1fc363755a84ec7",
+      "artifact_1b9113fbe3b127f11c92"
     ],
-    "operation_id": "operation_a835892ac16c540b5565",
+    "operation_id": "operation_ca8cdf734c6917532c9c",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "animated_episode: Exact effect authority",
@@ -224,20 +224,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:611397f9195030c0df0dfd8ee2e2b2631ca1de02eb03a37440f9cbf737cfaea2",
-    "artifact_digest": "sha256:305d0b7c2db98abd4943e23797174ed40149441cc610795325db74d9d1ab8d0e",
-    "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+    "approval_digest": "sha256:75a26374c9d1a632c0e17301668706d421db2f010ce29096c599e0136233b6ec",
+    "artifact_digest": "sha256:321c5da1f0bd3101ff802f09abcf4d41990d5f42224e63435c89e1afcdf2b611",
+    "artifact_ref": "artifact_1b9113fbe3b127f11c92",
     "connection_ref": "connection_zeroemployee.org_newsletter",
-    "content_digest": "sha256:42fb1f60483a87b91015241be2a50b37272a99aeec1635659c92c50612ef8f82",
+    "content_digest": "sha256:916edc86a42546ba9b5d611a07b2e8f8d637811e359d4ac627947b430d8ec0c0",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_zeroemployee.org_newsletter",
-    "idempotency_key": "publish_49a6e3b4d55e53b8cc44",
+    "idempotency_key": "publish_b01afba09e9a2d4fde00",
     "input_refs": [
-      "review_e6ebae805e35e9e31782",
-      "brief_8fbb5e120c400d53ffb2",
-      "artifact_133f9d2d5a9fea47cc6e"
+      "review_008e54f6453a498b7d92",
+      "brief_f07ef1fc363755a84ec7",
+      "artifact_1b9113fbe3b127f11c92"
     ],
-    "operation_id": "operation_49a6e3b4d55e53b8cc44",
+    "operation_id": "operation_b01afba09e9a2d4fde00",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "animated_episode: Exact effect authority",
@@ -256,20 +256,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:e743121d9a26b1fbaf2b5dcf7aa72452cc0d9cbcb9bc8f7a2b9a0774223ac2f9",
-    "artifact_digest": "sha256:04920ac63404d30106e6e10ca41bf67a15e051ed302785d6ee84d1f55701932a",
-    "artifact_ref": "artifact_69a7c523ac973e6d200a",
+    "approval_digest": "sha256:e746427d7f22b50e1a1fdf38d2268af4e3fab5461bd7a9211d241ddaf2fbc38f",
+    "artifact_digest": "sha256:920e00cfd62f313bc964e977a94b5e12ee2a25389009d83bea4ba86ebc3db70c",
+    "artifact_ref": "artifact_c694939889ad19b63765",
     "connection_ref": "connection_zeroemployee.org_website",
-    "content_digest": "sha256:19bcd569d54495f1f1d147654986453ff1d772f5c6bf18e0d616729a161d3800",
+    "content_digest": "sha256:2aade360fe27559fae235c05c657e4b904a29cdff45aab662a578c4b756f359b",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_zeroemployee.org_website",
-    "idempotency_key": "publish_ea3f0b96b9ea43b979eb",
+    "idempotency_key": "publish_26f5e00a58ced09e5809",
     "input_refs": [
-      "review_4e534d07de9404c6c8d9",
-      "brief_3dfa05d6507eaa5a5bcf",
-      "artifact_69a7c523ac973e6d200a"
+      "review_fc1ffc3232965155f4d9",
+      "brief_dc0482c85a7e56ad1963",
+      "artifact_c694939889ad19b63765"
     ],
-    "operation_id": "operation_ea3f0b96b9ea43b979eb",
+    "operation_id": "operation_26f5e00a58ced09e5809",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "hud: Digest-bound approvals",
@@ -288,20 +288,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:e743121d9a26b1fbaf2b5dcf7aa72452cc0d9cbcb9bc8f7a2b9a0774223ac2f9",
-    "artifact_digest": "sha256:04920ac63404d30106e6e10ca41bf67a15e051ed302785d6ee84d1f55701932a",
-    "artifact_ref": "artifact_69a7c523ac973e6d200a",
+    "approval_digest": "sha256:e746427d7f22b50e1a1fdf38d2268af4e3fab5461bd7a9211d241ddaf2fbc38f",
+    "artifact_digest": "sha256:920e00cfd62f313bc964e977a94b5e12ee2a25389009d83bea4ba86ebc3db70c",
+    "artifact_ref": "artifact_c694939889ad19b63765",
     "connection_ref": "connection_zeroemployee.org_newsletter",
-    "content_digest": "sha256:b3e6bcecf61248c0eb5b0b388292c1a89658deee8af10127f0c184cf92fbfe49",
+    "content_digest": "sha256:b9365428702f0f7694bb7661669fb241cff1ff635966e471982808eb9de7ee7d",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_zeroemployee.org_newsletter",
-    "idempotency_key": "publish_d418b546310ab100ec53",
+    "idempotency_key": "publish_dc46f31c53a52739dc5b",
     "input_refs": [
-      "review_4e534d07de9404c6c8d9",
-      "brief_3dfa05d6507eaa5a5bcf",
-      "artifact_69a7c523ac973e6d200a"
+      "review_fc1ffc3232965155f4d9",
+      "brief_dc0482c85a7e56ad1963",
+      "artifact_c694939889ad19b63765"
     ],
-    "operation_id": "operation_d418b546310ab100ec53",
+    "operation_id": "operation_dc46f31c53a52739dc5b",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "hud: Digest-bound approvals",
@@ -320,20 +320,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:5d315da7799ad407b2c349ed711d6233caec8442c8e27142b740939e6cc0eb45",
-    "artifact_digest": "sha256:aeac7772f15ea044e4f5f9d398b87315c732176de28a5269e6e69260dea1aaed",
-    "artifact_ref": "artifact_18940b3934fcec873fb8",
+    "approval_digest": "sha256:704f476f6b3d95ed0125cb9e3eef331c589aac0f570567ed732585d858cdb515",
+    "artifact_digest": "sha256:011f5eb993e1561e45c85b8f428fe139f2d5850b74d872d00774fc59a7b45648",
+    "artifact_ref": "artifact_568bd8a1c24ac8825cee",
     "connection_ref": "connection_zeroemployee.org_website",
-    "content_digest": "sha256:ea8de4df47405e009a342d5f4f69ff8a2ab41fdb65191c76fd8b5681c82552c5",
+    "content_digest": "sha256:ac2ae5f9b732f1e087973cd8f3a433989f18e6a9ef1fb7984b6383e2a10de205",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_zeroemployee.org_website",
-    "idempotency_key": "publish_8a9856143d848a36ff8f",
+    "idempotency_key": "publish_5e051437cfef5fe52967",
     "input_refs": [
-      "review_8b054fe4c4ba3ca8e178",
-      "brief_f898a646b35e42eb7752",
-      "artifact_18940b3934fcec873fb8"
+      "review_9e219fbc03c2c10e532b",
+      "brief_75d4b73cf5f78f3d2eda",
+      "artifact_568bd8a1c24ac8825cee"
     ],
-    "operation_id": "operation_8a9856143d848a36ff8f",
+    "operation_id": "operation_5e051437cfef5fe52967",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "comic_slides: Reconciliation evidence",
@@ -352,20 +352,20 @@
     "schema_version": "1.0.0"
   },
   {
-    "approval_digest": "sha256:5d315da7799ad407b2c349ed711d6233caec8442c8e27142b740939e6cc0eb45",
-    "artifact_digest": "sha256:aeac7772f15ea044e4f5f9d398b87315c732176de28a5269e6e69260dea1aaed",
-    "artifact_ref": "artifact_18940b3934fcec873fb8",
+    "approval_digest": "sha256:704f476f6b3d95ed0125cb9e3eef331c589aac0f570567ed732585d858cdb515",
+    "artifact_digest": "sha256:011f5eb993e1561e45c85b8f428fe139f2d5850b74d872d00774fc59a7b45648",
+    "artifact_ref": "artifact_568bd8a1c24ac8825cee",
     "connection_ref": "connection_zeroemployee.org_newsletter",
-    "content_digest": "sha256:e49575034618c49f13162072b24115f3fe8c10950e38c802fdb1e1352cd97675",
+    "content_digest": "sha256:7dfc8fecd666f48a05d7c113fde14193609385b1cb8e2d6568fc0ca6de72b794",
     "created_at": "2026-09-05T08:00:00Z",
     "destination_account_ref": "destination_zeroemployee.org_newsletter",
-    "idempotency_key": "publish_4a8f5091f044c44a0b3c",
+    "idempotency_key": "publish_e22c563ff196490bf1cf",
     "input_refs": [
-      "review_8b054fe4c4ba3ca8e178",
-      "brief_f898a646b35e42eb7752",
-      "artifact_18940b3934fcec873fb8"
+      "review_9e219fbc03c2c10e532b",
+      "brief_75d4b73cf5f78f3d2eda",
+      "artifact_568bd8a1c24ac8825cee"
     ],
-    "operation_id": "operation_4a8f5091f044c44a0b3c",
+    "operation_id": "operation_e22c563ff196490bf1cf",
     "organization_id": "ducktyper-dogfood",
     "payload": {
       "alt_text": "comic_slides: Reconciliation evidence",

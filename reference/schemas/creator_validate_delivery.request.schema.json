@@ -90,6 +90,63 @@
       "title": "AnimatedEpisodePayload",
       "type": "object"
     },
+    "ArtifactDigestProof": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "pattern": "^sha256$",
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "byte_length": {
+          "exclusiveMinimum": 0,
+          "title": "Byte Length",
+          "type": "integer"
+        },
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "evidence_ref": {
+          "minLength": 1,
+          "title": "Evidence Ref",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "storage_ref": {
+          "minLength": 1,
+          "title": "Storage Ref",
+          "type": "string"
+        },
+        "tool_identity": {
+          "minLength": 1,
+          "title": "Tool Identity",
+          "type": "string"
+        },
+        "tool_version": {
+          "minLength": 1,
+          "title": "Tool Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "digest",
+        "byte_length",
+        "storage_ref",
+        "retrieved_at",
+        "evidence_ref",
+        "tool_identity",
+        "tool_version"
+      ],
+      "title": "ArtifactDigestProof",
+      "type": "object"
+    },
     "ChannelDestination": {
       "additionalProperties": false,
       "properties": {
@@ -737,6 +794,56 @@
       "title": "PublicationProfile",
       "type": "object"
     },
+    "RenderAttestation": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "minLength": 1,
+          "title": "Check Id",
+          "type": "string"
+        },
+        "check_version": {
+          "minLength": 1,
+          "title": "Check Version",
+          "type": "string"
+        },
+        "evidence_ref": {
+          "minLength": 1,
+          "title": "Evidence Ref",
+          "type": "string"
+        },
+        "expected_constraint": {
+          "minLength": 1,
+          "title": "Expected Constraint",
+          "type": "string"
+        },
+        "observed_value": {
+          "minLength": 1,
+          "title": "Observed Value",
+          "type": "string"
+        },
+        "result": {
+          "title": "Result",
+          "type": "boolean"
+        },
+        "tool_identity": {
+          "minLength": 1,
+          "title": "Tool Identity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "check_version",
+        "result",
+        "evidence_ref",
+        "tool_identity",
+        "observed_value",
+        "expected_constraint"
+      ],
+      "title": "RenderAttestation",
+      "type": "object"
+    },
     "RenderManifest": {
       "additionalProperties": false,
       "properties": {
@@ -745,10 +852,21 @@
           "title": "Artifact Digest",
           "type": "string"
         },
+        "artifact_digest_proof": {
+          "$ref": "#/$defs/ArtifactDigestProof"
+        },
         "artifact_ref": {
           "minLength": 1,
           "title": "Artifact Ref",
           "type": "string"
+        },
+        "attestations": {
+          "items": {
+            "$ref": "#/$defs/RenderAttestation"
+          },
+          "minItems": 1,
+          "title": "Attestations",
+          "type": "array"
         },
         "brand_profile_ref": {
           "minLength": 1,
@@ -779,14 +897,6 @@
           "format": "date-time",
           "title": "Created At",
           "type": "string"
-        },
-        "included_elements": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "title": "Included Elements",
-          "type": "array"
         },
         "input_refs": {
           "default": [],
@@ -829,13 +939,6 @@
           "default": "1.0.0",
           "title": "Schema Version",
           "type": "string"
-        },
-        "technical_checks": {
-          "additionalProperties": {
-            "type": "boolean"
-          },
-          "title": "Technical Checks",
-          "type": "object"
         }
       },
       "required": [
@@ -848,7 +951,9 @@
         "brief_content_digest",
         "artifact_ref",
         "artifact_digest",
-        "brand_profile_ref"
+        "brand_profile_ref",
+        "artifact_digest_proof",
+        "attestations"
       ],
       "title": "RenderManifest",
       "type": "object"
@@ -875,6 +980,11 @@
           "minLength": 1,
           "title": "Brief Id",
           "type": "string"
+        },
+        "byte_length": {
+          "exclusiveMinimum": 0,
+          "title": "Byte Length",
+          "type": "integer"
         },
         "content_digest": {
           "default": "",
@@ -946,7 +1056,8 @@
         "content_revision",
         "brief_content_digest",
         "media_type",
-        "storage_ref"
+        "storage_ref",
+        "byte_length"
       ],
       "title": "RenderedArtifact",
       "type": "object"

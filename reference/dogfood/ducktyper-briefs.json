@@ -2,13 +2,13 @@
   {
     "assignment_id": "assignment_0fa494c62763ae38d5d0",
     "audience": "Savvy builders shipping practical AI systems",
-    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
-    "brief_id": "brief_a072daeb7fa3dcf4dd3e",
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
+    "brief_id": "brief_f57dd847627f60c69e29",
     "character_refs": [
       "prof_rod",
       "ducktyper"
     ],
-    "content_digest": "sha256:2704530c81bc0add87f68037eecf8b5d527b2d3b65b34160c2c4fa933e2ac853",
+    "content_digest": "sha256:09f91940fd3b6f7f38b912db38ce54f68728b2f89cce5201997c6fb78c80d1ea",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
     "cta": "Invite builders to test the technique in a bounded project.",
@@ -55,7 +55,7 @@
     "input_refs": [
       "assignment_0fa494c62763ae38d5d0",
       "synthesis_366960f5a52a20753c60",
-      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778"
+      "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a"
     ],
     "objective": "Help builders ship one reliable creator operation",
     "organization_id": "ducktyper-dogfood",
@@ -80,13 +80,13 @@
   {
     "assignment_id": "assignment_c5fd4df956bc2f1d6575",
     "audience": "Savvy builders shipping practical AI systems",
-    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
-    "brief_id": "brief_c740c7b4799e30c9f33e",
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
+    "brief_id": "brief_4f0e7c1d8038e8e5365b",
     "character_refs": [
       "prof_rod",
       "ducktyper"
     ],
-    "content_digest": "sha256:d4bcf1eed467fd6d2bf764676b8feed1018e5e628726bd4cdc9f3dd1e23fe9ef",
+    "content_digest": "sha256:7e6c3b6e00dde57e2cd1d94991a6b8f3e703139ed40764c532dfdbf4a6fcec45",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
     "cta": "Invite builders to test the technique in a bounded project.",
@@ -141,7 +141,7 @@
     "input_refs": [
       "assignment_c5fd4df956bc2f1d6575",
       "synthesis_366960f5a52a20753c60",
-      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778"
+      "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a"
     ],
     "objective": "Help builders ship one reliable creator operation",
     "organization_id": "ducktyper-dogfood",
@@ -166,13 +166,13 @@
   {
     "assignment_id": "assignment_863e40c8404c83f080e4",
     "audience": "Savvy builders shipping practical AI systems",
-    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
-    "brief_id": "brief_b80021c5388692b9f9ab",
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a",
+    "brief_id": "brief_20ba8e08b5bbdcf383e7",
     "character_refs": [
       "prof_rod",
       "ducktyper"
     ],
-    "content_digest": "sha256:d64a9c90b4648c179b770fb8a0e7fbd5de9d5815abfdcf6f5f42f3843157728b",
+    "content_digest": "sha256:5bf2e00a0795142f2ca755296f687767c1c8f58bdeb92dd52d75cda3aea4e921",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
     "cta": "Invite builders to test the technique in a bounded project.",
@@ -219,7 +219,7 @@
     "input_refs": [
       "assignment_863e40c8404c83f080e4",
       "synthesis_366960f5a52a20753c60",
-      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778"
+      "profile_profrod_ai@1:sha256:a45a027dfa8904777841ddb94a37559db064340ae23d2a8ab34e9d8eff49719a"
     ],
     "objective": "Help builders ship one reliable creator operation",
     "organization_id": "ducktyper-dogfood",
@@ -244,12 +244,12 @@
   {
     "assignment_id": "assignment_6212d34e80290ebe0998",
     "audience": "Organizations governing dependable digital labor",
-    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
-    "brief_id": "brief_8fbb5e120c400d53ffb2",
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
+    "brief_id": "brief_f07ef1fc363755a84ec7",
     "character_refs": [
       "zeo_operator"
     ],
-    "content_digest": "sha256:377aa5db2e7da36c71e21160eb35c9a815339b5cc4931db76b1e60559075b7fe",
+    "content_digest": "sha256:644f6455257d4d8449a0c1d093dde99717d6ff83dd75f49d6e8ceacb1438e8d8",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
     "cta": "Invite operators to adopt one explicit control boundary.",
@@ -296,7 +296,7 @@
     "input_refs": [
       "assignment_6212d34e80290ebe0998",
       "synthesis_c1a66ac43e95708ee3a7",
-      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970"
+      "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f"
     ],
     "objective": "Teach organizations to govern provider effects",
     "organization_id": "ducktyper-dogfood",
@@ -321,12 +321,12 @@
   {
     "assignment_id": "assignment_cee3652532b835af7311",
     "audience": "Organizations governing dependable digital labor",
-    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
-    "brief_id": "brief_3dfa05d6507eaa5a5bcf",
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
+    "brief_id": "brief_dc0482c85a7e56ad1963",
     "character_refs": [
       "zeo_operator"
     ],
-    "content_digest": "sha256:4f9b5c7b014d4fd6fe84f3cf8e384d9942f872819cd7690e8d4e0aabdc7d61a0",
+    "content_digest": "sha256:5c309b389fe1d4417202be63ced85095aae794757412dfa9a9c7e120ff53444e",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
     "cta": "Invite operators to adopt one explicit control boundary.",
@@ -381,7 +381,7 @@
     "input_refs": [
       "assignment_cee3652532b835af7311",
       "synthesis_c1a66ac43e95708ee3a7",
-      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970"
+      "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f"
     ],
     "objective": "Teach organizations to govern provider effects",
     "organization_id": "ducktyper-dogfood",
@@ -406,12 +406,12 @@
   {
     "assignment_id": "assignment_d3ede5f2eb7784a5b47b",
     "audience": "Organizations governing dependable digital labor",
-    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
-    "brief_id": "brief_f898a646b35e42eb7752",
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f",
+    "brief_id": "brief_75d4b73cf5f78f3d2eda",
     "character_refs": [
       "zeo_operator"
     ],
-    "content_digest": "sha256:8ff61261aafc27810d0a194c0055b051106fd142ebe38a733ddafd73e0b9984a",
+    "content_digest": "sha256:7e35d1e7642bd38eadf2490171f8bd66563d77a6428d43ac0c0512b0f6dcab75",
     "content_revision": 1,
     "created_at": "2026-09-05T08:00:00Z",
     "cta": "Invite operators to adopt one explicit control boundary.",
@@ -458,7 +458,7 @@
     "input_refs": [
       "assignment_d3ede5f2eb7784a5b47b",
       "synthesis_c1a66ac43e95708ee3a7",
-      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970"
+      "profile_zeroemployee_org@1:sha256:e717267388fae8cb1d714a234310b74554cc9a47fe91acfb3e176e5f36ced15f"
     ],
     "objective": "Teach organizations to govern provider effects",
     "organization_id": "ducktyper-dogfood",

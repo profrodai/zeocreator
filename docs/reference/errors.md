@@ -21,6 +21,8 @@ outcomes; use the human message for operators, not branching logic.
 | `ZEO_CREATOR_MISSING_CLAIM_TRACE` | Accepted claims are absent from the render manifest | Correct Ducktyper's manifest/render |
 | `ZEO_CREATOR_RENDER_IDENTITY_MISMATCH` | Brief, manifest, and artifact identity differ | Use outputs from the accepted brief revision |
 | `ZEO_CREATOR_MISSING_RENDER_ELEMENT` | Required format element is absent | Re-render with full coverage |
+| `ZEO_CREATOR_EXTRACTED_TEXT_MISSING` | Claim-sensitive render lacks verified extracted text | Extract and attest render text before review |
+| `ZEO_CREATOR_ARTIFACT_DIGEST_UNVERIFIED` | Retrieved artifact-byte proof does not match the artifact | Retrieve the artifact again and recompute SHA-256 |
 | `ZEO_CREATOR_PROHIBITED_CLAIM` | Render contains prohibited language | Revise and re-render |
 | `ZEO_CREATOR_DESTINATION_MISMATCH` | Channel was not accepted by the brief | Correct the channel plan |
 | `ZEO_CREATOR_TECHNICAL_CHECKS_MISSING` | Ducktyper supplied no technical checks | Require a complete render manifest |

@@ -189,8 +189,9 @@ and [contributing guide](docs/contributing.md).
 
 ## Status
 
-The repository and capability contracts are ready for dogfooding. PyPI
-publication and live provider effects require separate operator approval and
-have not occurred.
+ZEO Creator 0.1 is **contract-ready**, not yet Ducktyper-integrated or
+product-ready. The next release gate is one genuinely publishable artifact from
+real, authorized read-only evidence. PyPI publication and live provider effects
+require separate operator approval and have not occurred.
 
 MIT licensed.

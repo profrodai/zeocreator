@@ -1,5 +1,6 @@
 .PHONY: help setup sync test lint typecheck format check verify clean lock update \
-	cli version doctor capabilities reference reference-check docs docs-serve examples
+	cli version doctor capabilities reference reference-check docs docs-serve examples \
+	digest-vectors dist-check
 
 UV ?= uv
 ZEO_CREATOR := $(UV) run zeo-creator
@@ -77,7 +78,14 @@ reference-check: reference
 
 check: lint typecheck test reference-check docs
 
-verify: check
+digest-vectors:
+	node contracts/verify-digest-vectors.mjs
+
+dist-check:
+	$(UV) build
+	$(UV) run python scripts/check_distribution.py
+
+verify: check digest-vectors dist-check
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache .coverage coverage.xml htmlcov dist build site

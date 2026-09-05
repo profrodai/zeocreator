@@ -1,11 +1,10 @@
 """Daily portfolio and assignment contracts."""
 
-from datetime import datetime
 from enum import StrEnum
 
 from pydantic import Field, model_validator
 
-from zeo_creator.contracts.common import CreatorModel, DurableArtifact
+from zeo_creator.contracts.common import CreatorModel, DurableArtifact, UtcDatetime
 
 
 class DeliverableKind(StrEnum):
@@ -21,7 +20,7 @@ class ContentHistoryEntry(DurableArtifact):
     history_id: str = Field(min_length=1)
     deliverable_kind: DeliverableKind
     topic: str = Field(min_length=1)
-    published_at: datetime
+    published_at: UtcDatetime
     artifact_ref: str = Field(min_length=1)
 
 
@@ -59,7 +58,7 @@ class EditorialAssignment(DurableArtifact):
     relationship_to_other_daily_assignments: str = Field(min_length=1)
     target_channels: tuple[str, ...] = Field(min_length=1)
     brand_profile_ref: str = Field(min_length=1)
-    due_at: datetime
+    due_at: UtcDatetime
 
 
 class DailyEditorialPlan(DurableArtifact):

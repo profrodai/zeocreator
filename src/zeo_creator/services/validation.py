@@ -12,6 +12,7 @@ from zeo_creator.contracts.delivery import (
 )
 from zeo_creator.contracts.distribution import ChannelPlan, PublicationPayload
 from zeo_creator.contracts.ducktyper import DucktyperBrief, required_render_elements
+from zeo_creator.contracts.editorial import DeliverableKind
 from zeo_creator.contracts.evidence import ResearchSynthesis
 from zeo_creator.contracts.publications import PublicationProfile
 
@@ -46,6 +47,20 @@ def approval_digest_for(
             "payload": payload.model_dump(mode="json"),
         }
     )
+
+
+def required_technical_checks(brief: DucktyperBrief, channel_plan: ChannelPlan) -> frozenset[str]:
+    by_format = {
+        DeliverableKind.ANIMATED_EPISODE: {"media.decode", "video.duration", "audio.track"},
+        DeliverableKind.HUD: {"media.decode", "visual.dimensions", "motion.sequence"},
+        DeliverableKind.COMIC_SLIDES: {
+            "media.decode",
+            "visual.dimensions",
+            "comic.panel_count",
+        },
+    }
+    destinations = {f"destination.{item.channel}.constraints" for item in channel_plan.destinations}
+    return frozenset((*by_format[brief.deliverable_kind], *destinations))
 
 
 def validate_delivery_bundle(
@@ -97,8 +112,13 @@ def validate_delivery_bundle(
             "ZEO_CREATOR_RENDER_IDENTITY_MISMATCH", "identity", "Brief/render identity mismatch"
         )
 
-    required = set(required_render_elements(brief))
-    missing_elements = sorted(required.difference(manifest.included_elements))
+    attestations = {item.check_id: item for item in manifest.attestations}
+    required = {f"element.{item}" for item in required_render_elements(brief)}
+    missing_elements = sorted(
+        check_id.removeprefix("element.")
+        for check_id in required
+        if check_id not in attestations or not attestations[check_id].result
+    )
     element_coverage = not missing_elements
     if missing_elements:
         blocking(
@@ -109,9 +129,13 @@ def validate_delivery_bundle(
 
     allowed_claim_ids = {claim.claim_id for claim in brief.evidence_claims}
     rendered_claim_ids = set(manifest.rendered_claim_ids)
-    source_claim_traceability = rendered_claim_ids == allowed_claim_ids and all(
-        set(claim.evidence_refs).issubset(synthesis.evidence_refs)
-        for claim in brief.evidence_claims
+    source_claim_traceability = (
+        rendered_claim_ids == allowed_claim_ids
+        and all(
+            set(claim.evidence_refs).issubset(synthesis.evidence_refs)
+            for claim in brief.evidence_claims
+        )
+        and set(brief.source_refs).issubset(synthesis.evidence_refs)
     )
     if rendered_claim_ids.difference(allowed_claim_ids):
         blocking(
@@ -125,11 +149,30 @@ def validate_delivery_bundle(
             "evidence",
             "Accepted brief claims are missing from the render manifest",
         )
+    if not source_claim_traceability:
+        blocking(
+            "ZEO_CREATOR_MISSING_CLAIM_TRACE",
+            "evidence",
+            "Brief or rendered claims do not resolve entirely to the accepted synthesis",
+        )
 
     brand_pass = manifest.brand_profile_ref == publication.reference
     if not brand_pass:
         blocking("ZEO_CREATOR_BRAND_MISMATCH", "brand", "Render used the wrong brand profile")
     rendered_text = artifact.extracted_text.casefold()
+    text_validation_required = bool(brief.evidence_claims or brief.prohibited_claims)
+    text_attestation = attestations.get("content.extracted_text")
+    if text_validation_required and (
+        not artifact.extracted_text.strip()
+        or text_attestation is None
+        or not text_attestation.result
+    ):
+        brand_pass = False
+        blocking(
+            "ZEO_CREATOR_EXTRACTED_TEXT_MISSING",
+            "evidence",
+            "Verified extracted text is required for claim and prohibited-language checks",
+        )
     prohibited = [claim for claim in brief.prohibited_claims if claim.casefold() in rendered_text]
     if prohibited:
         brand_pass = False
@@ -149,13 +192,34 @@ def validate_delivery_bundle(
             f"Unapproved destination channels: {', '.join(sorted(unsupported_destinations))}",
         )
 
-    failed_checks = sorted(name for name, passed in manifest.technical_checks.items() if not passed)
-    technical_pass = bool(manifest.technical_checks) and not failed_checks
-    if not manifest.technical_checks:
+    proof = manifest.artifact_digest_proof
+    digest_proof_pass = (
+        proof.digest == artifact.artifact_digest == manifest.artifact_digest
+        and proof.storage_ref == artifact.storage_ref
+        and proof.byte_length == artifact.byte_length
+    )
+    if not digest_proof_pass:
         blocking(
-            "ZEO_CREATOR_TECHNICAL_CHECKS_MISSING", "technical", "No technical checks supplied"
+            "ZEO_CREATOR_ARTIFACT_DIGEST_UNVERIFIED",
+            "technical",
+            "Artifact digest proof does not bind the retrieved artifact bytes",
         )
-    elif failed_checks:
+
+    required_checks = required_technical_checks(brief, channel_plan)
+    missing_checks = sorted(required_checks.difference(attestations))
+    failed_checks = sorted(
+        check_id
+        for check_id in required_checks
+        if check_id in attestations and not attestations[check_id].result
+    )
+    technical_pass = digest_proof_pass and not missing_checks and not failed_checks
+    if missing_checks:
+        blocking(
+            "ZEO_CREATOR_TECHNICAL_CHECKS_MISSING",
+            "technical",
+            f"Missing required technical checks: {', '.join(missing_checks)}",
+        )
+    if failed_checks:
         blocking(
             "ZEO_CREATOR_TECHNICAL_CHECK_FAILED",
             "technical",

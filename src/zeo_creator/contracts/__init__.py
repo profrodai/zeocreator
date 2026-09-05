@@ -1,9 +1,11 @@
 """Public versioned domain contracts for ZEO Creator."""
 
 from zeo_creator.contracts.delivery import (
+    ArtifactDigestProof,
     DeliveryFinding,
     DeliveryReviewBundle,
     FindingSeverity,
+    RenderAttestation,
     RenderedArtifact,
     RenderManifest,
 )
@@ -40,6 +42,7 @@ from zeo_creator.contracts.evidence import (
 )
 from zeo_creator.contracts.performance import (
     DailyPerformanceAssessment,
+    MetricAggregation,
     MetricObservation,
     MetricsQuery,
 )
@@ -47,6 +50,7 @@ from zeo_creator.contracts.publications import PublicationProfile
 
 __all__ = [
     "AnimatedEpisodePayload",
+    "ArtifactDigestProof",
     "ChannelDestination",
     "ChannelPlan",
     "ComicSlidesPayload",
@@ -64,6 +68,7 @@ __all__ = [
     "FindingSeverity",
     "FormatPayload",
     "HudPayload",
+    "MetricAggregation",
     "MetricObservation",
     "MetricsQuery",
     "PortfolioConstraints",
@@ -74,6 +79,7 @@ __all__ = [
     "PublicationProfile",
     "PublicationReceipt",
     "ReconciliationState",
+    "RenderAttestation",
     "RenderManifest",
     "RenderedArtifact",
     "ResearchSynthesis",

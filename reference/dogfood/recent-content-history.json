@@ -1,7 +1,7 @@
 [
   {
     "artifact_ref": "artifact_history_profrod.ai",
-    "content_digest": "sha256:ed9d7839cbc49bb9324a6a0326192be1e32d5943a0f15ad31a6f73584e9a0ba6",
+    "content_digest": "sha256:f5fb342079d291a8204a9aa0949d2b8a80800646f9b92a8ea6cf284409fe14cd",
     "created_at": "2026-09-04T08:00:00Z",
     "deliverable_kind": "hud",
     "history_id": "history_profrod.ai",
@@ -15,7 +15,7 @@
   },
   {
     "artifact_ref": "artifact_history_zeroemployee.org",
-    "content_digest": "sha256:4b5986c04b51708c8c56402337375efdcef815dc7b984df39b7bd2d94b7ee107",
+    "content_digest": "sha256:7bcba4cd9fce134dab2cf814fff3bedc485f430a0c89735754db84eac8bd8286",
     "created_at": "2026-09-04T08:00:00Z",
     "deliverable_kind": "hud",
     "history_id": "history_zeroemployee.org",

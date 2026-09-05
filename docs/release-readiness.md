@@ -1,7 +1,7 @@
 # ZEO Creator release-readiness report
 
 Date: 2026-09-05
-Decision: **Repository-ready; Python distribution not yet approved for publication**
+Decision: **Contract-ready; product integration and Python publication not yet approved**
 
 ## Implemented evidence
 
@@ -38,9 +38,11 @@ boundary, not a claim that local transforms contact a provider.
 
 ## Explicit publication gates
 
-1. PyPI publication and live provider effects require separate approval and have
+1. Evidence lineage, artifact-byte verification, cross-runtime digests, and real
+   Ducktyper consumer validation must pass before the package is product-ready.
+2. PyPI publication and live provider effects require separate approval and have
    not occurred.
-2. Ducktyper must confirm the external JSON brief/render boundary during
+3. Ducktyper must confirm the external JSON brief/render boundary during
    dogfooding before a distribution release decision.
 
 The operator owns GitHub visibility and repository placement. The canonical

@@ -52,7 +52,12 @@ def test_briefs_and_renders_are_evidence_and_digest_bound() -> None:
         assert artifact.brief_id == brief.brief_id
         assert artifact.brief_content_digest == brief.content_digest
         assert manifest.brief_content_digest == brief.content_digest
-        assert set(required_render_elements(brief)) <= set(manifest.included_elements)
+        attested_elements = {
+            item.check_id.removeprefix("element.")
+            for item in manifest.attestations
+            if item.check_id.startswith("element.") and item.result
+        }
+        assert set(required_render_elements(brief)) <= attested_elements
         assert review.ready_for_approval is True
         assert review.approval_digest
 
