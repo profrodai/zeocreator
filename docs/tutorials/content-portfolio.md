@@ -78,4 +78,5 @@ make reference
 uv run python examples/complete_content_portfolio.py
 ```
 
-Inspect the generated JSON in [`reference/examples`](../../reference/examples).
+Inspect the generated JSON in
+[`reference/examples`](https://github.com/profrodai/zeocreator/tree/main/reference/examples).

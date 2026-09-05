@@ -90,7 +90,13 @@ def contracts_list(
     """List versioned contracts included in this installation."""
     entries = list_contract_schemas()
     rows = [
-        {"name": item.name, "version": item.version, "filename": item.filename} for item in entries
+        {
+            "name": item.name,
+            "version": item.version,
+            "filename": item.filename,
+            "schema_digest": item.schema_digest,
+        }
+        for item in entries
     ]
     if json_output:
         typer.echo(json.dumps(rows, indent=2))
@@ -99,8 +105,9 @@ def contracts_list(
     table.add_column("Name")
     table.add_column("Version")
     table.add_column("Schema")
+    table.add_column("Digest")
     for item in entries:
-        table.add_row(item.name, item.version, item.filename)
+        table.add_row(item.name, item.version, item.filename, item.schema_digest)
     console.print(table)
 
 

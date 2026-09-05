@@ -10,7 +10,7 @@ from zeo_core.tools import ToolContext, capability
 from zeo_creator.capabilities._examples import performance_request
 from zeo_creator.capabilities.support import METRICS_READ_REQUIREMENTS
 from zeo_creator.contracts.common import CreatorModel
-from zeo_creator.contracts.performance import DailyPerformanceAssessment, MetricsQuery
+from zeo_creator.contracts.performance import MetricsQuery, PerformanceAssessment
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.errors import CreatorDomainError
 from zeo_creator.ports.metrics import MetricsSourcePort
@@ -26,7 +26,7 @@ class AssessPerformanceRequest(CreatorModel):
 
 
 class AssessPerformanceResponse(CreatorModel):
-    assessment: DailyPerformanceAssessment
+    assessment: PerformanceAssessment
 
 
 @capability(

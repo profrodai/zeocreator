@@ -9,7 +9,11 @@ from zeo_creator.contracts.delivery import (
     ArtifactDigestProof,
     ArtifactManifest,
 )
-from zeo_creator.contracts.distribution import ChannelDestination, ChannelPlan
+from zeo_creator.contracts.distribution import (
+    ChannelDestination,
+    ChannelPlan,
+    DistributionVariant,
+)
 from zeo_creator.contracts.editorial import (
     ContentRequirement,
     EditorialAssignment,
@@ -202,17 +206,26 @@ def manifest() -> ArtifactManifest:
 
 def channel_plan() -> ChannelPlan:
     profile = publication()
+    produced = manifest()
     return ChannelPlan(
         channel_plan_id="channels_example",
         created_at=NOW,
         organization_id=profile.organization_id,
         publication_id=profile.publication_id,
-        destinations=(
-            ChannelDestination(
-                channel="website",
-                provider_kind="website",
-                connection_ref="connection_website_example",
-                destination_account_ref="destination_example",
+        variants=(
+            DistributionVariant(
+                destination=ChannelDestination(
+                    channel="website",
+                    provider_kind="website",
+                    connection_ref="connection_website_example",
+                    destination_account_ref="destination_example",
+                ),
+                selected_artifact_refs=(produced.artifacts[0].artifact_ref,),
+                content=ContentDocument(
+                    media_type="text/markdown",
+                    content="# Reliable workflows\n\nRetries need bounds.",
+                ),
+                accessibility_text="An evidence-led guide to bounded workflows.",
             ),
         ),
     )

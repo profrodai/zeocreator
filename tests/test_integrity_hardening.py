@@ -118,5 +118,5 @@ def _channel_plan(snapshot: ReferenceSnapshot, index: int) -> ChannelPlan:
         organization_id=brief.organization_id,
         publication_id=brief.publication_id,
         input_refs=(brief.brief_id,),
-        destinations=review.proposed_destinations,
+        variants=review.proposed_variants,
     )

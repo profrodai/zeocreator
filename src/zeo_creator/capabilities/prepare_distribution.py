@@ -35,6 +35,7 @@ class PrepareDistributionResponse(CreatorModel):
     examples=(CapabilityExample(name="one-proposal", request=distribution_request()),),
     error_codes=(
         "ZEO_CREATOR_APPROVAL_STALE",
+        "ZEO_CREATOR_ARTIFACT_SELECTION_MISMATCH",
         "ZEO_CREATOR_DELIVERY_BLOCKED",
         "ZEO_CREATOR_STALE_INPUT",
     ),

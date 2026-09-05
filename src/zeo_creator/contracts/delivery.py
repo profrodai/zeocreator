@@ -10,7 +10,7 @@ from zeo_creator.contracts.common import (
     UtcDatetime,
     assert_secret_safe,
 )
-from zeo_creator.contracts.distribution import ChannelDestination, PublicationPayload
+from zeo_creator.contracts.distribution import DistributionVariant
 
 
 class ArtifactDescriptor(CreatorModel):
@@ -104,8 +104,7 @@ class DeliveryReviewBundle(DurableArtifact):
     brand_constraints_pass: bool
     artifact_integrity_pass: bool
     findings: tuple[DeliveryFinding, ...] = ()
-    proposed_payload: PublicationPayload
-    proposed_destinations: tuple[ChannelDestination, ...]
+    proposed_variants: tuple[DistributionVariant, ...] = Field(min_length=1)
     approval_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     ready_for_approval: bool
 

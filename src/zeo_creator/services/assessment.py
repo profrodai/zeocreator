@@ -4,9 +4,9 @@ from datetime import datetime
 
 from zeo_creator.contracts.common import digest_is_current, stable_id
 from zeo_creator.contracts.performance import (
-    DailyPerformanceAssessment,
     MetricObservation,
     MetricsQuery,
+    PerformanceAssessment,
 )
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.errors import CreatorDomainError
@@ -21,7 +21,7 @@ def assess_publication_performance(
     created_at: datetime,
     revision: int,
     source: MetricsSourcePort,
-) -> DailyPerformanceAssessment:
+) -> PerformanceAssessment:
     if not digest_is_current(publication):
         raise CreatorDomainError("ZEO_CREATOR_STALE_INPUT", "publication profile digest is stale")
     if not queries:
@@ -110,7 +110,7 @@ def assess_publication_performance(
             }
         )
     )
-    return DailyPerformanceAssessment(
+    return PerformanceAssessment(
         assessment_id=stable_id(
             "assessment",
             publication.publication_id,

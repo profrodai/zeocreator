@@ -1,28 +1,33 @@
 [
   {
-    "approval_digest": "sha256:72fce3073266b9bd832044d4672e41ee52e750d988f8ff6e3750c367d4de4072",
+    "accessibility_text": "article: Example Publication A: Evidence-led explanations",
+    "approval_digest": "sha256:d5023b76f7d06ec116f331faf4af477d3495e7cbf4d4507aac3e07e5419839e7",
     "artifact_manifest_digest": "sha256:b1d8f07caa0a8a5002515648c4f0d7d80b7dab3ca92450d1c3c7c4d562582d01",
     "artifact_manifest_ref": "manifest_4e9bcf76f69c52795155",
-    "connection_ref": "connection_publication-a.example_website",
-    "content_digest": "sha256:922fe8551ee0cfad4a754b98ecd7966fb2ccddcf7d6c88ad44b9064d4c0bd156",
+    "channel": "website",
+    "content": {
+      "content": "# Example Publication A: Evidence-led explanations\n\nEvidence supporting evidence-led explanations in creator operations.\n\nChannel: website",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:f3cbc74ab199e0acba1000eaa73526c9a9de18775c9c8468cd1a35a6cb994323",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_website",
-    "idempotency_key": "publish_0f6679d396ecd9d96cb7",
+    "destination": {
+      "channel": "website",
+      "connection_ref": "connection_publication-a.example_website",
+      "destination_account_ref": "destination_publication-a.example_website",
+      "provider_kind": "example.website",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_dc3d2b3d5684d329e209",
     "input_refs": [
-      "review_74a7cbe0b9ba6d130be4",
+      "review_e75b86c9bc194ffe043e",
       "brief_1a25a061f24771474f29",
       "manifest_4e9bcf76f69c52795155",
       "artifact_0536061154dfab8c4242"
     ],
-    "operation_id": "operation_0f6679d396ecd9d96cb7",
+    "operation_id": "operation_dc3d2b3d5684d329e209",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "article: Example Publication A: Evidence-led explanations",
-      "caption": "Evidence supporting evidence-led explanations in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 article",
-      "title": "Example Publication A: Evidence-led explanations"
-    },
-    "provider_kind": "example.website",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -36,29 +41,34 @@
     ]
   },
   {
-    "approval_digest": "sha256:72fce3073266b9bd832044d4672e41ee52e750d988f8ff6e3750c367d4de4072",
+    "accessibility_text": "article: Example Publication A: Evidence-led explanations",
+    "approval_digest": "sha256:d5023b76f7d06ec116f331faf4af477d3495e7cbf4d4507aac3e07e5419839e7",
     "artifact_manifest_digest": "sha256:b1d8f07caa0a8a5002515648c4f0d7d80b7dab3ca92450d1c3c7c4d562582d01",
     "artifact_manifest_ref": "manifest_4e9bcf76f69c52795155",
-    "connection_ref": "connection_publication-a.example_social.network-a",
-    "content_digest": "sha256:39915d3f3acb8cb7a4c9462f5f9ff063d29e5412c62bdd1406b38a800882aedf",
+    "channel": "social.network-a",
+    "content": {
+      "content": "# Example Publication A: Evidence-led explanations\n\nEvidence supporting evidence-led explanations in creator operations.\n\nChannel: social.network-a",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:6cc2dce21fb133d6f55e38059c61fa5933943bbecd870eed2dab76e72a9aa5c3",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_social.network-a",
-    "idempotency_key": "publish_284cf8c5d483d3ef9303",
+    "destination": {
+      "channel": "social.network-a",
+      "connection_ref": "connection_publication-a.example_social.network-a",
+      "destination_account_ref": "destination_publication-a.example_social.network-a",
+      "provider_kind": "example.social.network-a",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_6780ad9a6164609c464f",
     "input_refs": [
-      "review_74a7cbe0b9ba6d130be4",
+      "review_e75b86c9bc194ffe043e",
       "brief_1a25a061f24771474f29",
       "manifest_4e9bcf76f69c52795155",
       "artifact_0536061154dfab8c4242"
     ],
-    "operation_id": "operation_284cf8c5d483d3ef9303",
+    "operation_id": "operation_6780ad9a6164609c464f",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "article: Example Publication A: Evidence-led explanations",
-      "caption": "Evidence supporting evidence-led explanations in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 article",
-      "title": "Example Publication A: Evidence-led explanations"
-    },
-    "provider_kind": "example.social.network-a",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -72,30 +82,34 @@
     ]
   },
   {
-    "approval_digest": "sha256:bc633630cfce8e27f78852154a9b0a68a1e548091e15742ca94489c0cf146d1f",
+    "accessibility_text": "video.short: Example Publication A: Reusable content atoms",
+    "approval_digest": "sha256:899795becc69d9e3f5b08a0e0240f796bf99624ed86c4c43b1e04816a234f0cc",
     "artifact_manifest_digest": "sha256:fc4ba7df634a239903cd9732ad1134923ae25af9bd77630267234624bb278ce2",
     "artifact_manifest_ref": "manifest_1988b4efe8f157629f92",
-    "connection_ref": "connection_publication-a.example_website",
-    "content_digest": "sha256:0807df24d93e234237cc5a49f47bff082fb098d0033a60b320c48b8f1f8e721e",
+    "channel": "website",
+    "content": {
+      "content": "# Example Publication A: Reusable content atoms\n\nEvidence supporting reusable content atoms in creator operations.\n\nChannel: website",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:39bb19b7924e597c4853b71d4e8fd5270c38d7266a011e9d254ef386af3f433a",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_website",
-    "idempotency_key": "publish_35af896ddd25d52b93f1",
+    "destination": {
+      "channel": "website",
+      "connection_ref": "connection_publication-a.example_website",
+      "destination_account_ref": "destination_publication-a.example_website",
+      "provider_kind": "example.website",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_c09a61a000b558022779",
     "input_refs": [
-      "review_f1784353790791a26389",
+      "review_af776cdb12fa4459ab77",
       "brief_dae90cadc90ec5f09cd4",
       "manifest_1988b4efe8f157629f92",
-      "artifact_c18f113e7da46678bc67",
-      "artifact_ce6d5e9927d23852d265"
+      "artifact_c18f113e7da46678bc67"
     ],
-    "operation_id": "operation_35af896ddd25d52b93f1",
+    "operation_id": "operation_c09a61a000b558022779",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "video.short: Example Publication A: Reusable content atoms",
-      "caption": "Evidence supporting reusable content atoms in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 video.short",
-      "title": "Example Publication A: Reusable content atoms"
-    },
-    "provider_kind": "example.website",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -105,35 +119,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_c18f113e7da46678bc67",
-      "artifact_ce6d5e9927d23852d265"
+      "artifact_c18f113e7da46678bc67"
     ]
   },
   {
-    "approval_digest": "sha256:bc633630cfce8e27f78852154a9b0a68a1e548091e15742ca94489c0cf146d1f",
+    "accessibility_text": "video.short: Example Publication A: Reusable content atoms",
+    "approval_digest": "sha256:899795becc69d9e3f5b08a0e0240f796bf99624ed86c4c43b1e04816a234f0cc",
     "artifact_manifest_digest": "sha256:fc4ba7df634a239903cd9732ad1134923ae25af9bd77630267234624bb278ce2",
     "artifact_manifest_ref": "manifest_1988b4efe8f157629f92",
-    "connection_ref": "connection_publication-a.example_social.network-a",
-    "content_digest": "sha256:0d9f807d2baab8675bd6b7a99b33881b6e245ef6150cc8fd4947fd256a710ab0",
+    "channel": "social.network-a",
+    "content": {
+      "content": "# Example Publication A: Reusable content atoms\n\nEvidence supporting reusable content atoms in creator operations.\n\nChannel: social.network-a",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:059205e3391bccf896c289516c6ddc854354cdfc63f31345c23e4e7303d7ff81",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_social.network-a",
-    "idempotency_key": "publish_56c9efa0912a57b8b3f7",
+    "destination": {
+      "channel": "social.network-a",
+      "connection_ref": "connection_publication-a.example_social.network-a",
+      "destination_account_ref": "destination_publication-a.example_social.network-a",
+      "provider_kind": "example.social.network-a",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_917897c0a1a83002bf5c",
     "input_refs": [
-      "review_f1784353790791a26389",
+      "review_af776cdb12fa4459ab77",
       "brief_dae90cadc90ec5f09cd4",
       "manifest_1988b4efe8f157629f92",
-      "artifact_c18f113e7da46678bc67",
       "artifact_ce6d5e9927d23852d265"
     ],
-    "operation_id": "operation_56c9efa0912a57b8b3f7",
+    "operation_id": "operation_917897c0a1a83002bf5c",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "video.short: Example Publication A: Reusable content atoms",
-      "caption": "Evidence supporting reusable content atoms in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 video.short",
-      "title": "Example Publication A: Reusable content atoms"
-    },
-    "provider_kind": "example.social.network-a",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -143,35 +160,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_c18f113e7da46678bc67",
       "artifact_ce6d5e9927d23852d265"
     ]
   },
   {
-    "approval_digest": "sha256:12ce7089b9a1b2d8651f4c9f8d2855256cdd1b57a7524bfde789e65dba9863c8",
+    "accessibility_text": "image.carousel: Example Publication A: Typed handoffs",
+    "approval_digest": "sha256:6f292bcd8dc1207cf9f4602b6a5262c0bfbfcbfadb5906d5b2142355d0904f1f",
     "artifact_manifest_digest": "sha256:de34123bfcc37dfb4d4dc03ea0d1e340a224d053aa8dabd1b66d685a73c932b2",
     "artifact_manifest_ref": "manifest_f90ad2e4786178abd18f",
-    "connection_ref": "connection_publication-a.example_website",
-    "content_digest": "sha256:59769c57257d8b81ca1da0777c96361b4daedab80a0529cb142bab56cb6ec54a",
+    "channel": "website",
+    "content": {
+      "content": "# Example Publication A: Typed handoffs\n\nEvidence supporting typed handoffs in creator operations.\n\nChannel: website",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:6d7ba3b32359179f49ffbf0ad44967fd09861203100985613a958868967d6204",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_website",
-    "idempotency_key": "publish_b1b14e5d969e76df3752",
+    "destination": {
+      "channel": "website",
+      "connection_ref": "connection_publication-a.example_website",
+      "destination_account_ref": "destination_publication-a.example_website",
+      "provider_kind": "example.website",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_2c6dd61476f9b52eb0f3",
     "input_refs": [
-      "review_4a3399c1e1246bfa5d71",
+      "review_9379b6d5fab6e6db6d0a",
       "brief_a7cc9c0ed7d2235f752a",
       "manifest_f90ad2e4786178abd18f",
-      "artifact_fbe60ad5155560f78486",
-      "artifact_ebfbfef3883f6b3518d6"
+      "artifact_fbe60ad5155560f78486"
     ],
-    "operation_id": "operation_b1b14e5d969e76df3752",
+    "operation_id": "operation_2c6dd61476f9b52eb0f3",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "image.carousel: Example Publication A: Typed handoffs",
-      "caption": "Evidence supporting typed handoffs in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 image.carousel",
-      "title": "Example Publication A: Typed handoffs"
-    },
-    "provider_kind": "example.website",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -181,35 +201,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_fbe60ad5155560f78486",
-      "artifact_ebfbfef3883f6b3518d6"
+      "artifact_fbe60ad5155560f78486"
     ]
   },
   {
-    "approval_digest": "sha256:12ce7089b9a1b2d8651f4c9f8d2855256cdd1b57a7524bfde789e65dba9863c8",
+    "accessibility_text": "image.carousel: Example Publication A: Typed handoffs",
+    "approval_digest": "sha256:6f292bcd8dc1207cf9f4602b6a5262c0bfbfcbfadb5906d5b2142355d0904f1f",
     "artifact_manifest_digest": "sha256:de34123bfcc37dfb4d4dc03ea0d1e340a224d053aa8dabd1b66d685a73c932b2",
     "artifact_manifest_ref": "manifest_f90ad2e4786178abd18f",
-    "connection_ref": "connection_publication-a.example_social.network-a",
-    "content_digest": "sha256:1fb940614b34a9ae7d26147863d4e8de5332929f2dc09c25e648f13b982dff70",
+    "channel": "social.network-a",
+    "content": {
+      "content": "# Example Publication A: Typed handoffs\n\nEvidence supporting typed handoffs in creator operations.\n\nChannel: social.network-a",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:432506f1d3bbcfabcc2801fd957bc4e6e1750566041edd19ac1dcced08a74a87",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_social.network-a",
-    "idempotency_key": "publish_746c433e1a21eca791e0",
+    "destination": {
+      "channel": "social.network-a",
+      "connection_ref": "connection_publication-a.example_social.network-a",
+      "destination_account_ref": "destination_publication-a.example_social.network-a",
+      "provider_kind": "example.social.network-a",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_752ea6ed5c657e66de97",
     "input_refs": [
-      "review_4a3399c1e1246bfa5d71",
+      "review_9379b6d5fab6e6db6d0a",
       "brief_a7cc9c0ed7d2235f752a",
       "manifest_f90ad2e4786178abd18f",
-      "artifact_fbe60ad5155560f78486",
       "artifact_ebfbfef3883f6b3518d6"
     ],
-    "operation_id": "operation_746c433e1a21eca791e0",
+    "operation_id": "operation_752ea6ed5c657e66de97",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "image.carousel: Example Publication A: Typed handoffs",
-      "caption": "Evidence supporting typed handoffs in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 image.carousel",
-      "title": "Example Publication A: Typed handoffs"
-    },
-    "provider_kind": "example.social.network-a",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -219,35 +242,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_fbe60ad5155560f78486",
       "artifact_ebfbfef3883f6b3518d6"
     ]
   },
   {
-    "approval_digest": "sha256:28a4d00cc114c6f3e03bf84abc1faae298e7ee6709cb05bacefb6498d2721cca",
+    "accessibility_text": "newsletter.issue: Example Publication A: Bounded retries",
+    "approval_digest": "sha256:2cdc63f39226c0df31a4854291820304cef0e64b6959695dd358529a0d578a4d",
     "artifact_manifest_digest": "sha256:7383000b965bb58ebe755ec12686773a97bc378d756fb19b1bfc738d52a855ca",
     "artifact_manifest_ref": "manifest_14166c47bf73d3859372",
-    "connection_ref": "connection_publication-a.example_website",
-    "content_digest": "sha256:91a848a2cf5b97f9bc3f2af8ad4ddd304ade9eda0ddf4d78ecddc8c845e5b715",
+    "channel": "website",
+    "content": {
+      "content": "# Example Publication A: Bounded retries\n\nEvidence supporting bounded retries in creator operations.\n\nChannel: website",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:30e161601d4546afc375ac59c5f30ae746295f4a4ed60c1d263aaa87c712ba56",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_website",
-    "idempotency_key": "publish_7af9bf43269f3690564e",
+    "destination": {
+      "channel": "website",
+      "connection_ref": "connection_publication-a.example_website",
+      "destination_account_ref": "destination_publication-a.example_website",
+      "provider_kind": "example.website",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_c887e710b95acef56e9e",
     "input_refs": [
-      "review_18478e411f8f9e378bf9",
+      "review_a4120ec4112dab7ab94e",
       "brief_65b9e1dcb4942f44a6b9",
       "manifest_14166c47bf73d3859372",
-      "artifact_3f7f2544d2d079cb61a5",
-      "artifact_2bce15f77a9586b8f00b"
+      "artifact_3f7f2544d2d079cb61a5"
     ],
-    "operation_id": "operation_7af9bf43269f3690564e",
+    "operation_id": "operation_c887e710b95acef56e9e",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "newsletter.issue: Example Publication A: Bounded retries",
-      "caption": "Evidence supporting bounded retries in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 newsletter.issue",
-      "title": "Example Publication A: Bounded retries"
-    },
-    "provider_kind": "example.website",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -257,35 +283,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_3f7f2544d2d079cb61a5",
-      "artifact_2bce15f77a9586b8f00b"
+      "artifact_3f7f2544d2d079cb61a5"
     ]
   },
   {
-    "approval_digest": "sha256:28a4d00cc114c6f3e03bf84abc1faae298e7ee6709cb05bacefb6498d2721cca",
+    "accessibility_text": "newsletter.issue: Example Publication A: Bounded retries",
+    "approval_digest": "sha256:2cdc63f39226c0df31a4854291820304cef0e64b6959695dd358529a0d578a4d",
     "artifact_manifest_digest": "sha256:7383000b965bb58ebe755ec12686773a97bc378d756fb19b1bfc738d52a855ca",
     "artifact_manifest_ref": "manifest_14166c47bf73d3859372",
-    "connection_ref": "connection_publication-a.example_social.network-a",
-    "content_digest": "sha256:306a2f06c02d8065dd3909236fa5e98e376135844e260fe21139e8118cf0b2ea",
+    "channel": "social.network-a",
+    "content": {
+      "content": "# Example Publication A: Bounded retries\n\nEvidence supporting bounded retries in creator operations.\n\nChannel: social.network-a",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:00797bf068d1a514529d5fc2b9968e4a79877c166e392d185d46d4ebc5ee9a52",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-a.example_social.network-a",
-    "idempotency_key": "publish_b42ba8c89b25636d9cc3",
+    "destination": {
+      "channel": "social.network-a",
+      "connection_ref": "connection_publication-a.example_social.network-a",
+      "destination_account_ref": "destination_publication-a.example_social.network-a",
+      "provider_kind": "example.social.network-a",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_38bea81444a1940bf5aa",
     "input_refs": [
-      "review_18478e411f8f9e378bf9",
+      "review_a4120ec4112dab7ab94e",
       "brief_65b9e1dcb4942f44a6b9",
       "manifest_14166c47bf73d3859372",
-      "artifact_3f7f2544d2d079cb61a5",
       "artifact_2bce15f77a9586b8f00b"
     ],
-    "operation_id": "operation_b42ba8c89b25636d9cc3",
+    "operation_id": "operation_38bea81444a1940bf5aa",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "newsletter.issue: Example Publication A: Bounded retries",
-      "caption": "Evidence supporting bounded retries in creator operations.\n\nApply one bounded practice",
-      "description": "Teach practice through useful content \u2014 newsletter.issue",
-      "title": "Example Publication A: Bounded retries"
-    },
-    "provider_kind": "example.social.network-a",
     "publication_id": "publication-a.example",
     "required_effects": [
       "write",
@@ -295,34 +324,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_3f7f2544d2d079cb61a5",
       "artifact_2bce15f77a9586b8f00b"
     ]
   },
   {
-    "approval_digest": "sha256:55ca9c75f9021685b03b1880ed375156752e2df5ee89a5f86f220f8944c67ed3",
+    "accessibility_text": "article: Example Publication B: Digest-bound decisions",
+    "approval_digest": "sha256:44d15472eba76afddcf889bd6eb258ebcb7ef820d16ebd7372a2eb36e9d47a4f",
     "artifact_manifest_digest": "sha256:99db014faf544c750202ee2695ef547861e99aa11e2de6621c0ae990c13944e1",
     "artifact_manifest_ref": "manifest_a4dd16fd4d954a67d273",
-    "connection_ref": "connection_publication-b.example_newsletter",
-    "content_digest": "sha256:99b3d71ee07027bdfac983adfd79bced7127c1084a407e615823010f5c5ceb99",
+    "channel": "newsletter",
+    "content": {
+      "content": "# Example Publication B: Digest-bound decisions\n\nEvidence supporting digest-bound decisions in creator operations.\n\nChannel: newsletter",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:3ddd33183a1c65dc189712e344f392958ce7ad800f46ddca9473dc64078d6aa2",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_newsletter",
-    "idempotency_key": "publish_a0eba2a937dcfb47deb5",
+    "destination": {
+      "channel": "newsletter",
+      "connection_ref": "connection_publication-b.example_newsletter",
+      "destination_account_ref": "destination_publication-b.example_newsletter",
+      "provider_kind": "example.newsletter",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_0fff6f6e4749b31e27de",
     "input_refs": [
-      "review_c2fc61cf911940b45b86",
+      "review_76a0b26d2cad02b235e7",
       "brief_802732cc9c8eb5fab319",
       "manifest_a4dd16fd4d954a67d273",
       "artifact_04375c00a716604ae876"
     ],
-    "operation_id": "operation_a0eba2a937dcfb47deb5",
+    "operation_id": "operation_0fff6f6e4749b31e27de",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "article: Example Publication B: Digest-bound decisions",
-      "caption": "Evidence supporting digest-bound decisions in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 article",
-      "title": "Example Publication B: Digest-bound decisions"
-    },
-    "provider_kind": "example.newsletter",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -336,29 +369,34 @@
     ]
   },
   {
-    "approval_digest": "sha256:55ca9c75f9021685b03b1880ed375156752e2df5ee89a5f86f220f8944c67ed3",
+    "accessibility_text": "article: Example Publication B: Digest-bound decisions",
+    "approval_digest": "sha256:44d15472eba76afddcf889bd6eb258ebcb7ef820d16ebd7372a2eb36e9d47a4f",
     "artifact_manifest_digest": "sha256:99db014faf544c750202ee2695ef547861e99aa11e2de6621c0ae990c13944e1",
     "artifact_manifest_ref": "manifest_a4dd16fd4d954a67d273",
-    "connection_ref": "connection_publication-b.example_video.platform-b",
-    "content_digest": "sha256:8164709446c37e6c3cbd503ca83e26ab224e9065f66e4c1db1f4704de7dd057e",
+    "channel": "video.platform-b",
+    "content": {
+      "content": "# Example Publication B: Digest-bound decisions\n\nEvidence supporting digest-bound decisions in creator operations.\n\nChannel: video.platform-b",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:7b778caf4d8c7e1b3558d787bc7d6793bd7a9fe6a68dbcaf9f73cdb52d9923d1",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_video.platform-b",
-    "idempotency_key": "publish_738a2cee464c6706bd8f",
+    "destination": {
+      "channel": "video.platform-b",
+      "connection_ref": "connection_publication-b.example_video.platform-b",
+      "destination_account_ref": "destination_publication-b.example_video.platform-b",
+      "provider_kind": "example.video.platform-b",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_7a8f8b14f3862e2f3119",
     "input_refs": [
-      "review_c2fc61cf911940b45b86",
+      "review_76a0b26d2cad02b235e7",
       "brief_802732cc9c8eb5fab319",
       "manifest_a4dd16fd4d954a67d273",
       "artifact_04375c00a716604ae876"
     ],
-    "operation_id": "operation_738a2cee464c6706bd8f",
+    "operation_id": "operation_7a8f8b14f3862e2f3119",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "article: Example Publication B: Digest-bound decisions",
-      "caption": "Evidence supporting digest-bound decisions in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 article",
-      "title": "Example Publication B: Digest-bound decisions"
-    },
-    "provider_kind": "example.video.platform-b",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -372,30 +410,34 @@
     ]
   },
   {
-    "approval_digest": "sha256:8409e3efb47a25b4df6bb94ea44368ad446a2c3c16c52bd991db0e1ef60dca2a",
+    "accessibility_text": "video.short: Example Publication B: Reconciliation evidence",
+    "approval_digest": "sha256:1a57fb9a63b9532020fc0fb383deb31c387cf287ae07b805bd57a32592c10670",
     "artifact_manifest_digest": "sha256:8eb984cb9d3acdbd8a8e4b38dd5ea233197a35e693c0f02de50d551eb06b8c09",
     "artifact_manifest_ref": "manifest_91779aa1ec8dae583548",
-    "connection_ref": "connection_publication-b.example_newsletter",
-    "content_digest": "sha256:e059040f8da4608eeb0732d7475258f0a0813ee05f201272b6a19899a9bd0dd2",
+    "channel": "newsletter",
+    "content": {
+      "content": "# Example Publication B: Reconciliation evidence\n\nEvidence supporting reconciliation evidence in creator operations.\n\nChannel: newsletter",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:41a1144ea69e7c738af744e28efee863081c0cac26cdfd638544c48defa83d58",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_newsletter",
-    "idempotency_key": "publish_cdf9e1d93b41510c2485",
+    "destination": {
+      "channel": "newsletter",
+      "connection_ref": "connection_publication-b.example_newsletter",
+      "destination_account_ref": "destination_publication-b.example_newsletter",
+      "provider_kind": "example.newsletter",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_f7b627d3818cefc42698",
     "input_refs": [
-      "review_e83cf38c2b98a6beb213",
+      "review_308eed215c7e84b0076e",
       "brief_69d691ebb8b8f95e730b",
       "manifest_91779aa1ec8dae583548",
-      "artifact_5059f30e1684ac046ba0",
-      "artifact_1c98f0065b1956ab948e"
+      "artifact_5059f30e1684ac046ba0"
     ],
-    "operation_id": "operation_cdf9e1d93b41510c2485",
+    "operation_id": "operation_f7b627d3818cefc42698",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "video.short: Example Publication B: Reconciliation evidence",
-      "caption": "Evidence supporting reconciliation evidence in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 video.short",
-      "title": "Example Publication B: Reconciliation evidence"
-    },
-    "provider_kind": "example.newsletter",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -405,35 +447,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_5059f30e1684ac046ba0",
-      "artifact_1c98f0065b1956ab948e"
+      "artifact_5059f30e1684ac046ba0"
     ]
   },
   {
-    "approval_digest": "sha256:8409e3efb47a25b4df6bb94ea44368ad446a2c3c16c52bd991db0e1ef60dca2a",
+    "accessibility_text": "video.short: Example Publication B: Reconciliation evidence",
+    "approval_digest": "sha256:1a57fb9a63b9532020fc0fb383deb31c387cf287ae07b805bd57a32592c10670",
     "artifact_manifest_digest": "sha256:8eb984cb9d3acdbd8a8e4b38dd5ea233197a35e693c0f02de50d551eb06b8c09",
     "artifact_manifest_ref": "manifest_91779aa1ec8dae583548",
-    "connection_ref": "connection_publication-b.example_video.platform-b",
-    "content_digest": "sha256:ae200f16cb6231148b6da0dcd90d83ab7e2acb785d7335870f5d6a3d35e68cea",
+    "channel": "video.platform-b",
+    "content": {
+      "content": "# Example Publication B: Reconciliation evidence\n\nEvidence supporting reconciliation evidence in creator operations.\n\nChannel: video.platform-b",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:b1c0ce6a6bd9002d9c19cfcfe2e6188d4bbeabb104860500aba034d0866dd71e",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_video.platform-b",
-    "idempotency_key": "publish_5efcd90ae0c1b7203a32",
+    "destination": {
+      "channel": "video.platform-b",
+      "connection_ref": "connection_publication-b.example_video.platform-b",
+      "destination_account_ref": "destination_publication-b.example_video.platform-b",
+      "provider_kind": "example.video.platform-b",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_bc2ddbfb4431bab18445",
     "input_refs": [
-      "review_e83cf38c2b98a6beb213",
+      "review_308eed215c7e84b0076e",
       "brief_69d691ebb8b8f95e730b",
       "manifest_91779aa1ec8dae583548",
-      "artifact_5059f30e1684ac046ba0",
       "artifact_1c98f0065b1956ab948e"
     ],
-    "operation_id": "operation_5efcd90ae0c1b7203a32",
+    "operation_id": "operation_bc2ddbfb4431bab18445",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "video.short: Example Publication B: Reconciliation evidence",
-      "caption": "Evidence supporting reconciliation evidence in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 video.short",
-      "title": "Example Publication B: Reconciliation evidence"
-    },
-    "provider_kind": "example.video.platform-b",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -443,35 +488,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_5059f30e1684ac046ba0",
       "artifact_1c98f0065b1956ab948e"
     ]
   },
   {
-    "approval_digest": "sha256:d60ee8260dfb9c44cb1c05da430365231706367e30fb1b507c61b4d6eaac65a6",
+    "accessibility_text": "image.carousel: Example Publication B: Normalized performance",
+    "approval_digest": "sha256:e226930947166886db6575c7c2028c353e51923ecb928ab5cb727f44ec9213e5",
     "artifact_manifest_digest": "sha256:36758ad237cb0b477d6f0199df23145f72234f3f6dedcce00f60e50d071b1875",
     "artifact_manifest_ref": "manifest_b56bbdc4a4bab0fabb0b",
-    "connection_ref": "connection_publication-b.example_newsletter",
-    "content_digest": "sha256:e76a09f867616b58019707960d8ff4207b05c880215accde375235b3ee4e10e4",
+    "channel": "newsletter",
+    "content": {
+      "content": "# Example Publication B: Normalized performance\n\nEvidence supporting normalized performance in creator operations.\n\nChannel: newsletter",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:838052769ebc96bcfbad30333311098792bf2d53fb76edf2960e6fb4969d0c44",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_newsletter",
-    "idempotency_key": "publish_29e33e455629a60922e8",
+    "destination": {
+      "channel": "newsletter",
+      "connection_ref": "connection_publication-b.example_newsletter",
+      "destination_account_ref": "destination_publication-b.example_newsletter",
+      "provider_kind": "example.newsletter",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_0e991f5041f3762b6daa",
     "input_refs": [
-      "review_f157f37a56b62c0cf9b1",
+      "review_a4433136d8aff0324edd",
       "brief_f9f59a2e0cb86955a7c9",
       "manifest_b56bbdc4a4bab0fabb0b",
-      "artifact_fffc70d28bf506d616ea",
-      "artifact_f009283e9444386a1a5e"
+      "artifact_fffc70d28bf506d616ea"
     ],
-    "operation_id": "operation_29e33e455629a60922e8",
+    "operation_id": "operation_0e991f5041f3762b6daa",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "image.carousel: Example Publication B: Normalized performance",
-      "caption": "Evidence supporting normalized performance in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 image.carousel",
-      "title": "Example Publication B: Normalized performance"
-    },
-    "provider_kind": "example.newsletter",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -481,35 +529,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_fffc70d28bf506d616ea",
-      "artifact_f009283e9444386a1a5e"
+      "artifact_fffc70d28bf506d616ea"
     ]
   },
   {
-    "approval_digest": "sha256:d60ee8260dfb9c44cb1c05da430365231706367e30fb1b507c61b4d6eaac65a6",
+    "accessibility_text": "image.carousel: Example Publication B: Normalized performance",
+    "approval_digest": "sha256:e226930947166886db6575c7c2028c353e51923ecb928ab5cb727f44ec9213e5",
     "artifact_manifest_digest": "sha256:36758ad237cb0b477d6f0199df23145f72234f3f6dedcce00f60e50d071b1875",
     "artifact_manifest_ref": "manifest_b56bbdc4a4bab0fabb0b",
-    "connection_ref": "connection_publication-b.example_video.platform-b",
-    "content_digest": "sha256:5f4cd0e9af74ee79daf56f776e8f6263e731dcb3b9ece459297f132570d12d3d",
+    "channel": "video.platform-b",
+    "content": {
+      "content": "# Example Publication B: Normalized performance\n\nEvidence supporting normalized performance in creator operations.\n\nChannel: video.platform-b",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:5a285a62913d41ab28702312f93abf408af1e82557012fef5ef6eb3f695f1bb1",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_video.platform-b",
-    "idempotency_key": "publish_e9202f5d9d43adcbbc54",
+    "destination": {
+      "channel": "video.platform-b",
+      "connection_ref": "connection_publication-b.example_video.platform-b",
+      "destination_account_ref": "destination_publication-b.example_video.platform-b",
+      "provider_kind": "example.video.platform-b",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_34af0d6ec5464e5e5d20",
     "input_refs": [
-      "review_f157f37a56b62c0cf9b1",
+      "review_a4433136d8aff0324edd",
       "brief_f9f59a2e0cb86955a7c9",
       "manifest_b56bbdc4a4bab0fabb0b",
-      "artifact_fffc70d28bf506d616ea",
       "artifact_f009283e9444386a1a5e"
     ],
-    "operation_id": "operation_e9202f5d9d43adcbbc54",
+    "operation_id": "operation_34af0d6ec5464e5e5d20",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "image.carousel: Example Publication B: Normalized performance",
-      "caption": "Evidence supporting normalized performance in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 image.carousel",
-      "title": "Example Publication B: Normalized performance"
-    },
-    "provider_kind": "example.video.platform-b",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -519,35 +570,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_fffc70d28bf506d616ea",
       "artifact_f009283e9444386a1a5e"
     ]
   },
   {
-    "approval_digest": "sha256:c580be12559ac5baf413c47809bb901ef93a42a8c3bfbf9348fb9ae88c6326e3",
+    "accessibility_text": "newsletter.issue: Example Publication B: Explicit approvals",
+    "approval_digest": "sha256:f74faff1a6f14a047874c758ece8896a7e32fcf484746544e414bca68dfad456",
     "artifact_manifest_digest": "sha256:889d1735f1b464a23feaac6c5099ff31d419ac5204fa857a2b364f1def07799c",
     "artifact_manifest_ref": "manifest_7d8438a507b73dd51922",
-    "connection_ref": "connection_publication-b.example_newsletter",
-    "content_digest": "sha256:ebc6aadf7248ed15fab1d3748c00f3329711f9ded683e1349699bc83ec50634f",
+    "channel": "newsletter",
+    "content": {
+      "content": "# Example Publication B: Explicit approvals\n\nEvidence supporting explicit approvals in creator operations.\n\nChannel: newsletter",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:8c1a2d6c2e29b8e983148d80bc84c585b88919ccda2c6922c41dac14efdf095f",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_newsletter",
-    "idempotency_key": "publish_ccca824f99f11c490faa",
+    "destination": {
+      "channel": "newsletter",
+      "connection_ref": "connection_publication-b.example_newsletter",
+      "destination_account_ref": "destination_publication-b.example_newsletter",
+      "provider_kind": "example.newsletter",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_f900a012f840de4ad7eb",
     "input_refs": [
-      "review_a9beadf4d71126508ba3",
+      "review_b296f8a77357e70105e2",
       "brief_c218aa83930db38cdbc9",
       "manifest_7d8438a507b73dd51922",
-      "artifact_32e99822061392acc5c7",
-      "artifact_09fea16aeb1d343388b5"
+      "artifact_32e99822061392acc5c7"
     ],
-    "operation_id": "operation_ccca824f99f11c490faa",
+    "operation_id": "operation_f900a012f840de4ad7eb",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "newsletter.issue: Example Publication B: Explicit approvals",
-      "caption": "Evidence supporting explicit approvals in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 newsletter.issue",
-      "title": "Example Publication B: Explicit approvals"
-    },
-    "provider_kind": "example.newsletter",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -557,35 +611,38 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_32e99822061392acc5c7",
-      "artifact_09fea16aeb1d343388b5"
+      "artifact_32e99822061392acc5c7"
     ]
   },
   {
-    "approval_digest": "sha256:c580be12559ac5baf413c47809bb901ef93a42a8c3bfbf9348fb9ae88c6326e3",
+    "accessibility_text": "newsletter.issue: Example Publication B: Explicit approvals",
+    "approval_digest": "sha256:f74faff1a6f14a047874c758ece8896a7e32fcf484746544e414bca68dfad456",
     "artifact_manifest_digest": "sha256:889d1735f1b464a23feaac6c5099ff31d419ac5204fa857a2b364f1def07799c",
     "artifact_manifest_ref": "manifest_7d8438a507b73dd51922",
-    "connection_ref": "connection_publication-b.example_video.platform-b",
-    "content_digest": "sha256:155a23093b54812e5bf67af4ba462fde8e6a221e7619f5cd971d8d87bde8b0ce",
+    "channel": "video.platform-b",
+    "content": {
+      "content": "# Example Publication B: Explicit approvals\n\nEvidence supporting explicit approvals in creator operations.\n\nChannel: video.platform-b",
+      "media_type": "text/markdown"
+    },
+    "content_digest": "sha256:3c9f4919b90a7c778fdda57451f0d9307ec053c18ee6adb7b89f1fbd1ab44864",
     "created_at": "2026-09-05T08:00:00Z",
-    "destination_account_ref": "destination_publication-b.example_video.platform-b",
-    "idempotency_key": "publish_265e2e797c91f87d28fa",
+    "destination": {
+      "channel": "video.platform-b",
+      "connection_ref": "connection_publication-b.example_video.platform-b",
+      "destination_account_ref": "destination_publication-b.example_video.platform-b",
+      "provider_kind": "example.video.platform-b",
+      "scheduled_for": "2026-09-06T08:00:00Z"
+    },
+    "extension": null,
+    "idempotency_key": "publish_b191ff9ec25a8f2e4b5d",
     "input_refs": [
-      "review_a9beadf4d71126508ba3",
+      "review_b296f8a77357e70105e2",
       "brief_c218aa83930db38cdbc9",
       "manifest_7d8438a507b73dd51922",
-      "artifact_32e99822061392acc5c7",
       "artifact_09fea16aeb1d343388b5"
     ],
-    "operation_id": "operation_265e2e797c91f87d28fa",
+    "operation_id": "operation_b191ff9ec25a8f2e4b5d",
     "organization_id": "example-organization",
-    "payload": {
-      "alt_text": "newsletter.issue: Example Publication B: Explicit approvals",
-      "caption": "Evidence supporting explicit approvals in creator operations.\n\nApply one bounded practice",
-      "description": "Teach governance through useful content \u2014 newsletter.issue",
-      "title": "Example Publication B: Explicit approvals"
-    },
-    "provider_kind": "example.video.platform-b",
     "publication_id": "publication-b.example",
     "required_effects": [
       "write",
@@ -595,7 +652,6 @@
     "scheduled_for": "2026-09-06T08:00:00Z",
     "schema_version": "1.0.0",
     "selected_artifact_refs": [
-      "artifact_32e99822061392acc5c7",
       "artifact_09fea16aeb1d343388b5"
     ]
   }

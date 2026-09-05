@@ -411,14 +411,6 @@
           "title": "Created At",
           "type": "string"
         },
-        "destinations": {
-          "items": {
-            "$ref": "#/$defs/ChannelDestination"
-          },
-          "minItems": 1,
-          "title": "Destinations",
-          "type": "array"
-        },
         "input_refs": {
           "default": [],
           "items": {
@@ -447,6 +439,14 @@
           "default": "1.0.0",
           "title": "Schema Version",
           "type": "string"
+        },
+        "variants": {
+          "items": {
+            "$ref": "#/$defs/DistributionVariant"
+          },
+          "minItems": 1,
+          "title": "Variants",
+          "type": "array"
         }
       },
       "required": [
@@ -454,7 +454,7 @@
         "organization_id",
         "publication_id",
         "channel_plan_id",
-        "destinations"
+        "variants"
       ],
       "title": "ChannelPlan",
       "type": "object"
@@ -687,6 +687,55 @@
         "content"
       ],
       "title": "ContentDocument",
+      "type": "object"
+    },
+    "DistributionVariant": {
+      "additionalProperties": false,
+      "properties": {
+        "accessibility_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accessibility Text"
+        },
+        "content": {
+          "$ref": "#/$defs/ContentDocument"
+        },
+        "destination": {
+          "$ref": "#/$defs/ChannelDestination"
+        },
+        "extension": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExtensionPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selected_artifact_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Selected Artifact Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "destination",
+        "selected_artifact_refs",
+        "content"
+      ],
+      "title": "DistributionVariant",
       "type": "object"
     },
     "EvidenceClaim": {

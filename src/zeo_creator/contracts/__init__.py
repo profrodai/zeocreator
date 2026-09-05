@@ -12,9 +12,9 @@ from zeo_creator.contracts.delivery import (
 from zeo_creator.contracts.distribution import (
     ChannelDestination,
     ChannelPlan,
+    DistributionVariant,
     ProposedPublicationOperation,
     ProviderKind,
-    PublicationPayload,
     PublicationReceipt,
     ReconciliationState,
 )
@@ -35,10 +35,10 @@ from zeo_creator.contracts.evidence import (
     ResearchWindow,
 )
 from zeo_creator.contracts.performance import (
-    DailyPerformanceAssessment,
     MetricAggregation,
     MetricObservation,
     MetricsQuery,
+    PerformanceAssessment,
 )
 from zeo_creator.contracts.production import (
     AttestationPolicy,
@@ -64,9 +64,9 @@ __all__ = [
     "ContentKind",
     "ContentPortfolioPlan",
     "ContentRequirement",
-    "DailyPerformanceAssessment",
     "DeliveryFinding",
     "DeliveryReviewBundle",
+    "DistributionVariant",
     "EditorialAssignment",
     "EvidenceClaim",
     "EvidenceItem",
@@ -76,11 +76,11 @@ __all__ = [
     "MetricAggregation",
     "MetricObservation",
     "MetricsQuery",
+    "PerformanceAssessment",
     "PortfolioConstraints",
     "ProposedPublicationOperation",
     "ProviderKind",
     "PublicationObjective",
-    "PublicationPayload",
     "PublicationProfile",
     "PublicationReceipt",
     "ReconciliationState",

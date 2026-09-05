@@ -1,8 +1,7 @@
 # Validate and prepare distribution
 
-Delivery review answers one question: *is this exact produced artifact, with
-this exact publication payload and destination plan, ready to ask a human to
-approve?*
+Delivery review answers one question: *is this exact artifact bundle, with these
+exact destination variants, ready to ask a human to approve?*
 
 ## Validate the artifact bundle
 
@@ -29,8 +28,8 @@ The digest includes:
 brief ID + brief digest + revision
 artifact references + artifact digests
 artifact manifest ID + manifest digest
-channel-plan digest
-publication payload
+channel-plan digest, including every destination variant
+selected artifact references + content + accessibility text + extension + schedule
 ```
 
 Change any one of these and the earlier approval no longer applies.
@@ -38,12 +37,14 @@ Change any one of these and the earlier approval no longer applies.
 ## Prepare proposals
 
 Only a review with no blocking findings can enter
-`creator.prepare_distribution@1.0.0`. Each destination becomes one
+`creator.prepare_distribution@1.0.0`. Each `DistributionVariant` becomes one
 `ProposedPublicationOperation` with:
 
-- provider kind and safe connection reference;
-- destination account reference;
-- proposed payload and schedule;
+- explicit channel and typed destination;
+- only the artifact references selected for that destination;
+- a destination-specific `ContentDocument`;
+- optional accessibility text and opaque extension;
+- schedule;
 - exact required effects;
 - approval digest; and
 - deterministic idempotency key.

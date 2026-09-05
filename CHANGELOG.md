@@ -11,6 +11,12 @@ All notable changes to ZEO Creator are documented here.
 - Generalize portfolio planning to explicit windows and caller-supplied quantities.
 - Ship versioned JSON Schemas in the wheel with list, inspect, and export commands.
 - Replace branded factory fixtures with neutral two-publication examples.
+- Rename `DailyPerformanceAssessment` to cadence-neutral `PerformanceAssessment`.
+- Replace shared publication payloads with destination-specific distribution
+  variants that bind channel, selected artifacts, content, accessibility text,
+  optional extensions, and schedules.
+- Add RFC 8785 schema digests and an explicit package/capability/schema
+  compatibility policy to the bundled contract catalog.
 
 ## 0.1.0 — 2026-09-05
 

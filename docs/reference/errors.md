@@ -22,11 +22,12 @@ outcomes; use the human message for operators, not branching logic.
 | `ZEO_CREATOR_ARTIFACT_IDENTITY_MISMATCH` | Brief, manifest, and artifact identity differ | Use outputs from the accepted brief revision |
 | `ZEO_CREATOR_EXTRACTED_TEXT_MISSING` | Claim-sensitive artifact lacks verified extracted text | Extract and attest artifact text before review |
 | `ZEO_CREATOR_ARTIFACT_DIGEST_UNVERIFIED` | Retrieved artifact-byte proof does not match the artifact | Retrieve the artifact again and recompute SHA-256 |
+| `ZEO_CREATOR_ARTIFACT_SELECTION_MISMATCH` | A distribution variant selects an artifact outside the manifest | Select only bound manifest artifacts |
 | `ZEO_CREATOR_PROHIBITED_CLAIM` | Artifact contains prohibited language | Revise and reproduce |
 | `ZEO_CREATOR_DESTINATION_MISMATCH` | Channel was not accepted by the brief | Correct the channel plan |
 | `ZEO_CREATOR_REQUIRED_ATTESTATION_FAILED` | A required attestation is absent or failed | Require a complete artifact manifest |
 | `ZEO_CREATOR_DELIVERY_BLOCKED` | Distribution was attempted with blocking findings | Resolve findings and obtain a new review |
-| `ZEO_CREATOR_APPROVAL_STALE` | Payload, destination, or schedule changed | Generate and approve a new digest |
+| `ZEO_CREATOR_APPROVAL_STALE` | Content, artifact selection, destination, extension, or schedule changed | Generate and approve a new digest |
 
 The canonical list for each capability is present in its manifest. Use:
 

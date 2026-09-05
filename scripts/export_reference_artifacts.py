@@ -9,11 +9,17 @@ from tests.fixtures.reference import (
     evidence_fixture,
     recent_history,
 )
+from zeo_creator.contracts.common import canonical_digest
 from zeo_creator.contracts.delivery import ArtifactManifest, DeliveryReviewBundle
-from zeo_creator.contracts.distribution import ProposedPublicationOperation, PublicationReceipt
+from zeo_creator.contracts.distribution import (
+    ChannelPlan,
+    DistributionVariant,
+    ProposedPublicationOperation,
+    PublicationReceipt,
+)
 from zeo_creator.contracts.editorial import ContentPortfolioPlan, EditorialAssignment
 from zeo_creator.contracts.evidence import EvidenceItem, ResearchSynthesis
-from zeo_creator.contracts.performance import DailyPerformanceAssessment, MetricObservation
+from zeo_creator.contracts.performance import MetricObservation, PerformanceAssessment
 from zeo_creator.contracts.production import ContentBrief
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.registry import CAPABILITIES
@@ -29,6 +35,10 @@ def _write(path: Path, value: Any) -> None:
 
 
 def export_schemas() -> None:
+    for root in (REFERENCE / "schemas", PACKAGED_SCHEMAS):
+        root.mkdir(parents=True, exist_ok=True)
+        for existing in root.glob("*.json"):
+            existing.unlink()
     contract_models = (
         ("publication-profile", "1", PublicationProfile),
         ("evidence-item", "1", EvidenceItem),
@@ -38,10 +48,12 @@ def export_schemas() -> None:
         ("content-brief", "1", ContentBrief),
         ("artifact-manifest", "1", ArtifactManifest),
         ("delivery-review-bundle", "1", DeliveryReviewBundle),
+        ("distribution-variant", "1", DistributionVariant),
+        ("channel-plan", "1", ChannelPlan),
         ("proposed-publication-operation", "1", ProposedPublicationOperation),
         ("publication-receipt", "1", PublicationReceipt),
         ("metric-observation", "1", MetricObservation),
-        ("daily-performance-assessment", "1", DailyPerformanceAssessment),
+        ("performance-assessment", "1", PerformanceAssessment),
     )
     catalog = []
     for name, version, model in contract_models:
@@ -49,7 +61,14 @@ def export_schemas() -> None:
         schema = model.model_json_schema()
         _write(REFERENCE / "schemas" / filename, schema)
         _write(PACKAGED_SCHEMAS / filename, schema)
-        catalog.append({"name": name, "version": version, "filename": filename})
+        catalog.append(
+            {
+                "name": name,
+                "version": version,
+                "filename": filename,
+                "schema_digest": canonical_digest(schema),
+            }
+        )
     _write(PACKAGED_SCHEMAS / "catalog.json", {"contracts": catalog})
     for capability in CAPABILITIES:
         name = capability.definition.projection_name

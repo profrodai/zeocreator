@@ -57,7 +57,9 @@ def main() -> None:
                 "proposals": [
                     {
                         "operation_id": item.operation_id,
-                        "provider_kind": item.provider_kind,
+                        "channel": item.channel,
+                        "provider_kind": item.destination.provider_kind,
+                        "selected_artifact_refs": item.selected_artifact_refs,
                         "idempotency_key": item.idempotency_key,
                     }
                     for item in preparation.data.operations

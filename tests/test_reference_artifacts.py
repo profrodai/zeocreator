@@ -5,7 +5,7 @@ from pathlib import Path
 
 from tests.fixtures.reference import build_reference_snapshot
 from zeo_creator.contracts.editorial import ContentPortfolioPlan
-from zeo_creator.contracts.performance import DailyPerformanceAssessment
+from zeo_creator.contracts.performance import PerformanceAssessment
 from zeo_creator.contracts.production import ContentBrief
 
 REFERENCE = Path("reference")
@@ -19,7 +19,7 @@ def test_reference_examples_validate() -> None:
     plan = ContentPortfolioPlan.model_validate(_load("examples/content-portfolio-plan.json"))
     briefs = [ContentBrief.model_validate(item) for item in _load("examples/content-briefs.json")]
     assessments = [
-        DailyPerformanceAssessment.model_validate(item)
+        PerformanceAssessment.model_validate(item)
         for item in _load("examples/performance-assessments.json")
     ]
     assert len(plan.assignments) == len(briefs) == 8

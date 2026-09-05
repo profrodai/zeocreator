@@ -22,7 +22,7 @@ def _channel_plan(index: int) -> ChannelPlan:
         organization_id=brief.organization_id,
         publication_id=brief.publication_id,
         input_refs=(brief.brief_id,),
-        destinations=review.proposed_destinations,
+        variants=review.proposed_variants,
     )
 
 
@@ -73,11 +73,17 @@ def test_validation_blocks_missing_required_attestation() -> None:
 def test_changed_schedule_invalidates_approval() -> None:
     snapshot = build_reference_snapshot()
     brief, manifest, review = snapshot.briefs[0], snapshot.manifests[0], snapshot.reviews[0]
-    destinations = tuple(
-        item.model_copy(update={"scheduled_for": item.scheduled_for + timedelta(hours=1)})
-        for item in review.proposed_destinations
+    variants = tuple(
+        item.model_copy(
+            update={
+                "destination": item.destination.model_copy(
+                    update={"scheduled_for": item.destination.scheduled_for + timedelta(hours=1)}
+                )
+            }
+        )
+        for item in review.proposed_variants
     )
-    changed_plan = _channel_plan(0).model_copy(update={"destinations": destinations})
+    changed_plan = _channel_plan(0).model_copy(update={"variants": variants})
     with pytest.raises(CreatorDomainError) as caught:
         prepare_distribution_operations(
             brief=brief,
@@ -94,3 +100,38 @@ def test_distribution_handoff_is_idempotent_and_write_free() -> None:
     first = build_reference_snapshot().operations
     second = build_reference_snapshot().operations
     assert [item.idempotency_key for item in first] == [item.idempotency_key for item in second]
+
+
+def test_distribution_operations_preserve_destination_variants() -> None:
+    snapshot = build_reference_snapshot()
+    first_brief = snapshot.briefs[1]
+    operations = tuple(
+        item for item in snapshot.operations if first_brief.brief_id in item.input_refs
+    )
+
+    assert len(operations) == 2
+    assert operations[0].channel == operations[0].destination.channel
+    assert operations[1].channel == operations[1].destination.channel
+    assert operations[0].selected_artifact_refs != operations[1].selected_artifact_refs
+    assert operations[0].content.content != operations[1].content.content
+
+
+def test_validation_blocks_unknown_variant_artifact() -> None:
+    snapshot = build_reference_snapshot()
+    plan = _channel_plan(0)
+    variants = (
+        plan.variants[0].model_copy(update={"selected_artifact_refs": ("missing",)}),
+        *plan.variants[1:],
+    )
+    review = validate_delivery_bundle(
+        brief=snapshot.briefs[0],
+        manifest=snapshot.manifests[0],
+        publication=publication_profiles()[0],
+        synthesis=snapshot.syntheses[0],
+        channel_plan=plan.model_copy(update={"variants": variants}),
+        created_at=NOW,
+        revision=1,
+    )
+    assert "ZEO_CREATOR_ARTIFACT_SELECTION_MISMATCH" in {
+        finding.code for finding in review.blocking_findings
+    }

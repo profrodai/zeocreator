@@ -351,6 +351,6 @@
     "performance_relative_to_objective",
     "confidence"
   ],
-  "title": "DailyPerformanceAssessment",
+  "title": "PerformanceAssessment",
   "type": "object"
 }

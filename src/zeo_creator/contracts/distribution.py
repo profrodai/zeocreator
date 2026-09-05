@@ -12,6 +12,7 @@ from zeo_creator.contracts.common import (
     UtcDatetime,
     assert_secret_safe,
 )
+from zeo_creator.contracts.production import ContentDocument, ExtensionPayload
 
 ProviderKind = Annotated[str, Field(pattern=r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$", min_length=1)]
 
@@ -24,32 +25,35 @@ class ChannelDestination(CreatorModel):
     scheduled_for: UtcDatetime | None = None
 
 
-class ChannelPlan(DurableArtifact):
-    channel_plan_id: str = Field(min_length=1)
-    destinations: tuple[ChannelDestination, ...] = Field(min_length=1)
-
-
-class PublicationPayload(CreatorModel):
-    title: str = Field(min_length=1)
-    caption: str = Field(min_length=1)
-    description: str = Field(min_length=1)
-    alt_text: str = Field(min_length=1)
+class DistributionVariant(CreatorModel):
+    destination: ChannelDestination
+    selected_artifact_refs: tuple[str, ...] = Field(min_length=1)
+    content: ContentDocument
+    accessibility_text: str | None = None
+    extension: ExtensionPayload | None = None
 
     @model_validator(mode="after")
-    def secret_safe(self) -> PublicationPayload:
-        assert_secret_safe(self)
+    def unique_artifacts(self) -> DistributionVariant:
+        if len(self.selected_artifact_refs) != len(set(self.selected_artifact_refs)):
+            raise ValueError("selected artifact references must be unique")
         return self
+
+
+class ChannelPlan(DurableArtifact):
+    channel_plan_id: str = Field(min_length=1)
+    variants: tuple[DistributionVariant, ...] = Field(min_length=1)
 
 
 class ProposedPublicationOperation(DurableArtifact):
     operation_id: str = Field(min_length=1)
     artifact_manifest_ref: str = Field(min_length=1)
     artifact_manifest_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    channel: str = Field(min_length=1)
+    destination: ChannelDestination
     selected_artifact_refs: tuple[str, ...] = Field(min_length=1)
-    provider_kind: ProviderKind
-    connection_ref: str = Field(min_length=1)
-    destination_account_ref: str = Field(min_length=1)
-    payload: PublicationPayload
+    content: ContentDocument
+    accessibility_text: str | None = None
+    extension: ExtensionPayload | None = None
     scheduled_for: UtcDatetime | None = None
     required_effects: tuple[EffectKind, ...] = (
         EffectKind.WRITE,
@@ -60,6 +64,10 @@ class ProposedPublicationOperation(DurableArtifact):
 
     @model_validator(mode="after")
     def proposal_is_secret_safe(self) -> ProposedPublicationOperation:
+        if self.channel != self.destination.channel:
+            raise ValueError("operation channel must match its destination")
+        if self.scheduled_for != self.destination.scheduled_for:
+            raise ValueError("operation schedule must match its destination")
         assert_secret_safe(self)
         return self
 

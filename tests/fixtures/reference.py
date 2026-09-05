@@ -14,6 +14,7 @@ from zeo_creator.contracts.delivery import (
 from zeo_creator.contracts.distribution import (
     ChannelDestination,
     ChannelPlan,
+    DistributionVariant,
     ProposedPublicationOperation,
 )
 from zeo_creator.contracts.editorial import (
@@ -30,15 +31,16 @@ from zeo_creator.contracts.evidence import (
     ResearchWindow,
 )
 from zeo_creator.contracts.performance import (
-    DailyPerformanceAssessment,
     MetricAggregation,
     MetricObservation,
     MetricsQuery,
+    PerformanceAssessment,
 )
 from zeo_creator.contracts.production import (
     AttestationPolicy,
     AttestationRequirement,
     ContentBrief,
+    ContentDocument,
 )
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.services.assessment import assess_publication_performance
@@ -89,7 +91,7 @@ class ReferenceSnapshot(CreatorModel):
     manifests: tuple[ArtifactManifest, ...]
     reviews: tuple[DeliveryReviewBundle, ...]
     operations: tuple[ProposedPublicationOperation, ...]
-    assessments: tuple[DailyPerformanceAssessment, ...]
+    assessments: tuple[PerformanceAssessment, ...]
 
 
 def publication_profiles() -> tuple[PublicationProfile, PublicationProfile]:
@@ -262,22 +264,32 @@ def _manifest(brief: ContentBrief) -> ArtifactManifest:
     )
 
 
-def _channel_plan(brief: ContentBrief) -> ChannelPlan:
+def _channel_plan(brief: ContentBrief, manifest: ArtifactManifest) -> ChannelPlan:
     return ChannelPlan(
         channel_plan_id=stable_id("channels", brief.brief_id),
         created_at=NOW,
         organization_id=brief.organization_id,
         publication_id=brief.publication_id,
         input_refs=(brief.brief_id,),
-        destinations=tuple(
-            ChannelDestination(
-                channel=channel,
-                provider_kind=f"example.{channel}",
-                connection_ref=f"connection_{brief.publication_id}_{channel}",
-                destination_account_ref=f"destination_{brief.publication_id}_{channel}",
-                scheduled_for=NOW + timedelta(days=1),
+        variants=tuple(
+            DistributionVariant(
+                destination=ChannelDestination(
+                    channel=channel,
+                    provider_kind=f"example.{channel}",
+                    connection_ref=f"connection_{brief.publication_id}_{channel}",
+                    destination_account_ref=f"destination_{brief.publication_id}_{channel}",
+                    scheduled_for=NOW + timedelta(days=1),
+                ),
+                selected_artifact_refs=(
+                    (manifest.artifacts[0] if index == 0 else manifest.artifacts[-1]).artifact_ref,
+                ),
+                content=ContentDocument(
+                    media_type="text/markdown",
+                    content=f"# {brief.working_title}\n\n{brief.core_message}\n\nChannel: {channel}",
+                ),
+                accessibility_text=f"{brief.content_kind}: {brief.working_title}",
             )
-            for channel in brief.target_channels
+            for index, channel in enumerate(brief.target_channels)
         ),
     )
 
@@ -345,7 +357,7 @@ def build_reference_snapshot() -> ReferenceSnapshot:
     reviews: list[DeliveryReviewBundle] = []
     operations: list[ProposedPublicationOperation] = []
     for brief, manifest in zip(briefs, manifests, strict=True):
-        channels = _channel_plan(brief)
+        channels = _channel_plan(brief, manifest)
         review = validate_delivery_bundle(
             brief=brief,
             manifest=manifest,
@@ -376,9 +388,9 @@ def build_reference_snapshot() -> ReferenceSnapshot:
         query = MetricsQuery(
             query_id=f"metrics_{profile.publication_id}",
             publication_id=profile.publication_id,
-            provider_kind=operation.provider_kind,
-            connection_ref=operation.connection_ref,
-            destination_account_ref=operation.destination_account_ref,
+            provider_kind=operation.destination.provider_kind,
+            connection_ref=operation.destination.connection_ref,
+            destination_account_ref=operation.destination.destination_account_ref,
             observation_window=PERFORMANCE_WINDOW,
             operation_refs=(operation.operation_id,),
         )

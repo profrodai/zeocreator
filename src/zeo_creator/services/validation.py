@@ -9,19 +9,10 @@ from zeo_creator.contracts.delivery import (
     DeliveryReviewBundle,
     FindingSeverity,
 )
-from zeo_creator.contracts.distribution import ChannelPlan, PublicationPayload
+from zeo_creator.contracts.distribution import ChannelPlan
 from zeo_creator.contracts.evidence import ResearchSynthesis
 from zeo_creator.contracts.production import AttestationPolicy, ContentBrief
 from zeo_creator.contracts.publications import PublicationProfile
-
-
-def proposed_payload(brief: ContentBrief) -> PublicationPayload:
-    return PublicationPayload(
-        title=brief.working_title,
-        caption=f"{brief.core_message}\n\n{brief.desired_audience_action}",
-        description=f"{brief.objective} — {brief.content_kind}",
-        alt_text=f"{brief.content_kind}: {brief.working_title}",
-    )
 
 
 def approval_digest_for(
@@ -29,7 +20,6 @@ def approval_digest_for(
     brief: ContentBrief,
     manifest: ArtifactManifest,
     channel_plan: ChannelPlan,
-    payload: PublicationPayload,
 ) -> str:
     return canonical_digest(
         {
@@ -40,7 +30,6 @@ def approval_digest_for(
             "manifest_content_digest": manifest.content_digest,
             "artifact_digests": {item.artifact_ref: item.digest for item in manifest.artifacts},
             "channel_plan_content_digest": channel_plan.content_digest,
-            "payload": payload.model_dump(mode="json"),
         }
     )
 
@@ -170,7 +159,7 @@ def validate_delivery_bundle(
             f"Produced content contains prohibited claims: {', '.join(prohibited)}",
         )
 
-    destination_channels = {item.channel for item in channel_plan.destinations}
+    destination_channels = {item.destination.channel for item in channel_plan.variants}
     unsupported = destination_channels.difference(brief.target_channels)
     if unsupported:
         blocking(
@@ -178,13 +167,23 @@ def validate_delivery_bundle(
             "distribution",
             f"Unapproved destination channels: {', '.join(sorted(unsupported))}",
         )
+    selected_refs = {
+        artifact_ref
+        for variant in channel_plan.variants
+        for artifact_ref in variant.selected_artifact_refs
+    }
+    unknown_artifacts = selected_refs.difference(artifact_by_ref)
+    if unknown_artifacts:
+        blocking(
+            "ZEO_CREATOR_ARTIFACT_SELECTION_MISMATCH",
+            "distribution",
+            f"Distribution variants select unknown artifacts: {', '.join(sorted(unknown_artifacts))}",
+        )
 
-    payload = proposed_payload(brief)
     approval_digest = approval_digest_for(
         brief=brief,
         manifest=manifest,
         channel_plan=channel_plan,
-        payload=payload,
     )
     artifact_refs = tuple(item.artifact_ref for item in manifest.artifacts)
     return DeliveryReviewBundle(
@@ -210,8 +209,7 @@ def validate_delivery_bundle(
         brand_constraints_pass=brand_pass,
         artifact_integrity_pass=artifact_integrity_pass,
         findings=tuple(findings),
-        proposed_payload=payload,
-        proposed_destinations=channel_plan.destinations,
+        proposed_variants=channel_plan.variants,
         approval_digest=approval_digest,
         ready_for_approval=not any(item.severity == FindingSeverity.BLOCKING for item in findings),
     )

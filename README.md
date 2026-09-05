@@ -144,9 +144,16 @@ zeo-creator contract-schema --name=content-brief --version=1
 zeo-creator contracts export --output=./schemas
 ```
 
+Each catalog entry includes the schema's RFC 8785 canonical SHA-256 digest.
+Package, capability, and contract versions evolve independently; the
+[compatibility policy](docs/reference/contracts.md#compatibility-and-version-axes)
+defines when each one changes.
+
 ## The authority boundary
 
-ZEO Creator proposes provider-neutral operations; it never executes them. A
+ZEO Creator proposes destination-specific operations; each binds an explicit
+channel and destination, selected artifacts, content document, optional
+accessibility text and extension, and schedule. It never executes them. A
 runner resolves connection references, checks policy, obtains approval, mints
 bounded effect authority, executes through an authorized connector, and retains
 a secret-safe receipt.

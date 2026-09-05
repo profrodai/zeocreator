@@ -9,7 +9,7 @@ from pydantic import TypeAdapter
 from zeo_creator.contracts.delivery import ArtifactManifest, DeliveryReviewBundle
 from zeo_creator.contracts.distribution import ProposedPublicationOperation
 from zeo_creator.contracts.editorial import ContentPortfolioPlan
-from zeo_creator.contracts.performance import DailyPerformanceAssessment
+from zeo_creator.contracts.performance import PerformanceAssessment
 from zeo_creator.contracts.production import ContentBrief
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,7 +32,7 @@ def main() -> None:
     proposals = TypeAdapter(tuple[ProposedPublicationOperation, ...]).validate_python(
         _load("publication-proposals.json")
     )
-    assessments = TypeAdapter(tuple[DailyPerformanceAssessment, ...]).validate_python(
+    assessments = TypeAdapter(tuple[PerformanceAssessment, ...]).validate_python(
         _load("performance-assessments.json")
     )
 

@@ -36,7 +36,7 @@ uv run python examples/assess_performance.py
 
 ## Interpret the output
 
-A `DailyPerformanceAssessment` contains:
+A `PerformanceAssessment` contains:
 
 - metric observations and their observation window;
 - provider, connection, and destination provenance;

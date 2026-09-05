@@ -7,6 +7,8 @@ from importlib.resources.abc import Traversable
 from pathlib import Path
 from typing import Any, cast
 
+from zeo_creator.contracts.common import canonical_digest
+
 
 @dataclass(frozen=True)
 class ContractSchema:
@@ -15,6 +17,7 @@ class ContractSchema:
     name: str
     version: str
     filename: str
+    schema_digest: str
 
 
 def _schema_root() -> Traversable:
@@ -35,10 +38,13 @@ def read_contract_schema(name: str, version: str) -> dict[str, Any]:
     )
     if match is None:
         raise KeyError(f"unknown contract schema: {name}@{version}")
-    return cast(
+    schema = cast(
         dict[str, Any],
         json.loads(_schema_root().joinpath(match.filename).read_text(encoding="utf-8")),
     )
+    if canonical_digest(schema) != match.schema_digest:
+        raise RuntimeError(f"packaged schema digest mismatch: {name}@{version}")
+    return schema
 
 
 def export_contract_schemas(output: Path) -> tuple[Path, ...]:

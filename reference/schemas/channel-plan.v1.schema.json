@@ -68,18 +68,54 @@
       "title": "ContentDocument",
       "type": "object"
     },
-    "EffectKind": {
-      "description": "Declared side-effect kind. Declarations are not permission grants.",
-      "enum": [
-        "read",
-        "write",
-        "delete",
-        "external_communication",
-        "financial",
-        "security_sensitive"
+    "DistributionVariant": {
+      "additionalProperties": false,
+      "properties": {
+        "accessibility_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accessibility Text"
+        },
+        "content": {
+          "$ref": "#/$defs/ContentDocument"
+        },
+        "destination": {
+          "$ref": "#/$defs/ChannelDestination"
+        },
+        "extension": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExtensionPayload"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selected_artifact_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Selected Artifact Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "destination",
+        "selected_artifact_refs",
+        "content"
       ],
-      "title": "EffectKind",
-      "type": "string"
+      "title": "DistributionVariant",
+      "type": "object"
     },
     "ExtensionPayload": {
       "additionalProperties": false,
@@ -122,40 +158,10 @@
   },
   "additionalProperties": false,
   "properties": {
-    "accessibility_text": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Accessibility Text"
-    },
-    "approval_digest": {
-      "pattern": "^sha256:[0-9a-f]{64}$",
-      "title": "Approval Digest",
-      "type": "string"
-    },
-    "artifact_manifest_digest": {
-      "pattern": "^sha256:[0-9a-f]{64}$",
-      "title": "Artifact Manifest Digest",
-      "type": "string"
-    },
-    "artifact_manifest_ref": {
+    "channel_plan_id": {
       "minLength": 1,
-      "title": "Artifact Manifest Ref",
+      "title": "Channel Plan Id",
       "type": "string"
-    },
-    "channel": {
-      "minLength": 1,
-      "title": "Channel",
-      "type": "string"
-    },
-    "content": {
-      "$ref": "#/$defs/ContentDocument"
     },
     "content_digest": {
       "default": "",
@@ -167,25 +173,6 @@
       "title": "Created At",
       "type": "string"
     },
-    "destination": {
-      "$ref": "#/$defs/ChannelDestination"
-    },
-    "extension": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/ExtensionPayload"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null
-    },
-    "idempotency_key": {
-      "minLength": 1,
-      "title": "Idempotency Key",
-      "type": "string"
-    },
     "input_refs": {
       "default": [],
       "items": {
@@ -193,11 +180,6 @@
       },
       "title": "Input Refs",
       "type": "array"
-    },
-    "operation_id": {
-      "minLength": 1,
-      "title": "Operation Id",
-      "type": "string"
     },
     "organization_id": {
       "minLength": 1,
@@ -209,47 +191,23 @@
       "title": "Publication Id",
       "type": "string"
     },
-    "required_effects": {
-      "default": [
-        "write",
-        "external_communication"
-      ],
-      "items": {
-        "$ref": "#/$defs/EffectKind"
-      },
-      "title": "Required Effects",
-      "type": "array"
-    },
     "revision": {
       "default": 1,
       "minimum": 1,
       "title": "Revision",
       "type": "integer"
     },
-    "scheduled_for": {
-      "anyOf": [
-        {
-          "format": "date-time",
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Scheduled For"
-    },
     "schema_version": {
       "default": "1.0.0",
       "title": "Schema Version",
       "type": "string"
     },
-    "selected_artifact_refs": {
+    "variants": {
       "items": {
-        "type": "string"
+        "$ref": "#/$defs/DistributionVariant"
       },
       "minItems": 1,
-      "title": "Selected Artifact Refs",
+      "title": "Variants",
       "type": "array"
     }
   },
@@ -257,16 +215,9 @@
     "created_at",
     "organization_id",
     "publication_id",
-    "operation_id",
-    "artifact_manifest_ref",
-    "artifact_manifest_digest",
-    "channel",
-    "destination",
-    "selected_artifact_refs",
-    "content",
-    "approval_digest",
-    "idempotency_key"
+    "channel_plan_id",
+    "variants"
   ],
-  "title": "ProposedPublicationOperation",
+  "title": "ChannelPlan",
   "type": "object"
 }

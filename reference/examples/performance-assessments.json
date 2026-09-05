@@ -5,7 +5,7 @@
     ],
     "assessment_id": "assessment_8f18a8f561e75a93dbfb",
     "confidence": "medium",
-    "content_digest": "sha256:3bb3218b620b6a0f4f095cbe5460ad5e907f941eb1a1789f43d12e6ada5aefd8",
+    "content_digest": "sha256:f61d08fcff88b4dde9eee015e8bab845d8d4847fec58f43f5b7649a5ee17933d",
     "created_at": "2026-09-05T08:00:00Z",
     "data_gaps": [
       "Only one metric observation is available"
@@ -16,7 +16,7 @@
     "input_refs": [
       "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
       "metrics_publication-a.example",
-      "operation_0f6679d396ecd9d96cb7"
+      "operation_dc3d2b3d5684d329e209"
     ],
     "metrics": [
       {
@@ -28,7 +28,7 @@
         },
         "baseline": 0.08,
         "connection_ref": "connection_publication-a.example_website",
-        "content_digest": "sha256:b3ec9154d40ebea976abcd2b05cbe5b750a690aa5d43778a3b48dd734fcf2131",
+        "content_digest": "sha256:6c59aef578b659c36104e543ce1b9d1eb3f95e9938205028fc16db2eb8ac6e31",
         "created_at": "2026-09-05T08:00:00Z",
         "denominator": "impressions",
         "destination_account_ref": "destination_publication-a.example_website",
@@ -44,7 +44,7 @@
         "provider_definition_version": "1",
         "provider_kind": "example.website",
         "publication_id": "publication-a.example",
-        "publication_operation_ref": "operation_0f6679d396ecd9d96cb7",
+        "publication_operation_ref": "operation_dc3d2b3d5684d329e209",
         "revision": 1,
         "schema_version": "1.0.0",
         "target": 0.1,
@@ -65,7 +65,7 @@
     ],
     "publication_id": "publication-a.example",
     "publication_operation_refs": [
-      "operation_0f6679d396ecd9d96cb7"
+      "operation_dc3d2b3d5684d329e209"
     ],
     "reusable_learnings": [
       "Strongest normalized signal: engagement_rate (0.12 ratio)."
@@ -79,7 +79,7 @@
     ],
     "assessment_id": "assessment_3a529644c3e16b0f19f0",
     "confidence": "medium",
-    "content_digest": "sha256:6562381ac1128e2f164fddb23e7ed45689624849c01c3ba880820f388690d1b8",
+    "content_digest": "sha256:0bba16c07c4fd2b9c7033e93dfca98911282dbc56d37dcb6fc468a731b1dcab2",
     "created_at": "2026-09-05T08:00:00Z",
     "data_gaps": [
       "Only one metric observation is available"
@@ -90,7 +90,7 @@
     "input_refs": [
       "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
       "metrics_publication-b.example",
-      "operation_a0eba2a937dcfb47deb5"
+      "operation_0fff6f6e4749b31e27de"
     ],
     "metrics": [
       {
@@ -102,7 +102,7 @@
         },
         "baseline": 0.08,
         "connection_ref": "connection_publication-b.example_newsletter",
-        "content_digest": "sha256:ab10be01b05c1b8f743c1b92c5e8201a3e3538396f88231b1a46d79773e25a00",
+        "content_digest": "sha256:03852183c14689066f123ed5ecedd629a3b78344a7accb1a99ad2412784a2d38",
         "created_at": "2026-09-05T08:00:00Z",
         "denominator": "impressions",
         "destination_account_ref": "destination_publication-b.example_newsletter",
@@ -118,7 +118,7 @@
         "provider_definition_version": "1",
         "provider_kind": "example.newsletter",
         "publication_id": "publication-b.example",
-        "publication_operation_ref": "operation_a0eba2a937dcfb47deb5",
+        "publication_operation_ref": "operation_0fff6f6e4749b31e27de",
         "revision": 1,
         "schema_version": "1.0.0",
         "target": 0.1,
@@ -139,7 +139,7 @@
     ],
     "publication_id": "publication-b.example",
     "publication_operation_refs": [
-      "operation_a0eba2a937dcfb47deb5"
+      "operation_0fff6f6e4749b31e27de"
     ],
     "reusable_learnings": [
       "Strongest normalized signal: engagement_rate (0.12 ratio)."

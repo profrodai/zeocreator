@@ -1,5 +1,73 @@
 {
   "$defs": {
+    "ChannelDestination": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "minLength": 1,
+          "title": "Channel",
+          "type": "string"
+        },
+        "connection_ref": {
+          "minLength": 1,
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "destination_account_ref": {
+          "minLength": 1,
+          "title": "Destination Account Ref",
+          "type": "string"
+        },
+        "provider_kind": {
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "title": "Provider Kind",
+          "type": "string"
+        },
+        "scheduled_for": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scheduled For"
+        }
+      },
+      "required": [
+        "channel",
+        "provider_kind",
+        "connection_ref",
+        "destination_account_ref"
+      ],
+      "title": "ChannelDestination",
+      "type": "object"
+    },
+    "ContentDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "media_type": {
+          "minLength": 1,
+          "title": "Media Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media_type",
+        "content"
+      ],
+      "title": "ContentDocument",
+      "type": "object"
+    },
     "EffectKind": {
       "description": "Declared side-effect kind. Declarations are not permission grants.",
       "enum": [
@@ -13,42 +81,59 @@
       "title": "EffectKind",
       "type": "string"
     },
-    "PublicationPayload": {
+    "ExtensionPayload": {
       "additionalProperties": false,
       "properties": {
-        "alt_text": {
+        "namespace": {
           "minLength": 1,
-          "title": "Alt Text",
+          "title": "Namespace",
           "type": "string"
         },
-        "caption": {
-          "minLength": 1,
-          "title": "Caption",
+        "payload": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "schema_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Schema Digest",
           "type": "string"
         },
-        "description": {
+        "schema_id": {
           "minLength": 1,
-          "title": "Description",
+          "title": "Schema Id",
           "type": "string"
         },
-        "title": {
+        "schema_version": {
           "minLength": 1,
-          "title": "Title",
+          "title": "Schema Version",
           "type": "string"
         }
       },
       "required": [
-        "title",
-        "caption",
-        "description",
-        "alt_text"
+        "namespace",
+        "schema_id",
+        "schema_version",
+        "schema_digest",
+        "payload"
       ],
-      "title": "PublicationPayload",
+      "title": "ExtensionPayload",
       "type": "object"
-    }
+    },
+    "JsonValue": {}
   },
   "additionalProperties": false,
   "properties": {
+    "accessibility_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Accessibility Text"
+    },
     "approval_digest": {
       "pattern": "^sha256:[0-9a-f]{64}$",
       "title": "Approval Digest",
@@ -64,10 +149,13 @@
       "title": "Artifact Manifest Ref",
       "type": "string"
     },
-    "connection_ref": {
+    "channel": {
       "minLength": 1,
-      "title": "Connection Ref",
+      "title": "Channel",
       "type": "string"
+    },
+    "content": {
+      "$ref": "#/$defs/ContentDocument"
     },
     "content_digest": {
       "default": "",
@@ -79,10 +167,19 @@
       "title": "Created At",
       "type": "string"
     },
-    "destination_account_ref": {
-      "minLength": 1,
-      "title": "Destination Account Ref",
-      "type": "string"
+    "destination": {
+      "$ref": "#/$defs/ChannelDestination"
+    },
+    "extension": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExtensionPayload"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
     },
     "idempotency_key": {
       "minLength": 1,
@@ -105,15 +202,6 @@
     "organization_id": {
       "minLength": 1,
       "title": "Organization Id",
-      "type": "string"
-    },
-    "payload": {
-      "$ref": "#/$defs/PublicationPayload"
-    },
-    "provider_kind": {
-      "minLength": 1,
-      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
-      "title": "Provider Kind",
       "type": "string"
     },
     "publication_id": {
@@ -172,11 +260,10 @@
     "operation_id",
     "artifact_manifest_ref",
     "artifact_manifest_digest",
+    "channel",
+    "destination",
     "selected_artifact_refs",
-    "provider_kind",
-    "connection_ref",
-    "destination_account_ref",
-    "payload",
+    "content",
     "approval_digest",
     "idempotency_key"
   ],

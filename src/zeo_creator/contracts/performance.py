@@ -55,7 +55,7 @@ class MetricObservation(DurableArtifact):
         return self
 
 
-class DailyPerformanceAssessment(DurableArtifact):
+class PerformanceAssessment(DurableArtifact):
     assessment_id: str = Field(min_length=1)
     observation_window: ResearchWindow
     metrics: tuple[MetricObservation, ...]

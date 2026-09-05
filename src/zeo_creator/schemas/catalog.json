@@ -3,61 +3,85 @@
     {
       "filename": "publication-profile.v1.schema.json",
       "name": "publication-profile",
+      "schema_digest": "sha256:92b463461ce28f51c1ae5de9f5d76446e9cc69307e380c2f3ee555593d7bbbe9",
       "version": "1"
     },
     {
       "filename": "evidence-item.v1.schema.json",
       "name": "evidence-item",
+      "schema_digest": "sha256:0c23d9aaeebd5ea8be33157ebd62b8500d0650dbf1afd2504ed791e0e967151e",
       "version": "1"
     },
     {
       "filename": "research-synthesis.v1.schema.json",
       "name": "research-synthesis",
+      "schema_digest": "sha256:b1868b7b64416ddae31a8f71c259deaa531f43d42824a139927eae1a9da06784",
       "version": "1"
     },
     {
       "filename": "editorial-assignment.v1.schema.json",
       "name": "editorial-assignment",
+      "schema_digest": "sha256:23c5aee68788df0790a2caf22043208c18e6dbe443023814e5ec32911c596bd2",
       "version": "1"
     },
     {
       "filename": "content-portfolio-plan.v1.schema.json",
       "name": "content-portfolio-plan",
+      "schema_digest": "sha256:a1296c7fe897f6caa75ff2cfc1cf98cad78829a546d942e89c9f2ba2f1a97077",
       "version": "1"
     },
     {
       "filename": "content-brief.v1.schema.json",
       "name": "content-brief",
+      "schema_digest": "sha256:6b6630a35ce0e7c06e7dd9c3aa9c2e006644a6578fc2e91d7fed93824354d79d",
       "version": "1"
     },
     {
       "filename": "artifact-manifest.v1.schema.json",
       "name": "artifact-manifest",
+      "schema_digest": "sha256:7e77da4d1027af57628ba204ff5ba0b9f32df1f6ec5635f30df1a8a69ba34ef3",
       "version": "1"
     },
     {
       "filename": "delivery-review-bundle.v1.schema.json",
       "name": "delivery-review-bundle",
+      "schema_digest": "sha256:b540031d64688349efdedd8a732bd4deac652ea96ff1d8b978f2df4497bcaf1a",
+      "version": "1"
+    },
+    {
+      "filename": "distribution-variant.v1.schema.json",
+      "name": "distribution-variant",
+      "schema_digest": "sha256:ae36a96231e0af7b56452d8d4ad13ed0cc8c79ccc31a39e85f14a8f50f9311a3",
+      "version": "1"
+    },
+    {
+      "filename": "channel-plan.v1.schema.json",
+      "name": "channel-plan",
+      "schema_digest": "sha256:51b995a6fa8c74060619a118ae1f2495336a0c988ddc4666445e2764df53f117",
       "version": "1"
     },
     {
       "filename": "proposed-publication-operation.v1.schema.json",
       "name": "proposed-publication-operation",
+      "schema_digest": "sha256:c0a84ad4f828412a56796fa03e19ad1a79defed8c863dec596476053d82418d5",
       "version": "1"
     },
     {
       "filename": "publication-receipt.v1.schema.json",
       "name": "publication-receipt",
+      "schema_digest": "sha256:b8b6048c36332f95539a84cd3837727185c5afbcbe0e0a71fb89bb7152d5181f",
       "version": "1"
     },
     {
       "filename": "metric-observation.v1.schema.json",
       "name": "metric-observation",
+      "schema_digest": "sha256:5db2da2c5b9060fe1c202ee89d9c08a592b115a914023a6b396d1f1488edbabb",
       "version": "1"
     },
     {
-      "filename": "daily-performance-assessment.v1.schema.json",
-      "name": "daily-performance-assessment",
+      "filename": "performance-assessment.v1.schema.json",
+      "name": "performance-assessment",
+      "schema_digest": "sha256:08f0c89db83ca3db96f9fe230be9f50f6971241c635a29cbb67b5c8b2e404528",
       "version": "1"
     }
   ]

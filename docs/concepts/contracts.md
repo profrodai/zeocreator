@@ -59,7 +59,7 @@ PublicationProfile
   → ArtifactManifest
   → DeliveryReviewBundle
   → ProposedPublicationOperation
-  → DailyPerformanceAssessment
+  → PerformanceAssessment
 ```
 
 A mismatch at any transition is a typed failure. Cross-property reuse must be

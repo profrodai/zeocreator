@@ -47,7 +47,8 @@ zeo-creator contracts export --output=./vendor/zeo-creator
 zeo-creator contract-schema --name=content-brief --version=1
 ```
 
-Use the exported schemas to validate adapter inputs and outputs in any language.
+The catalog includes a canonical SHA-256 digest for every schema. Verify that
+digest before validating adapter inputs and outputs in any language.
 RFC 8785 golden vectors in `reference/digest-vectors.json` verify cross-language
 digest compatibility.
 
