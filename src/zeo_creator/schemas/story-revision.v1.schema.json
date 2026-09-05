@@ -1,0 +1,335 @@
+{
+  "$defs": {
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_refs"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    },
+    "MaterialDevelopment": {
+      "additionalProperties": false,
+      "properties": {
+        "development_id": {
+          "minLength": 1,
+          "title": "Development Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "development_id",
+        "occurred_at",
+        "summary",
+        "source_refs"
+      ],
+      "title": "MaterialDevelopment",
+      "type": "object"
+    },
+    "RiskLevel": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "RiskLevel",
+      "type": "string"
+    },
+    "StoryStatus": {
+      "enum": [
+        "DETECTED",
+        "WATCHING",
+        "DEVELOPING",
+        "VERIFIED",
+        "SELECTED",
+        "PUBLISHED",
+        "CORRECTED",
+        "SUPERSEDED",
+        "DISMISSED"
+      ],
+      "title": "StoryStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "affected_communities": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Communities",
+      "type": "array"
+    },
+    "community_reaction_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Community Reaction Refs",
+      "type": "array"
+    },
+    "content_digest": {
+      "default": "",
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "disputed_claims": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EvidenceClaim"
+      },
+      "title": "Disputed Claims",
+      "type": "array"
+    },
+    "editorial_risk": {
+      "$ref": "#/$defs/RiskLevel"
+    },
+    "freshness_at": {
+      "format": "date-time",
+      "title": "Freshness At",
+      "type": "string"
+    },
+    "generation": {
+      "$ref": "#/$defs/GenerationTrace"
+    },
+    "geography": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Geography",
+      "type": "array"
+    },
+    "input_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "material_developments": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/MaterialDevelopment"
+      },
+      "title": "Material Developments",
+      "type": "array"
+    },
+    "organization_id": {
+      "minLength": 1,
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "previous_revision_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Revision Ref"
+    },
+    "primary_source_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Primary Source Refs",
+      "type": "array"
+    },
+    "publication_id": {
+      "minLength": 1,
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "secondary_source_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Secondary Source Refs",
+      "type": "array"
+    },
+    "signal_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Signal Refs",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/StoryStatus"
+    },
+    "story_id": {
+      "minLength": 1,
+      "title": "Story Id",
+      "type": "string"
+    },
+    "story_revision_id": {
+      "minLength": 1,
+      "title": "Story Revision Id",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "unknowns": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Unknowns",
+      "type": "array"
+    },
+    "verified_claims": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EvidenceClaim"
+      },
+      "title": "Verified Claims",
+      "type": "array"
+    }
+  },
+  "required": [
+    "created_at",
+    "organization_id",
+    "publication_id",
+    "story_id",
+    "story_revision_id",
+    "status",
+    "title",
+    "freshness_at",
+    "editorial_risk",
+    "signal_refs",
+    "generation"
+  ],
+  "title": "StoryRevision",
+  "type": "object"
+}

@@ -95,6 +95,7 @@ nav:
       - Integrate a runner: guides/runner-integration.md
   - Concepts:
       - Architecture: concepts/architecture.md
+      - Continuous editorial operations: concepts/continuous-editorial-operations.md
       - Contracts and digests: concepts/contracts.md
       - Canonical digest protocol: concepts/canonical-digests.md
   - Reference:

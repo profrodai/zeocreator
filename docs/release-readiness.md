@@ -3,7 +3,7 @@
 ## Current status
 
 ZEO Creator is a pre-release contract and reference package. The source exposes
-six producer-neutral capabilities, strict domain contracts, RFC 8785 digests,
+twenty producer-neutral capabilities, strict domain contracts, RFC 8785 digests,
 packaged JSON Schemas, neutral fixtures, and credential-free examples.
 
 The deterministic reference workflow produces two publication syntheses, a
@@ -24,11 +24,14 @@ two separate performance assessments.
 
 ## Remaining product evidence
 
-Before a stable package release, an external production adapter should consume
-the exported `ContentBrief` schema, create a real artifact bundle, emit a
-conforming `ArtifactManifest`, and pass validation against authorized read-only
-evidence. This proof belongs in the integrating system and must not introduce
-producer-specific contracts into the public package.
+A private production adapter has already consumed the installed wheel boundary,
+verified existing artifact bytes, emitted conforming manifests, passed delivery
+validation and produced destination-specific proposals. The expanded editorial
+kernel now needs equivalent private integration evidence: resumable real-source
+collection, multi-day story revision, publication-specific agendas, qualified
+human review, one fresh producer run and a newsletter issue as a materially
+different format. Those proofs belong in the integrating newsroom and producers,
+not in this public package.
 
 ## Explicit blockers
 

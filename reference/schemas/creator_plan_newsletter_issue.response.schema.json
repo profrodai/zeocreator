@@ -1,0 +1,305 @@
+{
+  "$defs": {
+    "AudienceSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "consent_policy_ref": {
+          "minLength": 1,
+          "title": "Consent Policy Ref",
+          "type": "string"
+        },
+        "segment_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Segment Refs",
+          "type": "array"
+        },
+        "selection_policy_ref": {
+          "minLength": 1,
+          "title": "Selection Policy Ref",
+          "type": "string"
+        },
+        "suppression_policy_ref": {
+          "minLength": 1,
+          "title": "Suppression Policy Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "segment_refs",
+        "selection_policy_ref",
+        "suppression_policy_ref",
+        "consent_policy_ref"
+      ],
+      "title": "AudienceSelection",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    },
+    "NewsletterIssuePlan": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/AudienceSelection"
+        },
+        "campaign_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Campaign Ref"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "edition_plan_ref": {
+          "minLength": 1,
+          "title": "Edition Plan Ref",
+          "type": "string"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "issue_plan_id": {
+          "minLength": 1,
+          "title": "Issue Plan Id",
+          "type": "string"
+        },
+        "link_tracking_plan_ref": {
+          "minLength": 1,
+          "title": "Link Tracking Plan Ref",
+          "type": "string"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "preheader_variants": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Preheader Variants",
+          "type": "array"
+        },
+        "preview_required": {
+          "default": true,
+          "title": "Preview Required",
+          "type": "boolean"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sections": {
+          "items": {
+            "$ref": "#/$defs/NewsletterSectionPlan"
+          },
+          "minItems": 1,
+          "title": "Sections",
+          "type": "array"
+        },
+        "sequence_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sequence Ref"
+        },
+        "subject_variants": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Subject Variants",
+          "type": "array"
+        },
+        "test_send_required": {
+          "default": true,
+          "title": "Test Send Required",
+          "type": "boolean"
+        },
+        "working_title": {
+          "minLength": 1,
+          "title": "Working Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "issue_plan_id",
+        "edition_plan_ref",
+        "working_title",
+        "subject_variants",
+        "preheader_variants",
+        "sections",
+        "audience",
+        "link_tracking_plan_ref",
+        "generation"
+      ],
+      "title": "NewsletterIssuePlan",
+      "type": "object"
+    },
+    "NewsletterSectionPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "call_to_action": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Call To Action"
+        },
+        "dossier_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Dossier Refs",
+          "type": "array"
+        },
+        "heading": {
+          "minLength": 1,
+          "title": "Heading",
+          "type": "string"
+        },
+        "purpose": {
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "section_id": {
+          "minLength": 1,
+          "title": "Section Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "section_id",
+        "heading",
+        "dossier_refs",
+        "purpose"
+      ],
+      "title": "NewsletterSectionPlan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "plan": {
+      "$ref": "#/$defs/NewsletterIssuePlan"
+    }
+  },
+  "required": [
+    "plan"
+  ],
+  "title": "PlanNewsletterIssueResponse",
+  "type": "object"
+}

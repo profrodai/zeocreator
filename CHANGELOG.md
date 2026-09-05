@@ -17,6 +17,12 @@ All notable changes to ZEO Creator are documented here.
   optional extensions, and schedules.
 - Add RFC 8785 schema digests and an explicit package/capability/schema
   compatibility policy to the bundled contract catalog.
+- Add the continuous editorial kernel: source observations, signals, immutable
+  story revisions, frozen dossiers, agendas, publication slots, and editions.
+- Add provider-neutral commentary, newsletter, journalism, human-review, and
+  correction contracts with deterministic reference strategies.
+- Expand the registry to twenty independently composable capabilities without
+  adding workflow persistence, scheduling, credentials, or publishing authority.
 
 ## 0.1.0 — 2026-09-05
 

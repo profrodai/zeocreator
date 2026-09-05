@@ -5,7 +5,7 @@ production workflow orchestration.
 
 ## `zeo-creator capabilities`
 
-List the six capability manifests:
+List the complete capability catalog:
 
 ```console
 zeo-creator capabilities

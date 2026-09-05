@@ -1,0 +1,107 @@
+[
+  {
+    "author_context": "A practitioner asking about evidence quality.",
+    "author_ref": "author_example",
+    "community_context": "A technical creator community.",
+    "complete_through_cutoff": true,
+    "content": {
+      "content": "How should evidence be preserved?",
+      "media_type": "text/plain"
+    },
+    "content_digest": "sha256:77abd8bc5b79740c53127c47420ae98986c7446813bd12ce25c832efe04f6d1c",
+    "conversation_id": "conversation_example",
+    "created_at": "2026-09-05T12:00:00Z",
+    "engagement_snapshot": {
+      "replies": 3
+    },
+    "input_refs": [],
+    "organization_id": "org_example",
+    "original_post_ref": "post_example",
+    "provider_kind": "community.example",
+    "publication_id": "publication-a.example",
+    "related_story_refs": [
+      "story_31b04dcb83aa6de1143b"
+    ],
+    "reply_refs": [],
+    "retrieval_cutoff": "2026-09-05T12:00:00Z",
+    "retrieved_at": "2026-09-05T12:00:00Z",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "thread_ref": null
+  },
+  {
+    "content_digest": "sha256:1abfdfd34d14c122cba6587268d3c8e8af2b18533518bd8493a1ded970835cda",
+    "conversation_ref": "conversation_example",
+    "created_at": "2026-09-05T12:00:00Z",
+    "disposition": "REPLY",
+    "distinctive_contribution": "Preserve immutable source references before synthesis.",
+    "evidence_refs": [
+      "observation_example"
+    ],
+    "expected_community_value": "Adds evidence or a distinct, attributable perspective.",
+    "expertise_basis_ref": null,
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:77abd8bc5b79740c53127c47420ae98986c7446813bd12ce25c832efe04f6d1c"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.engagement-opportunity",
+      "strategy_version": "1.0.0"
+    },
+    "input_refs": [
+      "conversation_example",
+      "observation_example"
+    ],
+    "opportunity_id": "engagement_dd64412b7d44f8ae1bfd",
+    "organization_id": "org_example",
+    "participant_relationship_ref": null,
+    "persona_ref": "persona_example",
+    "proposed_stance": "Preserve immutable source references before synthesis.",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "risk_level": "MEDIUM",
+    "schema_version": "1.0.0",
+    "timeliness_expires_at": "2026-09-05T16:00:00Z"
+  },
+  {
+    "authorship_mode": "human-reviewed",
+    "commentary_id": "commentary_9fab22bab5a8b8d08f43",
+    "content": {
+      "content": "Preserve immutable source references before synthesis.",
+      "media_type": "text/plain"
+    },
+    "content_digest": "sha256:631d45abc9f74bcb8c9221f943afb6f39528176b2482200d3ffee31b64ceaf02",
+    "conversation_ref": "conversation_example",
+    "created_at": "2026-09-05T12:00:00Z",
+    "evidence_claims": [],
+    "expires_at": "2026-09-05T16:00:00Z",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:1abfdfd34d14c122cba6587268d3c8e8af2b18533518bd8493a1ded970835cda",
+        "sha256:77abd8bc5b79740c53127c47420ae98986c7446813bd12ce25c832efe04f6d1c"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.commentary-composition",
+      "strategy_version": "1.0.0"
+    },
+    "input_refs": [
+      "engagement_dd64412b7d44f8ae1bfd",
+      "conversation_example"
+    ],
+    "organization_id": "org_example",
+    "persona_ref": "persona_example",
+    "publication_id": "publication-a.example",
+    "response_type": "REPLY",
+    "revision": 1,
+    "risk_level": "MEDIUM",
+    "schema_version": "1.0.0",
+    "stance_ref": "engagement_dd64412b7d44f8ae1bfd",
+    "tone": "constructive"
+  }
+]

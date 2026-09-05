@@ -1,9 +1,8 @@
-# Creator operations, governed by design
+# Continuous editorial operations, governed by design
 
 <p class="hero-tagline">
-ZEO Creator turns evidence into governed content portfolios and producer-neutral
-creative briefs, validates artifact bundles, prepares distribution, and learns
-from performance.
+ZEO Creator turns observations into evolving stories, frozen dossiers, agendas,
+editions, governed content and producer-neutral delivery contracts.
 </p>
 
 [Get started](getting-started/index.md){ .md-button .md-button--primary }
@@ -11,19 +10,19 @@ from performance.
 
 ---
 
-## One coherent path from evidence to learning
+## One coherent path from observation to accountable publication
 
 ```mermaid
 flowchart LR
-    A[Connector observations] --> B[Research synthesis]
-    B --> C[Content portfolio]
-    C --> D[Content briefs]
-    D --> E[External producer]
-    E --> F[Artifact bundles]
-    F --> G[Delivery reviews]
+    A[Source observations] --> B[Signals]
+    B --> C[Story revisions]
+    C --> D[Publication dossiers]
+    D --> E[Agendas and editions]
+    E --> F[Articles, commentary, newsletters, briefs]
+    F --> G[Review and artifact validation]
     G --> H[Distribution proposals]
     H -. exact runtime authority .-> I[Provider receipts]
-    I --> J[Performance assessment]
+    I --> J[Performance and corrections]
 ```
 
 ZEO Creator owns the creator-domain transformations. The controlling runtime
@@ -69,21 +68,20 @@ owns the authority boundary; a production adapter owns producer-specific lowerin
 
 </div>
 
-## Six focused capabilities
+## Composable capability families
 
-| Stage | Capability | Result |
+| Stage | Capability family | Result |
 |---|---|---|
-| Research | `creator.research_synthesis@1.0.0` | One publication-scoped synthesis |
-| Plan | `creator.plan_content_portfolio@1.0.0` | A planning-window portfolio |
-| Brief | `creator.create_content_brief@1.0.0` | One producer-neutral content brief |
-| Review | `creator.validate_delivery@1.0.0` | One digest-bound delivery review |
-| Distribute | `creator.prepare_distribution@1.0.0` | Proposals only; no provider write |
-| Learn | `creator.assess_performance@1.0.0` | One publication performance assessment |
+| Observe | Research synthesis and signal extraction | Publication-scoped evidence and developments |
+| Remember | Story revision and dossier construction | Evolving truth plus frozen editorial packages |
+| Decide | Agenda, edition, and portfolio planning | Explicit selections, rejections, slots and prominence |
+| Create | Brief, commentary, newsletter and article composition | Producer/provider-neutral drafts |
+| Review | Commentary, newsletter, journalism and artifact checks | Digest-bound, fail-closed review records |
+| Distribute and learn | Publication proposals and performance assessment | No provider write; separate publication learning |
 
 ## Designed boundaries
 
-ZEO Creator owns synthesis, editorial planning, brief construction, validation,
-distribution proposals, and performance interpretation. It does not own
+ZEO Creator owns editorial contracts and stateless transformations. It does not own
 credentials, OAuth, scheduling, workflow state, rendering, billing, approval
 authority, or provider execution.
 

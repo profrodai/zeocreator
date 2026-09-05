@@ -1,0 +1,590 @@
+{
+  "$defs": {
+    "AudienceSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "consent_policy_ref": {
+          "minLength": 1,
+          "title": "Consent Policy Ref",
+          "type": "string"
+        },
+        "segment_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Segment Refs",
+          "type": "array"
+        },
+        "selection_policy_ref": {
+          "minLength": 1,
+          "title": "Selection Policy Ref",
+          "type": "string"
+        },
+        "suppression_policy_ref": {
+          "minLength": 1,
+          "title": "Suppression Policy Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "segment_refs",
+        "selection_policy_ref",
+        "suppression_policy_ref",
+        "consent_policy_ref"
+      ],
+      "title": "AudienceSelection",
+      "type": "object"
+    },
+    "EditionItem": {
+      "additionalProperties": false,
+      "properties": {
+        "dossier_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Dossier Refs",
+          "type": "array"
+        },
+        "prominence": {
+          "minimum": 1,
+          "title": "Prominence",
+          "type": "integer"
+        },
+        "required_content_kinds": {
+          "items": {
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Required Content Kinds",
+          "type": "array"
+        },
+        "slot_ref": {
+          "minLength": 1,
+          "title": "Slot Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slot_ref",
+        "prominence",
+        "required_content_kinds"
+      ],
+      "title": "EditionItem",
+      "type": "object"
+    },
+    "EditionPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "agenda_ref": {
+          "minLength": 1,
+          "title": "Agenda Ref",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "correction_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Correction Refs",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "edition_id": {
+          "minLength": 1,
+          "title": "Edition Id",
+          "type": "string"
+        },
+        "edition_kind": {
+          "minLength": 1,
+          "title": "Edition Kind",
+          "type": "string"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "human_editor_requirements": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Human Editor Requirements",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "lead_items": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EditionItem"
+          },
+          "title": "Lead Items",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "publication_window": {
+          "$ref": "#/$defs/ResearchWindow"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "shared_relationship_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shared Relationship Ref"
+        },
+        "supporting_items": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EditionItem"
+          },
+          "title": "Supporting Items",
+          "type": "array"
+        },
+        "update_policy_ref": {
+          "minLength": 1,
+          "title": "Update Policy Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "edition_id",
+        "agenda_ref",
+        "edition_kind",
+        "publication_window",
+        "update_policy_ref",
+        "generation"
+      ],
+      "title": "EditionPlan",
+      "type": "object"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_refs"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    },
+    "ResearchWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "ends_at": {
+          "format": "date-time",
+          "title": "Ends At",
+          "type": "string"
+        },
+        "starts_at": {
+          "format": "date-time",
+          "title": "Starts At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "starts_at",
+        "ends_at"
+      ],
+      "title": "ResearchWindow",
+      "type": "object"
+    },
+    "RiskLevel": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "RiskLevel",
+      "type": "string"
+    },
+    "StoryDossier": {
+      "additionalProperties": false,
+      "properties": {
+        "audience_significance": {
+          "minLength": 1,
+          "title": "Audience Significance",
+          "type": "string"
+        },
+        "community_conversation_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Community Conversation Refs",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "contradictions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Contradictions",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "dossier_id": {
+          "minLength": 1,
+          "title": "Dossier Id",
+          "type": "string"
+        },
+        "evidence_lineage": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Lineage",
+          "type": "array"
+        },
+        "frozen_at": {
+          "format": "date-time",
+          "title": "Frozen At",
+          "type": "string"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "possible_angles": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Possible Angles",
+          "type": "array"
+        },
+        "prior_coverage_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Prior Coverage Refs",
+          "type": "array"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "quotation_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Quotation Refs",
+          "type": "array"
+        },
+        "recommended_framing": {
+          "minLength": 1,
+          "title": "Recommended Framing",
+          "type": "string"
+        },
+        "rejected_framings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Framings",
+          "type": "array"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "risk_level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "risk_notes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Risk Notes",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "story_id": {
+          "minLength": 1,
+          "title": "Story Id",
+          "type": "string"
+        },
+        "story_revision_ref": {
+          "minLength": 1,
+          "title": "Story Revision Ref",
+          "type": "string"
+        },
+        "suggested_follow_up": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Suggested Follow Up",
+          "type": "array"
+        },
+        "timeline": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/StoryTimelineEntry"
+          },
+          "title": "Timeline",
+          "type": "array"
+        },
+        "unknowns": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknowns",
+          "type": "array"
+        },
+        "verified_claims": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "title": "Verified Claims",
+          "type": "array"
+        },
+        "visual_opportunities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Opportunities",
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "dossier_id",
+        "story_id",
+        "story_revision_ref",
+        "evidence_lineage",
+        "audience_significance",
+        "recommended_framing",
+        "risk_level",
+        "frozen_at",
+        "generation"
+      ],
+      "title": "StoryDossier",
+      "type": "object"
+    },
+    "StoryTimelineEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "occurred_at",
+        "summary",
+        "source_refs"
+      ],
+      "title": "StoryTimelineEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "audience": {
+      "$ref": "#/$defs/AudienceSelection"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "dossiers": {
+      "items": {
+        "$ref": "#/$defs/StoryDossier"
+      },
+      "minItems": 1,
+      "title": "Dossiers",
+      "type": "array"
+    },
+    "edition": {
+      "$ref": "#/$defs/EditionPlan"
+    }
+  },
+  "required": [
+    "edition",
+    "dossiers",
+    "audience",
+    "created_at"
+  ],
+  "title": "PlanNewsletterIssueRequest",
+  "type": "object"
+}

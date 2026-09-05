@@ -1,0 +1,97 @@
+[
+  {
+    "article_plan_id": "article_plan_example",
+    "bylines": [
+      {
+        "accepted": true,
+        "contributor_ref": "reporter_example",
+        "disclosure": null,
+        "role": "reporter"
+      }
+    ],
+    "content_digest": "sha256:c7f43d36ec3f0dbc8cfec2936ec56dd8925a6bf2734052ad91061f2900a36a4a",
+    "created_at": "2026-09-05T12:00:00Z",
+    "dossier_refs": [
+      "dossier_67e79748fd7d0122cbb3"
+    ],
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:c18d0ba532d677e3a37081b9d64c72dbe8b18d932bad19de785857931088919f"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.story-dossier",
+      "strategy_version": "1.0.0"
+    },
+    "headline_direction": "A verified public update",
+    "high_risk_classifications": [],
+    "human_editor_policy_ref": "editorial.general@1",
+    "input_refs": [
+      "dossier_67e79748fd7d0122cbb3"
+    ],
+    "organization_id": "org_example",
+    "publication_id": "publication-a.example",
+    "reporting_gaps": [],
+    "required_claim_refs": [
+      "claim_f5cc3b19870c71f1c821"
+    ],
+    "revision": 1,
+    "risk_level": "MEDIUM",
+    "schema_version": "1.0.0",
+    "thesis": "The update changes how operators preserve evidence."
+  },
+  {
+    "article_draft_id": "article_draft_0b885bd0925ed16dea14",
+    "article_plan_ref": "article_plan_example",
+    "body": {
+      "content": "The service published an update.",
+      "media_type": "text/markdown"
+    },
+    "bylines": [
+      {
+        "accepted": true,
+        "contributor_ref": "reporter_example",
+        "disclosure": null,
+        "role": "reporter"
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "claim_f5cc3b19870c71f1c821",
+        "evidence_refs": [
+          "observation_example"
+        ],
+        "text": "The service published an update."
+      }
+    ],
+    "content_digest": "sha256:b1aa0d4beaea3d9b40427a7222b11cb57287e750d328dd47a1c83669cdcc022d",
+    "created_at": "2026-09-05T12:00:00Z",
+    "deck": null,
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:c7f43d36ec3f0dbc8cfec2936ec56dd8925a6bf2734052ad91061f2900a36a4a",
+        "sha256:bf2906676e1f94d6132c79265bba83817e712c8c2ce99d293975a3a889f9e674"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.news-article-composition",
+      "strategy_version": "1.0.0"
+    },
+    "headline": "A verified public update",
+    "input_refs": [
+      "article_plan_example",
+      "dossier_67e79748fd7d0122cbb3"
+    ],
+    "organization_id": "org_example",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_refs": [
+      "observation_example"
+    ]
+  }
+]

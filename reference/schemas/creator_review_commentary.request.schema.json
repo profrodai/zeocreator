@@ -1,0 +1,444 @@
+{
+  "$defs": {
+    "CommentaryDraft": {
+      "additionalProperties": false,
+      "properties": {
+        "authorship_mode": {
+          "minLength": 1,
+          "title": "Authorship Mode",
+          "type": "string"
+        },
+        "commentary_id": {
+          "minLength": 1,
+          "title": "Commentary Id",
+          "type": "string"
+        },
+        "content": {
+          "$ref": "#/$defs/ContentDocument"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "conversation_ref": {
+          "minLength": 1,
+          "title": "Conversation Ref",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "evidence_claims": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "title": "Evidence Claims",
+          "type": "array"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "persona_ref": {
+          "minLength": 1,
+          "title": "Persona Ref",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "response_type": {
+          "$ref": "#/$defs/EngagementDisposition"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "risk_level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "stance_ref": {
+          "minLength": 1,
+          "title": "Stance Ref",
+          "type": "string"
+        },
+        "tone": {
+          "minLength": 1,
+          "title": "Tone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "commentary_id",
+        "persona_ref",
+        "conversation_ref",
+        "response_type",
+        "content",
+        "stance_ref",
+        "tone",
+        "authorship_mode",
+        "expires_at",
+        "risk_level",
+        "generation"
+      ],
+      "title": "CommentaryDraft",
+      "type": "object"
+    },
+    "ContentDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "media_type": {
+          "minLength": 1,
+          "title": "Media Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media_type",
+        "content"
+      ],
+      "title": "ContentDocument",
+      "type": "object"
+    },
+    "ConversationObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "author_context": {
+          "minLength": 1,
+          "title": "Author Context",
+          "type": "string"
+        },
+        "author_ref": {
+          "minLength": 1,
+          "title": "Author Ref",
+          "type": "string"
+        },
+        "community_context": {
+          "minLength": 1,
+          "title": "Community Context",
+          "type": "string"
+        },
+        "complete_through_cutoff": {
+          "title": "Complete Through Cutoff",
+          "type": "boolean"
+        },
+        "content": {
+          "$ref": "#/$defs/ContentDocument"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "conversation_id": {
+          "minLength": 1,
+          "title": "Conversation Id",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "engagement_snapshot": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Engagement Snapshot",
+          "type": "object"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "original_post_ref": {
+          "minLength": 1,
+          "title": "Original Post Ref",
+          "type": "string"
+        },
+        "provider_kind": {
+          "minLength": 1,
+          "title": "Provider Kind",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "related_story_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Story Refs",
+          "type": "array"
+        },
+        "reply_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reply Refs",
+          "type": "array"
+        },
+        "retrieval_cutoff": {
+          "format": "date-time",
+          "title": "Retrieval Cutoff",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "thread_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thread Ref"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "conversation_id",
+        "provider_kind",
+        "original_post_ref",
+        "author_ref",
+        "author_context",
+        "community_context",
+        "content",
+        "retrieved_at",
+        "retrieval_cutoff",
+        "complete_through_cutoff"
+      ],
+      "title": "ConversationObservation",
+      "type": "object"
+    },
+    "EngagementDisposition": {
+      "enum": [
+        "IGNORE",
+        "MONITOR",
+        "LIKE",
+        "REPOST",
+        "QUOTE",
+        "REPLY",
+        "ORIGINAL_POST",
+        "ESCALATE"
+      ],
+      "title": "EngagementDisposition",
+      "type": "string"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_refs"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    },
+    "RiskLevel": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "RiskLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "approval_policy_ref": {
+      "minLength": 1,
+      "title": "Approval Policy Ref",
+      "type": "string"
+    },
+    "conversation": {
+      "$ref": "#/$defs/ConversationObservation"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "draft": {
+      "$ref": "#/$defs/CommentaryDraft"
+    },
+    "persona_position_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Persona Position Refs",
+      "type": "array"
+    },
+    "personal_experience_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Personal Experience Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "draft",
+    "conversation",
+    "approval_policy_ref",
+    "created_at"
+  ],
+  "title": "ReviewCommentaryRequest",
+  "type": "object"
+}

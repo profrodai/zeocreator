@@ -12,7 +12,7 @@ help:
 	@echo "  make setup          Install the exact locked environment"
 	@echo "  make verify         Lint, strict type-check, and test"
 	@echo "  make doctor         Verify Python/Zeocore/manifests/projections"
-	@echo "  make capabilities   List the six public capabilities"
+	@echo "  make capabilities   List the public capability catalog"
 	@echo "  make reference      Regenerate JSON schemas and neutral samples"
 	@echo "  make docs           Build the documentation site in strict mode"
 	@echo "  make docs-serve     Serve docs locally with live reload"

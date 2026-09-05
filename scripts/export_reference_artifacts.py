@@ -9,6 +9,23 @@ from tests.fixtures.reference import (
     evidence_fixture,
     recent_history,
 )
+from zeo_creator.capabilities._newsroom_examples import agenda, dossier, observation, signal, story
+from zeo_creator.capabilities._specialization_examples import (
+    article_draft,
+    article_plan,
+    commentary_draft,
+    conversation,
+    edition,
+    newsletter_draft,
+    newsletter_plan,
+    opportunity,
+)
+from zeo_creator.contracts.commentary import (
+    CommentaryDraft,
+    CommentaryReview,
+    ConversationObservation,
+    EngagementOpportunity,
+)
 from zeo_creator.contracts.common import canonical_digest
 from zeo_creator.contracts.delivery import ArtifactManifest, DeliveryReviewBundle
 from zeo_creator.contracts.distribution import (
@@ -19,6 +36,29 @@ from zeo_creator.contracts.distribution import (
 )
 from zeo_creator.contracts.editorial import ContentPortfolioPlan, EditorialAssignment
 from zeo_creator.contracts.evidence import EvidenceItem, ResearchSynthesis
+from zeo_creator.contracts.journalism import (
+    CorrectionNotice,
+    EditorialReview,
+    NewsArticleDraft,
+    NewsArticlePlan,
+    PublicationUpdate,
+    RetractionNotice,
+)
+from zeo_creator.contracts.newsletter import (
+    AudienceSelection,
+    NewsletterEditorialReview,
+    NewsletterIssueDraft,
+    NewsletterIssuePlan,
+)
+from zeo_creator.contracts.newsroom import (
+    EditionPlan,
+    EditorialAgenda,
+    EditorialSignal,
+    PublicationSlot,
+    SourceObservation,
+    StoryDossier,
+    StoryRevision,
+)
 from zeo_creator.contracts.performance import MetricObservation, PerformanceAssessment
 from zeo_creator.contracts.production import ContentBrief
 from zeo_creator.contracts.publications import PublicationProfile
@@ -54,6 +94,27 @@ def export_schemas() -> None:
         ("publication-receipt", "1", PublicationReceipt),
         ("metric-observation", "1", MetricObservation),
         ("performance-assessment", "1", PerformanceAssessment),
+        ("source-observation", "1", SourceObservation),
+        ("editorial-signal", "1", EditorialSignal),
+        ("story-revision", "1", StoryRevision),
+        ("story-dossier", "1", StoryDossier),
+        ("publication-slot", "1", PublicationSlot),
+        ("editorial-agenda", "1", EditorialAgenda),
+        ("edition-plan", "1", EditionPlan),
+        ("conversation-observation", "1", ConversationObservation),
+        ("engagement-opportunity", "1", EngagementOpportunity),
+        ("commentary-draft", "1", CommentaryDraft),
+        ("commentary-review", "1", CommentaryReview),
+        ("audience-selection", "1", AudienceSelection),
+        ("newsletter-issue-plan", "1", NewsletterIssuePlan),
+        ("newsletter-issue-draft", "1", NewsletterIssueDraft),
+        ("newsletter-editorial-review", "1", NewsletterEditorialReview),
+        ("news-article-plan", "1", NewsArticlePlan),
+        ("news-article-draft", "1", NewsArticleDraft),
+        ("editorial-review", "1", EditorialReview),
+        ("correction-notice", "1", CorrectionNotice),
+        ("retraction-notice", "1", RetractionNotice),
+        ("publication-update", "1", PublicationUpdate),
     )
     catalog = []
     for name, version, model in contract_models:
@@ -95,6 +156,17 @@ def export_examples() -> None:
         "delivery-reviews.json": snapshot.reviews,
         "publication-proposals.json": snapshot.operations,
         "performance-assessments.json": snapshot.assessments,
+        "editorial-kernel.json": (
+            observation(),
+            signal(),
+            story(),
+            dossier(),
+            agenda(),
+            edition(),
+        ),
+        "commentary.json": (conversation(), opportunity(), commentary_draft()),
+        "newsletter.json": (newsletter_plan(), newsletter_draft()),
+        "journalism.json": (article_plan(), article_draft()),
     }
     for filename, value in values.items():
         if isinstance(value, tuple):

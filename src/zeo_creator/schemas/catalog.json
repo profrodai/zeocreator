@@ -83,6 +83,132 @@
       "name": "performance-assessment",
       "schema_digest": "sha256:08f0c89db83ca3db96f9fe230be9f50f6971241c635a29cbb67b5c8b2e404528",
       "version": "1"
+    },
+    {
+      "filename": "source-observation.v1.schema.json",
+      "name": "source-observation",
+      "schema_digest": "sha256:f569969b247673bf5d34c4a3f1b224c52752ee25cf495e2455b8ba30ad90b9b7",
+      "version": "1"
+    },
+    {
+      "filename": "editorial-signal.v1.schema.json",
+      "name": "editorial-signal",
+      "schema_digest": "sha256:b78bc7e274a2c0c01d85796cfedc06ca681005286ef50d7c99ecc5db7ee76a2f",
+      "version": "1"
+    },
+    {
+      "filename": "story-revision.v1.schema.json",
+      "name": "story-revision",
+      "schema_digest": "sha256:143773ae6916540cd01d88bbcf2d92d16888ac616f8d7145c5994576b2a9321a",
+      "version": "1"
+    },
+    {
+      "filename": "story-dossier.v1.schema.json",
+      "name": "story-dossier",
+      "schema_digest": "sha256:53d1bfcc06aa876dc2055a68c977168ac58058026f7f88c6c38e906ff2ae3752",
+      "version": "1"
+    },
+    {
+      "filename": "publication-slot.v1.schema.json",
+      "name": "publication-slot",
+      "schema_digest": "sha256:1c8bc7fa21456b957b1efe087e72108702415e9d6bfc06b9384c8a6d77d1fbd8",
+      "version": "1"
+    },
+    {
+      "filename": "editorial-agenda.v1.schema.json",
+      "name": "editorial-agenda",
+      "schema_digest": "sha256:785cbe8d86bb711bcc42e04df0c5bba0352579d75c96bd00f61b8f40c04418cb",
+      "version": "1"
+    },
+    {
+      "filename": "edition-plan.v1.schema.json",
+      "name": "edition-plan",
+      "schema_digest": "sha256:0d09c68850d12aee0a47907e3a8430ddf5b75bfd3e2b1f6119065295cccc4436",
+      "version": "1"
+    },
+    {
+      "filename": "conversation-observation.v1.schema.json",
+      "name": "conversation-observation",
+      "schema_digest": "sha256:209ebdbedae995723de5a715a60e9918e96065c29c4a04df91f54eaae2f01604",
+      "version": "1"
+    },
+    {
+      "filename": "engagement-opportunity.v1.schema.json",
+      "name": "engagement-opportunity",
+      "schema_digest": "sha256:9c0e5f1ee7db0d07443fbed59888b51193736cf112dd61be0960940cb4a2ef3f",
+      "version": "1"
+    },
+    {
+      "filename": "commentary-draft.v1.schema.json",
+      "name": "commentary-draft",
+      "schema_digest": "sha256:b3242d6111c64fd6632253ca67819d7c22f5714f2ae773383abd0959b0925ffc",
+      "version": "1"
+    },
+    {
+      "filename": "commentary-review.v1.schema.json",
+      "name": "commentary-review",
+      "schema_digest": "sha256:91e2bc2897534cef3165de90ca17d82e53f45cadfca644722037fb6237d4e014",
+      "version": "1"
+    },
+    {
+      "filename": "audience-selection.v1.schema.json",
+      "name": "audience-selection",
+      "schema_digest": "sha256:57e5b0fb29d3e3d52bb1cd0b327a38de762a349b5e1391573a88c8a73e1cd766",
+      "version": "1"
+    },
+    {
+      "filename": "newsletter-issue-plan.v1.schema.json",
+      "name": "newsletter-issue-plan",
+      "schema_digest": "sha256:2466b817311427934ace7324f2b018a71612e3bcca6d53212045a99425a58ed7",
+      "version": "1"
+    },
+    {
+      "filename": "newsletter-issue-draft.v1.schema.json",
+      "name": "newsletter-issue-draft",
+      "schema_digest": "sha256:ff33567951e20cb1a84d19fa298a44ed94a3ae0c2b9fed37b6e8584025881812",
+      "version": "1"
+    },
+    {
+      "filename": "newsletter-editorial-review.v1.schema.json",
+      "name": "newsletter-editorial-review",
+      "schema_digest": "sha256:56fc2b982fc8558ad3f7d2540736d08ff7704b27e551f5cd90db090d9cdd18c4",
+      "version": "1"
+    },
+    {
+      "filename": "news-article-plan.v1.schema.json",
+      "name": "news-article-plan",
+      "schema_digest": "sha256:efdb1e8a090a65ef65744a510330869b92a38b005833d32867e892495823a673",
+      "version": "1"
+    },
+    {
+      "filename": "news-article-draft.v1.schema.json",
+      "name": "news-article-draft",
+      "schema_digest": "sha256:e839d858412794a5e9ae4aa5cb2a83c5c196fa20562bdc0577c5bc51503f9ef0",
+      "version": "1"
+    },
+    {
+      "filename": "editorial-review.v1.schema.json",
+      "name": "editorial-review",
+      "schema_digest": "sha256:d287018365ea43b174dd89065253066f46c9f3693711917440bfd3b0509d05f7",
+      "version": "1"
+    },
+    {
+      "filename": "correction-notice.v1.schema.json",
+      "name": "correction-notice",
+      "schema_digest": "sha256:7d03e03a9406635e43f13a03bd43b61aa7fe9eb3ada448d603b5de755efd85e8",
+      "version": "1"
+    },
+    {
+      "filename": "retraction-notice.v1.schema.json",
+      "name": "retraction-notice",
+      "schema_digest": "sha256:f35d25422c95467c24eed53d2871f10930cfd8d4b26d119e55ceaab6f271fd6f",
+      "version": "1"
+    },
+    {
+      "filename": "publication-update.v1.schema.json",
+      "name": "publication-update",
+      "schema_digest": "sha256:7e9353f540dce07caec8c683ddd7e9d68967a87290bce61ad5c05edecd5f7d97",
+      "version": "1"
     }
   ]
 }

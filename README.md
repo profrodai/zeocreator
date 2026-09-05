@@ -2,10 +2,10 @@
 
 # ZEO Creator
 
-**Typed creator operations, governed by design.**
+**The open protocol for continuous editorial and creator operations.**
 
-Turn evidence into content portfolios and production-ready creative briefs.
-Validate produced artifacts. Prepare distribution without publishing behind your back.
+Turn source observations into evolving stories, frozen dossiers, editorial agendas,
+editions, production briefs, reviewed artifacts, commentary, newsletters and corrections.
 
 [![CI](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml/badge.svg)](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml)
 [![Python 3.14+](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
@@ -18,27 +18,30 @@ Validate produced artifacts. Prepare distribution without publishing behind your
 
 ---
 
-ZEO Creator is an open-source, typed creator-operations capability package. It
-turns evidence into governed content portfolios and producer-neutral creative
-briefs, validates artifact bundles, prepares distribution, and learns from
-performance. Any production engine can integrate through versioned JSON contracts.
+ZEO Creator is an open-source, typed contract and transformation layer for newsrooms,
+independent publications and creator teams. It supports live, daily, periodic and
+evergreen work without storing newsroom memory, scheduling jobs, possessing
+credentials or publishing behind an editor's back.
 
 ```mermaid
 flowchart LR
-    E[Evidence] --> R[Research synthesis]
-    R --> P[Content portfolio]
-    P --> B[Content briefs]
-    B --> X[External producer]
-    X --> A[Artifact bundles]
-    A --> V[Delivery review]
-    V --> O[Publication proposals]
-    O -. runtime approval .-> D[Distribution]
-    D --> M[Performance evidence]
+    S[Source observations] --> G[Signals and story revisions]
+    G --> D[Publication-scoped dossiers]
+    D --> A[Agendas and editions]
+    A --> B[Briefs, articles, commentary, newsletters]
+    B --> X[External producers]
+    X --> V[Artifact and editorial review]
+    V --> O[Digest-bound proposals]
+    O -. runtime approval .-> P[Provider execution]
+    P --> M[Performance and corrections]
 ```
 
 ## Why ZEO Creator?
 
 - **Evidence-backed.** Every material brief claim resolves to explicit provenance.
+- **Continuous.** Stories evolve across live, daily, periodic, and evergreen windows.
+- **Editorially coherent.** Dossiers, agendas, and editions prevent every producer from researching alone.
+- **Integrity-aware.** Commentary, journalism, corrections, and qualified-human requirements fail closed.
 - **Producer-neutral.** Public briefs express creative intent; adapters own production-specific lowering.
 - **Publication-safe.** Organization and publication scope follow every durable artifact.
 - **Approval-safe.** Artifact, payload, destination, or schedule changes invalidate approval.
@@ -98,18 +101,19 @@ uv sync --frozen
 uv run python examples/create_content_brief.py
 ```
 
-## Six focused capabilities
+## Capability families
 
-| Capability | Responsibility | Effect |
+| Family | Capabilities | Responsibility |
 |---|---|---|
-| `creator.research_synthesis@1.0.0` | Retrieve permitted observations and synthesize one publication | Read only |
-| `creator.plan_content_portfolio@1.0.0` | Plan a scoped window using caller-supplied content kinds and quantities | None |
-| `creator.create_content_brief@1.0.0` | Convert one assignment into a generic creative brief | None |
-| `creator.validate_delivery@1.0.0` | Check artifact integrity, evidence, brand, and declared attestations | None |
-| `creator.prepare_distribution@1.0.0` | Produce digest-bound publication proposals | None |
-| `creator.assess_performance@1.0.0` | Retrieve metrics and assess one publication | Read only |
+| Research and story | `research_synthesis`, `extract_editorial_signals`, `update_story_revisions`, `build_story_dossier` | Normalize evidence into evolving, frozen editorial knowledge |
+| Agenda and production | `plan_editorial_agenda`, `plan_edition`, `plan_content_portfolio`, `create_content_brief` | Select publication work and express producer-neutral intent |
+| Commentary | `identify_engagement_opportunities`, `compose_commentary`, `review_commentary` | Participate selectively with context, stance, expiry and human approval |
+| Newsletters | `plan_newsletter_issue`, `compose_newsletter_issue`, `review_newsletter_issue` | Produce HTML/plain-text issues from editions and dossiers |
+| Journalism | `compose_news_article`, `review_news_article`, `prepare_correction` | Draft attributed reporting and represent corrections with risk gates |
+| Delivery and learning | `validate_delivery`, `prepare_distribution`, `assess_performance` | Validate bytes and claims, propose effects, and interpret outcomes |
 
-There is intentionally no monolithic workflow capability. Scheduling, retries,
+All 20 capability IDs are independently composable. There is intentionally no
+monolithic workflow capability. Scheduling, retries,
 approval state, persistence, provider execution, and reconciliation belong to
 the controlling runtime.
 
@@ -124,6 +128,19 @@ A producer returns an `ArtifactManifest` containing one or more artifact
 descriptors, byte-digest proofs, claim references, and typed attestations. ZEO
 Creator validates the envelope and preserves opaque `ExtensionPayload` data but
 does not interpret a producer's private schema.
+
+## The editorial kernel
+
+`SourceObservation` records what was retrieved and how complete it was.
+`EditorialSignal` explains why it may matter. `StoryRevision` preserves a story's
+verified facts, disputed claims, unknowns and status through time. `StoryDossier`
+freezes that state for one publication, and `EditorialAgenda` plus `EditionPlan`
+turn dossiers into coherent publication decisions.
+
+One dossier can support a breaking update, a daily briefing, a video brief, a
+social reply and a later newsletter section without silently sharing voice,
+policy or approval across publications. See the
+[continuous editorial model](docs/concepts/continuous-editorial-operations.md).
 
 ```mermaid
 flowchart LR

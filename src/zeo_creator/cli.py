@@ -61,7 +61,7 @@ def capabilities(
     ),
     json_output: bool = typer.Option(False, "--json", help="Emit machine-readable JSON."),
 ) -> None:
-    """List the six stable business capabilities."""
+    """List the stable continuous editorial and creator capabilities."""
     if projection == ProjectionFormat.OPENAI:
         rows = [item.model_dump(mode="json") for item in openai_tool_projections()]
         typer.echo(json.dumps(rows, indent=2))
@@ -141,8 +141,8 @@ def doctor(json_output: bool = typer.Option(False, "--json")) -> None:
     checks = {
         "python_3_14_or_newer": sys.version_info >= (3, 14),
         "zeocore_0_6_0": zeocore_version == "0.6.0",
-        "six_manifests": len(capability_manifests()) == 6,
-        "six_openai_projections": len(openai_tool_projections()) == 6,
+        "twenty_manifests": len(capability_manifests()) == 20,
+        "twenty_openai_projections": len(openai_tool_projections()) == 20,
     }
     payload = {
         "ok": all(checks.values()),

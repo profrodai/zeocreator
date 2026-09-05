@@ -11,7 +11,7 @@ flowchart TB
     end
 
     subgraph Creator[ZEO Creator]
-      CAP[Six capabilities]
+      CAP[Composable capabilities]
       SVC[Domain services]
       CON[Typed contracts]
       PORT[Consumer ports]

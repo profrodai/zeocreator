@@ -40,6 +40,22 @@ pre-release line, removed names receive no compatibility aliases.
 
 ::: zeo_creator.contracts.editorial
 
+## Continuous newsroom interchange
+
+::: zeo_creator.contracts.newsroom
+
+## Commentary
+
+::: zeo_creator.contracts.commentary
+
+## Newsletter specialization
+
+::: zeo_creator.contracts.newsletter
+
+## Journalism integrity
+
+::: zeo_creator.contracts.journalism
+
 ## Production boundary
 
 ::: zeo_creator.contracts.production

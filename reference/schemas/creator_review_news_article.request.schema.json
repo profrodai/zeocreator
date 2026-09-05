@@ -1,0 +1,455 @@
+{
+  "$defs": {
+    "BylineAssignment": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {
+          "default": false,
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "contributor_ref": {
+          "minLength": 1,
+          "title": "Contributor Ref",
+          "type": "string"
+        },
+        "disclosure": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Disclosure"
+        },
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contributor_ref",
+        "role"
+      ],
+      "title": "BylineAssignment",
+      "type": "object"
+    },
+    "ContentDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "media_type": {
+          "minLength": 1,
+          "title": "Media Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "media_type",
+        "content"
+      ],
+      "title": "ContentDocument",
+      "type": "object"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_refs"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    },
+    "HighRiskClassification": {
+      "enum": [
+        "IDENTIFIABLE_PERSON_ALLEGATION",
+        "CRIME_OR_VICTIM",
+        "MINOR",
+        "ELECTION_OR_POLITICAL_CLAIM",
+        "PUBLIC_SAFETY",
+        "HEALTH",
+        "FINANCIAL_CLAIM",
+        "PRIVATE_PERSONAL_INFORMATION",
+        "UNVERIFIED_SOCIAL_REPORT"
+      ],
+      "title": "HighRiskClassification",
+      "type": "string"
+    },
+    "NewsArticleDraft": {
+      "additionalProperties": false,
+      "properties": {
+        "article_draft_id": {
+          "minLength": 1,
+          "title": "Article Draft Id",
+          "type": "string"
+        },
+        "article_plan_ref": {
+          "minLength": 1,
+          "title": "Article Plan Ref",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/ContentDocument"
+        },
+        "bylines": {
+          "items": {
+            "$ref": "#/$defs/BylineAssignment"
+          },
+          "minItems": 1,
+          "title": "Bylines",
+          "type": "array"
+        },
+        "claims": {
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "minItems": 1,
+          "title": "Claims",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "deck": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deck"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "headline": {
+          "minLength": 1,
+          "title": "Headline",
+          "type": "string"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "article_draft_id",
+        "article_plan_ref",
+        "headline",
+        "body",
+        "claims",
+        "source_refs",
+        "bylines",
+        "generation"
+      ],
+      "title": "NewsArticleDraft",
+      "type": "object"
+    },
+    "NewsArticlePlan": {
+      "additionalProperties": false,
+      "properties": {
+        "article_plan_id": {
+          "minLength": 1,
+          "title": "Article Plan Id",
+          "type": "string"
+        },
+        "bylines": {
+          "items": {
+            "$ref": "#/$defs/BylineAssignment"
+          },
+          "minItems": 1,
+          "title": "Bylines",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "dossier_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Dossier Refs",
+          "type": "array"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "headline_direction": {
+          "minLength": 1,
+          "title": "Headline Direction",
+          "type": "string"
+        },
+        "high_risk_classifications": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/HighRiskClassification"
+          },
+          "title": "High Risk Classifications",
+          "type": "array"
+        },
+        "human_editor_policy_ref": {
+          "minLength": 1,
+          "title": "Human Editor Policy Ref",
+          "type": "string"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "reporting_gaps": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reporting Gaps",
+          "type": "array"
+        },
+        "required_claim_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Required Claim Refs",
+          "type": "array"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "risk_level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "thesis": {
+          "minLength": 1,
+          "title": "Thesis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "article_plan_id",
+        "dossier_refs",
+        "headline_direction",
+        "thesis",
+        "required_claim_refs",
+        "bylines",
+        "risk_level",
+        "human_editor_policy_ref",
+        "generation"
+      ],
+      "title": "NewsArticlePlan",
+      "type": "object"
+    },
+    "RiskLevel": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ],
+      "title": "RiskLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "draft": {
+      "$ref": "#/$defs/NewsArticleDraft"
+    },
+    "plan": {
+      "$ref": "#/$defs/NewsArticlePlan"
+    },
+    "qualified_human_review_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Qualified Human Review Ref"
+    }
+  },
+  "required": [
+    "plan",
+    "draft",
+    "created_at"
+  ],
+  "title": "ReviewNewsArticleRequest",
+  "type": "object"
+}

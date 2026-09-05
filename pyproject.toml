@@ -5,13 +5,13 @@ build-backend = "hatchling.build"
 [project]
 name = "zeo-creator"
 version = "0.2.0.dev0"
-description = "Provider-neutral creator operations capabilities built on Zeocore"
+description = "Provider-neutral continuous editorial and creator operations built on Zeocore"
 readme = "README.md"
 requires-python = ">=3.14"
 license = "MIT"
 authors = [{ name = "ProfRodAI" }]
 maintainers = [{ name = "ProfRodAI" }]
-keywords = ["creator-operations", "zeocore", "pydantic", "content-governance"]
+keywords = ["creator-operations", "editorial-operations", "newsroom", "zeocore", "pydantic"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: MIT License",

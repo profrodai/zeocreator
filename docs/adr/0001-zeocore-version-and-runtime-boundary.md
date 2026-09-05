@@ -48,7 +48,7 @@ CI verifies:
 
 - the interpreter is Python 3.14 or newer;
 - installed Zeocore is exactly 0.6.0;
-- all six manifests and OpenAI-compatible projections render;
+- all registered manifests and OpenAI-compatible projections render;
 - missing context services fail closed; and
 - creator domain modules do not import provider SDKs or runtime products.
 

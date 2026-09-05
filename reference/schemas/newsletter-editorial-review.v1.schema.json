@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "advisory_findings": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Advisory Findings",
+      "type": "array"
+    },
+    "approval_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Approval Digest",
+      "type": "string"
+    },
+    "audience_policy_satisfied": {
+      "title": "Audience Policy Satisfied",
+      "type": "boolean"
+    },
+    "blocking_findings": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocking Findings",
+      "type": "array"
+    },
+    "content_digest": {
+      "default": "",
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "generation": {
+      "$ref": "#/$defs/GenerationTrace"
+    },
+    "input_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "issue_draft_ref": {
+      "minLength": 1,
+      "title": "Issue Draft Ref",
+      "type": "string"
+    },
+    "links_validated": {
+      "title": "Links Validated",
+      "type": "boolean"
+    },
+    "organization_id": {
+      "minLength": 1,
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "preview_required": {
+      "title": "Preview Required",
+      "type": "boolean"
+    },
+    "publication_id": {
+      "minLength": 1,
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "ready_for_human_approval": {
+      "title": "Ready For Human Approval",
+      "type": "boolean"
+    },
+    "review_id": {
+      "minLength": 1,
+      "title": "Review Id",
+      "type": "string"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "section_coverage": {
+      "title": "Section Coverage",
+      "type": "boolean"
+    },
+    "source_traceability": {
+      "title": "Source Traceability",
+      "type": "boolean"
+    },
+    "test_send_required": {
+      "title": "Test Send Required",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "created_at",
+    "organization_id",
+    "publication_id",
+    "review_id",
+    "issue_draft_ref",
+    "section_coverage",
+    "source_traceability",
+    "audience_policy_satisfied",
+    "links_validated",
+    "preview_required",
+    "test_send_required",
+    "ready_for_human_approval",
+    "approval_digest",
+    "generation"
+  ],
+  "title": "NewsletterEditorialReview",
+  "type": "object"
+}

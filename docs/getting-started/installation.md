@@ -42,8 +42,8 @@ Expected doctor checks:
   "checks": {
     "python_3_14_or_newer": true,
     "zeocore_0_6_0": true,
-    "six_manifests": true,
-    "six_openai_projections": true
+    "twenty_manifests": true,
+    "twenty_openai_projections": true
   }
 }
 ```

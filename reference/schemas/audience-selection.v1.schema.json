@@ -1,0 +1,36 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "consent_policy_ref": {
+      "minLength": 1,
+      "title": "Consent Policy Ref",
+      "type": "string"
+    },
+    "segment_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Segment Refs",
+      "type": "array"
+    },
+    "selection_policy_ref": {
+      "minLength": 1,
+      "title": "Selection Policy Ref",
+      "type": "string"
+    },
+    "suppression_policy_ref": {
+      "minLength": 1,
+      "title": "Suppression Policy Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "segment_refs",
+    "selection_policy_ref",
+    "suppression_policy_ref",
+    "consent_policy_ref"
+  ],
+  "title": "AudienceSelection",
+  "type": "object"
+}

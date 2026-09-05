@@ -15,11 +15,25 @@ from zeo_creator.registry import (
 
 EXPECTED_IDS = {
     "creator.research_synthesis@1.0.0",
+    "creator.extract_editorial_signals@1.0.0",
+    "creator.update_story_revisions@1.0.0",
+    "creator.build_story_dossier@1.0.0",
+    "creator.plan_editorial_agenda@1.0.0",
+    "creator.plan_edition@1.0.0",
     "creator.plan_content_portfolio@1.0.0",
     "creator.create_content_brief@1.0.0",
     "creator.validate_delivery@1.0.0",
     "creator.prepare_distribution@1.0.0",
     "creator.assess_performance@1.0.0",
+    "creator.identify_engagement_opportunities@1.0.0",
+    "creator.compose_commentary@1.0.0",
+    "creator.review_commentary@1.0.0",
+    "creator.plan_newsletter_issue@1.0.0",
+    "creator.compose_newsletter_issue@1.0.0",
+    "creator.review_newsletter_issue@1.0.0",
+    "creator.compose_news_article@1.0.0",
+    "creator.review_news_article@1.0.0",
+    "creator.prepare_correction@1.0.0",
 }
 
 
@@ -30,11 +44,11 @@ def test_declared_zeocore_version_is_exact() -> None:
     assert version("zeocore") == "0.6.0"
 
 
-def test_registry_exposes_exactly_six_stable_capabilities() -> None:
+def test_registry_exposes_the_stable_capability_surface() -> None:
     registry = capability_registry()
     assert {item.definition.canonical_id() for item in registry.list_all()} == EXPECTED_IDS
     assert {item.id.canonical() for item in capability_manifests()} == EXPECTED_IDS
-    assert len(openai_tool_projections()) == 6
+    assert len(openai_tool_projections()) == len(EXPECTED_IDS)
 
 
 def test_manifests_have_complete_contract_metadata_and_valid_examples() -> None:

@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "SlotUrgency": {
+      "enum": [
+        "LIVE",
+        "DAILY",
+        "PERIODIC",
+        "EVERGREEN"
+      ],
+      "title": "SlotUrgency",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "approval_policy_ref": {
+      "minLength": 1,
+      "title": "Approval Policy Ref",
+      "type": "string"
+    },
+    "content_kind": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+      "title": "Content Kind",
+      "type": "string"
+    },
+    "desired_audience_action": {
+      "minLength": 1,
+      "title": "Desired Audience Action",
+      "type": "string"
+    },
+    "desk_id": {
+      "minLength": 1,
+      "title": "Desk Id",
+      "type": "string"
+    },
+    "due_at": {
+      "format": "date-time",
+      "title": "Due At",
+      "type": "string"
+    },
+    "freshness_max_age_seconds": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Freshness Max Age Seconds"
+    },
+    "publication_id": {
+      "minLength": 1,
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "purpose": {
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "risk_policy_ref": {
+      "minLength": 1,
+      "title": "Risk Policy Ref",
+      "type": "string"
+    },
+    "slot_id": {
+      "minLength": 1,
+      "title": "Slot Id",
+      "type": "string"
+    },
+    "story_dossier_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Story Dossier Refs",
+      "type": "array"
+    },
+    "target_channels": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Target Channels",
+      "type": "array"
+    },
+    "urgency": {
+      "$ref": "#/$defs/SlotUrgency"
+    }
+  },
+  "required": [
+    "slot_id",
+    "publication_id",
+    "desk_id",
+    "content_kind",
+    "purpose",
+    "due_at",
+    "urgency",
+    "target_channels",
+    "desired_audience_action",
+    "risk_policy_ref",
+    "approval_policy_ref"
+  ],
+  "title": "PublicationSlot",
+  "type": "object"
+}
