@@ -29,6 +29,7 @@ MANIFEST
 .coverage
 coverage.xml
 htmlcov/
+site/
 *.log
 
 # PyInstaller

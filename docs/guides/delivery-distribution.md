@@ -1,0 +1,77 @@
+# Validate and prepare distribution
+
+Delivery review answers one question: *is this exact rendered artifact, with
+this exact publication payload and destination plan, ready to ask a human to
+approve?*
+
+## Validate the render
+
+Invoke `creator.validate_delivery@1.0.0` with the accepted brief, Ducktyper
+artifact and manifest, matching publication profile and synthesis, and proposed
+channel plan.
+
+The review separates blocking findings from advisory findings and reports five
+top-level checks:
+
+| Check | Protects against |
+|---|---|
+| Identity match | Wrong brief, revision, artifact, organization, or publication |
+| Required-element coverage | Missing scene, panel, HUD, or other format element |
+| Source-claim traceability | Unsupported or omitted factual claims |
+| Brand constraints | Wrong profile, prohibited claims, or unapproved channels |
+| Technical delivery | Missing or failed renderer-supplied technical checks |
+
+## Understand the approval digest
+
+The digest includes:
+
+```text
+brief ID + brief digest + revision
+artifact reference + artifact digest
+render manifest ID + manifest digest
+channel-plan digest
+publication payload
+```
+
+Change any one of these and the earlier approval no longer applies.
+
+## Prepare proposals
+
+Only a review with no blocking findings can enter
+`creator.prepare_distribution@1.0.0`. Each destination becomes one
+`ProposedPublicationOperation` with:
+
+- provider kind and safe connection reference;
+- destination account reference;
+- proposed payload and schedule;
+- exact required effects;
+- approval digest; and
+- deterministic idempotency key.
+
+## Runnable example
+
+```python
+--8<-- "examples/validate_and_prepare.py"
+```
+
+```console
+uv run python examples/validate_and_prepare.py
+```
+
+The example always reports `"executed_operations": 0`. Proposal construction has
+no provider-write effect.
+
+## Runtime handoff
+
+After human approval, the controlling runtime must:
+
+1. verify the proposal is still current;
+2. resolve the referenced connection and destination;
+3. check organizational policy;
+4. mint exact, bounded write and external-communication authority;
+5. execute through an authorized connector;
+6. retain a secret-safe receipt; and
+7. reconcile the provider outcome.
+
+None of those responsibilities should be moved into ZEO Creator to simplify a
+demo.

@@ -26,6 +26,8 @@ Decision: **Repository-ready; Python distribution not yet approved for publicati
   direct provider-write strings in creator source.
 - JSON schemas and credential-free reference artifacts are committed under
   `reference/` and regenerated with `make reference`.
+- Six credential-free public examples execute in CI, and the Material for MkDocs
+  documentation builds in strict mode as part of `make verify`.
 
 Zeocore 0.6 has no `pure` effect kind and requires a non-empty effect set. The
 four deterministic local transforms therefore declare `read` plus

@@ -1,0 +1,52 @@
+"""Adoption documentation has stable entry points and complete navigation."""
+
+from pathlib import Path
+
+
+def test_readme_has_primary_adoption_paths() -> None:
+    readme = Path("README.md").read_text()
+
+    for heading in (
+        "## Why ZEO Creator?",
+        "## Install",
+        "## First capability",
+        "## Six focused capabilities",
+        "## The authority boundary",
+        "## Dogfood proof",
+        "## Development",
+    ):
+        assert heading in readme
+    assert "https://github.com/profrodai/zeocreator" in readme
+
+
+def test_mkdocs_navigation_targets_exist() -> None:
+    expected = {
+        "index.md",
+        "getting-started/index.md",
+        "getting-started/installation.md",
+        "getting-started/first-capability.md",
+        "tutorials/daily-portfolio.md",
+        "guides/connectors.md",
+        "guides/ducktyper.md",
+        "guides/delivery-distribution.md",
+        "guides/performance.md",
+        "guides/runner-integration.md",
+        "concepts/architecture.md",
+        "concepts/contracts.md",
+        "reference/capabilities.md",
+        "reference/contracts.md",
+        "reference/errors.md",
+        "reference/cli.md",
+        "contributing.md",
+    }
+    docs = Path("docs")
+
+    assert all((docs / relative).is_file() for relative in expected)
+
+
+def test_docs_do_not_teach_credential_transport_or_direct_publish() -> None:
+    docs_text = "\n".join(path.read_text() for path in Path("docs").rglob("*.md"))
+
+    assert "os.environ[" not in docs_text
+    assert "api.twitter.com" not in docs_text
+    assert "api.linkedin.com" not in docs_text
