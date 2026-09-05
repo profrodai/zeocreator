@@ -6,8 +6,11 @@ from pathlib import Path
 
 
 def main() -> None:
-    wheel = next(Path("dist").glob("*.whl"))
-    sdist = next(Path("dist").glob("*.tar.gz"))
+    wheels = tuple(Path("dist").glob("*.whl"))
+    sdists = tuple(Path("dist").glob("*.tar.gz"))
+    assert len(wheels) == len(sdists) == 1, "dist must contain one wheel and one sdist"
+    wheel = wheels[0]
+    sdist = sdists[0]
 
     with zipfile.ZipFile(wheel) as archive:
         wheel_names = set(archive.namelist())

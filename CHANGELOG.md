@@ -2,7 +2,7 @@
 
 All notable changes to ZEO Creator are documented here.
 
-## Unreleased
+## 0.2.0.dev0 — 2026-09-05
 
 - Harden evidence lineage, delivery attestations, canonical digests, timestamps,
   performance semantics, and distribution packaging for product-readiness.

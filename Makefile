@@ -82,6 +82,7 @@ digest-vectors:
 	node contracts/verify-digest-vectors.mjs
 
 dist-check:
+	rm -rf dist
 	$(UV) build
 	$(UV) run python scripts/check_distribution.py
 
