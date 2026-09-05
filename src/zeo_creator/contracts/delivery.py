@@ -1,29 +1,38 @@
-"""Ducktyper render bindings and digest-bound delivery review contracts."""
+"""Producer-neutral artifact bundles and digest-bound delivery reviews."""
 
 from enum import StrEnum
 
-from pydantic import Field, model_validator
+from pydantic import Field, JsonValue, model_validator
 
-from zeo_creator.contracts.common import CreatorModel, DurableArtifact, UtcDatetime
+from zeo_creator.contracts.common import (
+    CreatorModel,
+    DurableArtifact,
+    UtcDatetime,
+    assert_secret_safe,
+)
 from zeo_creator.contracts.distribution import ChannelDestination, PublicationPayload
 
 
-class RenderedArtifact(DurableArtifact):
+class ArtifactDescriptor(CreatorModel):
     artifact_ref: str = Field(min_length=1)
-    artifact_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
-    brief_id: str = Field(min_length=1)
-    content_revision: int = Field(ge=1)
-    brief_content_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    role: str = Field(min_length=1)
     media_type: str = Field(min_length=1)
-    storage_ref: str = Field(min_length=1)
     byte_length: int = Field(gt=0)
-    extracted_text: str = ""
+    digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    storage_ref: str = Field(min_length=1)
+    metadata: dict[str, JsonValue] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def metadata_is_secret_safe(self) -> ArtifactDescriptor:
+        assert_secret_safe(self.metadata)
+        return self
 
 
-class RenderAttestation(CreatorModel):
+class ArtifactAttestation(CreatorModel):
     check_id: str = Field(min_length=1)
     check_version: str = Field(min_length=1)
     result: bool
+    artifact_refs: tuple[str, ...] = Field(min_length=1)
     evidence_ref: str = Field(min_length=1)
     tool_identity: str = Field(min_length=1)
     observed_value: str = Field(min_length=1)
@@ -31,6 +40,7 @@ class RenderAttestation(CreatorModel):
 
 
 class ArtifactDigestProof(CreatorModel):
+    artifact_ref: str = Field(min_length=1)
     algorithm: str = Field(pattern=r"^sha256$")
     digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     byte_length: int = Field(gt=0)
@@ -41,23 +51,33 @@ class ArtifactDigestProof(CreatorModel):
     tool_version: str = Field(min_length=1)
 
 
-class RenderManifest(DurableArtifact):
+class ArtifactManifest(DurableArtifact):
     manifest_id: str = Field(min_length=1)
     brief_id: str = Field(min_length=1)
     content_revision: int = Field(ge=1)
     brief_content_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
-    artifact_ref: str = Field(min_length=1)
-    artifact_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    producer_ref: str = Field(min_length=1)
+    producer_version: str = Field(min_length=1)
     brand_profile_ref: str = Field(min_length=1)
-    rendered_claim_ids: tuple[str, ...] = ()
-    artifact_digest_proof: ArtifactDigestProof
-    attestations: tuple[RenderAttestation, ...] = Field(min_length=1)
+    artifacts: tuple[ArtifactDescriptor, ...] = Field(min_length=1)
+    digest_proofs: tuple[ArtifactDigestProof, ...] = Field(min_length=1)
+    attestations: tuple[ArtifactAttestation, ...] = Field(min_length=1)
+    produced_claim_ids: tuple[str, ...] = ()
+    extracted_text: str = ""
 
     @model_validator(mode="after")
-    def unique_attestations(self) -> RenderManifest:
-        ids = [item.check_id for item in self.attestations]
-        if len(ids) != len(set(ids)):
-            raise ValueError("render attestation check identifiers must be unique")
+    def unique_and_bound_components(self) -> ArtifactManifest:
+        artifact_refs = [item.artifact_ref for item in self.artifacts]
+        if len(artifact_refs) != len(set(artifact_refs)):
+            raise ValueError("artifact references must be unique")
+        proof_refs = [item.artifact_ref for item in self.digest_proofs]
+        if set(proof_refs) != set(artifact_refs) or len(proof_refs) != len(set(proof_refs)):
+            raise ValueError("every artifact must have exactly one digest proof")
+        checks = [(item.check_id, item.check_version) for item in self.attestations]
+        if len(checks) != len(set(checks)):
+            raise ValueError("artifact attestation identifiers must be unique per version")
+        if any(not set(item.artifact_refs).issubset(artifact_refs) for item in self.attestations):
+            raise ValueError("artifact attestations must reference manifest artifacts")
         return self
 
 
@@ -76,13 +96,13 @@ class DeliveryFinding(CreatorModel):
 class DeliveryReviewBundle(DurableArtifact):
     review_id: str = Field(min_length=1)
     brief_id: str = Field(min_length=1)
-    artifact_ref: str = Field(min_length=1)
     manifest_id: str = Field(min_length=1)
+    artifact_refs: tuple[str, ...] = Field(min_length=1)
     identity_match: bool
-    required_element_coverage: bool
+    required_attestations_pass: bool
     source_claim_traceability: bool
     brand_constraints_pass: bool
-    technical_delivery_pass: bool
+    artifact_integrity_pass: bool
     findings: tuple[DeliveryFinding, ...] = ()
     proposed_payload: PublicationPayload
     proposed_destinations: tuple[ChannelDestination, ...]

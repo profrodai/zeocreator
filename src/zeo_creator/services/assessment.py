@@ -105,7 +105,7 @@ def assess_publication_performance(
     provenance = tuple(
         sorted(
             {
-                f"{item.provider_kind.value}:{item.connection_ref}:{item.destination_account_ref}"
+                f"{item.provider_kind}:{item.connection_ref}:{item.destination_account_ref}"
                 for item in ordered
             }
         )

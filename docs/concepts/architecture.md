@@ -20,7 +20,7 @@ flowchart TB
     subgraph Execution[Authorized infrastructure]
       ZC[Zeocore connectors]
       ZCON[ZEOconnect proxy]
-      DT[Ducktyper]
+      PROD[External producer]
     end
 
     SA --> CAP
@@ -30,7 +30,7 @@ flowchart TB
     SVC --> PORT
     PORT --> ZC
     PORT --> ZCON
-    CON --> DT
+    CON --> PROD
     ZR -. exact effect authority .-> ZC
     ZR -. exact effect authority .-> ZCON
 ```
@@ -44,7 +44,7 @@ flowchart TB
 | Sovereign Agent | Bounded builder-facing execution | Managed organizational operations |
 | ZEO runtime | Commitments, schedules, policy, approvals, authority, retries, receipts | Creator-domain transformations |
 | ZEOconnect | Managed OAuth and provider execution | Editorial judgment |
-| Ducktyper | Deterministic media production and render manifests | Research, selection, publishing authority |
+| External producer | Content production and artifact manifests | Research, selection, publishing authority |
 
 ## Read dependency direction
 
@@ -56,7 +56,7 @@ flowchart TB
 
 ## Write dependency direction
 
-1. ZEO Creator validates a render and prepares publication proposals.
+1. ZEO Creator validates an artifact bundle and prepares publication proposals.
 2. A human approves an exact digest.
 3. The runtime checks policy and mints bounded effect authority.
 4. An authorized connector executes the provider operation.

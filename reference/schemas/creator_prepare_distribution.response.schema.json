@@ -21,14 +21,14 @@
           "title": "Approval Digest",
           "type": "string"
         },
-        "artifact_digest": {
+        "artifact_manifest_digest": {
           "pattern": "^sha256:[0-9a-f]{64}$",
-          "title": "Artifact Digest",
+          "title": "Artifact Manifest Digest",
           "type": "string"
         },
-        "artifact_ref": {
+        "artifact_manifest_ref": {
           "minLength": 1,
-          "title": "Artifact Ref",
+          "title": "Artifact Manifest Ref",
           "type": "string"
         },
         "connection_ref": {
@@ -78,7 +78,10 @@
           "$ref": "#/$defs/PublicationPayload"
         },
         "provider_kind": {
-          "$ref": "#/$defs/ProviderKind"
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "title": "Provider Kind",
+          "type": "string"
         },
         "publication_id": {
           "minLength": 1,
@@ -119,6 +122,14 @@
           "default": "1.0.0",
           "title": "Schema Version",
           "type": "string"
+        },
+        "selected_artifact_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Selected Artifact Refs",
+          "type": "array"
         }
       },
       "required": [
@@ -126,8 +137,9 @@
         "organization_id",
         "publication_id",
         "operation_id",
-        "artifact_ref",
-        "artifact_digest",
+        "artifact_manifest_ref",
+        "artifact_manifest_digest",
+        "selected_artifact_refs",
         "provider_kind",
         "connection_ref",
         "destination_account_ref",
@@ -137,17 +149,6 @@
       ],
       "title": "ProposedPublicationOperation",
       "type": "object"
-    },
-    "ProviderKind": {
-      "enum": [
-        "website",
-        "newsletter",
-        "x",
-        "linkedin",
-        "youtube"
-      ],
-      "title": "ProviderKind",
-      "type": "string"
     },
     "PublicationPayload": {
       "additionalProperties": false,

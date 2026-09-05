@@ -1,13 +1,13 @@
 # Validate and prepare distribution
 
-Delivery review answers one question: *is this exact rendered artifact, with
+Delivery review answers one question: *is this exact produced artifact, with
 this exact publication payload and destination plan, ready to ask a human to
 approve?*
 
-## Validate the render
+## Validate the artifact bundle
 
-Invoke `creator.validate_delivery@1.0.0` with the accepted brief, Ducktyper
-artifact and manifest, matching publication profile and synthesis, and proposed
+Invoke `creator.validate_delivery@1.0.0` with the accepted brief, generic
+artifact manifest, matching publication profile and synthesis, and proposed
 channel plan.
 
 The review separates blocking findings from advisory findings and reports five
@@ -16,10 +16,10 @@ top-level checks:
 | Check | Protects against |
 |---|---|
 | Identity match | Wrong brief, revision, artifact, organization, or publication |
-| Required-element coverage | Missing scene, panel, HUD, or other format element |
+| Required-attestation coverage | Missing or failed checks declared by the brief |
 | Source-claim traceability | Unsupported or omitted factual claims |
 | Brand constraints | Wrong profile, prohibited claims, or unapproved channels |
-| Technical delivery | Missing or failed renderer-supplied technical checks |
+| Artifact integrity | Missing or invalid byte-digest proof |
 
 ## Understand the approval digest
 
@@ -27,8 +27,8 @@ The digest includes:
 
 ```text
 brief ID + brief digest + revision
-artifact reference + artifact digest
-render manifest ID + manifest digest
+artifact references + artifact digests
+artifact manifest ID + manifest digest
 channel-plan digest
 publication payload
 ```

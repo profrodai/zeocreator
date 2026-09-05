@@ -1,16 +1,16 @@
-"""Deterministic two-property editorial portfolio planning."""
+"""Deterministic, cadence-neutral content portfolio planning."""
 
 from datetime import datetime
 
 from zeo_creator.contracts.common import digest_is_current, stable_id
 from zeo_creator.contracts.editorial import (
     ContentHistoryEntry,
-    DailyEditorialPlan,
+    ContentPortfolioPlan,
     EditorialAssignment,
     PortfolioConstraints,
     PublicationObjective,
 )
-from zeo_creator.contracts.evidence import ResearchSynthesis
+from zeo_creator.contracts.evidence import ResearchSynthesis, ResearchWindow
 from zeo_creator.contracts.publications import PublicationProfile
 from zeo_creator.errors import CreatorDomainError
 
@@ -23,11 +23,11 @@ def plan_portfolio(
     content_history: tuple[ContentHistoryEntry, ...],
     objectives: tuple[PublicationObjective, ...],
     constraints: PortfolioConstraints,
-    plan_date: str,
+    planning_window: ResearchWindow,
     due_at: datetime,
     created_at: datetime,
     revision: int,
-) -> DailyEditorialPlan:
+) -> ContentPortfolioPlan:
     profile_by_publication = {item.publication_id: item for item in profiles}
     synthesis_by_publication = {item.publication_id: item for item in syntheses}
     objective_by_publication = {item.publication_id: item for item in objectives}
@@ -42,6 +42,11 @@ def plan_portfolio(
             "ZEO_CREATOR_SCOPE_MISMATCH", "profile and objective scopes differ"
         )
 
+    requested_kinds = tuple(
+        requirement.content_kind
+        for requirement in constraints.requirements
+        for _ in range(requirement.quantity)
+    )
     assignments: list[EditorialAssignment] = []
     for publication_id in sorted(profile_by_publication):
         profile = profile_by_publication[publication_id]
@@ -65,9 +70,7 @@ def plan_portfolio(
         candidates = [
             (topic, claim)
             for topic, claim in zip(
-                synthesis.opportunities,
-                synthesis.candidate_claims,
-                strict=False,
+                synthesis.opportunities, synthesis.candidate_claims, strict=False
             )
             if not constraints.avoid_recent_topics or topic.casefold() not in recent_topics
         ]
@@ -78,50 +81,60 @@ def plan_portfolio(
             if normalized not in seen_topics:
                 seen_topics.add(normalized)
                 unique_candidates.append(candidate)
-        if len(unique_candidates) < constraints.assignments_per_publication:
+        if len(unique_candidates) < len(requested_kinds):
             raise CreatorDomainError(
                 "ZEO_CREATOR_INSUFFICIENT_NOVEL_TOPICS",
                 f"{publication_id} lacks enough novel, evidence-backed topics",
             )
 
-        selected = unique_candidates[: constraints.assignments_per_publication]
+        selected = unique_candidates[: len(requested_kinds)]
         selected_topics = tuple(topic for topic, _claim in selected)
-        for index, kind in enumerate(constraints.required_kinds):
+        for index, content_kind in enumerate(requested_kinds):
             topic, untyped_claim = selected[index]
-            claim = synthesis.candidate_claims[
-                next(
-                    i for i, item in enumerate(synthesis.candidate_claims) if item == untyped_claim
-                )
-            ]
+            claim = next(item for item in synthesis.candidate_claims if item == untyped_claim)
             other_topics = tuple(item for item in selected_topics if item != topic)
-            assignment = EditorialAssignment(
-                assignment_id=stable_id("assignment", plan_date, publication_id, kind.value),
-                created_at=created_at,
-                organization_id=organization_id,
-                publication_id=publication_id,
-                input_refs=(synthesis.synthesis_id, profile.reference, claim.claim_id),
-                revision=revision,
-                deliverable_kind=kind,
-                objective=objective.objective,
-                audience=profile.audience_definition,
-                desired_audience_action=objective.desired_audience_action,
-                topic=topic,
-                thesis=claim.text,
-                hook=f"{profile.display_name}: {topic}",
-                evidence_refs=claim.evidence_refs,
-                novelty_rationale="Not present in the supplied recent publication history.",
-                relationship_to_other_daily_assignments=(
-                    f"Complements today's {', '.join(other_topics)} assignments without duplication."
-                ),
-                target_channels=profile.default_channels,
-                brand_profile_ref=profile.reference,
-                due_at=due_at,
+            assignments.append(
+                EditorialAssignment(
+                    assignment_id=stable_id(
+                        "assignment",
+                        planning_window.starts_at.isoformat(),
+                        publication_id,
+                        content_kind,
+                        str(index),
+                    ),
+                    created_at=created_at,
+                    organization_id=organization_id,
+                    publication_id=publication_id,
+                    input_refs=(synthesis.synthesis_id, profile.reference, claim.claim_id),
+                    revision=revision,
+                    content_kind=content_kind,
+                    objective=objective.objective,
+                    audience=profile.audience_definition,
+                    desired_audience_action=objective.desired_audience_action,
+                    topic=topic,
+                    thesis=claim.text,
+                    hook=f"{profile.display_name}: {topic}",
+                    evidence_refs=claim.evidence_refs,
+                    novelty_rationale="Not present in the supplied publication history.",
+                    relationship_to_other_assignments=(
+                        f"Complements {', '.join(other_topics)} without duplication."
+                    ),
+                    target_channels=profile.default_channels,
+                    brand_profile_ref=profile.reference,
+                    due_at=due_at,
+                )
             )
-            assignments.append(assignment)
 
     portfolio_scope = "+".join(sorted(profile_by_publication))
-    return DailyEditorialPlan(
-        plan_id=stable_id("plan", organization_id, plan_date, portfolio_scope, str(revision)),
+    return ContentPortfolioPlan(
+        plan_id=stable_id(
+            "plan",
+            organization_id,
+            planning_window.starts_at.isoformat(),
+            planning_window.ends_at.isoformat(),
+            portfolio_scope,
+            str(revision),
+        ),
         created_at=created_at,
         organization_id=organization_id,
         publication_id=f"portfolio:{portfolio_scope}",
@@ -131,6 +144,6 @@ def plan_portfolio(
             + [item.history_id for item in content_history]
         ),
         revision=revision,
-        plan_date=plan_date,
+        planning_window=planning_window,
         assignments=tuple(assignments),
     )

@@ -11,7 +11,7 @@ requires-python = ">=3.14"
 license = "MIT"
 authors = [{ name = "ProfRodAI" }]
 maintainers = [{ name = "ProfRodAI" }]
-keywords = ["creator-operations", "zeocore", "pydantic", "ducktyper"]
+keywords = ["creator-operations", "zeocore", "pydantic", "content-governance"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: MIT License",

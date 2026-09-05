@@ -19,7 +19,7 @@ make verify
 | `make verify` | Lint, strict type-check, test, regenerate references, and build docs |
 | `make examples` | Run every public example |
 | `make docs-serve` | Serve the documentation with live reload |
-| `make reference` | Regenerate JSON schemas and dogfood artifacts |
+| `make reference` | Regenerate JSON schemas and neutral reference artifacts |
 | `make doctor` | Check Python, Zeocore, manifests, and projections |
 
 ## Architecture rules

@@ -4,12 +4,18 @@ import importlib.metadata
 import json
 import sys
 from enum import StrEnum
+from pathlib import Path
 
 import typer
 from rich.console import Console
 from rich.table import Table
 
 from zeo_creator import __version__
+from zeo_creator.contract_schemas import (
+    export_contract_schemas,
+    list_contract_schemas,
+    read_contract_schema,
+)
 from zeo_creator.registry import capability_manifests, openai_tool_projections
 
 app = typer.Typer(
@@ -18,6 +24,8 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 console = Console()
+contracts_app = typer.Typer(help="Discover and export packaged public contract schemas.")
+app.add_typer(contracts_app, name="contracts")
 
 
 class ProjectionFormat(StrEnum):
@@ -73,6 +81,50 @@ def capabilities(
             ", ".join(sorted(manifest.requirements.services)) or "none",
         )
     console.print(table)
+
+
+@contracts_app.command("list")
+def contracts_list(
+    json_output: bool = typer.Option(False, "--json", help="Emit machine-readable JSON."),
+) -> None:
+    """List versioned contracts included in this installation."""
+    entries = list_contract_schemas()
+    rows = [
+        {"name": item.name, "version": item.version, "filename": item.filename} for item in entries
+    ]
+    if json_output:
+        typer.echo(json.dumps(rows, indent=2))
+        return
+    table = Table(title="ZEO Creator contracts")
+    table.add_column("Name")
+    table.add_column("Version")
+    table.add_column("Schema")
+    for item in entries:
+        table.add_row(item.name, item.version, item.filename)
+    console.print(table)
+
+
+@contracts_app.command("export")
+def contracts_export(
+    output: Path = typer.Option(..., "--output", help="Destination directory."),
+) -> None:
+    """Export packaged schemas without importing source checkout files."""
+    written = export_contract_schemas(output)
+    typer.echo(json.dumps({"output": str(output), "files": len(written)}, indent=2))
+
+
+@app.command("contract-schema")
+def contract_schema(
+    name: str = typer.Option(..., "--name", help="Stable contract name."),
+    version: str = typer.Option(..., "--version", help="Contract major version."),
+) -> None:
+    """Print one packaged JSON Schema."""
+    try:
+        schema = read_contract_schema(name, version)
+    except KeyError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(2) from exc
+    typer.echo(json.dumps(schema, indent=2))
 
 
 @app.command()

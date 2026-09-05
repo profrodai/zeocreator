@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 import pytest
 from zeo_core.contracts import EffectKind
 
-from tests.fixtures.dogfood import NOW, build_dogfood_snapshot
+from tests.fixtures.reference import NOW, build_reference_snapshot
 from zeo_creator.contracts.common import stable_id
 from zeo_creator.contracts.distribution import (
     ProposedPublicationOperation,
@@ -48,16 +48,16 @@ class FakeZeoRuntime:
         )
 
 
-def test_sovereign_style_bounded_invocations_produce_complete_chain() -> None:
-    snapshot = build_dogfood_snapshot()
+def test_bounded_reference_workflow_produces_complete_chain() -> None:
+    snapshot = build_reference_snapshot()
 
-    assert len(snapshot.evidence_calls) == 6
-    assert len(snapshot.metrics_calls) == 2
+    assert len(snapshot.briefs) == 8
+    assert len(snapshot.assessments) == 2
     assert all(review.ready_for_approval for review in snapshot.reviews)
 
 
 def test_fake_runtime_owns_approval_and_effect_execution() -> None:
-    operation = build_dogfood_snapshot().operations[0]
+    operation = build_reference_snapshot().operations[0]
     runtime = FakeZeoRuntime()
 
     with pytest.raises(PermissionError):

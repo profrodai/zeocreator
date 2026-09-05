@@ -2,10 +2,10 @@
 
 from typing import Protocol
 
-from zeo_creator.contracts.delivery import RenderedArtifact, RenderManifest
+from zeo_creator.contracts.delivery import ArtifactManifest
 
 
 class ArtifactStorePort(Protocol):
-    def get_artifact(self, artifact_ref: str) -> RenderedArtifact | None: ...
+    def get_artifact_bytes(self, artifact_ref: str) -> bytes | None: ...
 
-    def get_render_manifest(self, manifest_ref: str) -> RenderManifest | None: ...
+    def get_manifest(self, manifest_ref: str) -> ArtifactManifest | None: ...

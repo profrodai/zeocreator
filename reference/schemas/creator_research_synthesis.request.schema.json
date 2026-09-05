@@ -52,14 +52,6 @@
           "title": "Audience Definition",
           "type": "string"
         },
-        "character_refs": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "title": "Character Refs",
-          "type": "array"
-        },
         "content_digest": {
           "default": "",
           "title": "Content Digest",
@@ -109,6 +101,14 @@
           "title": "Organization Id",
           "type": "string"
         },
+        "participant_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Participant Refs",
+          "type": "array"
+        },
         "profile_id": {
           "minLength": 1,
           "title": "Profile Id",
@@ -146,9 +146,9 @@
           "title": "Schema Version",
           "type": "string"
         },
-        "visual_style_ref": {
+        "style_ref": {
           "minLength": 1,
-          "title": "Visual Style Ref",
+          "title": "Style Ref",
           "type": "string"
         },
         "voice_rules": {
@@ -169,7 +169,7 @@
         "audience_definition",
         "editorial_pillars",
         "voice_rules",
-        "visual_style_ref",
+        "style_ref",
         "default_channels",
         "cta_policy",
         "approval_policy_ref"

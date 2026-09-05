@@ -19,7 +19,10 @@
           "type": "string"
         },
         "provider_kind": {
-          "$ref": "#/$defs/ProviderKind"
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "title": "Provider Kind",
+          "type": "string"
         },
         "scheduled_for": {
           "anyOf": [
@@ -83,10 +86,17 @@
           "title": "Approval Digest",
           "type": "string"
         },
-        "artifact_ref": {
-          "minLength": 1,
-          "title": "Artifact Ref",
-          "type": "string"
+        "artifact_integrity_pass": {
+          "title": "Artifact Integrity Pass",
+          "type": "boolean"
+        },
+        "artifact_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Artifact Refs",
+          "type": "array"
         },
         "brand_constraints_pass": {
           "title": "Brand Constraints Pass",
@@ -156,8 +166,8 @@
           "title": "Ready For Approval",
           "type": "boolean"
         },
-        "required_element_coverage": {
-          "title": "Required Element Coverage",
+        "required_attestations_pass": {
+          "title": "Required Attestations Pass",
           "type": "boolean"
         },
         "review_id": {
@@ -179,10 +189,6 @@
         "source_claim_traceability": {
           "title": "Source Claim Traceability",
           "type": "boolean"
-        },
-        "technical_delivery_pass": {
-          "title": "Technical Delivery Pass",
-          "type": "boolean"
         }
       },
       "required": [
@@ -191,13 +197,13 @@
         "publication_id",
         "review_id",
         "brief_id",
-        "artifact_ref",
         "manifest_id",
+        "artifact_refs",
         "identity_match",
-        "required_element_coverage",
+        "required_attestations_pass",
         "source_claim_traceability",
         "brand_constraints_pass",
-        "technical_delivery_pass",
+        "artifact_integrity_pass",
         "proposed_payload",
         "proposed_destinations",
         "approval_digest",
@@ -212,17 +218,6 @@
         "advisory"
       ],
       "title": "FindingSeverity",
-      "type": "string"
-    },
-    "ProviderKind": {
-      "enum": [
-        "website",
-        "newsletter",
-        "x",
-        "linkedin",
-        "youtube"
-      ],
-      "title": "ProviderKind",
       "type": "string"
     },
     "PublicationPayload": {

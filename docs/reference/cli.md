@@ -32,6 +32,26 @@ compatibility:
 zeo-creator doctor --json
 ```
 
+## Contract schemas
+
+List the stable contract catalog:
+
+```console
+zeo-creator contracts list --json
+```
+
+Export the schemas bundled in the installed wheel:
+
+```console
+zeo-creator contracts export --output=./schemas
+```
+
+Print one named contract version:
+
+```console
+zeo-creator contract-schema --name=content-brief --version=1
+```
+
 ## `zeo-creator --version`
 
 ```console

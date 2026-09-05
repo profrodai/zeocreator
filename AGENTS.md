@@ -8,5 +8,5 @@ ZEO Creator is a governed capability package, not a workflow runtime.
 - Use `make verify` and `make doctor` before declaring work ready.
 - Do not publish, push, rename, or change repository visibility without an explicit operator decision.
 
-Governed work lives in the associated org corpus under
-`projects/quackresearch/sow/zeo-creator/`.
+Governed work lives in the associated organization corpus and must follow its
+active statement of work.

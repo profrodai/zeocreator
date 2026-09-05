@@ -1,86 +1,25 @@
 # Capability catalog
 
-The registry contains exactly six public capabilities. IDs are stable and
-versioned; runners should resolve the full canonical ID.
+All capability IDs are stable at `1.0.0`. Each manifest includes JSON request
+and response schemas, effects, requirements, examples, projections, and typed
+error codes.
 
-## Discover the catalog
+| Capability | Input focus | Output | Effect |
+|---|---|---|---|
+| `creator.research_synthesis@1.0.0` | Publication, research window, evidence queries | `ResearchSynthesis` | Read |
+| `creator.plan_content_portfolio@1.0.0` | Syntheses, objectives, history, requirements, planning window | `ContentPortfolioPlan` | None |
+| `creator.create_content_brief@1.0.0` | Assignment, synthesis, profile, creative direction | `ContentBrief` | None |
+| `creator.validate_delivery@1.0.0` | Brief, artifact manifest, profile, synthesis, channel plan | `DeliveryReviewBundle` | None |
+| `creator.prepare_distribution@1.0.0` | Accepted review and exact channel plan | Publication proposals | None |
+| `creator.assess_performance@1.0.0` | Profile, metric queries, objective | Performance assessment | Read |
 
-```python
---8<-- "examples/inspect_capabilities.py"
-```
+Use `zeo-creator capabilities --json` for canonical manifests or
+`zeo-creator capabilities --projection openai` for function-tool projections.
 
-## `creator.research_synthesis@1.0.0`
+Zeocore 0.6 requires every manifest to carry at least one effect kind. The four
+pure transformations therefore conservatively declare `read` and additionally
+publish `execution: pure-deterministic`; they do not read external state. This
+compatibility boundary can be removed if Zeocore gains an explicit pure effect.
 
-Retrieves permitted observations through `creator.evidence_source` and produces
-one `ResearchSynthesis`.
-
-- **Input:** organization, `PublicationProfile`, research window, evidence
-  queries, content-history references
-- **Output:** one publication-scoped synthesis
-- **Effects:** read, external communication
-- **Requirement:** `creator.evidence_source`
-- **Deterministic after observations:** yes
-
-## `creator.plan_daily_portfolio@1.0.0`
-
-Plans a format-balanced portfolio from profiles, syntheses, objectives, history,
-and constraints.
-
-- **Input:** matching profiles/syntheses/objectives, recent history, constraints
-- **Output:** `DailyEditorialPlan`
-- **Effects:** local deterministic transform
-- **Dogfood invariant:** three formats × two publications = six assignments
-
-## `creator.create_ducktyper_brief@1.0.0`
-
-Converts one assignment into one renderer-independent `DucktyperBrief`.
-
-- **Input:** assignment, matching profile and synthesis, content revision
-- **Output:** discriminated animated, HUD, or comic brief
-- **Effects:** local deterministic transform
-
-## `creator.validate_delivery@1.0.0`
-
-Validates Ducktyper's artifact and render manifest against the accepted brief,
-evidence, brand profile, technical checks, and channel plan.
-
-- **Input:** brief, artifact, manifest, profile, synthesis, channel plan
-- **Output:** `DeliveryReviewBundle` and approval digest
-- **Effects:** local deterministic transform
-
-## `creator.prepare_distribution@1.0.0`
-
-Creates provider-neutral publication proposals without executing them.
-
-- **Input:** accepted delivery chain and unchanged channel plan
-- **Output:** one `ProposedPublicationOperation` per destination
-- **Effects:** local deterministic transform; no provider write
-- **Later runtime effects:** write and external communication
-
-## `creator.assess_performance@1.0.0`
-
-Retrieves permitted metrics through `creator.metrics_source` and interprets them
-against one publication objective.
-
-- **Input:** publication, metrics queries, objective
-- **Output:** one `DailyPerformanceAssessment`
-- **Effects:** read, external communication
-- **Requirement:** `creator.metrics_source`
-
-## Machine-readable forms
-
-```console
-zeo-creator capabilities --json
-zeo-creator capabilities --projection openai
-```
-
-Committed request and response schemas live in the
-[`reference/schemas`](https://github.com/profrodai/zeocreator/tree/main/reference/schemas)
-directory.
-
-!!! info "Pure effects on Zeocore 0.6"
-
-    Zeocore 0.6 requires a non-empty effect set and has no `pure` effect kind.
-    Local transforms therefore declare `read` with
-    `metadata.execution=pure-deterministic`; they request no service and perform
-    no I/O. This compatibility boundary is tested and documented in the ADR.
+Composition, scheduling, retries, approval waits, and effect authorization are
+runtime concerns; the package deliberately exposes no monolithic workflow.

@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "EffectKind": {
+      "description": "Declared side-effect kind. Declarations are not permission grants.",
+      "enum": [
+        "read",
+        "write",
+        "delete",
+        "external_communication",
+        "financial",
+        "security_sensitive"
+      ],
+      "title": "EffectKind",
+      "type": "string"
+    },
+    "PublicationPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "alt_text": {
+          "minLength": 1,
+          "title": "Alt Text",
+          "type": "string"
+        },
+        "caption": {
+          "minLength": 1,
+          "title": "Caption",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "caption",
+        "description",
+        "alt_text"
+      ],
+      "title": "PublicationPayload",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "approval_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Approval Digest",
+      "type": "string"
+    },
+    "artifact_manifest_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Artifact Manifest Digest",
+      "type": "string"
+    },
+    "artifact_manifest_ref": {
+      "minLength": 1,
+      "title": "Artifact Manifest Ref",
+      "type": "string"
+    },
+    "connection_ref": {
+      "minLength": 1,
+      "title": "Connection Ref",
+      "type": "string"
+    },
+    "content_digest": {
+      "default": "",
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "destination_account_ref": {
+      "minLength": 1,
+      "title": "Destination Account Ref",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "input_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "operation_id": {
+      "minLength": 1,
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "organization_id": {
+      "minLength": 1,
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/$defs/PublicationPayload"
+    },
+    "provider_kind": {
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+      "title": "Provider Kind",
+      "type": "string"
+    },
+    "publication_id": {
+      "minLength": 1,
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "required_effects": {
+      "default": [
+        "write",
+        "external_communication"
+      ],
+      "items": {
+        "$ref": "#/$defs/EffectKind"
+      },
+      "title": "Required Effects",
+      "type": "array"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "scheduled_for": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scheduled For"
+    },
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "selected_artifact_refs": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Selected Artifact Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "created_at",
+    "organization_id",
+    "publication_id",
+    "operation_id",
+    "artifact_manifest_ref",
+    "artifact_manifest_digest",
+    "selected_artifact_refs",
+    "provider_kind",
+    "connection_ref",
+    "destination_account_ref",
+    "payload",
+    "approval_digest",
+    "idempotency_key"
+  ],
+  "title": "ProposedPublicationOperation",
+  "type": "object"
+}

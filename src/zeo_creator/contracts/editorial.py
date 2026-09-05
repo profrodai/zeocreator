@@ -1,24 +1,21 @@
-"""Daily portfolio and assignment contracts."""
+"""Cadence-neutral content portfolio and assignment contracts."""
 
-from enum import StrEnum
+from typing import Annotated
 
 from pydantic import Field, model_validator
 
 from zeo_creator.contracts.common import CreatorModel, DurableArtifact, UtcDatetime
+from zeo_creator.contracts.evidence import ResearchWindow
 
-
-class DeliverableKind(StrEnum):
-    ANIMATED_EPISODE = "animated_episode"
-    HUD = "hud"
-    COMIC_SLIDES = "comic_slides"
-
-
-REQUIRED_DAILY_KINDS = tuple(DeliverableKind)
+ContentKind = Annotated[
+    str,
+    Field(pattern=r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$", min_length=1),
+]
 
 
 class ContentHistoryEntry(DurableArtifact):
     history_id: str = Field(min_length=1)
-    deliverable_kind: DeliverableKind
+    content_kind: ContentKind
     topic: str = Field(min_length=1)
     published_at: UtcDatetime
     artifact_ref: str = Field(min_length=1)
@@ -30,23 +27,26 @@ class PublicationObjective(CreatorModel):
     desired_audience_action: str = Field(min_length=1)
 
 
+class ContentRequirement(CreatorModel):
+    content_kind: ContentKind
+    quantity: int = Field(ge=1)
+
+
 class PortfolioConstraints(CreatorModel):
-    required_kinds: tuple[DeliverableKind, ...] = REQUIRED_DAILY_KINDS
-    assignments_per_publication: int = Field(default=3, ge=1)
+    requirements: tuple[ContentRequirement, ...] = Field(min_length=1)
     avoid_recent_topics: bool = True
 
     @model_validator(mode="after")
-    def kinds_match_count(self) -> PortfolioConstraints:
-        if len(set(self.required_kinds)) != len(self.required_kinds):
-            raise ValueError("required deliverable kinds must be unique")
-        if len(self.required_kinds) != self.assignments_per_publication:
-            raise ValueError("assignment count must match required deliverable kinds")
+    def unique_kinds(self) -> PortfolioConstraints:
+        kinds = [item.content_kind for item in self.requirements]
+        if len(kinds) != len(set(kinds)):
+            raise ValueError("content requirements must use unique kinds")
         return self
 
 
 class EditorialAssignment(DurableArtifact):
     assignment_id: str = Field(min_length=1)
-    deliverable_kind: DeliverableKind
+    content_kind: ContentKind
     objective: str = Field(min_length=1)
     audience: str = Field(min_length=1)
     desired_audience_action: str = Field(min_length=1)
@@ -55,23 +55,20 @@ class EditorialAssignment(DurableArtifact):
     hook: str = Field(min_length=1)
     evidence_refs: tuple[str, ...] = Field(min_length=1)
     novelty_rationale: str = Field(min_length=1)
-    relationship_to_other_daily_assignments: str = Field(min_length=1)
+    relationship_to_other_assignments: str = Field(min_length=1)
     target_channels: tuple[str, ...] = Field(min_length=1)
     brand_profile_ref: str = Field(min_length=1)
     due_at: UtcDatetime
 
 
-class DailyEditorialPlan(DurableArtifact):
+class ContentPortfolioPlan(DurableArtifact):
     plan_id: str = Field(min_length=1)
-    plan_date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
+    planning_window: ResearchWindow
     assignments: tuple[EditorialAssignment, ...]
 
     @model_validator(mode="after")
-    def unique_assignment_identity(self) -> DailyEditorialPlan:
+    def unique_assignment_identity(self) -> ContentPortfolioPlan:
         ids = [item.assignment_id for item in self.assignments]
         if len(ids) != len(set(ids)):
             raise ValueError("assignment identifiers must be unique")
-        keys = [(item.publication_id, item.deliverable_kind) for item in self.assignments]
-        if len(keys) != len(set(keys)):
-            raise ValueError("each publication may receive each format only once per plan")
         return self

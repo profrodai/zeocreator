@@ -1,0 +1,562 @@
+[
+  {
+    "assignment_id": "assignment_6884486f095674cb1cbb",
+    "audience": "Independent builders improving reliable workflows",
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_id": "brief_1a25a061f24771474f29",
+    "content_digest": "sha256:d790aaf238c1adec2f4964c0a6605082d6ea6047aca2866175abcae5cac3b49c",
+    "content_kind": "article",
+    "content_revision": 1,
+    "core_message": "Evidence supporting evidence-led explanations in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_37415c11022314610393",
+        "evidence_refs": [
+          "evidence_3c86da8702bccabf81a7"
+        ],
+        "text": "Evidence supporting evidence-led explanations in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_6884486f095674cb1cbb",
+      "synthesis_f36814841f69e9ad7db9",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d"
+    ],
+    "objective": "Teach practice through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.a"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "guaranteed outcomes"
+    ],
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "evidence-led-explanations",
+    "source_content": {
+      "content": "# Example Publication A: Evidence-led explanations\n\nEvidence supporting evidence-led explanations in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to test one bounded technique.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_3c86da8702bccabf81a7"
+    ],
+    "style_ref": "style_publication_a@1",
+    "target_channels": [
+      "website",
+      "social.network-a"
+    ],
+    "working_title": "Example Publication A: Evidence-led explanations"
+  },
+  {
+    "assignment_id": "assignment_ea4216990a0b2e71fd31",
+    "audience": "Independent builders improving reliable workflows",
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_id": "brief_dae90cadc90ec5f09cd4",
+    "content_digest": "sha256:d1bc4e1c6cacdb7f6f4449b7e8cf013aa3e08b4b852fa820e0bc76bb7b0d7fff",
+    "content_kind": "video.short",
+    "content_revision": 1,
+    "core_message": "Evidence supporting reusable content atoms in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_3ceb1145d4eed7d7d424",
+        "evidence_refs": [
+          "evidence_cec30701b7bb04a13aae"
+        ],
+        "text": "Evidence supporting reusable content atoms in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_ea4216990a0b2e71fd31",
+      "synthesis_f36814841f69e9ad7db9",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d"
+    ],
+    "objective": "Teach practice through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.a"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "guaranteed outcomes"
+    ],
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "reusable-content-atoms",
+    "source_content": {
+      "content": "# Example Publication A: Reusable content atoms\n\nEvidence supporting reusable content atoms in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to test one bounded technique.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_cec30701b7bb04a13aae"
+    ],
+    "style_ref": "style_publication_a@1",
+    "target_channels": [
+      "website",
+      "social.network-a"
+    ],
+    "working_title": "Example Publication A: Reusable content atoms"
+  },
+  {
+    "assignment_id": "assignment_b2b225c2ee3afd1cf1da",
+    "audience": "Independent builders improving reliable workflows",
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_id": "brief_a7cc9c0ed7d2235f752a",
+    "content_digest": "sha256:45bd777aa0e2f6208662af1acdfd1bedca203129ee34dd2f081e78d26fb260a9",
+    "content_kind": "image.carousel",
+    "content_revision": 1,
+    "core_message": "Evidence supporting typed handoffs in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_c14499a1ff2a4cb0b8da",
+        "evidence_refs": [
+          "evidence_e6c5edca04c382538dca"
+        ],
+        "text": "Evidence supporting typed handoffs in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_b2b225c2ee3afd1cf1da",
+      "synthesis_f36814841f69e9ad7db9",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d"
+    ],
+    "objective": "Teach practice through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.a"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "guaranteed outcomes"
+    ],
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "typed-handoffs",
+    "source_content": {
+      "content": "# Example Publication A: Typed handoffs\n\nEvidence supporting typed handoffs in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to test one bounded technique.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_e6c5edca04c382538dca"
+    ],
+    "style_ref": "style_publication_a@1",
+    "target_channels": [
+      "website",
+      "social.network-a"
+    ],
+    "working_title": "Example Publication A: Typed handoffs"
+  },
+  {
+    "assignment_id": "assignment_1c43d713e6c5d7b51c1b",
+    "audience": "Independent builders improving reliable workflows",
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_id": "brief_65b9e1dcb4942f44a6b9",
+    "content_digest": "sha256:3a5957e97512d52cd60967a2be18ff808af916ea6ba8fe21d761f96c8e168b2a",
+    "content_kind": "newsletter.issue",
+    "content_revision": 1,
+    "core_message": "Evidence supporting bounded retries in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_409b606af91faa7457a7",
+        "evidence_refs": [
+          "evidence_ffe800ce51ebd407d307"
+        ],
+        "text": "Evidence supporting bounded retries in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_1c43d713e6c5d7b51c1b",
+      "synthesis_f36814841f69e9ad7db9",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d"
+    ],
+    "objective": "Teach practice through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.a"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "guaranteed outcomes"
+    ],
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "bounded-retries",
+    "source_content": {
+      "content": "# Example Publication A: Bounded retries\n\nEvidence supporting bounded retries in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to test one bounded technique.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_ffe800ce51ebd407d307"
+    ],
+    "style_ref": "style_publication_a@1",
+    "target_channels": [
+      "website",
+      "social.network-a"
+    ],
+    "working_title": "Example Publication A: Bounded retries"
+  },
+  {
+    "assignment_id": "assignment_22676e243bd164f0ec00",
+    "audience": "Teams governing dependable automation",
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_id": "brief_802732cc9c8eb5fab319",
+    "content_digest": "sha256:12852efc14f152191c124f41be86765212a9ac2bf28450998f0d3604ac279f3e",
+    "content_kind": "article",
+    "content_revision": 1,
+    "core_message": "Evidence supporting digest-bound decisions in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_d24cdac7d3b71def0f9b",
+        "evidence_refs": [
+          "evidence_3eb46ecc100a13817624"
+        ],
+        "text": "Evidence supporting digest-bound decisions in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_22676e243bd164f0ec00",
+      "synthesis_a6dbacd803b90cd871fb",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378"
+    ],
+    "objective": "Teach governance through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.b"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "fully autonomous"
+    ],
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "digest-bound-decisions",
+    "source_content": {
+      "content": "# Example Publication B: Digest-bound decisions\n\nEvidence supporting digest-bound decisions in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to define an explicit approval boundary.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_3eb46ecc100a13817624"
+    ],
+    "style_ref": "style_publication_b@1",
+    "target_channels": [
+      "newsletter",
+      "video.platform-b"
+    ],
+    "working_title": "Example Publication B: Digest-bound decisions"
+  },
+  {
+    "assignment_id": "assignment_ef147776185aff7bc6bc",
+    "audience": "Teams governing dependable automation",
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_id": "brief_69d691ebb8b8f95e730b",
+    "content_digest": "sha256:cc849cd85598d210f4b11ae119aebc438d54fa8cb4b8d5fdcb9406a4e95512bc",
+    "content_kind": "video.short",
+    "content_revision": 1,
+    "core_message": "Evidence supporting reconciliation evidence in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_83d0f87772ac65e26636",
+        "evidence_refs": [
+          "evidence_520773db12ea887ff565"
+        ],
+        "text": "Evidence supporting reconciliation evidence in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_ef147776185aff7bc6bc",
+      "synthesis_a6dbacd803b90cd871fb",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378"
+    ],
+    "objective": "Teach governance through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.b"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "fully autonomous"
+    ],
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "reconciliation-evidence",
+    "source_content": {
+      "content": "# Example Publication B: Reconciliation evidence\n\nEvidence supporting reconciliation evidence in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to define an explicit approval boundary.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_520773db12ea887ff565"
+    ],
+    "style_ref": "style_publication_b@1",
+    "target_channels": [
+      "newsletter",
+      "video.platform-b"
+    ],
+    "working_title": "Example Publication B: Reconciliation evidence"
+  },
+  {
+    "assignment_id": "assignment_d7f86b520d01406214cc",
+    "audience": "Teams governing dependable automation",
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_id": "brief_f9f59a2e0cb86955a7c9",
+    "content_digest": "sha256:c8201c0f04cb827e5c14fa5e6ee0006d0b44d105fca7cf9c5915774b5dd44086",
+    "content_kind": "image.carousel",
+    "content_revision": 1,
+    "core_message": "Evidence supporting normalized performance in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_1e403f563a0eb6072592",
+        "evidence_refs": [
+          "evidence_69aca31fa14338f92629"
+        ],
+        "text": "Evidence supporting normalized performance in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_d7f86b520d01406214cc",
+      "synthesis_a6dbacd803b90cd871fb",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378"
+    ],
+    "objective": "Teach governance through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.b"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "fully autonomous"
+    ],
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "normalized-performance",
+    "source_content": {
+      "content": "# Example Publication B: Normalized performance\n\nEvidence supporting normalized performance in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to define an explicit approval boundary.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_69aca31fa14338f92629"
+    ],
+    "style_ref": "style_publication_b@1",
+    "target_channels": [
+      "newsletter",
+      "video.platform-b"
+    ],
+    "working_title": "Example Publication B: Normalized performance"
+  },
+  {
+    "assignment_id": "assignment_502aec2f9b78efa357aa",
+    "audience": "Teams governing dependable automation",
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_id": "brief_c218aa83930db38cdbc9",
+    "content_digest": "sha256:a061512ed3d0de2bdf1a653b587a68c77cfa0b0dc62745bd23019901115ba329",
+    "content_kind": "newsletter.issue",
+    "content_revision": 1,
+    "core_message": "Evidence supporting explicit approvals in creator operations.",
+    "created_at": "2026-09-05T08:00:00Z",
+    "creative_direction": "Create a clear, useful, evidence-led piece for the intended audience.",
+    "delivery_requirements": [
+      {
+        "check_id": "artifact.readable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "content.claims-traceable",
+        "check_version": null,
+        "policy": "required"
+      },
+      {
+        "check_id": "channel.constraints",
+        "check_version": null,
+        "policy": "required"
+      }
+    ],
+    "desired_audience_action": "Apply one bounded practice",
+    "evidence_claims": [
+      {
+        "claim_id": "claim_ac42679f6221a6b755bc",
+        "evidence_refs": [
+          "evidence_8422ad48da06d0b80604"
+        ],
+        "text": "Evidence supporting explicit approvals in creator operations."
+      }
+    ],
+    "input_refs": [
+      "assignment_502aec2f9b78efa357aa",
+      "synthesis_a6dbacd803b90cd871fb",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378"
+    ],
+    "objective": "Teach governance through useful content",
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.b"
+    ],
+    "producer_extension": null,
+    "prohibited_claims": [
+      "fully autonomous"
+    ],
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "slug_hint": "explicit-approvals",
+    "source_content": {
+      "content": "# Example Publication B: Explicit approvals\n\nEvidence supporting explicit approvals in creator operations.\n\n## Intended action\n\nApply one bounded practice\n\n## Call to action\n\nInvite the audience to define an explicit approval boundary.",
+      "media_type": "text/markdown"
+    },
+    "source_refs": [
+      "evidence_8422ad48da06d0b80604"
+    ],
+    "style_ref": "style_publication_b@1",
+    "target_channels": [
+      "newsletter",
+      "video.platform-b"
+    ],
+    "working_title": "Example Publication B: Explicit approvals"
+  }
+]

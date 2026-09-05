@@ -6,8 +6,8 @@ from zeo_core.tools import BoundCapability, CapabilityRegistry, bound_capability
 
 from zeo_creator.capabilities import (
     assess_performance,
-    create_ducktyper_brief,
-    plan_daily_portfolio,
+    create_content_brief,
+    plan_content_portfolio,
     prepare_distribution,
     research_synthesis,
     validate_delivery,
@@ -17,8 +17,8 @@ CAPABILITIES: tuple[BoundCapability, ...] = tuple(
     bound_capability_of(item)
     for item in (
         research_synthesis,
-        plan_daily_portfolio,
-        create_ducktyper_brief,
+        plan_content_portfolio,
+        create_content_brief,
         validate_delivery,
         prepare_distribution,
         assess_performance,

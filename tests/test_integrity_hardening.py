@@ -8,13 +8,14 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from tests.fixtures.dogfood import (
+from tests.fixtures.reference import (
     NOW,
-    DogfoodSnapshot,
-    build_dogfood_snapshot,
+    ReferenceSnapshot,
+    build_reference_snapshot,
     publication_profiles,
 )
 from zeo_creator.contracts.common import CreatorModel, canonical_bytes, canonical_digest
+from zeo_creator.contracts.delivery import ArtifactManifest
 from zeo_creator.contracts.distribution import ChannelPlan
 from zeo_creator.contracts.evidence import EvidenceClaim, ResearchSynthesis
 from zeo_creator.services.validation import validate_delivery_bundle
@@ -48,7 +49,7 @@ def test_python_matches_committed_cross_language_digest_vectors() -> None:
 
 
 def test_synthesis_rejects_claim_evidence_outside_its_evidence_set() -> None:
-    synthesis = build_dogfood_snapshot().syntheses[0]
+    synthesis = build_reference_snapshot().syntheses[0]
     data = synthesis.model_dump(mode="python", exclude={"content_digest"})
     data["candidate_claims"] = (
         EvidenceClaim(claim_id="claim_bad", text="Unsupported", evidence_refs=("missing",)),
@@ -58,11 +59,10 @@ def test_synthesis_rejects_claim_evidence_outside_its_evidence_set() -> None:
 
 
 def test_untraceable_brief_is_always_blocking() -> None:
-    snapshot = build_dogfood_snapshot()
+    snapshot = build_reference_snapshot()
     brief = snapshot.briefs[0].model_copy(update={"source_refs": ("missing",)})
     review = validate_delivery_bundle(
         brief=brief,
-        artifact=snapshot.artifacts[0],
         manifest=snapshot.manifests[0],
         publication=publication_profiles()[0],
         synthesis=snapshot.syntheses[0],
@@ -76,13 +76,16 @@ def test_untraceable_brief_is_always_blocking() -> None:
 
 
 def test_empty_extracted_text_and_bad_artifact_proof_fail_closed() -> None:
-    snapshot = build_dogfood_snapshot()
-    artifact = snapshot.artifacts[0].model_copy(update={"extracted_text": ""})
-    proof = snapshot.manifests[0].artifact_digest_proof.model_copy(update={"byte_length": 1})
-    manifest = snapshot.manifests[0].model_copy(update={"artifact_digest_proof": proof})
+    snapshot = build_reference_snapshot()
+    proof = snapshot.manifests[0].digest_proofs[0].model_copy(update={"byte_length": 1})
+    manifest = snapshot.manifests[0].model_copy(
+        update={
+            "extracted_text": "",
+            "digest_proofs": (proof, *snapshot.manifests[0].digest_proofs[1:]),
+        }
+    )
     review = validate_delivery_bundle(
         brief=snapshot.briefs[0],
-        artifact=artifact,
         manifest=manifest,
         publication=publication_profiles()[0],
         synthesis=snapshot.syntheses[0],
@@ -95,7 +98,18 @@ def test_empty_extracted_text_and_bad_artifact_proof_fail_closed() -> None:
     assert review.ready_for_approval is False
 
 
-def _channel_plan(snapshot: DogfoodSnapshot, index: int) -> ChannelPlan:
+def test_attestations_must_reference_artifacts_in_the_manifest() -> None:
+    manifest = build_reference_snapshot().manifests[0]
+    data = manifest.model_dump(mode="python", exclude={"content_digest"})
+    data["attestations"] = (
+        manifest.attestations[0].model_copy(update={"artifact_refs": ("missing",)}),
+        *manifest.attestations[1:],
+    )
+    with pytest.raises(ValidationError, match="must reference manifest artifacts"):
+        ArtifactManifest.model_validate(data)
+
+
+def _channel_plan(snapshot: ReferenceSnapshot, index: int) -> ChannelPlan:
     brief = snapshot.briefs[index]
     review = snapshot.reviews[index]
     return ChannelPlan(

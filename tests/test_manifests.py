@@ -15,8 +15,8 @@ from zeo_creator.registry import (
 
 EXPECTED_IDS = {
     "creator.research_synthesis@1.0.0",
-    "creator.plan_daily_portfolio@1.0.0",
-    "creator.create_ducktyper_brief@1.0.0",
+    "creator.plan_content_portfolio@1.0.0",
+    "creator.create_content_brief@1.0.0",
     "creator.validate_delivery@1.0.0",
     "creator.prepare_distribution@1.0.0",
     "creator.assess_performance@1.0.0",

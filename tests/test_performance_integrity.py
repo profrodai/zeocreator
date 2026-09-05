@@ -4,7 +4,7 @@ from datetime import timedelta
 
 import pytest
 
-from tests.fixtures.dogfood import NOW, PERFORMANCE_WINDOW, build_dogfood_snapshot
+from tests.fixtures.reference import NOW, PERFORMANCE_WINDOW, build_reference_snapshot
 from zeo_creator.contracts.performance import MetricObservation, MetricsQuery
 from zeo_creator.errors import CreatorDomainError
 from zeo_creator.services.assessment import assess_publication_performance
@@ -39,7 +39,7 @@ def _rebuild(row: MetricObservation, **changes: object) -> MetricObservation:
 
 
 def test_raw_unlike_metrics_are_not_ranked_by_numeric_magnitude() -> None:
-    snapshot = build_dogfood_snapshot()
+    snapshot = build_reference_snapshot()
     rows = tuple(_rebuild(row, normalized_rate=None) for row in snapshot.assessments[0].metrics)
     assessment = assess_publication_performance(
         publication=snapshot.profiles[0],
@@ -70,7 +70,7 @@ def test_raw_unlike_metrics_are_not_ranked_by_numeric_magnitude() -> None:
 def test_observation_must_match_window_and_operation_scope(
     changes: dict[str, object], code: str
 ) -> None:
-    snapshot = build_dogfood_snapshot()
+    snapshot = build_reference_snapshot()
     row = _rebuild(snapshot.assessments[0].metrics[0], **changes)
 
     with pytest.raises(CreatorDomainError) as caught:
@@ -86,7 +86,7 @@ def test_observation_must_match_window_and_operation_scope(
 
 
 def test_stale_publication_profile_is_rejected() -> None:
-    snapshot = build_dogfood_snapshot()
+    snapshot = build_reference_snapshot()
     profile = snapshot.profiles[0].model_copy(update={"display_name": "Changed"})
     rows = snapshot.assessments[0].metrics
 

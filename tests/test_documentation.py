@@ -12,7 +12,7 @@ def test_readme_has_primary_adoption_paths() -> None:
         "## First capability",
         "## Six focused capabilities",
         "## The authority boundary",
-        "## Dogfood proof",
+        "## Reference workflow",
         "## Development",
     ):
         assert heading in readme
@@ -25,9 +25,9 @@ def test_mkdocs_navigation_targets_exist() -> None:
         "getting-started/index.md",
         "getting-started/installation.md",
         "getting-started/first-capability.md",
-        "tutorials/daily-portfolio.md",
+        "tutorials/content-portfolio.md",
         "guides/connectors.md",
-        "guides/ducktyper.md",
+        "guides/production-adapters.md",
         "guides/delivery-distribution.md",
         "guides/performance.md",
         "guides/runner-integration.md",
@@ -50,3 +50,11 @@ def test_docs_do_not_teach_credential_transport_or_direct_publish() -> None:
     assert "os.environ[" not in docs_text
     assert "api.twitter.com" not in docs_text
     assert "api.linkedin.com" not in docs_text
+
+
+def test_public_material_describes_a_generic_producer_boundary() -> None:
+    readme = Path("README.md").read_text()
+    assert "producer-neutral" in readme
+    assert "ContentBrief" in readme
+    assert "ArtifactManifest" in readme
+    assert "contracts export" in readme

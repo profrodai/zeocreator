@@ -31,8 +31,8 @@ def test_public_example_runs(example: Path) -> None:
 def test_expected_example_set_is_present() -> None:
     assert {path.name for path in EXAMPLES} == {
         "assess_performance.py",
-        "complete_daily_portfolio.py",
-        "create_brief.py",
+        "complete_content_portfolio.py",
+        "create_content_brief.py",
         "inspect_capabilities.py",
         "research_connector.py",
         "validate_and_prepare.py",

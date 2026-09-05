@@ -15,6 +15,9 @@ def main() -> None:
     with zipfile.ZipFile(wheel) as archive:
         wheel_names = set(archive.namelist())
     assert "zeo_creator/py.typed" in wheel_names
+    assert "zeo_creator/schemas/catalog.json" in wheel_names
+    assert "zeo_creator/schemas/content-brief.v1.schema.json" in wheel_names
+    assert "zeo_creator/schemas/artifact-manifest.v1.schema.json" in wheel_names
     assert not any("tests/" in name or ".claude/" in name for name in wheel_names)
 
     with tarfile.open(sdist) as archive:

@@ -266,7 +266,10 @@
           "type": "string"
         },
         "provider_kind": {
-          "$ref": "#/$defs/ProviderKind"
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "title": "Provider Kind",
+          "type": "string"
         },
         "publication_id": {
           "minLength": 1,
@@ -329,17 +332,6 @@
       ],
       "title": "MetricObservation",
       "type": "object"
-    },
-    "ProviderKind": {
-      "enum": [
-        "website",
-        "newsletter",
-        "x",
-        "linkedin",
-        "youtube"
-      ],
-      "title": "ProviderKind",
-      "type": "string"
     },
     "ResearchWindow": {
       "additionalProperties": false,

@@ -2,7 +2,7 @@
 
 ZEO Creator contains creator-domain transformations over Zeocore contracts and
 runner-injected connector ports. The package owns research synthesis, editorial
-planning, Ducktyper brief construction, delivery validation, distribution
+planning, content brief construction, delivery validation, distribution
 proposal construction, and performance assessment.
 
 It must not own credentials, OAuth, provider SDK authority, scheduling,

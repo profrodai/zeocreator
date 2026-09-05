@@ -1,4 +1,4 @@
-"""Validate a synthetic Ducktyper render, then prepare—but do not execute—distribution."""
+"""Validate a synthetic artifact bundle, then prepare—but do not execute—distribution."""
 
 import json
 
@@ -32,14 +32,13 @@ def main() -> None:
 
     review = validation.data.review
     if not review.ready_for_approval:
-        raise RuntimeError("example render unexpectedly failed validation")
+        raise RuntimeError("example artifact unexpectedly failed validation")
 
     prepare = registry.get("creator.prepare_distribution@1.0.0")
     preparation = invoke_sync(
         prepare,
         PrepareDistributionRequest(
             brief=validate_request.brief,
-            artifact=validate_request.artifact,
             manifest=validate_request.manifest,
             review=review,
             channel_plan=validate_request.channel_plan,

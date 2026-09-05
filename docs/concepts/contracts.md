@@ -27,7 +27,7 @@ then prefixes its SHA-256 digest with `sha256:`.
 ```python
 from zeo_creator.contracts.common import canonical_digest
 
-digest = canonical_digest({"publication_id": "profrod.ai", "revision": 2})
+digest = canonical_digest({"publication_id": "publication-a.example", "revision": 2})
 ```
 
 The digest does not replace a signature or runtime authorization. It supplies a
@@ -54,9 +54,9 @@ Publication identity flows through:
 ```text
 PublicationProfile
   → EvidenceItem / ResearchSynthesis
-  → EditorialAssignment / DailyEditorialPlan
-  → DucktyperBrief
-  → RenderedArtifact / RenderManifest
+  → EditorialAssignment / ContentPortfolioPlan
+  → ContentBrief
+  → ArtifactManifest
   → DeliveryReviewBundle
   → ProposedPublicationOperation
   → DailyPerformanceAssessment

@@ -1,0 +1,30 @@
+[
+  {
+    "artifact_ref": "artifact_history_publication-a.example",
+    "content_digest": "sha256:d60cd3bac6a7ff07e5af168cb7082c769d678f8450247ea7b5e5672431ea3c2f",
+    "content_kind": "article",
+    "created_at": "2026-09-05T08:00:00Z",
+    "history_id": "history_publication-a.example",
+    "input_refs": [],
+    "organization_id": "example-organization",
+    "publication_id": "publication-a.example",
+    "published_at": "2026-09-02T08:00:00Z",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "topic": "A previously published topic"
+  },
+  {
+    "artifact_ref": "artifact_history_publication-b.example",
+    "content_digest": "sha256:b90c15bbee749dbaea84522a0eb148a9448440042e83fd6bbec161cd80858762",
+    "content_kind": "article",
+    "created_at": "2026-09-05T08:00:00Z",
+    "history_id": "history_publication-b.example",
+    "input_refs": [],
+    "organization_id": "example-organization",
+    "publication_id": "publication-b.example",
+    "published_at": "2026-09-02T08:00:00Z",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "topic": "A previously published topic"
+  }
+]

@@ -1,0 +1,812 @@
+[
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_0536061154dfab8c4242",
+        "byte_length": 103,
+        "digest": "sha256:741fc4910f2fac2f32603f2e8ab4641070594274581bc02a02d28e7f0df2673e",
+        "media_type": "text/html",
+        "metadata": {},
+        "role": "primary",
+        "storage_ref": "artifact://example/brief_1a25a061f24771474f29/1"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_0536061154dfab8c4242"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_1a25a061f24771474f29/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_0536061154dfab8c4242"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_1a25a061f24771474f29/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_0536061154dfab8c4242"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_1a25a061f24771474f29/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_content_digest": "sha256:d790aaf238c1adec2f4964c0a6605082d6ea6047aca2866175abcae5cac3b49c",
+    "brief_id": "brief_1a25a061f24771474f29",
+    "content_digest": "sha256:b1d8f07caa0a8a5002515648c4f0d7d80b7dab3ca92450d1c3c7c4d562582d01",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_0536061154dfab8c4242",
+        "byte_length": 103,
+        "digest": "sha256:741fc4910f2fac2f32603f2e8ab4641070594274581bc02a02d28e7f0df2673e",
+        "evidence_ref": "retrieval://artifact_0536061154dfab8c4242",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_1a25a061f24771474f29/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication A: Evidence-led explanations Evidence supporting evidence-led explanations in creator operations.",
+    "input_refs": [
+      "brief_1a25a061f24771474f29"
+    ],
+    "manifest_id": "manifest_4e9bcf76f69c52795155",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_37415c11022314610393"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_c18f113e7da46678bc67",
+        "byte_length": 100,
+        "digest": "sha256:0b4de66c8fe5e818756fc771604b671be8cade19026e5284be0f5a741e6d2207",
+        "media_type": "video/mp4",
+        "metadata": {},
+        "role": "primary",
+        "storage_ref": "artifact://example/brief_dae90cadc90ec5f09cd4/1"
+      },
+      {
+        "artifact_ref": "artifact_ce6d5e9927d23852d265",
+        "byte_length": 101,
+        "digest": "sha256:e0a6f3f441e74cd27dc25f0078f2c8370055924348c4af04d0ff9f052a78e2e7",
+        "media_type": "text/vtt",
+        "metadata": {},
+        "role": "captions",
+        "storage_ref": "artifact://example/brief_dae90cadc90ec5f09cd4/2"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_c18f113e7da46678bc67",
+          "artifact_ce6d5e9927d23852d265"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_dae90cadc90ec5f09cd4/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_c18f113e7da46678bc67",
+          "artifact_ce6d5e9927d23852d265"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_dae90cadc90ec5f09cd4/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_c18f113e7da46678bc67",
+          "artifact_ce6d5e9927d23852d265"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_dae90cadc90ec5f09cd4/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_content_digest": "sha256:d1bc4e1c6cacdb7f6f4449b7e8cf013aa3e08b4b852fa820e0bc76bb7b0d7fff",
+    "brief_id": "brief_dae90cadc90ec5f09cd4",
+    "content_digest": "sha256:fc4ba7df634a239903cd9732ad1134923ae25af9bd77630267234624bb278ce2",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_c18f113e7da46678bc67",
+        "byte_length": 100,
+        "digest": "sha256:0b4de66c8fe5e818756fc771604b671be8cade19026e5284be0f5a741e6d2207",
+        "evidence_ref": "retrieval://artifact_c18f113e7da46678bc67",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_dae90cadc90ec5f09cd4/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      },
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_ce6d5e9927d23852d265",
+        "byte_length": 101,
+        "digest": "sha256:e0a6f3f441e74cd27dc25f0078f2c8370055924348c4af04d0ff9f052a78e2e7",
+        "evidence_ref": "retrieval://artifact_ce6d5e9927d23852d265",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_dae90cadc90ec5f09cd4/2",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication A: Reusable content atoms Evidence supporting reusable content atoms in creator operations.",
+    "input_refs": [
+      "brief_dae90cadc90ec5f09cd4"
+    ],
+    "manifest_id": "manifest_1988b4efe8f157629f92",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_3ceb1145d4eed7d7d424"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_fbe60ad5155560f78486",
+        "byte_length": 92,
+        "digest": "sha256:8fcd8f2f64ee4a70bf3adfda0d54ca8153ce2042dc696fa1ba04f674e16dd1b4",
+        "media_type": "image/png",
+        "metadata": {},
+        "role": "slide-1",
+        "storage_ref": "artifact://example/brief_a7cc9c0ed7d2235f752a/1"
+      },
+      {
+        "artifact_ref": "artifact_ebfbfef3883f6b3518d6",
+        "byte_length": 92,
+        "digest": "sha256:f1fea687aa926ad3af3b4c189526fd22f91039ea3be49b49fc35753c4a5ecab0",
+        "media_type": "image/png",
+        "metadata": {},
+        "role": "slide-2",
+        "storage_ref": "artifact://example/brief_a7cc9c0ed7d2235f752a/2"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_fbe60ad5155560f78486",
+          "artifact_ebfbfef3883f6b3518d6"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_a7cc9c0ed7d2235f752a/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_fbe60ad5155560f78486",
+          "artifact_ebfbfef3883f6b3518d6"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_a7cc9c0ed7d2235f752a/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_fbe60ad5155560f78486",
+          "artifact_ebfbfef3883f6b3518d6"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_a7cc9c0ed7d2235f752a/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_content_digest": "sha256:45bd777aa0e2f6208662af1acdfd1bedca203129ee34dd2f081e78d26fb260a9",
+    "brief_id": "brief_a7cc9c0ed7d2235f752a",
+    "content_digest": "sha256:de34123bfcc37dfb4d4dc03ea0d1e340a224d053aa8dabd1b66d685a73c932b2",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_fbe60ad5155560f78486",
+        "byte_length": 92,
+        "digest": "sha256:8fcd8f2f64ee4a70bf3adfda0d54ca8153ce2042dc696fa1ba04f674e16dd1b4",
+        "evidence_ref": "retrieval://artifact_fbe60ad5155560f78486",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_a7cc9c0ed7d2235f752a/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      },
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_ebfbfef3883f6b3518d6",
+        "byte_length": 92,
+        "digest": "sha256:f1fea687aa926ad3af3b4c189526fd22f91039ea3be49b49fc35753c4a5ecab0",
+        "evidence_ref": "retrieval://artifact_ebfbfef3883f6b3518d6",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_a7cc9c0ed7d2235f752a/2",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication A: Typed handoffs Evidence supporting typed handoffs in creator operations.",
+    "input_refs": [
+      "brief_a7cc9c0ed7d2235f752a"
+    ],
+    "manifest_id": "manifest_f90ad2e4786178abd18f",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_c14499a1ff2a4cb0b8da"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_3f7f2544d2d079cb61a5",
+        "byte_length": 90,
+        "digest": "sha256:af182c8053a927df6d0abda96d9b22f758f0bd2a5cfc66f521b6c594b11b7ae9",
+        "media_type": "text/html",
+        "metadata": {},
+        "role": "html",
+        "storage_ref": "artifact://example/brief_65b9e1dcb4942f44a6b9/1"
+      },
+      {
+        "artifact_ref": "artifact_2bce15f77a9586b8f00b",
+        "byte_length": 96,
+        "digest": "sha256:73d74720214636b5e4a962ce9f079248911d9c1e037c9b5a71ce1fe9353923ed",
+        "media_type": "text/plain",
+        "metadata": {},
+        "role": "plain-text",
+        "storage_ref": "artifact://example/brief_65b9e1dcb4942f44a6b9/2"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_3f7f2544d2d079cb61a5",
+          "artifact_2bce15f77a9586b8f00b"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_65b9e1dcb4942f44a6b9/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_3f7f2544d2d079cb61a5",
+          "artifact_2bce15f77a9586b8f00b"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_65b9e1dcb4942f44a6b9/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_3f7f2544d2d079cb61a5",
+          "artifact_2bce15f77a9586b8f00b"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_65b9e1dcb4942f44a6b9/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "brief_content_digest": "sha256:3a5957e97512d52cd60967a2be18ff808af916ea6ba8fe21d761f96c8e168b2a",
+    "brief_id": "brief_65b9e1dcb4942f44a6b9",
+    "content_digest": "sha256:7383000b965bb58ebe755ec12686773a97bc378d756fb19b1bfc738d52a855ca",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_3f7f2544d2d079cb61a5",
+        "byte_length": 90,
+        "digest": "sha256:af182c8053a927df6d0abda96d9b22f758f0bd2a5cfc66f521b6c594b11b7ae9",
+        "evidence_ref": "retrieval://artifact_3f7f2544d2d079cb61a5",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_65b9e1dcb4942f44a6b9/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      },
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_2bce15f77a9586b8f00b",
+        "byte_length": 96,
+        "digest": "sha256:73d74720214636b5e4a962ce9f079248911d9c1e037c9b5a71ce1fe9353923ed",
+        "evidence_ref": "retrieval://artifact_2bce15f77a9586b8f00b",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_65b9e1dcb4942f44a6b9/2",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication A: Bounded retries Evidence supporting bounded retries in creator operations.",
+    "input_refs": [
+      "brief_65b9e1dcb4942f44a6b9"
+    ],
+    "manifest_id": "manifest_14166c47bf73d3859372",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_409b606af91faa7457a7"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_04375c00a716604ae876",
+        "byte_length": 100,
+        "digest": "sha256:4d85aed45a8f2a0fa85f75ce04af5bface7887ecfe9786d46d1a34120e46f153",
+        "media_type": "text/html",
+        "metadata": {},
+        "role": "primary",
+        "storage_ref": "artifact://example/brief_802732cc9c8eb5fab319/1"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_04375c00a716604ae876"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_802732cc9c8eb5fab319/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_04375c00a716604ae876"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_802732cc9c8eb5fab319/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_04375c00a716604ae876"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_802732cc9c8eb5fab319/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_content_digest": "sha256:12852efc14f152191c124f41be86765212a9ac2bf28450998f0d3604ac279f3e",
+    "brief_id": "brief_802732cc9c8eb5fab319",
+    "content_digest": "sha256:99db014faf544c750202ee2695ef547861e99aa11e2de6621c0ae990c13944e1",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_04375c00a716604ae876",
+        "byte_length": 100,
+        "digest": "sha256:4d85aed45a8f2a0fa85f75ce04af5bface7887ecfe9786d46d1a34120e46f153",
+        "evidence_ref": "retrieval://artifact_04375c00a716604ae876",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_802732cc9c8eb5fab319/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication B: Digest-bound decisions Evidence supporting digest-bound decisions in creator operations.",
+    "input_refs": [
+      "brief_802732cc9c8eb5fab319"
+    ],
+    "manifest_id": "manifest_a4dd16fd4d954a67d273",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_d24cdac7d3b71def0f9b"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_5059f30e1684ac046ba0",
+        "byte_length": 101,
+        "digest": "sha256:e0d0cc0ea08b12bf5dea851a05cfd8644b39cfef86c98bd476159bd70b1383ff",
+        "media_type": "video/mp4",
+        "metadata": {},
+        "role": "primary",
+        "storage_ref": "artifact://example/brief_69d691ebb8b8f95e730b/1"
+      },
+      {
+        "artifact_ref": "artifact_1c98f0065b1956ab948e",
+        "byte_length": 102,
+        "digest": "sha256:23154e6d15ae63927efeca1acfd45d20cc832c22c00fca0703917834ead940b6",
+        "media_type": "text/vtt",
+        "metadata": {},
+        "role": "captions",
+        "storage_ref": "artifact://example/brief_69d691ebb8b8f95e730b/2"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_5059f30e1684ac046ba0",
+          "artifact_1c98f0065b1956ab948e"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_69d691ebb8b8f95e730b/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_5059f30e1684ac046ba0",
+          "artifact_1c98f0065b1956ab948e"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_69d691ebb8b8f95e730b/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_5059f30e1684ac046ba0",
+          "artifact_1c98f0065b1956ab948e"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_69d691ebb8b8f95e730b/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_content_digest": "sha256:cc849cd85598d210f4b11ae119aebc438d54fa8cb4b8d5fdcb9406a4e95512bc",
+    "brief_id": "brief_69d691ebb8b8f95e730b",
+    "content_digest": "sha256:8eb984cb9d3acdbd8a8e4b38dd5ea233197a35e693c0f02de50d551eb06b8c09",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_5059f30e1684ac046ba0",
+        "byte_length": 101,
+        "digest": "sha256:e0d0cc0ea08b12bf5dea851a05cfd8644b39cfef86c98bd476159bd70b1383ff",
+        "evidence_ref": "retrieval://artifact_5059f30e1684ac046ba0",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_69d691ebb8b8f95e730b/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      },
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_1c98f0065b1956ab948e",
+        "byte_length": 102,
+        "digest": "sha256:23154e6d15ae63927efeca1acfd45d20cc832c22c00fca0703917834ead940b6",
+        "evidence_ref": "retrieval://artifact_1c98f0065b1956ab948e",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_69d691ebb8b8f95e730b/2",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication B: Reconciliation evidence Evidence supporting reconciliation evidence in creator operations.",
+    "input_refs": [
+      "brief_69d691ebb8b8f95e730b"
+    ],
+    "manifest_id": "manifest_91779aa1ec8dae583548",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_83d0f87772ac65e26636"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_fffc70d28bf506d616ea",
+        "byte_length": 100,
+        "digest": "sha256:3d07daaad0752fb9ba680530c79ddb5105fcf56376694e95e601dba3c58e80be",
+        "media_type": "image/png",
+        "metadata": {},
+        "role": "slide-1",
+        "storage_ref": "artifact://example/brief_f9f59a2e0cb86955a7c9/1"
+      },
+      {
+        "artifact_ref": "artifact_f009283e9444386a1a5e",
+        "byte_length": 100,
+        "digest": "sha256:d9a373f7f60fa931a8a7b0203f2cf3c30fc57e33084584ab2c49c0b628c6b362",
+        "media_type": "image/png",
+        "metadata": {},
+        "role": "slide-2",
+        "storage_ref": "artifact://example/brief_f9f59a2e0cb86955a7c9/2"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_fffc70d28bf506d616ea",
+          "artifact_f009283e9444386a1a5e"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_f9f59a2e0cb86955a7c9/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_fffc70d28bf506d616ea",
+          "artifact_f009283e9444386a1a5e"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_f9f59a2e0cb86955a7c9/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_fffc70d28bf506d616ea",
+          "artifact_f009283e9444386a1a5e"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_f9f59a2e0cb86955a7c9/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_content_digest": "sha256:c8201c0f04cb827e5c14fa5e6ee0006d0b44d105fca7cf9c5915774b5dd44086",
+    "brief_id": "brief_f9f59a2e0cb86955a7c9",
+    "content_digest": "sha256:36758ad237cb0b477d6f0199df23145f72234f3f6dedcce00f60e50d071b1875",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_fffc70d28bf506d616ea",
+        "byte_length": 100,
+        "digest": "sha256:3d07daaad0752fb9ba680530c79ddb5105fcf56376694e95e601dba3c58e80be",
+        "evidence_ref": "retrieval://artifact_fffc70d28bf506d616ea",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_f9f59a2e0cb86955a7c9/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      },
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_f009283e9444386a1a5e",
+        "byte_length": 100,
+        "digest": "sha256:d9a373f7f60fa931a8a7b0203f2cf3c30fc57e33084584ab2c49c0b628c6b362",
+        "evidence_ref": "retrieval://artifact_f009283e9444386a1a5e",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_f9f59a2e0cb86955a7c9/2",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication B: Normalized performance Evidence supporting normalized performance in creator operations.",
+    "input_refs": [
+      "brief_f9f59a2e0cb86955a7c9"
+    ],
+    "manifest_id": "manifest_b56bbdc4a4bab0fabb0b",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_1e403f563a0eb6072592"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifacts": [
+      {
+        "artifact_ref": "artifact_32e99822061392acc5c7",
+        "byte_length": 93,
+        "digest": "sha256:cd40924290ea5d421dcb8d9bad724cf4a7ee24c4662e0b15f5ce0c57c21c90af",
+        "media_type": "text/html",
+        "metadata": {},
+        "role": "html",
+        "storage_ref": "artifact://example/brief_c218aa83930db38cdbc9/1"
+      },
+      {
+        "artifact_ref": "artifact_09fea16aeb1d343388b5",
+        "byte_length": 99,
+        "digest": "sha256:4a84c76bd5b2fe5f3a47e8080f8f96fd82591866c6939e9819af8301a6731569",
+        "media_type": "text/plain",
+        "metadata": {},
+        "role": "plain-text",
+        "storage_ref": "artifact://example/brief_c218aa83930db38cdbc9/2"
+      }
+    ],
+    "attestations": [
+      {
+        "artifact_refs": [
+          "artifact_32e99822061392acc5c7",
+          "artifact_09fea16aeb1d343388b5"
+        ],
+        "check_id": "artifact.readable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_c218aa83930db38cdbc9/artifact.readable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_32e99822061392acc5c7",
+          "artifact_09fea16aeb1d343388b5"
+        ],
+        "check_id": "content.claims-traceable",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_c218aa83930db38cdbc9/content.claims-traceable",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      },
+      {
+        "artifact_refs": [
+          "artifact_32e99822061392acc5c7",
+          "artifact_09fea16aeb1d343388b5"
+        ],
+        "check_id": "channel.constraints",
+        "check_version": "1.0.0",
+        "evidence_ref": "attestation://brief_c218aa83930db38cdbc9/channel.constraints",
+        "expected_constraint": "required by accepted brief",
+        "observed_value": "verified",
+        "result": true,
+        "tool_identity": "example.local-producer"
+      }
+    ],
+    "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "brief_content_digest": "sha256:a061512ed3d0de2bdf1a653b587a68c77cfa0b0dc62745bd23019901115ba329",
+    "brief_id": "brief_c218aa83930db38cdbc9",
+    "content_digest": "sha256:889d1735f1b464a23feaac6c5099ff31d419ac5204fa857a2b364f1def07799c",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "digest_proofs": [
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_32e99822061392acc5c7",
+        "byte_length": 93,
+        "digest": "sha256:cd40924290ea5d421dcb8d9bad724cf4a7ee24c4662e0b15f5ce0c57c21c90af",
+        "evidence_ref": "retrieval://artifact_32e99822061392acc5c7",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_c218aa83930db38cdbc9/1",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      },
+      {
+        "algorithm": "sha256",
+        "artifact_ref": "artifact_09fea16aeb1d343388b5",
+        "byte_length": 99,
+        "digest": "sha256:4a84c76bd5b2fe5f3a47e8080f8f96fd82591866c6939e9819af8301a6731569",
+        "evidence_ref": "retrieval://artifact_09fea16aeb1d343388b5",
+        "retrieved_at": "2026-09-05T08:00:00Z",
+        "storage_ref": "artifact://example/brief_c218aa83930db38cdbc9/2",
+        "tool_identity": "example.byte-verifier",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "extracted_text": "Example Publication B: Explicit approvals Evidence supporting explicit approvals in creator operations.",
+    "input_refs": [
+      "brief_c218aa83930db38cdbc9"
+    ],
+    "manifest_id": "manifest_7d8438a507b73dd51922",
+    "organization_id": "example-organization",
+    "produced_claim_ids": [
+      "claim_ac42679f6221a6b755bc"
+    ],
+    "producer_ref": "example.local-producer",
+    "producer_version": "1.0.0",
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0"
+  }
+]

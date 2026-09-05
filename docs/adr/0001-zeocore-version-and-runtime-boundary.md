@@ -35,6 +35,13 @@ ZEO Creator capabilities may request read observations through injected ports.
 They may only construct proposed external-write operations. They never resolve
 credentials or call provider SDKs.
 
+Zeocore 0.6 requires every capability manifest to declare at least one
+`EffectKind`; it has no explicit pure/local kind. Creator's four deterministic
+transformations therefore declare the conservative `read` kind and add
+`execution: pure-deterministic` metadata. Those functions do not access external
+state. Creator will not change Zeocore's public contract to work around this
+limitation.
+
 ## Compatibility boundary
 
 CI verifies:

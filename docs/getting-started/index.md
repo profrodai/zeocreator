@@ -14,9 +14,9 @@ when you need recurring commitments and authorized provider effects.
 
 === "I am building a creator workflow"
 
-    1. Read the [daily portfolio tutorial](../tutorials/daily-portfolio.md).
+    1. Read the [content portfolio tutorial](../tutorials/content-portfolio.md).
     2. Implement an [evidence source port](../guides/connectors.md).
-    3. Hand accepted briefs to [Ducktyper](../guides/ducktyper.md).
+    3. Hand accepted briefs to a [production adapter](../guides/production-adapters.md).
 
 === "I am integrating a managed runtime"
 

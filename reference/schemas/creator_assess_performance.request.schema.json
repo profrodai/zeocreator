@@ -25,7 +25,10 @@
           "type": "array"
         },
         "provider_kind": {
-          "$ref": "#/$defs/ProviderKind"
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "title": "Provider Kind",
+          "type": "string"
         },
         "publication_id": {
           "minLength": 1,
@@ -50,17 +53,6 @@
       "title": "MetricsQuery",
       "type": "object"
     },
-    "ProviderKind": {
-      "enum": [
-        "website",
-        "newsletter",
-        "x",
-        "linkedin",
-        "youtube"
-      ],
-      "title": "ProviderKind",
-      "type": "string"
-    },
     "PublicationProfile": {
       "additionalProperties": false,
       "properties": {
@@ -73,14 +65,6 @@
           "minLength": 1,
           "title": "Audience Definition",
           "type": "string"
-        },
-        "character_refs": {
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "title": "Character Refs",
-          "type": "array"
         },
         "content_digest": {
           "default": "",
@@ -131,6 +115,14 @@
           "title": "Organization Id",
           "type": "string"
         },
+        "participant_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Participant Refs",
+          "type": "array"
+        },
         "profile_id": {
           "minLength": 1,
           "title": "Profile Id",
@@ -168,9 +160,9 @@
           "title": "Schema Version",
           "type": "string"
         },
-        "visual_style_ref": {
+        "style_ref": {
           "minLength": 1,
-          "title": "Visual Style Ref",
+          "title": "Style Ref",
           "type": "string"
         },
         "voice_rules": {
@@ -191,7 +183,7 @@
         "audience_definition",
         "editorial_pillars",
         "voice_rules",
-        "visual_style_ref",
+        "style_ref",
         "default_channels",
         "cta_policy",
         "approval_policy_ref"

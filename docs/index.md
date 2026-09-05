@@ -1,13 +1,13 @@
 # Creator operations, governed by design
 
 <p class="hero-tagline">
-ZEO Creator turns evidence into publication-ready creator operations while
-keeping credentials, approvals, schedules, and provider authority where they
-belong: in your runner.
+ZEO Creator turns evidence into governed content portfolios and producer-neutral
+creative briefs, validates artifact bundles, prepares distribution, and learns
+from performance.
 </p>
 
 [Get started](getting-started/index.md){ .md-button .md-button--primary }
-[Explore the capabilities](reference/capabilities.md){ .md-button }
+[Explore the contracts](reference/contracts.md){ .md-button }
 
 ---
 
@@ -16,92 +16,75 @@ belong: in your runner.
 ```mermaid
 flowchart LR
     A[Connector observations] --> B[Research synthesis]
-    B --> C[Daily portfolio]
-    C --> D[Ducktyper briefs]
-    D --> E[Rendered artifacts]
-    E --> F[Delivery reviews]
-    F --> G[Distribution proposals]
-    G -. exact runtime authority .-> H[Provider receipts]
-    H --> I[Performance assessment]
+    B --> C[Content portfolio]
+    C --> D[Content briefs]
+    D --> E[External producer]
+    E --> F[Artifact bundles]
+    F --> G[Delivery reviews]
+    G --> H[Distribution proposals]
+    H -. exact runtime authority .-> I[Provider receipts]
+    I --> J[Performance assessment]
 ```
 
-ZEO Creator owns the solid creator-domain transformations. Your controlling
-runtime owns the dotted authority boundary.
+ZEO Creator owns the creator-domain transformations. The controlling runtime
+owns the authority boundary; a production adapter owns producer-specific lowering.
 
 <div class="grid cards" markdown>
 
--   :material-file-tree:{ .lg .middle } **Typed from end to end**
+-   :material-file-tree:{ .lg .middle } **Typed end to end**
 
     ---
 
-    Pydantic contracts reject invalid formats, stale digests, mixed publication
-    scope, and credential-shaped fields before downstream work begins.
+    Strict Pydantic contracts reject stale digests, mixed publication scope, and
+    credential-shaped fields before downstream work begins.
 
-    [Understand the contracts](concepts/contracts.md)
+    [Understand contracts](concepts/contracts.md)
 
--   :material-shield-check:{ .lg .middle } **Approval means exactly this**
-
-    ---
-
-    Reviews bind the brief, render, payload, destination, and schedule into one
-    deterministic digest. Any governed change requires a new approval.
-
-    [Validate and prepare distribution](guides/delivery-distribution.md)
-
--   :material-connection:{ .lg .middle } **Bring your own connectors**
+-   :material-puzzle:{ .lg .middle } **Bring any producer**
 
     ---
 
-    Inject local Zeocore connectors or ZEOconnect-backed proxies. Creator code
-    receives observations and connection references—never reusable credentials.
+    Content briefs express intent. Generic manifests describe artifact bundles.
+    Opaque extensions let private adapters evolve without leaking their schemas.
+
+    [Build a production adapter](guides/production-adapters.md)
+
+-   :material-shield-check:{ .lg .middle } **Approve exact content**
+
+    ---
+
+    Reviews bind artifacts, payloads, destinations, and schedules into one
+    deterministic digest. Governed changes require fresh approval.
+
+    [Validate delivery](guides/delivery-distribution.md)
+
+-   :material-connection:{ .lg .middle } **Inject connectors**
+
+    ---
+
+    Supply local Zeocore connectors or managed proxies. Creator models receive
+    observations and safe references—never reusable credentials.
 
     [Inject a connector](guides/connectors.md)
 
--   :material-robot-outline:{ .lg .middle } **Use any controlling runner**
-
-    ---
-
-    Invoke the same stable capability IDs from Sovereign Agent or a managed ZEO
-    runtime. Composition is intentionally outside the package.
-
-    [Integrate a runner](guides/runner-integration.md)
-
 </div>
 
-## The six-capability surface
+## Six focused capabilities
 
 | Stage | Capability | Result |
 |---|---|---|
 | Research | `creator.research_synthesis@1.0.0` | One publication-scoped synthesis |
-| Plan | `creator.plan_daily_portfolio@1.0.0` | A balanced daily editorial plan |
-| Brief | `creator.create_ducktyper_brief@1.0.0` | One discriminated Ducktyper brief |
+| Plan | `creator.plan_content_portfolio@1.0.0` | A planning-window portfolio |
+| Brief | `creator.create_content_brief@1.0.0` | One producer-neutral content brief |
 | Review | `creator.validate_delivery@1.0.0` | One digest-bound delivery review |
-| Distribute | `creator.prepare_distribution@1.0.0` | Provider-neutral proposals, no writes |
+| Distribute | `creator.prepare_distribution@1.0.0` | Proposals only; no provider write |
 | Learn | `creator.assess_performance@1.0.0` | One publication performance assessment |
-
-!!! tip "Start with one capability"
-
-    You do not need a scheduler or a full ZEO runtime to learn the model. The
-    [first-capability guide](getting-started/first-capability.md) produces a typed
-    Ducktyper brief locally in a few minutes.
 
 ## Designed boundaries
 
-<span class="boundary-good">ZEO Creator owns</span>: synthesis, editorial
-selection, brief construction, delivery validation, distribution proposals, and
-performance interpretation.
+ZEO Creator owns synthesis, editorial planning, brief construction, validation,
+distribution proposals, and performance interpretation. It does not own
+credentials, OAuth, scheduling, workflow state, rendering, billing, approval
+authority, or provider execution.
 
-<span class="boundary-stop">ZEO Creator does not own</span>: credentials, OAuth,
-scheduling, workflow persistence, approval state, provider execution, billing,
-or media rendering.
-
-This is a capability package, not a second connector framework and not a hidden
-agent runtime.
-
-## Proven with a real daily shape
-
-The dogfood fixture plans one animated episode, one HUD, and one comic-slides
-deliverable for each of `profrod.ai` and `zeroemployee.org`—six distinct briefs
-with isolated profiles, histories, objectives, evidence, and approval scopes.
-
-[Follow the complete tutorial](tutorials/daily-portfolio.md){ .md-button .md-button--primary }
+[Follow the complete portfolio tutorial](tutorials/content-portfolio.md){ .md-button .md-button--primary }

@@ -5,11 +5,11 @@ Every example is credential-free, deterministic, and exercised by CI.
 | Example | Demonstrates |
 |---|---|
 | [`inspect_capabilities.py`](inspect_capabilities.py) | Manifest discovery, effects, and required services |
-| [`create_brief.py`](create_brief.py) | Pure capability invocation and a typed Ducktyper brief |
+| [`create_content_brief.py`](create_content_brief.py) | Pure capability invocation and a typed producer-neutral brief |
 | [`research_connector.py`](research_connector.py) | Runtime injection of a provider-neutral evidence source |
-| [`validate_and_prepare.py`](validate_and_prepare.py) | Render validation and write-free distribution preparation |
+| [`validate_and_prepare.py`](validate_and_prepare.py) | Artifact validation and write-free distribution preparation |
 | [`assess_performance.py`](assess_performance.py) | Runtime injection of read-only metrics |
-| [`complete_daily_portfolio.py`](complete_daily_portfolio.py) | Validation of the six-deliverable reference portfolio |
+| [`complete_content_portfolio.py`](complete_content_portfolio.py) | Validation of the neutral two-publication reference portfolio |
 
 From the repository root:
 

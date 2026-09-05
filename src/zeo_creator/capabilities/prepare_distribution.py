@@ -8,17 +8,16 @@ from zeo_core.tools import ToolContext, capability
 
 from zeo_creator.capabilities._examples import distribution_request
 from zeo_creator.contracts.common import CreatorModel
-from zeo_creator.contracts.delivery import DeliveryReviewBundle, RenderedArtifact, RenderManifest
+from zeo_creator.contracts.delivery import ArtifactManifest, DeliveryReviewBundle
 from zeo_creator.contracts.distribution import ChannelPlan, ProposedPublicationOperation
-from zeo_creator.contracts.ducktyper import DucktyperBrief
+from zeo_creator.contracts.production import ContentBrief
 from zeo_creator.errors import CreatorDomainError
 from zeo_creator.services.distribution import prepare_distribution_operations
 
 
 class PrepareDistributionRequest(CreatorModel):
-    brief: DucktyperBrief
-    artifact: RenderedArtifact
-    manifest: RenderManifest
+    brief: ContentBrief
+    manifest: ArtifactManifest
     review: DeliveryReviewBundle
     channel_plan: ChannelPlan
     created_at: datetime
@@ -51,7 +50,6 @@ def prepare_distribution(
     try:
         operations = prepare_distribution_operations(
             brief=request.brief,
-            artifact=request.artifact,
             manifest=request.manifest,
             review=request.review,
             channel_plan=request.channel_plan,

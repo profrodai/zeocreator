@@ -86,10 +86,10 @@ nav:
       - Installation: getting-started/installation.md
       - Your first capability: getting-started/first-capability.md
   - Tutorial:
-      - The daily creator loop: tutorials/daily-portfolio.md
+      - Build a content portfolio: tutorials/content-portfolio.md
   - How-to guides:
       - Inject research connectors: guides/connectors.md
-      - Hand off to Ducktyper: guides/ducktyper.md
+      - Integrate a production engine: guides/production-adapters.md
       - Validate and prepare distribution: guides/delivery-distribution.md
       - Assess performance: guides/performance.md
       - Integrate a runner: guides/runner-integration.md

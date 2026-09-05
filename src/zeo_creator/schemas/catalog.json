@@ -1,0 +1,64 @@
+{
+  "contracts": [
+    {
+      "filename": "publication-profile.v1.schema.json",
+      "name": "publication-profile",
+      "version": "1"
+    },
+    {
+      "filename": "evidence-item.v1.schema.json",
+      "name": "evidence-item",
+      "version": "1"
+    },
+    {
+      "filename": "research-synthesis.v1.schema.json",
+      "name": "research-synthesis",
+      "version": "1"
+    },
+    {
+      "filename": "editorial-assignment.v1.schema.json",
+      "name": "editorial-assignment",
+      "version": "1"
+    },
+    {
+      "filename": "content-portfolio-plan.v1.schema.json",
+      "name": "content-portfolio-plan",
+      "version": "1"
+    },
+    {
+      "filename": "content-brief.v1.schema.json",
+      "name": "content-brief",
+      "version": "1"
+    },
+    {
+      "filename": "artifact-manifest.v1.schema.json",
+      "name": "artifact-manifest",
+      "version": "1"
+    },
+    {
+      "filename": "delivery-review-bundle.v1.schema.json",
+      "name": "delivery-review-bundle",
+      "version": "1"
+    },
+    {
+      "filename": "proposed-publication-operation.v1.schema.json",
+      "name": "proposed-publication-operation",
+      "version": "1"
+    },
+    {
+      "filename": "publication-receipt.v1.schema.json",
+      "name": "publication-receipt",
+      "version": "1"
+    },
+    {
+      "filename": "metric-observation.v1.schema.json",
+      "name": "metric-observation",
+      "version": "1"
+    },
+    {
+      "filename": "daily-performance-assessment.v1.schema.json",
+      "name": "daily-performance-assessment",
+      "version": "1"
+    }
+  ]
+}

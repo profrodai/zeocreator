@@ -13,7 +13,7 @@ help:
 	@echo "  make verify         Lint, strict type-check, and test"
 	@echo "  make doctor         Verify Python/Zeocore/manifests/projections"
 	@echo "  make capabilities   List the six public capabilities"
-	@echo "  make reference      Regenerate JSON schemas and dogfood samples"
+	@echo "  make reference      Regenerate JSON schemas and neutral samples"
 	@echo "  make docs           Build the documentation site in strict mode"
 	@echo "  make docs-serve     Serve docs locally with live reload"
 	@echo "  make examples       Run every public example"
@@ -67,11 +67,11 @@ docs-serve:
 
 examples:
 	$(UV) run python examples/inspect_capabilities.py
-	$(UV) run python examples/create_brief.py
+	$(UV) run python examples/create_content_brief.py
 	$(UV) run python examples/research_connector.py
 	$(UV) run python examples/validate_and_prepare.py
 	$(UV) run python examples/assess_performance.py
-	$(UV) run python examples/complete_daily_portfolio.py
+	$(UV) run python examples/complete_content_portfolio.py
 
 reference-check: reference
 	git diff --exit-code -- reference

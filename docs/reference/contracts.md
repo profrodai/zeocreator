@@ -1,54 +1,38 @@
 # Contract API
 
-The API below is generated directly from Python types and docstrings. Canonical
-standalone JSON Schemas are also committed under
-[`reference/schemas`](https://github.com/profrodai/zeocreator/tree/main/reference/schemas).
+ZEO Creator ships its versioned JSON Schemas inside the wheel and commits copies
+under [`reference/schemas`](../../reference/schemas).
 
-## Publication contracts
+```console
+zeo-creator contracts list --json
+zeo-creator contracts export --output=./schemas
+zeo-creator contract-schema --name=content-brief --version=1
+```
+
+## Publication and evidence
 
 ::: zeo_creator.contracts.publications
-    options:
-      show_root_heading: false
-      members_order: source
-
-## Evidence contracts
 
 ::: zeo_creator.contracts.evidence
-    options:
-      show_root_heading: false
-      members_order: source
 
-## Editorial contracts
+## Editorial planning
 
 ::: zeo_creator.contracts.editorial
-    options:
-      show_root_heading: false
-      members_order: source
 
-## Ducktyper contracts
+## Production boundary
 
-::: zeo_creator.contracts.ducktyper
-    options:
-      show_root_heading: false
-      members_order: source
+::: zeo_creator.contracts.production
 
-## Delivery contracts
+## Delivery and distribution
 
 ::: zeo_creator.contracts.delivery
-    options:
-      show_root_heading: false
-      members_order: source
-
-## Distribution contracts
 
 ::: zeo_creator.contracts.distribution
-    options:
-      show_root_heading: false
-      members_order: source
 
-## Performance contracts
+## Performance
 
 ::: zeo_creator.contracts.performance
-    options:
-      show_root_heading: false
-      members_order: source
+
+## Common identity and canonicalization
+
+::: zeo_creator.contracts.common

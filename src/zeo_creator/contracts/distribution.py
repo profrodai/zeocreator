@@ -1,6 +1,7 @@
 """Provider-neutral publication proposals and secret-safe receipt contracts."""
 
 from enum import StrEnum
+from typing import Annotated
 
 from pydantic import Field, model_validator
 from zeo_core.contracts import EffectKind
@@ -12,13 +13,7 @@ from zeo_creator.contracts.common import (
     assert_secret_safe,
 )
 
-
-class ProviderKind(StrEnum):
-    WEBSITE = "website"
-    NEWSLETTER = "newsletter"
-    X = "x"
-    LINKEDIN = "linkedin"
-    YOUTUBE = "youtube"
+ProviderKind = Annotated[str, Field(pattern=r"^[a-z0-9]+(?:[.-][a-z0-9]+)*$", min_length=1)]
 
 
 class ChannelDestination(CreatorModel):
@@ -48,8 +43,9 @@ class PublicationPayload(CreatorModel):
 
 class ProposedPublicationOperation(DurableArtifact):
     operation_id: str = Field(min_length=1)
-    artifact_ref: str = Field(min_length=1)
-    artifact_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    artifact_manifest_ref: str = Field(min_length=1)
+    artifact_manifest_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    selected_artifact_refs: tuple[str, ...] = Field(min_length=1)
     provider_kind: ProviderKind
     connection_ref: str = Field(min_length=1)
     destination_account_ref: str = Field(min_length=1)
