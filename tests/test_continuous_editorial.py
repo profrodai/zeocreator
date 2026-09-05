@@ -1,6 +1,7 @@
 """End-to-end invariants for the continuous editorial protocol."""
 
 from datetime import timedelta
+from typing import Any
 
 import pytest
 from pydantic import ValidationError
@@ -41,7 +42,7 @@ from zeo_creator.registry import capability_registry
 from zeo_creator.runtime import make_context
 
 
-def _invoke(capability_id: str, request: object):
+def _invoke(capability_id: str, request: Any) -> Any:
     capability = capability_registry().get(capability_id)
     return invoke_sync(
         capability,

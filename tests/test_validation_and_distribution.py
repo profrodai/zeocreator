@@ -1,11 +1,12 @@
 """Failure paths for producer-neutral delivery and distribution."""
 
-from datetime import timedelta
+from datetime import datetime, timedelta
+from typing import cast
 
 import pytest
 
 from tests.fixtures.reference import NOW, build_reference_snapshot, publication_profiles
-from zeo_creator.contracts.delivery import ArtifactManifest
+from zeo_creator.contracts.delivery import ArtifactManifest, DeliveryReviewBundle
 from zeo_creator.contracts.distribution import ChannelPlan
 from zeo_creator.errors import CreatorDomainError
 from zeo_creator.services.distribution import prepare_distribution_operations
@@ -26,7 +27,7 @@ def _channel_plan(index: int) -> ChannelPlan:
     )
 
 
-def _review_with_manifest(manifest: ArtifactManifest):
+def _review_with_manifest(manifest: ArtifactManifest) -> DeliveryReviewBundle:
     snapshot = build_reference_snapshot()
     return validate_delivery_bundle(
         brief=snapshot.briefs[0],
@@ -73,11 +74,15 @@ def test_validation_blocks_missing_required_attestation() -> None:
 def test_changed_schedule_invalidates_approval() -> None:
     snapshot = build_reference_snapshot()
     brief, manifest, review = snapshot.briefs[0], snapshot.manifests[0], snapshot.reviews[0]
+    assert all(item.destination.scheduled_for is not None for item in review.proposed_variants)
     variants = tuple(
         item.model_copy(
             update={
                 "destination": item.destination.model_copy(
-                    update={"scheduled_for": item.destination.scheduled_for + timedelta(hours=1)}
+                    update={
+                        "scheduled_for": cast(datetime, item.destination.scheduled_for)
+                        + timedelta(hours=1)
+                    }
                 )
             }
         )

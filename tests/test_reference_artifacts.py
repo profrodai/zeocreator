@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from typing import Any
 
 from tests.fixtures.reference import build_reference_snapshot
 from zeo_creator.contracts.editorial import ContentPortfolioPlan
@@ -11,7 +12,7 @@ from zeo_creator.contracts.production import ContentBrief
 REFERENCE = Path("reference")
 
 
-def _load(relative: str):
+def _load(relative: str) -> Any:
     return json.loads((REFERENCE / relative).read_text())
 
 

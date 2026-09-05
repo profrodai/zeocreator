@@ -169,7 +169,12 @@ class DeterministicEditorialStrategy(
         previous_revisions: Sequence[StoryRevision],
         created_at: datetime,
     ) -> tuple[StoryRevision, ...]:
-        previous_by_title = {item.title.casefold(): item for item in previous_revisions}
+        previous_by_title: dict[str, StoryRevision] = {}
+        for item in previous_revisions:
+            key = item.title.casefold()
+            current = previous_by_title.get(key)
+            if current is None or item.revision > current.revision:
+                previous_by_title[key] = item
         results: list[StoryRevision] = []
         for signal in sorted(signals, key=lambda item: item.signal_id):
             previous = previous_by_title.get(signal.topic.casefold())
