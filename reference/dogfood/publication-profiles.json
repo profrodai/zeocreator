@@ -1,0 +1,81 @@
+[
+  {
+    "approval_policy_ref": "approval_profrod@1",
+    "audience_definition": "Savvy builders shipping practical AI systems",
+    "character_refs": [
+      "prof_rod",
+      "ducktyper"
+    ],
+    "content_digest": "sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+    "created_at": "2026-09-05T08:00:00Z",
+    "cta_policy": "Invite builders to test the technique in a bounded project.",
+    "default_channels": [
+      "website",
+      "linkedin",
+      "youtube"
+    ],
+    "display_name": "Prof Rod",
+    "editorial_pillars": [
+      "agent engineering",
+      "AI product craft",
+      "builder leverage"
+    ],
+    "input_refs": [],
+    "organization_id": "ducktyper-dogfood",
+    "profile_id": "profile_profrod_ai",
+    "prohibited_claims": [
+      "guaranteed revenue"
+    ],
+    "prohibited_topics": [
+      "celebrity gossip"
+    ],
+    "publication_id": "profrod.ai",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "visual_style_ref": "style_profrod_editorial@1",
+    "voice_rules": [
+      "First person",
+      "Pragmatic",
+      "Show the mechanism"
+    ]
+  },
+  {
+    "approval_policy_ref": "approval_zeroemployee@1",
+    "audience_definition": "Organizations governing dependable digital labor",
+    "character_refs": [
+      "zeo_operator"
+    ],
+    "content_digest": "sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+    "created_at": "2026-09-05T08:00:00Z",
+    "cta_policy": "Invite operators to adopt one explicit control boundary.",
+    "default_channels": [
+      "website",
+      "newsletter",
+      "x"
+    ],
+    "display_name": "Zero Employee",
+    "editorial_pillars": [
+      "governance",
+      "authority boundaries",
+      "operational evidence"
+    ],
+    "input_refs": [],
+    "organization_id": "ducktyper-dogfood",
+    "profile_id": "profile_zeroemployee_org",
+    "prohibited_claims": [
+      "humans are obsolete"
+    ],
+    "prohibited_topics": [
+      "unbounded autonomy"
+    ],
+    "publication_id": "zeroemployee.org",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "visual_style_ref": "style_zeroemployee_systems@1",
+    "voice_rules": [
+      "Institutional",
+      "Precise",
+      "Separate fact from hypothesis"
+    ]
+  }
+]

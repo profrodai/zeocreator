@@ -1,0 +1,12 @@
+# ZEO Creator agent entrypoint
+
+ZEO Creator is a governed capability package, not a workflow runtime.
+
+- Preserve publication identity and evidence provenance end to end.
+- Keep credentials and provider SDKs outside contracts, capabilities, and services.
+- Never add live provider execution, scheduling, OAuth, or renderer internals.
+- Use `make verify` and `make doctor` before declaring work ready.
+- Do not publish, push, rename, or change repository visibility without an explicit operator decision.
+
+Governed work lives in the associated org corpus under
+`projects/quackresearch/sow/zeo-creator/`.

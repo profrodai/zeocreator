@@ -1,0 +1,1136 @@
+{
+  "$defs": {
+    "AnimatedEpisodePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "audio_direction": {
+          "minLength": 1,
+          "title": "Audio Direction",
+          "type": "string"
+        },
+        "character_actions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Character Actions",
+          "type": "array"
+        },
+        "dialogue": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Dialogue",
+          "type": "array"
+        },
+        "duration_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Seconds",
+          "type": "integer"
+        },
+        "ending": {
+          "minLength": 1,
+          "title": "Ending",
+          "type": "string"
+        },
+        "kind": {
+          "const": "animated_episode",
+          "default": "animated_episode",
+          "title": "Kind",
+          "type": "string"
+        },
+        "on_screen_text": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "On Screen Text",
+          "type": "array"
+        },
+        "scene_beats": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Scene Beats",
+          "type": "array"
+        },
+        "script": {
+          "minLength": 1,
+          "title": "Script",
+          "type": "string"
+        },
+        "setting": {
+          "minLength": 1,
+          "title": "Setting",
+          "type": "string"
+        },
+        "voice_over": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Voice Over",
+          "type": "array"
+        }
+      },
+      "required": [
+        "script",
+        "scene_beats",
+        "dialogue",
+        "voice_over",
+        "on_screen_text",
+        "character_actions",
+        "setting",
+        "duration_seconds",
+        "audio_direction",
+        "ending"
+      ],
+      "title": "AnimatedEpisodePayload",
+      "type": "object"
+    },
+    "ChannelDestination": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "minLength": 1,
+          "title": "Channel",
+          "type": "string"
+        },
+        "connection_ref": {
+          "minLength": 1,
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "destination_account_ref": {
+          "minLength": 1,
+          "title": "Destination Account Ref",
+          "type": "string"
+        },
+        "provider_kind": {
+          "$ref": "#/$defs/ProviderKind"
+        },
+        "scheduled_for": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scheduled For"
+        }
+      },
+      "required": [
+        "channel",
+        "provider_kind",
+        "connection_ref",
+        "destination_account_ref"
+      ],
+      "title": "ChannelDestination",
+      "type": "object"
+    },
+    "ChannelPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "channel_plan_id": {
+          "minLength": 1,
+          "title": "Channel Plan Id",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "destinations": {
+          "items": {
+            "$ref": "#/$defs/ChannelDestination"
+          },
+          "minItems": 1,
+          "title": "Destinations",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "channel_plan_id",
+        "destinations"
+      ],
+      "title": "ChannelPlan",
+      "type": "object"
+    },
+    "ComicSlidesPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "continuity_requirements": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Continuity Requirements",
+          "type": "array"
+        },
+        "dialogue_captions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Dialogue Captions",
+          "type": "array"
+        },
+        "final_cta": {
+          "minLength": 1,
+          "title": "Final Cta",
+          "type": "string"
+        },
+        "kind": {
+          "const": "comic_slides",
+          "default": "comic_slides",
+          "title": "Kind",
+          "type": "string"
+        },
+        "panel_beats": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Panel Beats",
+          "type": "array"
+        },
+        "panel_count": {
+          "minimum": 2,
+          "title": "Panel Count",
+          "type": "integer"
+        },
+        "poses": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Poses",
+          "type": "array"
+        },
+        "slide_headlines": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Slide Headlines",
+          "type": "array"
+        }
+      },
+      "required": [
+        "panel_count",
+        "panel_beats",
+        "dialogue_captions",
+        "poses",
+        "continuity_requirements",
+        "slide_headlines",
+        "final_cta"
+      ],
+      "title": "ComicSlidesPayload",
+      "type": "object"
+    },
+    "DeliverableKind": {
+      "enum": [
+        "animated_episode",
+        "hud",
+        "comic_slides"
+      ],
+      "title": "DeliverableKind",
+      "type": "string"
+    },
+    "DucktyperBrief": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_id": {
+          "minLength": 1,
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "audience": {
+          "minLength": 1,
+          "title": "Audience",
+          "type": "string"
+        },
+        "brand_profile_ref": {
+          "minLength": 1,
+          "title": "Brand Profile Ref",
+          "type": "string"
+        },
+        "brief_id": {
+          "minLength": 1,
+          "title": "Brief Id",
+          "type": "string"
+        },
+        "character_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Character Refs",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "content_revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Content Revision",
+          "type": "integer"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "cta": {
+          "minLength": 1,
+          "title": "Cta",
+          "type": "string"
+        },
+        "deliverable_kind": {
+          "$ref": "#/$defs/DeliverableKind"
+        },
+        "desired_audience_action": {
+          "minLength": 1,
+          "title": "Desired Audience Action",
+          "type": "string"
+        },
+        "evidence_claims": {
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "minItems": 1,
+          "title": "Evidence Claims",
+          "type": "array"
+        },
+        "format_payload": {
+          "discriminator": {
+            "mapping": {
+              "animated_episode": "#/$defs/AnimatedEpisodePayload",
+              "comic_slides": "#/$defs/ComicSlidesPayload",
+              "hud": "#/$defs/HudPayload"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AnimatedEpisodePayload"
+            },
+            {
+              "$ref": "#/$defs/HudPayload"
+            },
+            {
+              "$ref": "#/$defs/ComicSlidesPayload"
+            }
+          ],
+          "title": "Format Payload"
+        },
+        "hook": {
+          "minLength": 1,
+          "title": "Hook",
+          "type": "string"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "prohibited_claims": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Claims",
+          "type": "array"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "target_channels": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Target Channels",
+          "type": "array"
+        },
+        "thesis": {
+          "minLength": 1,
+          "title": "Thesis",
+          "type": "string"
+        },
+        "topic": {
+          "minLength": 1,
+          "title": "Topic",
+          "type": "string"
+        },
+        "visual_style_ref": {
+          "minLength": 1,
+          "title": "Visual Style Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "brief_id",
+        "assignment_id",
+        "deliverable_kind",
+        "objective",
+        "audience",
+        "desired_audience_action",
+        "topic",
+        "thesis",
+        "hook",
+        "evidence_claims",
+        "source_refs",
+        "brand_profile_ref",
+        "visual_style_ref",
+        "cta",
+        "target_channels",
+        "format_payload"
+      ],
+      "title": "DucktyperBrief",
+      "type": "object"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_refs"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "HudPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "highlight_events": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Highlight Events",
+          "type": "array"
+        },
+        "information_hierarchy": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Information Hierarchy",
+          "type": "array"
+        },
+        "kind": {
+          "const": "hud",
+          "default": "hud",
+          "title": "Kind",
+          "type": "string"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Labels",
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Metrics",
+          "type": "array"
+        },
+        "motion_sequence": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Motion Sequence",
+          "type": "array"
+        },
+        "narration": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Narration",
+          "type": "array"
+        },
+        "screen_regions": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Screen Regions",
+          "type": "array"
+        },
+        "visual_metaphor": {
+          "minLength": 1,
+          "title": "Visual Metaphor",
+          "type": "string"
+        }
+      },
+      "required": [
+        "information_hierarchy",
+        "metrics",
+        "labels",
+        "motion_sequence",
+        "visual_metaphor",
+        "screen_regions",
+        "narration",
+        "highlight_events"
+      ],
+      "title": "HudPayload",
+      "type": "object"
+    },
+    "ProviderKind": {
+      "enum": [
+        "website",
+        "newsletter",
+        "x",
+        "linkedin",
+        "youtube"
+      ],
+      "title": "ProviderKind",
+      "type": "string"
+    },
+    "PublicationProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_policy_ref": {
+          "minLength": 1,
+          "title": "Approval Policy Ref",
+          "type": "string"
+        },
+        "audience_definition": {
+          "minLength": 1,
+          "title": "Audience Definition",
+          "type": "string"
+        },
+        "character_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Character Refs",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "cta_policy": {
+          "minLength": 1,
+          "title": "Cta Policy",
+          "type": "string"
+        },
+        "default_channels": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Default Channels",
+          "type": "array"
+        },
+        "display_name": {
+          "minLength": 1,
+          "title": "Display Name",
+          "type": "string"
+        },
+        "editorial_pillars": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Editorial Pillars",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "profile_id": {
+          "minLength": 1,
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "prohibited_claims": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Claims",
+          "type": "array"
+        },
+        "prohibited_topics": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Topics",
+          "type": "array"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "visual_style_ref": {
+          "minLength": 1,
+          "title": "Visual Style Ref",
+          "type": "string"
+        },
+        "voice_rules": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Voice Rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "profile_id",
+        "display_name",
+        "audience_definition",
+        "editorial_pillars",
+        "voice_rules",
+        "visual_style_ref",
+        "default_channels",
+        "cta_policy",
+        "approval_policy_ref"
+      ],
+      "title": "PublicationProfile",
+      "type": "object"
+    },
+    "RenderManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "artifact_ref": {
+          "minLength": 1,
+          "title": "Artifact Ref",
+          "type": "string"
+        },
+        "brand_profile_ref": {
+          "minLength": 1,
+          "title": "Brand Profile Ref",
+          "type": "string"
+        },
+        "brief_content_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Brief Content Digest",
+          "type": "string"
+        },
+        "brief_id": {
+          "minLength": 1,
+          "title": "Brief Id",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "content_revision": {
+          "minimum": 1,
+          "title": "Content Revision",
+          "type": "integer"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "included_elements": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Included Elements",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "manifest_id": {
+          "minLength": 1,
+          "title": "Manifest Id",
+          "type": "string"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "rendered_claim_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Rendered Claim Ids",
+          "type": "array"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "technical_checks": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "title": "Technical Checks",
+          "type": "object"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "manifest_id",
+        "brief_id",
+        "content_revision",
+        "brief_content_digest",
+        "artifact_ref",
+        "artifact_digest",
+        "brand_profile_ref"
+      ],
+      "title": "RenderManifest",
+      "type": "object"
+    },
+    "RenderedArtifact": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "artifact_ref": {
+          "minLength": 1,
+          "title": "Artifact Ref",
+          "type": "string"
+        },
+        "brief_content_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Brief Content Digest",
+          "type": "string"
+        },
+        "brief_id": {
+          "minLength": 1,
+          "title": "Brief Id",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "content_revision": {
+          "minimum": 1,
+          "title": "Content Revision",
+          "type": "integer"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "extracted_text": {
+          "default": "",
+          "title": "Extracted Text",
+          "type": "string"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "media_type": {
+          "minLength": 1,
+          "title": "Media Type",
+          "type": "string"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "storage_ref": {
+          "minLength": 1,
+          "title": "Storage Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "artifact_ref",
+        "artifact_digest",
+        "brief_id",
+        "content_revision",
+        "brief_content_digest",
+        "media_type",
+        "storage_ref"
+      ],
+      "title": "RenderedArtifact",
+      "type": "object"
+    },
+    "ResearchSynthesis": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_claims": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "title": "Candidate Claims",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "content_history_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Content History Refs",
+          "type": "array"
+        },
+        "coverage_gaps": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Coverage Gaps",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "opportunities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Opportunities",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "research_window": {
+          "$ref": "#/$defs/ResearchWindow"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "risks": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Risks",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "synthesis_id": {
+          "minLength": 1,
+          "title": "Synthesis Id",
+          "type": "string"
+        },
+        "themes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Themes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "synthesis_id",
+        "research_window"
+      ],
+      "title": "ResearchSynthesis",
+      "type": "object"
+    },
+    "ResearchWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "ends_at": {
+          "format": "date-time",
+          "title": "Ends At",
+          "type": "string"
+        },
+        "starts_at": {
+          "format": "date-time",
+          "title": "Starts At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "starts_at",
+        "ends_at"
+      ],
+      "title": "ResearchWindow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifact": {
+      "$ref": "#/$defs/RenderedArtifact"
+    },
+    "brief": {
+      "$ref": "#/$defs/DucktyperBrief"
+    },
+    "channel_plan": {
+      "$ref": "#/$defs/ChannelPlan"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "manifest": {
+      "$ref": "#/$defs/RenderManifest"
+    },
+    "publication": {
+      "$ref": "#/$defs/PublicationProfile"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "synthesis": {
+      "$ref": "#/$defs/ResearchSynthesis"
+    }
+  },
+  "required": [
+    "brief",
+    "artifact",
+    "manifest",
+    "publication",
+    "synthesis",
+    "channel_plan",
+    "created_at"
+  ],
+  "title": "ValidateDeliveryRequest",
+  "type": "object"
+}

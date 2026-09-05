@@ -1,0 +1,539 @@
+{
+  "$defs": {
+    "ContentHistoryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_ref": {
+          "minLength": 1,
+          "title": "Artifact Ref",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "deliverable_kind": {
+          "$ref": "#/$defs/DeliverableKind"
+        },
+        "history_id": {
+          "minLength": 1,
+          "title": "History Id",
+          "type": "string"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "published_at": {
+          "format": "date-time",
+          "title": "Published At",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "topic": {
+          "minLength": 1,
+          "title": "Topic",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "history_id",
+        "deliverable_kind",
+        "topic",
+        "published_at",
+        "artifact_ref"
+      ],
+      "title": "ContentHistoryEntry",
+      "type": "object"
+    },
+    "DeliverableKind": {
+      "enum": [
+        "animated_episode",
+        "hud",
+        "comic_slides"
+      ],
+      "title": "DeliverableKind",
+      "type": "string"
+    },
+    "EvidenceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_refs"
+      ],
+      "title": "EvidenceClaim",
+      "type": "object"
+    },
+    "PortfolioConstraints": {
+      "additionalProperties": false,
+      "properties": {
+        "assignments_per_publication": {
+          "default": 3,
+          "minimum": 1,
+          "title": "Assignments Per Publication",
+          "type": "integer"
+        },
+        "avoid_recent_topics": {
+          "default": true,
+          "title": "Avoid Recent Topics",
+          "type": "boolean"
+        },
+        "required_kinds": {
+          "default": [
+            "animated_episode",
+            "hud",
+            "comic_slides"
+          ],
+          "items": {
+            "$ref": "#/$defs/DeliverableKind"
+          },
+          "title": "Required Kinds",
+          "type": "array"
+        }
+      },
+      "title": "PortfolioConstraints",
+      "type": "object"
+    },
+    "PublicationObjective": {
+      "additionalProperties": false,
+      "properties": {
+        "desired_audience_action": {
+          "minLength": 1,
+          "title": "Desired Audience Action",
+          "type": "string"
+        },
+        "objective": {
+          "minLength": 1,
+          "title": "Objective",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "publication_id",
+        "objective",
+        "desired_audience_action"
+      ],
+      "title": "PublicationObjective",
+      "type": "object"
+    },
+    "PublicationProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_policy_ref": {
+          "minLength": 1,
+          "title": "Approval Policy Ref",
+          "type": "string"
+        },
+        "audience_definition": {
+          "minLength": 1,
+          "title": "Audience Definition",
+          "type": "string"
+        },
+        "character_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Character Refs",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "cta_policy": {
+          "minLength": 1,
+          "title": "Cta Policy",
+          "type": "string"
+        },
+        "default_channels": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Default Channels",
+          "type": "array"
+        },
+        "display_name": {
+          "minLength": 1,
+          "title": "Display Name",
+          "type": "string"
+        },
+        "editorial_pillars": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Editorial Pillars",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "profile_id": {
+          "minLength": 1,
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "prohibited_claims": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Claims",
+          "type": "array"
+        },
+        "prohibited_topics": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Topics",
+          "type": "array"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "visual_style_ref": {
+          "minLength": 1,
+          "title": "Visual Style Ref",
+          "type": "string"
+        },
+        "voice_rules": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Voice Rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "profile_id",
+        "display_name",
+        "audience_definition",
+        "editorial_pillars",
+        "voice_rules",
+        "visual_style_ref",
+        "default_channels",
+        "cta_policy",
+        "approval_policy_ref"
+      ],
+      "title": "PublicationProfile",
+      "type": "object"
+    },
+    "ResearchSynthesis": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_claims": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceClaim"
+          },
+          "title": "Candidate Claims",
+          "type": "array"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "content_history_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Content History Refs",
+          "type": "array"
+        },
+        "coverage_gaps": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Coverage Gaps",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "opportunities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Opportunities",
+          "type": "array"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "research_window": {
+          "$ref": "#/$defs/ResearchWindow"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "risks": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Risks",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "synthesis_id": {
+          "minLength": 1,
+          "title": "Synthesis Id",
+          "type": "string"
+        },
+        "themes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Themes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "synthesis_id",
+        "research_window"
+      ],
+      "title": "ResearchSynthesis",
+      "type": "object"
+    },
+    "ResearchWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "ends_at": {
+          "format": "date-time",
+          "title": "Ends At",
+          "type": "string"
+        },
+        "starts_at": {
+          "format": "date-time",
+          "title": "Starts At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "starts_at",
+        "ends_at"
+      ],
+      "title": "ResearchWindow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "constraints": {
+      "$ref": "#/$defs/PortfolioConstraints",
+      "default": {
+        "assignments_per_publication": 3,
+        "avoid_recent_topics": true,
+        "required_kinds": [
+          "animated_episode",
+          "hud",
+          "comic_slides"
+        ]
+      }
+    },
+    "content_history": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ContentHistoryEntry"
+      },
+      "title": "Content History",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "due_at": {
+      "format": "date-time",
+      "title": "Due At",
+      "type": "string"
+    },
+    "objectives": {
+      "items": {
+        "$ref": "#/$defs/PublicationObjective"
+      },
+      "minItems": 1,
+      "title": "Objectives",
+      "type": "array"
+    },
+    "organization_id": {
+      "minLength": 1,
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "plan_date": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "title": "Plan Date",
+      "type": "string"
+    },
+    "profiles": {
+      "items": {
+        "$ref": "#/$defs/PublicationProfile"
+      },
+      "minItems": 1,
+      "title": "Profiles",
+      "type": "array"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "syntheses": {
+      "items": {
+        "$ref": "#/$defs/ResearchSynthesis"
+      },
+      "minItems": 1,
+      "title": "Syntheses",
+      "type": "array"
+    }
+  },
+  "required": [
+    "organization_id",
+    "profiles",
+    "syntheses",
+    "objectives",
+    "plan_date",
+    "due_at",
+    "created_at"
+  ],
+  "title": "PlanDailyPortfolioRequest",
+  "type": "object"
+}

@@ -1,0 +1,302 @@
+[
+  {
+    "approval_digest": "sha256:b1dea172fdc495686f6e3d51027fb39d6c481ac9c9f0b9ea1895266550d6f729",
+    "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+    "brand_constraints_pass": true,
+    "brief_id": "brief_a072daeb7fa3dcf4dd3e",
+    "content_digest": "sha256:6373dff759d37db8cfb78ca4a1c55093e6ed85339a2f90e5318cce5143cc5416",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_a072daeb7fa3dcf4dd3e",
+      "artifact_a9c6396ba2b4968cd44c",
+      "manifest_a9c6396ba2b4968cd44c",
+      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+      "synthesis_366960f5a52a20753c60",
+      "channels_a9c6396ba2b4968cd44c"
+    ],
+    "manifest_id": "manifest_a9c6396ba2b4968cd44c",
+    "organization_id": "ducktyper-dogfood",
+    "proposed_destinations": [
+      {
+        "channel": "website",
+        "connection_ref": "connection_profrod.ai_website",
+        "destination_account_ref": "destination_profrod.ai_website",
+        "provider_kind": "website",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      },
+      {
+        "channel": "linkedin",
+        "connection_ref": "connection_profrod.ai_linkedin",
+        "destination_account_ref": "destination_profrod.ai_linkedin",
+        "provider_kind": "linkedin",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      }
+    ],
+    "proposed_payload": {
+      "alt_text": "animated_episode: Bounded agent retries",
+      "caption": "Bounded retries reduce runaway automation risk.\n\nInvite builders to test the technique in a bounded project.",
+      "description": "Help builders ship one reliable creator operation \u2014 Bounded agent retries",
+      "title": "Prof Rod: Bounded agent retries"
+    },
+    "publication_id": "profrod.ai",
+    "ready_for_approval": true,
+    "required_element_coverage": true,
+    "review_id": "review_98eb83934f5009342e79",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true,
+    "technical_delivery_pass": true
+  },
+  {
+    "approval_digest": "sha256:4ba6d4242e2a37da221ca19008bf1ce0962e825661de3a20ee9ca7d2fc833253",
+    "artifact_ref": "artifact_8149998ba5cac80ebb12",
+    "brand_constraints_pass": true,
+    "brief_id": "brief_c740c7b4799e30c9f33e",
+    "content_digest": "sha256:f3f6143e10e613c32e54de3816af2c5bbd9f137d5cb2c3bfe6ec3c13948b58d9",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_c740c7b4799e30c9f33e",
+      "artifact_8149998ba5cac80ebb12",
+      "manifest_8149998ba5cac80ebb12",
+      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+      "synthesis_366960f5a52a20753c60",
+      "channels_8149998ba5cac80ebb12"
+    ],
+    "manifest_id": "manifest_8149998ba5cac80ebb12",
+    "organization_id": "ducktyper-dogfood",
+    "proposed_destinations": [
+      {
+        "channel": "website",
+        "connection_ref": "connection_profrod.ai_website",
+        "destination_account_ref": "destination_profrod.ai_website",
+        "provider_kind": "website",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      },
+      {
+        "channel": "linkedin",
+        "connection_ref": "connection_profrod.ai_linkedin",
+        "destination_account_ref": "destination_profrod.ai_linkedin",
+        "provider_kind": "linkedin",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      }
+    ],
+    "proposed_payload": {
+      "alt_text": "hud: Typed creator handoffs",
+      "caption": "Typed briefs reduce renderer ambiguity.\n\nInvite builders to test the technique in a bounded project.",
+      "description": "Help builders ship one reliable creator operation \u2014 Typed creator handoffs",
+      "title": "Prof Rod: Typed creator handoffs"
+    },
+    "publication_id": "profrod.ai",
+    "ready_for_approval": true,
+    "required_element_coverage": true,
+    "review_id": "review_3754e53ce9af24b66128",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true,
+    "technical_delivery_pass": true
+  },
+  {
+    "approval_digest": "sha256:66ff831b284a9abb78e5f76f2488c5aeeda423d37532d273202752076953038c",
+    "artifact_ref": "artifact_2dabeddb5c8662a762ab",
+    "brand_constraints_pass": true,
+    "brief_id": "brief_b80021c5388692b9f9ab",
+    "content_digest": "sha256:9cfed90baac89ae1f532de8c94c21a85d6281f4c05814b8570e5124454bb00e6",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_b80021c5388692b9f9ab",
+      "artifact_2dabeddb5c8662a762ab",
+      "manifest_2dabeddb5c8662a762ab",
+      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+      "synthesis_366960f5a52a20753c60",
+      "channels_2dabeddb5c8662a762ab"
+    ],
+    "manifest_id": "manifest_2dabeddb5c8662a762ab",
+    "organization_id": "ducktyper-dogfood",
+    "proposed_destinations": [
+      {
+        "channel": "website",
+        "connection_ref": "connection_profrod.ai_website",
+        "destination_account_ref": "destination_profrod.ai_website",
+        "provider_kind": "website",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      },
+      {
+        "channel": "linkedin",
+        "connection_ref": "connection_profrod.ai_linkedin",
+        "destination_account_ref": "destination_profrod.ai_linkedin",
+        "provider_kind": "linkedin",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      }
+    ],
+    "proposed_payload": {
+      "alt_text": "comic_slides: Evidence-led demos",
+      "caption": "Source-linked demos improve builder trust.\n\nInvite builders to test the technique in a bounded project.",
+      "description": "Help builders ship one reliable creator operation \u2014 Evidence-led demos",
+      "title": "Prof Rod: Evidence-led demos"
+    },
+    "publication_id": "profrod.ai",
+    "ready_for_approval": true,
+    "required_element_coverage": true,
+    "review_id": "review_d11ceca2c14d6faef6d1",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true,
+    "technical_delivery_pass": true
+  },
+  {
+    "approval_digest": "sha256:611397f9195030c0df0dfd8ee2e2b2631ca1de02eb03a37440f9cbf737cfaea2",
+    "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+    "brand_constraints_pass": true,
+    "brief_id": "brief_8fbb5e120c400d53ffb2",
+    "content_digest": "sha256:808bd39e4d62efcea7f5d767cdc3d5c347e29d577b869702044e51ea574c3005",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_8fbb5e120c400d53ffb2",
+      "artifact_133f9d2d5a9fea47cc6e",
+      "manifest_133f9d2d5a9fea47cc6e",
+      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+      "synthesis_c1a66ac43e95708ee3a7",
+      "channels_133f9d2d5a9fea47cc6e"
+    ],
+    "manifest_id": "manifest_133f9d2d5a9fea47cc6e",
+    "organization_id": "ducktyper-dogfood",
+    "proposed_destinations": [
+      {
+        "channel": "website",
+        "connection_ref": "connection_zeroemployee.org_website",
+        "destination_account_ref": "destination_zeroemployee.org_website",
+        "provider_kind": "website",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      },
+      {
+        "channel": "newsletter",
+        "connection_ref": "connection_zeroemployee.org_newsletter",
+        "destination_account_ref": "destination_zeroemployee.org_newsletter",
+        "provider_kind": "newsletter",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      }
+    ],
+    "proposed_payload": {
+      "alt_text": "animated_episode: Exact effect authority",
+      "caption": "Exact effect authorization narrows provider-write risk.\n\nInvite operators to adopt one explicit control boundary.",
+      "description": "Teach organizations to govern provider effects \u2014 Exact effect authority",
+      "title": "Zero Employee: Exact effect authority"
+    },
+    "publication_id": "zeroemployee.org",
+    "ready_for_approval": true,
+    "required_element_coverage": true,
+    "review_id": "review_e6ebae805e35e9e31782",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true,
+    "technical_delivery_pass": true
+  },
+  {
+    "approval_digest": "sha256:e743121d9a26b1fbaf2b5dcf7aa72452cc0d9cbcb9bc8f7a2b9a0774223ac2f9",
+    "artifact_ref": "artifact_69a7c523ac973e6d200a",
+    "brand_constraints_pass": true,
+    "brief_id": "brief_3dfa05d6507eaa5a5bcf",
+    "content_digest": "sha256:4cd83e9280babe795034f5b4338e0ff371bebbf6a6e6b21d3830bc1e230a2866",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_3dfa05d6507eaa5a5bcf",
+      "artifact_69a7c523ac973e6d200a",
+      "manifest_69a7c523ac973e6d200a",
+      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+      "synthesis_c1a66ac43e95708ee3a7",
+      "channels_69a7c523ac973e6d200a"
+    ],
+    "manifest_id": "manifest_69a7c523ac973e6d200a",
+    "organization_id": "ducktyper-dogfood",
+    "proposed_destinations": [
+      {
+        "channel": "website",
+        "connection_ref": "connection_zeroemployee.org_website",
+        "destination_account_ref": "destination_zeroemployee.org_website",
+        "provider_kind": "website",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      },
+      {
+        "channel": "newsletter",
+        "connection_ref": "connection_zeroemployee.org_newsletter",
+        "destination_account_ref": "destination_zeroemployee.org_newsletter",
+        "provider_kind": "newsletter",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      }
+    ],
+    "proposed_payload": {
+      "alt_text": "hud: Digest-bound approvals",
+      "caption": "Approval digests expose post-review mutation.\n\nInvite operators to adopt one explicit control boundary.",
+      "description": "Teach organizations to govern provider effects \u2014 Digest-bound approvals",
+      "title": "Zero Employee: Digest-bound approvals"
+    },
+    "publication_id": "zeroemployee.org",
+    "ready_for_approval": true,
+    "required_element_coverage": true,
+    "review_id": "review_4e534d07de9404c6c8d9",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true,
+    "technical_delivery_pass": true
+  },
+  {
+    "approval_digest": "sha256:5d315da7799ad407b2c349ed711d6233caec8442c8e27142b740939e6cc0eb45",
+    "artifact_ref": "artifact_18940b3934fcec873fb8",
+    "brand_constraints_pass": true,
+    "brief_id": "brief_f898a646b35e42eb7752",
+    "content_digest": "sha256:5e878456266779ab6028175e187ff91a5d4ab3db08c404f7375f87a1d412da98",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_f898a646b35e42eb7752",
+      "artifact_18940b3934fcec873fb8",
+      "manifest_18940b3934fcec873fb8",
+      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+      "synthesis_c1a66ac43e95708ee3a7",
+      "channels_18940b3934fcec873fb8"
+    ],
+    "manifest_id": "manifest_18940b3934fcec873fb8",
+    "organization_id": "ducktyper-dogfood",
+    "proposed_destinations": [
+      {
+        "channel": "website",
+        "connection_ref": "connection_zeroemployee.org_website",
+        "destination_account_ref": "destination_zeroemployee.org_website",
+        "provider_kind": "website",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      },
+      {
+        "channel": "newsletter",
+        "connection_ref": "connection_zeroemployee.org_newsletter",
+        "destination_account_ref": "destination_zeroemployee.org_newsletter",
+        "provider_kind": "newsletter",
+        "scheduled_for": "2026-09-06T08:00:00Z"
+      }
+    ],
+    "proposed_payload": {
+      "alt_text": "comic_slides: Reconciliation evidence",
+      "caption": "Receipts support explicit reconciliation state.\n\nInvite operators to adopt one explicit control boundary.",
+      "description": "Teach organizations to govern provider effects \u2014 Reconciliation evidence",
+      "title": "Zero Employee: Reconciliation evidence"
+    },
+    "publication_id": "zeroemployee.org",
+    "ready_for_approval": true,
+    "required_element_coverage": true,
+    "review_id": "review_8b054fe4c4ba3ca8e178",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true,
+    "technical_delivery_pass": true
+  }
+]

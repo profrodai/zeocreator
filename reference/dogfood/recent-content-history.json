@@ -1,0 +1,30 @@
+[
+  {
+    "artifact_ref": "artifact_history_profrod.ai",
+    "content_digest": "sha256:ed9d7839cbc49bb9324a6a0326192be1e32d5943a0f15ad31a6f73584e9a0ba6",
+    "created_at": "2026-09-04T08:00:00Z",
+    "deliverable_kind": "hud",
+    "history_id": "history_profrod.ai",
+    "input_refs": [],
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "published_at": "2026-09-04T08:00:00Z",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "topic": "AI basics"
+  },
+  {
+    "artifact_ref": "artifact_history_zeroemployee.org",
+    "content_digest": "sha256:4b5986c04b51708c8c56402337375efdcef815dc7b984df39b7bd2d94b7ee107",
+    "created_at": "2026-09-04T08:00:00Z",
+    "deliverable_kind": "hud",
+    "history_id": "history_zeroemployee.org",
+    "input_refs": [],
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "published_at": "2026-09-04T08:00:00Z",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "topic": "AI basics"
+  }
+]

@@ -1,0 +1,273 @@
+{
+  "$defs": {
+    "ChannelDestination": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "minLength": 1,
+          "title": "Channel",
+          "type": "string"
+        },
+        "connection_ref": {
+          "minLength": 1,
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "destination_account_ref": {
+          "minLength": 1,
+          "title": "Destination Account Ref",
+          "type": "string"
+        },
+        "provider_kind": {
+          "$ref": "#/$defs/ProviderKind"
+        },
+        "scheduled_for": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scheduled For"
+        }
+      },
+      "required": [
+        "channel",
+        "provider_kind",
+        "connection_ref",
+        "destination_account_ref"
+      ],
+      "title": "ChannelDestination",
+      "type": "object"
+    },
+    "DeliveryFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "minLength": 1,
+          "title": "Category",
+          "type": "string"
+        },
+        "code": {
+          "pattern": "^ZEO_CREATOR_[A-Z0-9_]+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/FindingSeverity"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "category",
+        "message"
+      ],
+      "title": "DeliveryFinding",
+      "type": "object"
+    },
+    "DeliveryReviewBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Approval Digest",
+          "type": "string"
+        },
+        "artifact_ref": {
+          "minLength": 1,
+          "title": "Artifact Ref",
+          "type": "string"
+        },
+        "brand_constraints_pass": {
+          "title": "Brand Constraints Pass",
+          "type": "boolean"
+        },
+        "brief_id": {
+          "minLength": 1,
+          "title": "Brief Id",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "findings": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DeliveryFinding"
+          },
+          "title": "Findings",
+          "type": "array"
+        },
+        "identity_match": {
+          "title": "Identity Match",
+          "type": "boolean"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "manifest_id": {
+          "minLength": 1,
+          "title": "Manifest Id",
+          "type": "string"
+        },
+        "organization_id": {
+          "minLength": 1,
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "proposed_destinations": {
+          "items": {
+            "$ref": "#/$defs/ChannelDestination"
+          },
+          "title": "Proposed Destinations",
+          "type": "array"
+        },
+        "proposed_payload": {
+          "$ref": "#/$defs/PublicationPayload"
+        },
+        "publication_id": {
+          "minLength": 1,
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ready_for_approval": {
+          "title": "Ready For Approval",
+          "type": "boolean"
+        },
+        "required_element_coverage": {
+          "title": "Required Element Coverage",
+          "type": "boolean"
+        },
+        "review_id": {
+          "minLength": 1,
+          "title": "Review Id",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "source_claim_traceability": {
+          "title": "Source Claim Traceability",
+          "type": "boolean"
+        },
+        "technical_delivery_pass": {
+          "title": "Technical Delivery Pass",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "review_id",
+        "brief_id",
+        "artifact_ref",
+        "manifest_id",
+        "identity_match",
+        "required_element_coverage",
+        "source_claim_traceability",
+        "brand_constraints_pass",
+        "technical_delivery_pass",
+        "proposed_payload",
+        "proposed_destinations",
+        "approval_digest",
+        "ready_for_approval"
+      ],
+      "title": "DeliveryReviewBundle",
+      "type": "object"
+    },
+    "FindingSeverity": {
+      "enum": [
+        "blocking",
+        "advisory"
+      ],
+      "title": "FindingSeverity",
+      "type": "string"
+    },
+    "ProviderKind": {
+      "enum": [
+        "website",
+        "newsletter",
+        "x",
+        "linkedin",
+        "youtube"
+      ],
+      "title": "ProviderKind",
+      "type": "string"
+    },
+    "PublicationPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "alt_text": {
+          "minLength": 1,
+          "title": "Alt Text",
+          "type": "string"
+        },
+        "caption": {
+          "minLength": 1,
+          "title": "Caption",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "caption",
+        "description",
+        "alt_text"
+      ],
+      "title": "PublicationPayload",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "review": {
+      "$ref": "#/$defs/DeliveryReviewBundle"
+    }
+  },
+  "required": [
+    "review"
+  ],
+  "title": "ValidateDeliveryResponse",
+  "type": "object"
+}

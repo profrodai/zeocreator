@@ -1,0 +1,116 @@
+[
+  {
+    "artifact_digest": "sha256:bee0daf93ed5777f6e0cf551f7caacc33f2580587a74df2fab0ab58198bfe0a8",
+    "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+    "brief_content_digest": "sha256:2704530c81bc0add87f68037eecf8b5d527b2d3b65b34160c2c4fa933e2ac853",
+    "brief_id": "brief_a072daeb7fa3dcf4dd3e",
+    "content_digest": "sha256:c216c8537766142237261bc6208e79e41ba025c615a3246bbce2ccf701473110",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "extracted_text": "Prof Rod: Bounded agent retries Bounded retries reduce runaway automation risk. Invite builders to test the technique in a bounded project.",
+    "input_refs": [
+      "brief_a072daeb7fa3dcf4dd3e"
+    ],
+    "media_type": "video/mp4",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "storage_ref": "artifact://ducktyper/brief_a072daeb7fa3dcf4dd3e"
+  },
+  {
+    "artifact_digest": "sha256:6c1a066c38e8b3aa960d604ec9a9e9cfc66329afd1a5f9152644f914277aae9c",
+    "artifact_ref": "artifact_8149998ba5cac80ebb12",
+    "brief_content_digest": "sha256:d4bcf1eed467fd6d2bf764676b8feed1018e5e628726bd4cdc9f3dd1e23fe9ef",
+    "brief_id": "brief_c740c7b4799e30c9f33e",
+    "content_digest": "sha256:eff53030b871becf9fdf198a1a521464c3e5395ff5cdd7dd6a6c951863b7fede",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "extracted_text": "Prof Rod: Typed creator handoffs Typed briefs reduce renderer ambiguity. Invite builders to test the technique in a bounded project.",
+    "input_refs": [
+      "brief_c740c7b4799e30c9f33e"
+    ],
+    "media_type": "video/mp4",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "storage_ref": "artifact://ducktyper/brief_c740c7b4799e30c9f33e"
+  },
+  {
+    "artifact_digest": "sha256:736ff56410419de52073d296fa15651fa241d087f7936f39aaddb906af8f2f19",
+    "artifact_ref": "artifact_2dabeddb5c8662a762ab",
+    "brief_content_digest": "sha256:d64a9c90b4648c179b770fb8a0e7fbd5de9d5815abfdcf6f5f42f3843157728b",
+    "brief_id": "brief_b80021c5388692b9f9ab",
+    "content_digest": "sha256:173fc9141b97bb1648f44d6d3da239ee98e6992b55eeb8f72a1723e21b12f3cf",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "extracted_text": "Prof Rod: Evidence-led demos Source-linked demos improve builder trust. Invite builders to test the technique in a bounded project.",
+    "input_refs": [
+      "brief_b80021c5388692b9f9ab"
+    ],
+    "media_type": "application/pdf",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "storage_ref": "artifact://ducktyper/brief_b80021c5388692b9f9ab"
+  },
+  {
+    "artifact_digest": "sha256:305d0b7c2db98abd4943e23797174ed40149441cc610795325db74d9d1ab8d0e",
+    "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+    "brief_content_digest": "sha256:377aa5db2e7da36c71e21160eb35c9a815339b5cc4931db76b1e60559075b7fe",
+    "brief_id": "brief_8fbb5e120c400d53ffb2",
+    "content_digest": "sha256:3edfe0e800822e04842e2824fc25dad0a3418d0fffcc832d1f70dfa3db1d91d2",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "extracted_text": "Zero Employee: Exact effect authority Exact effect authorization narrows provider-write risk. Invite operators to adopt one explicit control boundary.",
+    "input_refs": [
+      "brief_8fbb5e120c400d53ffb2"
+    ],
+    "media_type": "video/mp4",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "storage_ref": "artifact://ducktyper/brief_8fbb5e120c400d53ffb2"
+  },
+  {
+    "artifact_digest": "sha256:04920ac63404d30106e6e10ca41bf67a15e051ed302785d6ee84d1f55701932a",
+    "artifact_ref": "artifact_69a7c523ac973e6d200a",
+    "brief_content_digest": "sha256:4f9b5c7b014d4fd6fe84f3cf8e384d9942f872819cd7690e8d4e0aabdc7d61a0",
+    "brief_id": "brief_3dfa05d6507eaa5a5bcf",
+    "content_digest": "sha256:6e5f5638624e0f8e8435446280c88456af0dc25c3bb164facbbce4085428f7dc",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "extracted_text": "Zero Employee: Digest-bound approvals Approval digests expose post-review mutation. Invite operators to adopt one explicit control boundary.",
+    "input_refs": [
+      "brief_3dfa05d6507eaa5a5bcf"
+    ],
+    "media_type": "video/mp4",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "storage_ref": "artifact://ducktyper/brief_3dfa05d6507eaa5a5bcf"
+  },
+  {
+    "artifact_digest": "sha256:aeac7772f15ea044e4f5f9d398b87315c732176de28a5269e6e69260dea1aaed",
+    "artifact_ref": "artifact_18940b3934fcec873fb8",
+    "brief_content_digest": "sha256:8ff61261aafc27810d0a194c0055b051106fd142ebe38a733ddafd73e0b9984a",
+    "brief_id": "brief_f898a646b35e42eb7752",
+    "content_digest": "sha256:9eda5826736349aee1b11993d35db05d25605386bc725a54d6494ddcf5908bfd",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "extracted_text": "Zero Employee: Reconciliation evidence Receipts support explicit reconciliation state. Invite operators to adopt one explicit control boundary.",
+    "input_refs": [
+      "brief_f898a646b35e42eb7752"
+    ],
+    "media_type": "application/pdf",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "storage_ref": "artifact://ducktyper/brief_f898a646b35e42eb7752"
+  }
+]

@@ -1,0 +1,222 @@
+[
+  {
+    "artifact_digest": "sha256:bee0daf93ed5777f6e0cf551f7caacc33f2580587a74df2fab0ab58198bfe0a8",
+    "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+    "brief_content_digest": "sha256:2704530c81bc0add87f68037eecf8b5d527b2d3b65b34160c2c4fa933e2ac853",
+    "brief_id": "brief_a072daeb7fa3dcf4dd3e",
+    "content_digest": "sha256:ed8674ea6ba0cec212b63746ce303990ccd3957a96bf4812026e829317dc8ed0",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "included_elements": [
+      "script",
+      "scene_beats",
+      "dialogue",
+      "voice_over",
+      "on_screen_text",
+      "character_actions",
+      "setting",
+      "audio_direction",
+      "ending"
+    ],
+    "input_refs": [
+      "brief_a072daeb7fa3dcf4dd3e",
+      "artifact_a9c6396ba2b4968cd44c"
+    ],
+    "manifest_id": "manifest_a9c6396ba2b4968cd44c",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "rendered_claim_ids": [
+      "claim_8407fb300deb32515a8c"
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "technical_checks": {
+      "decodable": true,
+      "dimensions": true,
+      "duration": true
+    }
+  },
+  {
+    "artifact_digest": "sha256:6c1a066c38e8b3aa960d604ec9a9e9cfc66329afd1a5f9152644f914277aae9c",
+    "artifact_ref": "artifact_8149998ba5cac80ebb12",
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+    "brief_content_digest": "sha256:d4bcf1eed467fd6d2bf764676b8feed1018e5e628726bd4cdc9f3dd1e23fe9ef",
+    "brief_id": "brief_c740c7b4799e30c9f33e",
+    "content_digest": "sha256:c1f18ceb3f5c174de00622ee2ea415f7365b646f32f48923e7cd99c9603da240",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "included_elements": [
+      "information_hierarchy",
+      "metrics",
+      "labels",
+      "motion_sequence",
+      "visual_metaphor",
+      "screen_regions",
+      "narration",
+      "highlight_events"
+    ],
+    "input_refs": [
+      "brief_c740c7b4799e30c9f33e",
+      "artifact_8149998ba5cac80ebb12"
+    ],
+    "manifest_id": "manifest_8149998ba5cac80ebb12",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "rendered_claim_ids": [
+      "claim_1f3529356b5a9a080f7e"
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "technical_checks": {
+      "decodable": true,
+      "dimensions": true,
+      "duration": true
+    }
+  },
+  {
+    "artifact_digest": "sha256:736ff56410419de52073d296fa15651fa241d087f7936f39aaddb906af8f2f19",
+    "artifact_ref": "artifact_2dabeddb5c8662a762ab",
+    "brand_profile_ref": "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+    "brief_content_digest": "sha256:d64a9c90b4648c179b770fb8a0e7fbd5de9d5815abfdcf6f5f42f3843157728b",
+    "brief_id": "brief_b80021c5388692b9f9ab",
+    "content_digest": "sha256:6fd818f57e80eac188c773f0e1d0998ac1e81bf267dd9cdaa525dddfb98d068c",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "included_elements": [
+      "panel_beats",
+      "dialogue_captions",
+      "poses",
+      "continuity_requirements",
+      "slide_headlines",
+      "final_cta"
+    ],
+    "input_refs": [
+      "brief_b80021c5388692b9f9ab",
+      "artifact_2dabeddb5c8662a762ab"
+    ],
+    "manifest_id": "manifest_2dabeddb5c8662a762ab",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "profrod.ai",
+    "rendered_claim_ids": [
+      "claim_9887cb4795611866fdc9"
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "technical_checks": {
+      "decodable": true,
+      "dimensions": true,
+      "duration": true
+    }
+  },
+  {
+    "artifact_digest": "sha256:305d0b7c2db98abd4943e23797174ed40149441cc610795325db74d9d1ab8d0e",
+    "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+    "brief_content_digest": "sha256:377aa5db2e7da36c71e21160eb35c9a815339b5cc4931db76b1e60559075b7fe",
+    "brief_id": "brief_8fbb5e120c400d53ffb2",
+    "content_digest": "sha256:7d50fe0a1af3be74874e76bf4927878f4143f2fc73ef9fc50d9960261dcb432d",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "included_elements": [
+      "script",
+      "scene_beats",
+      "dialogue",
+      "voice_over",
+      "on_screen_text",
+      "character_actions",
+      "setting",
+      "audio_direction",
+      "ending"
+    ],
+    "input_refs": [
+      "brief_8fbb5e120c400d53ffb2",
+      "artifact_133f9d2d5a9fea47cc6e"
+    ],
+    "manifest_id": "manifest_133f9d2d5a9fea47cc6e",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "rendered_claim_ids": [
+      "claim_2d2f8c24abefb57ef02e"
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "technical_checks": {
+      "decodable": true,
+      "dimensions": true,
+      "duration": true
+    }
+  },
+  {
+    "artifact_digest": "sha256:04920ac63404d30106e6e10ca41bf67a15e051ed302785d6ee84d1f55701932a",
+    "artifact_ref": "artifact_69a7c523ac973e6d200a",
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+    "brief_content_digest": "sha256:4f9b5c7b014d4fd6fe84f3cf8e384d9942f872819cd7690e8d4e0aabdc7d61a0",
+    "brief_id": "brief_3dfa05d6507eaa5a5bcf",
+    "content_digest": "sha256:36349ebe9358c520ed6ea1470d9d3c0a554cdb258a1dfd582c90fe12449e514b",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "included_elements": [
+      "information_hierarchy",
+      "metrics",
+      "labels",
+      "motion_sequence",
+      "visual_metaphor",
+      "screen_regions",
+      "narration",
+      "highlight_events"
+    ],
+    "input_refs": [
+      "brief_3dfa05d6507eaa5a5bcf",
+      "artifact_69a7c523ac973e6d200a"
+    ],
+    "manifest_id": "manifest_69a7c523ac973e6d200a",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "rendered_claim_ids": [
+      "claim_5aaa1a33a7ca51564f5c"
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "technical_checks": {
+      "decodable": true,
+      "dimensions": true,
+      "duration": true
+    }
+  },
+  {
+    "artifact_digest": "sha256:aeac7772f15ea044e4f5f9d398b87315c732176de28a5269e6e69260dea1aaed",
+    "artifact_ref": "artifact_18940b3934fcec873fb8",
+    "brand_profile_ref": "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+    "brief_content_digest": "sha256:8ff61261aafc27810d0a194c0055b051106fd142ebe38a733ddafd73e0b9984a",
+    "brief_id": "brief_f898a646b35e42eb7752",
+    "content_digest": "sha256:53b7252dd624f923a01001ca802d36de2f5fbf35127b2f73496e194c9de0dc13",
+    "content_revision": 1,
+    "created_at": "2026-09-05T08:00:00Z",
+    "included_elements": [
+      "panel_beats",
+      "dialogue_captions",
+      "poses",
+      "continuity_requirements",
+      "slide_headlines",
+      "final_cta"
+    ],
+    "input_refs": [
+      "brief_f898a646b35e42eb7752",
+      "artifact_18940b3934fcec873fb8"
+    ],
+    "manifest_id": "manifest_18940b3934fcec873fb8",
+    "organization_id": "ducktyper-dogfood",
+    "publication_id": "zeroemployee.org",
+    "rendered_claim_ids": [
+      "claim_f7a7b195083833cd249b"
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "technical_checks": {
+      "decodable": true,
+      "dimensions": true,
+      "duration": true
+    }
+  }
+]

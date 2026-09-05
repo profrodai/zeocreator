@@ -1,0 +1,164 @@
+[
+  {
+    "artifact_refs": [
+      "artifact_a9c6396ba2b4968cd44c"
+    ],
+    "assessment_id": "assessment_47319748cbc86219054d",
+    "confidence": "high",
+    "content_digest": "sha256:f4f63dbcabe7365e9337f4e63e3e2c13ba9d9a40313acf71aa5d7277a29455c5",
+    "created_at": "2026-09-05T08:00:00Z",
+    "data_gaps": [],
+    "hypotheses": [
+      "Hypothesis: the views signal may reflect audience-format fit; causal evidence is not available."
+    ],
+    "input_refs": [
+      "profile_profrod_ai@1:sha256:517a7cd7e124f53089f61c953c5af69b0813916b00648138159a671611945778",
+      "metrics_profrod.ai",
+      "operation_bf40f81f38af26016ca2"
+    ],
+    "metrics": [
+      {
+        "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+        "connection_ref": "connection_profrod.ai_website",
+        "content_digest": "sha256:5421107277a8e75e55bdb45c0621aaa3eeb132ca0c6d22274d38b586061124e2",
+        "created_at": "2026-09-05T08:00:00Z",
+        "destination_account_ref": "destination_profrod.ai_website",
+        "input_refs": [
+          "operation_bf40f81f38af26016ca2"
+        ],
+        "metric_name": "engagements",
+        "metric_value": 84.0,
+        "observation_id": "observation_profrod.ai_engagements",
+        "observed_at": "2026-09-05T08:00:00Z",
+        "organization_id": "ducktyper-dogfood",
+        "provider_kind": "website",
+        "publication_id": "profrod.ai",
+        "publication_operation_ref": "operation_bf40f81f38af26016ca2",
+        "revision": 1,
+        "schema_version": "1.0.0"
+      },
+      {
+        "artifact_ref": "artifact_a9c6396ba2b4968cd44c",
+        "connection_ref": "connection_profrod.ai_website",
+        "content_digest": "sha256:40e3942ee2a1fb3dc1cc16ee065742fc15f4987412aa2b6021964946881a7b04",
+        "created_at": "2026-09-05T08:00:00Z",
+        "destination_account_ref": "destination_profrod.ai_website",
+        "input_refs": [
+          "operation_bf40f81f38af26016ca2"
+        ],
+        "metric_name": "views",
+        "metric_value": 1200.0,
+        "observation_id": "observation_profrod.ai_views",
+        "observed_at": "2026-09-05T08:00:00Z",
+        "organization_id": "ducktyper-dogfood",
+        "provider_kind": "website",
+        "publication_id": "profrod.ai",
+        "publication_operation_ref": "operation_bf40f81f38af26016ca2",
+        "revision": 1,
+        "schema_version": "1.0.0"
+      }
+    ],
+    "observation_window": {
+      "ends_at": "2026-09-05T08:00:00Z",
+      "starts_at": "2026-08-29T08:00:00Z"
+    },
+    "organization_id": "ducktyper-dogfood",
+    "performance_relative_to_objective": "Observed engagements=84, views=1200 relative to objective: Help builders ship one reliable creator operation.",
+    "proposed_follow_up_work": [
+      "Runtime may consider testing another Prof Rod format."
+    ],
+    "provider_account_provenance": [
+      "website:connection_profrod.ai_website:destination_profrod.ai_website"
+    ],
+    "publication_id": "profrod.ai",
+    "publication_operation_refs": [
+      "operation_bf40f81f38af26016ca2"
+    ],
+    "reusable_learnings": [
+      "Strongest observed signal: views."
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifact_refs": [
+      "artifact_133f9d2d5a9fea47cc6e"
+    ],
+    "assessment_id": "assessment_7c12f953ae296d5c63bf",
+    "confidence": "high",
+    "content_digest": "sha256:1d3435d6d21d602139e129616a76f055607b720771d2d511f1fb841f203f560f",
+    "created_at": "2026-09-05T08:00:00Z",
+    "data_gaps": [],
+    "hypotheses": [
+      "Hypothesis: the views signal may reflect audience-format fit; causal evidence is not available."
+    ],
+    "input_refs": [
+      "profile_zeroemployee_org@1:sha256:f3db38d85a1ad91dad2fa7a8390c1824b989b9cbe50e649c36d10b1090f19970",
+      "metrics_zeroemployee.org",
+      "operation_a835892ac16c540b5565"
+    ],
+    "metrics": [
+      {
+        "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+        "connection_ref": "connection_zeroemployee.org_website",
+        "content_digest": "sha256:0d7de69e086691432613c77e6453a58f07ed62a63d7571f83a1bf525264a1e57",
+        "created_at": "2026-09-05T08:00:00Z",
+        "destination_account_ref": "destination_zeroemployee.org_website",
+        "input_refs": [
+          "operation_a835892ac16c540b5565"
+        ],
+        "metric_name": "engagements",
+        "metric_value": 84.0,
+        "observation_id": "observation_zeroemployee.org_engagements",
+        "observed_at": "2026-09-05T08:00:00Z",
+        "organization_id": "ducktyper-dogfood",
+        "provider_kind": "website",
+        "publication_id": "zeroemployee.org",
+        "publication_operation_ref": "operation_a835892ac16c540b5565",
+        "revision": 1,
+        "schema_version": "1.0.0"
+      },
+      {
+        "artifact_ref": "artifact_133f9d2d5a9fea47cc6e",
+        "connection_ref": "connection_zeroemployee.org_website",
+        "content_digest": "sha256:e1919e5cf91d02dd36b43878a536e9e197c626bda0ca48d9899feab81e9a5cfa",
+        "created_at": "2026-09-05T08:00:00Z",
+        "destination_account_ref": "destination_zeroemployee.org_website",
+        "input_refs": [
+          "operation_a835892ac16c540b5565"
+        ],
+        "metric_name": "views",
+        "metric_value": 1200.0,
+        "observation_id": "observation_zeroemployee.org_views",
+        "observed_at": "2026-09-05T08:00:00Z",
+        "organization_id": "ducktyper-dogfood",
+        "provider_kind": "website",
+        "publication_id": "zeroemployee.org",
+        "publication_operation_ref": "operation_a835892ac16c540b5565",
+        "revision": 1,
+        "schema_version": "1.0.0"
+      }
+    ],
+    "observation_window": {
+      "ends_at": "2026-09-05T08:00:00Z",
+      "starts_at": "2026-08-29T08:00:00Z"
+    },
+    "organization_id": "ducktyper-dogfood",
+    "performance_relative_to_objective": "Observed engagements=84, views=1200 relative to objective: Teach organizations to govern provider effects.",
+    "proposed_follow_up_work": [
+      "Runtime may consider testing another Zero Employee format."
+    ],
+    "provider_account_provenance": [
+      "website:connection_zeroemployee.org_website:destination_zeroemployee.org_website"
+    ],
+    "publication_id": "zeroemployee.org",
+    "publication_operation_refs": [
+      "operation_a835892ac16c540b5565"
+    ],
+    "reusable_learnings": [
+      "Strongest observed signal: views."
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0"
+  }
+]
