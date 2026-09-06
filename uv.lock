@@ -1082,7 +1082,7 @@ requires-dist = [
     { name = "rfc8785", specifier = "==0.1.4" },
     { name = "rich", specifier = ">=13.8.0" },
     { name = "typer", specifier = ">=0.27.1" },
-    { name = "zeocore", specifier = "==0.6.0" },
+    { name = "zeocore", specifier = "==0.9.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -1097,7 +1097,7 @@ dev = [
 
 [[package]]
 name = "zeocore"
-version = "0.6.0"
+version = "0.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -1107,7 +1107,7 @@ dependencies = [
     { name = "rich" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0b/97/5f81bc938365ae1b6f4a284c3339bcdc6ce241fee1a597a41ac116d1712a/zeocore-0.6.0.tar.gz", hash = "sha256:13590d9a368dd417e4c2dc7f8fa5185c0e8f38a62eb29578d92a3b90a97a9740", size = 1099883, upload-time = "2026-09-01T12:20:09.979Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/fe/782ae5ad64df46f5cad912321bdf8f472fc106c4b3df43df5c0aea3e7b5f/zeocore-0.9.0.tar.gz", hash = "sha256:f64fb9bc678da875fe5339192990873da131166d6270be6dbe31888daa5cdc18", size = 1271921, upload-time = "2026-09-06T03:10:06.773Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/3f/7dbb4d81476840ee216a8df56726a54ea8d00ea2496f750a8134dc0e974b/zeocore-0.6.0-py3-none-any.whl", hash = "sha256:04ba89f3753e503449913927aea81df67382c53291e247bae209dadbc3ac8f8e", size = 517009, upload-time = "2026-09-01T12:20:08.158Z" },
+    { url = "https://files.pythonhosted.org/packages/33/1f/3abb38f7870bb0abb876e957a6c5e840d6baacfba01b8cd90b8f15549f15/zeocore-0.9.0-py3-none-any.whl", hash = "sha256:fb725aa0357db702e931ca7ca7ef4eebc5a7284214bd00fb652e70832a311ee2", size = 628198, upload-time = "2026-09-06T03:10:04.79Z" },
 ]

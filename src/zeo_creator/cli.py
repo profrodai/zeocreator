@@ -140,7 +140,7 @@ def doctor(json_output: bool = typer.Option(False, "--json")) -> None:
     zeocore_version = importlib.metadata.version("zeocore")
     checks = {
         "python_3_14_or_newer": sys.version_info >= (3, 14),
-        "zeocore_0_6_0": zeocore_version == "0.6.0",
+        "zeocore_0_9_0": zeocore_version == "0.9.0",
         "twenty_manifests": len(capability_manifests()) == 20,
         "twenty_openai_projections": len(openai_tool_projections()) == 20,
     }

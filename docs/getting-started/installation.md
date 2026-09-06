@@ -41,14 +41,14 @@ Expected doctor checks:
   "ok": true,
   "checks": {
     "python_3_14_or_newer": true,
-    "zeocore_0_6_0": true,
+    "zeocore_0_9_0": true,
     "twenty_manifests": true,
     "twenty_openai_projections": true
   }
 }
 ```
 
-!!! note "Why exactly Zeocore 0.6.0?"
+!!! note "Why exactly Zeocore 0.9.0?"
 
     ZEO Creator consumes a released, immutable contract boundary. It does not
     claim parity with an unreleased branch. Read the

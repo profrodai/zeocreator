@@ -1,17 +1,16 @@
 # ADR 0001: Zeocore version and runtime boundary
 
 - Status: Accepted
-- Date: 2026-09-05
+- Date: 2026-09-06
 - Decision owners: ZEO Creator principal
 
 ## Context
 
-The Phase 0 capability migration pinned Zeocore 0.5.0 and Python 3.13. On
-2026-09-05, the public package index reports Zeocore 0.6.0 as the current
-release and declares Python 3.14 or newer. The local Zeocore source checkout
-also identifies as 0.6.0, but its `main` contains commits after the `v0.6.0`
-tag, including unreleased connection-contract work. Its remote additionally
-contains 0.7.0 release preparation.
+The Phase 0 capability migration pinned Zeocore 0.5.0 and Python 3.13, and the
+first public Creator boundary moved to Zeocore 0.6.0 and Python 3.14. On
+2026-09-06 Zeocore 0.9.0 became the released contract boundary, including the
+hosted integration profile and Supabase integration needed by deployed Zeocore
+applications.
 
 ZEO Creator needs the stable capability authoring, manifest, effects,
 requirements, guard, projection, and `ToolContext` service contracts. It does
@@ -20,22 +19,21 @@ provider execution.
 
 ## Decision
 
-ZEO Creator consumes exactly `zeocore==0.6.0` from the released Python
+ZEO Creator consumes exactly `zeocore==0.9.0` from the released Python
 distribution and requires Python 3.14 or newer.
 
-No floating Git branch, local editable checkout, post-tag 0.6 source state, or
-unreleased 0.7 contract is a supported dependency. Provider-neutral creator
-ports are injected as named `ToolContext.services`; they are deliberately small
-consumer protocols, not a connector framework. A local Zeocore connector or a
-ZEOconnect-backed proxy may implement those ports. The controlling runtime owns
-connection lookup, credential custody, policy, authorization, retries,
-execution, receipts, and reconciliation.
+No floating Git branch, local editable checkout, or unreleased contract is a
+supported dependency. The controlling runtime owns connection lookup,
+credential custody, policy, authorization, retries, execution, receipts and
+reconciliation. Stateful applications acquire provider observations before
+invoking Creator; they must not pass connector or ZEOconnect proxies through
+Creator's `ToolContext`.
 
 ZEO Creator capabilities may request read observations through injected ports.
 They may only construct proposed external-write operations. They never resolve
 credentials or call provider SDKs.
 
-Zeocore 0.6 requires every capability manifest to declare at least one
+Zeocore 0.9 requires every capability manifest to declare at least one
 `EffectKind`; it has no explicit pure/local kind. Creator's four deterministic
 transformations therefore declare the conservative `read` kind and add
 `execution: pure-deterministic` metadata. Those functions do not access external
@@ -47,7 +45,7 @@ limitation.
 CI verifies:
 
 - the interpreter is Python 3.14 or newer;
-- installed Zeocore is exactly 0.6.0;
+- installed Zeocore is exactly 0.9.0;
 - all registered manifests and OpenAI-compatible projections render;
 - missing context services fail closed; and
 - creator domain modules do not import provider SDKs or runtime products.

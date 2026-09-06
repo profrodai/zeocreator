@@ -9,7 +9,7 @@ editions, production briefs, reviewed artifacts, commentary, newsletters and cor
 
 [![CI](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml/badge.svg)](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml)
 [![Python 3.14+](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Zeocore 0.6](https://img.shields.io/badge/Zeocore-0.6.0-087f75)](https://pypi.org/project/zeocore/)
+[![Zeocore 0.9](https://img.shields.io/badge/Zeocore-0.9.0-087f75)](https://pypi.org/project/zeocore/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [Documentation](docs/index.md) · [Quickstart](docs/getting-started/first-capability.md) · [Examples](examples/README.md) · [API reference](docs/reference/contracts.md)
@@ -63,7 +63,7 @@ or:
 python -m pip install "git+https://github.com/profrodai/zeocreator.git"
 ```
 
-ZEO Creator requires Python 3.14+ and Zeocore 0.6.0.
+ZEO Creator requires Python 3.14+ and Zeocore 0.9.0.
 
 ## First capability
 

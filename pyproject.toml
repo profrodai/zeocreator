@@ -20,7 +20,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "zeocore==0.6.0",
+  "zeocore==0.9.0",
   "pydantic>=2.6.0",
   "rfc8785==0.1.4",
   "rich>=13.8.0",

@@ -30,7 +30,7 @@ error codes.
 Use `zeo-creator capabilities --json` for canonical manifests or
 `zeo-creator capabilities --projection openai` for function-tool projections.
 
-Zeocore 0.6 requires every manifest to carry at least one effect kind. Pure
+Zeocore 0.9 requires every manifest to carry at least one effect kind. Pure
 transformations therefore conservatively declare `read` and additionally
 publish `execution: pure-deterministic`; they do not read external state. This
 compatibility boundary can be removed if Zeocore gains an explicit pure effect.
