@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0.dev0 — 2026-09-07
+
+- Replace email preparation APIs with explicit v2 contracts; preserve all v1 schemas.
+- Bind logical operation keys, provider context, actual package material and acyclic campaign releases before approval.
+- Require lowering provenance, immutable remote mutation receipts and explicit per-step migration authority.
+- Correct CTA/accessibility review, ordinary query links, preview audience handling and safe refusal reasons.
+- Persist assessment expectations and provenance; reject mixed cohorts and qualify conflicts.
+- Add reviewer counterexamples and eight independent publication programs with all eleven simulated effects.
+
+
 All notable changes to ZEO Creator are documented here.
 
 ## Unreleased — 2026-09-07

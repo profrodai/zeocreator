@@ -3,7 +3,7 @@
 ## Current status
 
 ZEO Creator is a pre-release contract and reference package. The source exposes
-twenty-seven producer-neutral capabilities, strict domain contracts, RFC 8785 digests,
+twenty-nine producer-neutral capabilities, strict domain contracts, RFC 8785 digests,
 packaged JSON Schemas, neutral fixtures, and credential-free examples.
 
 The deterministic reference workflow produces two publication syntheses, a
@@ -41,7 +41,7 @@ authorized by this readiness report.
 
 ## Email marketing integration status — 2026-09-07
 
-The additive email contracts, seven input-only capabilities, three-publication
+The additive email contracts, nine input-only capabilities, three-publication
 example, packaged schemas, vectors and documentation support offline conformance.
 The reference hosts simulate lowering, exact approval checks, logical idempotency
 and ambiguous-outcome reconciliation. They are not production adapters or storage.

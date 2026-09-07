@@ -14,6 +14,7 @@ from zeo_creator.capabilities import (
     compose_newsletter_issue,
     create_content_brief,
     extract_editorial_signals,
+    finalize_email_campaign,
     identify_engagement_opportunities,
     plan_content_portfolio,
     plan_edition,
@@ -25,6 +26,7 @@ from zeo_creator.capabilities import (
     prepare_correction,
     prepare_distribution,
     prepare_email_delivery,
+    propose_email_operation,
     research_synthesis,
     review_commentary,
     review_email_message,
@@ -63,6 +65,8 @@ CAPABILITIES: tuple[BoundCapability, ...] = tuple(
         compose_email_message,
         review_email_message,
         prepare_email_delivery,
+        finalize_email_campaign,
+        propose_email_operation,
         assess_email_program,
     )
 )

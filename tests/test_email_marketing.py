@@ -48,7 +48,16 @@ def reviewed(publication="publication-a"):
 def package(publication="publication-a", purpose="production", schedule=None):
     plan, draft, review = reviewed(publication)
     return s.prepare_delivery(
-        plan, draft, review, x.snapshot(publication, purpose), x.proofs(draft), x.NOW, schedule
+        plan,
+        draft,
+        review,
+        x.snapshot(publication, purpose),
+        x.proofs(draft, purpose),
+        x.NOW,
+        schedule,
+        release=x.release(publication),
+        execution=x.execution(publication),
+        template_mapping_digest=x.mapping_digest(publication),
     )
 
 
@@ -56,6 +65,8 @@ def proposal(item, intent=EmailEffectIntent.SEND, key="logical-operation"):
     material = EmailOperationIntent(
         organization_id=item.organization_id,
         publication_id=item.publication_id,
+        execution=item.material.execution,
+        campaign_release=item.material.campaign_release,
         intent=intent,
         operation=operation_identity(intent),
         operation_contract_digest=operation_contract_digest(intent),
@@ -63,7 +74,9 @@ def proposal(item, intent=EmailEffectIntent.SEND, key="logical-operation"):
         delivery_approval_digest=item.approval_digest,
         audience=item.material.audience_snapshot,
     )
-    return s.propose_operation(material, x.NOW, key)
+    return s.propose_operation(
+        material, x.NOW, key, release=x.release(item.publication_id), package=item
+    )
 
 
 def sequence(publication="publication-a", previous=None, migration=None):
@@ -95,7 +108,17 @@ def test_three_publications_cannot_mix_any_stage(left, right):
         s.review_message(x.profile(left), x.plan(left), x.draft(right), (), x.NOW)
     plan, draft, review = reviewed(left)
     with pytest.raises((CreatorDomainError, ValidationError)):
-        s.prepare_delivery(plan, draft, review, x.snapshot(right), x.proofs(draft), x.NOW)
+        s.prepare_delivery(
+            plan,
+            draft,
+            review,
+            x.snapshot(right),
+            x.proofs(draft),
+            x.NOW,
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
+        )
     with pytest.raises(ValidationError):
         revised(x.directions(left), sender=x.ref("sender", right))
 
@@ -120,6 +143,7 @@ def test_semantic_checks_need_evidence_and_never_self_approve():
         "subject_body",
         "links",
         "claims",
+        "accessibility",
     }
     assert "approved" not in type(review).model_fields
 
@@ -172,6 +196,12 @@ def test_same_material_can_be_consumed_by_both_fake_lowerers():
     assert hubspot["content"]["html"] == kit["content_html"] == item.material.draft.html
     assert hubspot["content"]["plainText"] == kit["content_text"] == item.material.draft.plain_text
     assert hubspot["materialDigest"] == kit["material_digest"] == item.approval_digest
+    # Pure wire projections can inspect the same neutral material; effects still bind a destination.
+    op = proposal(item)
+    with pytest.raises(CreatorDomainError, match="execution_provider_mismatch"):
+        SimulatedEmailHost("kit-shaped").simulate(
+            op, op.approval_digest, x.NOW, package=item, release=x.release()
+        )
 
 
 def test_test_approval_and_audience_cannot_authorize_production():
@@ -180,7 +210,9 @@ def test_test_approval_and_audience_cannot_authorize_production():
     production = proposal(production_package)
     host = SimulatedEmailHost("kit-shaped")
     with pytest.raises(CreatorDomainError, match="approval_mismatch"):
-        host.simulate(production, test.approval_digest, x.NOW, package=production_package)
+        host.simulate(
+            production, test.approval_digest, x.NOW, package=production_package, release=x.release()
+        )
     with pytest.raises(ValidationError, match="test and production"):
         revised(test.material, intent=EmailEffectIntent.SEND)
     assert host.submissions == 0
@@ -188,7 +220,21 @@ def test_test_approval_and_audience_cannot_authorize_production():
 
 def test_activation_is_not_enrolment_and_sequence_capability_refuses_approximation():
     seq = sequence()
+    released = s.finalize_campaign(
+        x.campaign(), tuple(x.plan(message=f"step-{i}") for i in range(3)), (seq,), x.NOW
+    )
+    prior = x.remote_receipt(
+        x.ref("provisioned-sequence"),
+        released.binding(),
+        kind="sequence_revision",
+        sequence=seq.binding(),
+    )
     activate = EmailOperationIntent(
+        execution=x.execution(),
+        campaign_release=released.binding(),
+        prior_receipt=prior,
+        target_remote_ref=prior.remote_ref,
+        expected_remote_revision_digest=prior.remote_revision_digest,
         organization_id=seq.organization_id,
         publication_id=seq.publication_id,
         intent=EmailEffectIntent.ACTIVATE,
@@ -196,7 +242,7 @@ def test_activation_is_not_enrolment_and_sequence_capability_refuses_approximati
         operation_contract_digest=operation_contract_digest(EmailEffectIntent.ACTIVATE),
         sequence=seq.binding(),
     )
-    activation = s.propose_operation(activate, x.NOW, "activation")
+    activation = s.propose_operation(activate, x.NOW, "activation", release=released, sequence=seq)
     enrol = revised(
         activate,
         intent=EmailEffectIntent.ENROL,
@@ -204,12 +250,12 @@ def test_activation_is_not_enrolment_and_sequence_capability_refuses_approximati
         operation_contract_digest=operation_contract_digest(EmailEffectIntent.ENROL),
         audience=x.snapshot(),
     )
-    enrolment = s.propose_operation(enrol, x.NOW, "enrolment")
+    enrolment = s.propose_operation(enrol, x.NOW, "enrolment", release=released, sequence=seq)
     host = SimulatedEmailHost("hubspot-shaped")
     with pytest.raises(CreatorDomainError, match="approval_mismatch"):
-        host.simulate(enrolment, activation.approval_digest, x.NOW, sequence=seq)
+        host.simulate(enrolment, activation.approval_digest, x.NOW, sequence=seq, release=released)
     with pytest.raises(CreatorDomainError, match="semantics_unsupported"):
-        host.simulate(activation, activation.approval_digest, x.NOW, sequence=seq)
+        host.simulate(activation, activation.approval_digest, x.NOW, sequence=seq, release=released)
     with pytest.raises(ValidationError, match="activation cannot"):
         revised(activate, audience=x.snapshot())
 
@@ -229,7 +275,15 @@ def test_audience_drift_empty_or_policy_changes_are_refused(mutation):
     plan, draft, review = reviewed()
     with pytest.raises(CreatorDomainError):
         s.prepare_delivery(
-            plan, draft, review, revised(x.snapshot(), **mutation), x.proofs(draft), x.NOW
+            plan,
+            draft,
+            review,
+            revised(x.snapshot(), **mutation),
+            x.proofs(draft),
+            x.NOW,
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
         )
 
 
@@ -239,18 +293,25 @@ def test_audience_drift_empty_or_policy_changes_are_refused(mutation):
 def test_snapshot_boundary_is_inclusive_resolution_exclusive_expiry(at):
     plan, draft, review = reviewed()
     with pytest.raises(CreatorDomainError):
-        s.prepare_delivery(plan, draft, review, x.snapshot(), x.proofs(draft), at)
+        s.prepare_delivery(
+            plan,
+            draft,
+            review,
+            x.snapshot(),
+            x.proofs(draft),
+            at,
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
+        )
 
 
 def test_changed_snapshot_cannot_be_substituted_at_lowering():
     item = package()
     op = proposal(item)
     changed = revised(op.material, audience=revised(x.snapshot(), eligible_count=11))
-    changed_op = s.propose_operation(changed, x.NOW, "changed")
     with pytest.raises(CreatorDomainError, match="audience_changed"):
-        SimulatedEmailHost("kit-shaped").simulate(
-            changed_op, changed_op.approval_digest, x.NOW, package=item
-        )
+        s.propose_operation(changed, x.NOW, "changed", package=item, release=x.release())
 
 
 @pytest.mark.parametrize("policy", ["consent_policy", "suppression_policy"])
@@ -263,7 +324,17 @@ def test_absent_consent_or_suppression_blocks_readiness(policy):
     review = s.review_message(x.profile(), plan, draft, x.evidence(draft), x.NOW)
     assert not review.ready_for_human_approval
     with pytest.raises(CreatorDomainError):
-        s.prepare_delivery(plan, draft, review, x.snapshot(), x.proofs(draft), x.NOW)
+        s.prepare_delivery(
+            plan,
+            draft,
+            review,
+            x.snapshot(),
+            x.proofs(draft),
+            x.NOW,
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
+        )
 
 
 def test_divergent_html_and_plain_text_are_blocked():
@@ -324,12 +395,16 @@ def test_duplicate_execution_is_logical_once_conflicts_fail_and_ambiguity_reconc
     item = package()
     op = proposal(item)
     host = SimulatedEmailHost("hubspot-shaped")
-    receipt = host.simulate(op, op.approval_digest, x.NOW, package=item, outcome="ambiguous")
-    assert host.simulate(op, op.approval_digest, x.LATER, package=item) == receipt
+    receipt = host.simulate(
+        op, op.approval_digest, x.NOW, package=item, outcome="ambiguous", release=x.release()
+    )
+    assert (
+        host.simulate(op, op.approval_digest, x.LATER, package=item, release=x.release()) == receipt
+    )
     assert host.submissions == 1
     changed = proposal(package(schedule=x.NOW + timedelta(hours=1)), EmailEffectIntent.SCHEDULE)
     with pytest.raises(CreatorDomainError, match="conflicting_idempotency"):
-        host.simulate(changed, changed.approval_digest, x.NOW, package=item)
+        host.simulate(changed, changed.approval_digest, x.NOW, package=item, release=x.release())
     final = host.reconcile(op, receipt.submitted_payload_digest)
     assert final.outcome == "accepted" and host.submissions == 1
     transformed = host.reconcile(op, canonical_digest("transformed"))
@@ -345,7 +420,11 @@ def observation(publication="publication-a", **changes):
         campaign=x.campaign(publication).binding(),
         operation=x.ref("delivery-operation", publication),
         retrieval_receipt=x.ref("retrieval-receipt", publication),
-        provider_kind="example-provider",
+        campaign_release=x.release(publication).binding(),
+        operation_receipt=x.remote_receipt(
+            x.ref("delivery-operation", publication), x.release(publication).binding()
+        ),
+        provider_kind=x.execution(publication).provider_kind,
         connection_ref=f"{publication}/connection",
         aggregate_segment_ref=f"{publication}/aggregate-segment",
         observation_window=x.brief(publication).window,
@@ -365,17 +444,29 @@ def observation(publication="publication-a", **changes):
 
 def test_partial_metrics_stay_partial_and_missing_observations_stay_unknown():
     assessment = s.assess_program(
-        x.campaign(), (observation(),), x.brief().window, ("delivered", "cta_conversions"), x.NOW
+        x.campaign(),
+        (observation(),),
+        x.brief().window,
+        ("delivered", "cta_conversions"),
+        x.NOW,
+        release=x.release(),
     )
     assert assessment.completeness == "partial" and assessment.confidence == "limited"
     assert "Missing metric: cta_conversions" in assessment.data_gaps
     with pytest.raises(ValidationError):
         revised(assessment, completeness="complete", confidence="qualified")
-    empty = s.assess_program(x.campaign(), (), x.brief().window, ("delivered",), x.NOW)
+    empty = s.assess_program(
+        x.campaign(), (), x.brief().window, ("delivered",), x.NOW, release=x.release()
+    )
     assert empty.completeness == "unknown" and empty.confidence == "limited"
     with pytest.raises((ValidationError, CreatorDomainError)):
         s.assess_program(
-            x.campaign(), (observation("publication-b"),), x.brief().window, ("delivered",), x.NOW
+            x.campaign(),
+            (observation("publication-b"),),
+            x.brief().window,
+            ("delivered",),
+            x.NOW,
+            release=x.release(),
         )
 
 

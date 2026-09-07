@@ -1,19 +1,18 @@
 """Three-publication email proof using caller-supplied profiles and simulated hosts."""
 
-from zeo_creator.reference.email_inputs import profile
-from zeo_creator.reference.email_workflow import run_program
+from zeo_creator.reference.email_program_suite import effect_family, publication_suite
 
 
 def main() -> None:
-    # Deployment labels are supplied here; the public strategy contains no private brand facts.
-    for label, publication, shape, campaign, sequence in (
-        ("Rasa", "publication-a", "hubspot-shaped", "newsletter-and-nurture", "nurture"),
-        ("Prof Rod", "publication-b", "kit-shaped", "membership", "lead-magnet-welcome"),
-        ("Zero Employee", "publication-c", "kit-shaped", "product-interest", "orientation"),
-    ):
-        run = run_program(profile(publication), shape, campaign, sequence)  # type: ignore[arg-type]
+    labels = {
+        "publication-a": "Rasa",
+        "publication-b": "Prof Rod",
+        "publication-c": "Zero Employee",
+    }
+    for run in publication_suite():
+        family = effect_family(run)
         print(
-            f"{label}: {len(run.drafts)} dual-format messages, {len(run.sequence.steps)} sequence steps, {len(run.proposals)} separate simulated proposals; assessment {run.assessment.completeness}"
+            f"{labels[run.publication.publication_id]} / {run.campaign.artifact_id}: {len(run.drafts)} messages, {len(family.proposals)} simulated effects; assessment {run.assessment.completeness}"
         )
 
 

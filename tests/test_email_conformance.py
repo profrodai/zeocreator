@@ -10,7 +10,7 @@ import pytest
 from zeo_core.contracts import CapabilityStatus, EffectKind
 from zeo_core.tools import invoke_sync
 
-from scripts.export_reference_artifacts_v2 import MODELS
+from scripts.export_reference_artifacts_v3 import MODELS
 from tests.test_email_marketing import reviewed, revised
 from zeo_creator.contract_schemas import read_contract_schema
 from zeo_creator.contracts.common import canonical_digest
@@ -33,7 +33,7 @@ def test_all_email_capabilities_invoke_without_network_or_acquisition(monkeypatc
     monkeypatch.setattr(socket, "create_connection", deny)
     monkeypatch.setattr(socket.socket, "connect", deny)
     capabilities = [bound for bound in CAPABILITIES if "email" in bound.definition.tags]
-    assert len(capabilities) == 7
+    assert len(capabilities) == 9
     for bound in capabilities:
         assert bound.definition.effects.kinds == frozenset({EffectKind.READ})
         assert not bound.definition.requirements.services
@@ -64,13 +64,15 @@ def test_three_publication_reference_records_the_complete_data_flow():
             assert receipt.simulation is True
         production = run.packages[1]
         test_proof = next(row for row in production.material.proofs if row.kind == "test_send")
-        assert test_proof.receipt_ref == run.receipts[0].receipt_id
+        assert test_proof.lowering.execution == production.material.execution
+        assert test_proof.lowering.receipt.digest == canonical_digest(run.receipts[0])
+        assert run.observations[0].operation_receipt.remote_ref == run.receipts[1].remote_ref
         assert run.assessment.completeness == "partial"
 
 
 def test_packaged_email_schemas_match_python_and_include_every_new_contract():
     for name, model in MODELS:
-        assert read_contract_schema(name, "1") == model.model_json_schema()
+        assert read_contract_schema(name, "2") == model.model_json_schema()
     root = files("zeo_creator").joinpath("reference_artifacts")
     examples = json.loads(root.joinpath("email-marketing.json").read_text())
     runs = [EmailReferenceRun.model_validate(row) for row in examples]
@@ -96,12 +98,30 @@ def test_preparation_rejects_forged_ready_review_and_expired_review_evidence():
     plan, draft, review = reviewed()
     no_evidence = revised(review, evidence=())
     with pytest.raises(CreatorDomainError, match="review_not_ready"):
-        s.prepare_delivery(plan, draft, no_evidence, x.snapshot(), x.proofs(draft), x.NOW)
+        s.prepare_delivery(
+            plan,
+            draft,
+            no_evidence,
+            x.snapshot(),
+            x.proofs(draft),
+            x.NOW,
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
+        )
     expiring = tuple(revised(row, valid_until=x.NOW.replace(hour=13)) for row in review.evidence)
     review = revised(review, evidence=expiring)
     with pytest.raises(CreatorDomainError, match="review_evidence_stale"):
         s.prepare_delivery(
-            plan, draft, review, x.snapshot(), x.proofs(draft), x.NOW.replace(hour=14)
+            plan,
+            draft,
+            review,
+            x.snapshot(),
+            x.proofs(draft),
+            x.NOW.replace(hour=14),
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
         )
 
 
@@ -124,14 +144,14 @@ def test_personalization_needs_bound_resolution_evidence_without_receiving_value
         check="personalization",
         passed=True,
         policy=x.ref("symbolic-policy"),
-        receipt_ref="publication-a/simulated-preview-resolution",
+        receipt=x.ref("simulated-preview-resolution"),
+        issuer=x.ref("reviewer"),
         valid_until=x.LATER,
     )
     resolved = s.review_message(x.profile(), plan, draft, (*evidence, resolution), x.NOW)
-    assert resolved.ready_for_human_approval
-    item = s.prepare_delivery(plan, draft, resolved, x.snapshot(), x.proofs(draft), x.NOW)
-    assert item.material.draft.personalization == (token,)
-    assert "{{greeting}}" in item.material.draft.subject
+    assert not resolved.ready_for_human_approval
+    with pytest.raises(ValueError, match="cannot render personalization"):
+        x.proofs(draft)
     wrong = revised(resolution, draft=x.draft().binding())
     with pytest.raises(CreatorDomainError):
         s.review_message(x.profile(), plan, draft, (*evidence, wrong), x.NOW)
@@ -157,6 +177,9 @@ def test_missing_production_proofs_fail(kind):
             x.snapshot(),
             tuple(row for row in x.proofs(draft) if row.kind != kind),
             x.NOW,
+            release=x.release("publication-a"),
+            execution=x.execution("publication-a"),
+            template_mapping_digest=x.mapping_digest("publication-a"),
         )
 
 

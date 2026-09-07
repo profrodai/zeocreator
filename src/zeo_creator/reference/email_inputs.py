@@ -3,18 +3,24 @@
 from datetime import UTC, datetime, timedelta
 from typing import Literal
 
+from zeo_core.contracts import CapabilityId
+
 from zeo_creator.contracts.common import canonical_digest
 from zeo_creator.contracts.email_marketing import (
     AudienceIntent,
     AudienceSnapshotSummary,
     EmailArtifactRef,
     EmailCampaignPlan,
+    EmailCampaignRelease,
     EmailCompliance,
     EmailCTA,
+    EmailExecutionContext,
     EmailLink,
+    EmailLoweringEvidence,
     EmailMessageDraft,
     EmailMessagePlan,
     EmailProofReceipt,
+    EmailRemoteReceipt,
     EmailReviewCheck,
     EmailReviewEvidence,
 )
@@ -26,6 +32,7 @@ from zeo_creator.services.email_marketing import (
     EmailSequencePolicies,
     EmailSourceSection,
     compose_message,
+    finalize_campaign,
     plan_campaign,
     plan_message,
 )
@@ -215,7 +222,13 @@ def snapshot(
 
 
 def evidence(item: EmailMessageDraft) -> tuple[EmailReviewEvidence, ...]:
-    checks: tuple[EmailReviewCheck, ...] = ("publication_voice", "subject_body", "links", "claims")
+    checks: tuple[EmailReviewCheck, ...] = (
+        "publication_voice",
+        "subject_body",
+        "links",
+        "claims",
+        "accessibility",
+    )
     return tuple(
         EmailReviewEvidence(
             artifact_id=f"{item.publication_id}/simulated-review/{check}",
@@ -226,14 +239,17 @@ def evidence(item: EmailMessageDraft) -> tuple[EmailReviewEvidence, ...]:
             check=check,
             passed=True,
             policy=ref(f"review-{check}", item.publication_id),
-            receipt_ref=f"{item.publication_id}/simulated-evidence/{check}",
+            receipt=ref(f"simulated-evidence/{check}", item.publication_id),
+            issuer=ref("simulated-reviewer", item.publication_id),
             valid_until=LATER,
         )
         for check in checks
     )
 
 
-def proofs(item: EmailMessageDraft) -> tuple[EmailProofReceipt, ...]:
+def proofs(
+    item: EmailMessageDraft, purpose: Literal["production", "test"] = "production"
+) -> tuple[EmailProofReceipt, ...]:
     kinds: tuple[Literal["preview", "test_send"], ...] = ("preview", "test_send")
     return tuple(
         EmailProofReceipt(
@@ -243,7 +259,7 @@ def proofs(item: EmailMessageDraft) -> tuple[EmailProofReceipt, ...]:
             publication_id=item.publication_id,
             draft=item.binding(),
             kind=kind,
-            receipt_ref=f"{item.publication_id}/simulated-{kind}",
+            lowering=lowering_evidence(item, "test" if kind == "test_send" else purpose),
             audience_snapshot=snapshot(item.publication_id, "test")
             if kind == "test_send"
             else None,
@@ -252,4 +268,124 @@ def proofs(item: EmailMessageDraft) -> tuple[EmailProofReceipt, ...]:
             valid_until=LATER,
         )
         for kind in kinds
+    )
+
+
+def execution(publication: str = "publication-a") -> EmailExecutionContext:
+    snap = snapshot(publication)
+    return EmailExecutionContext(
+        organization_id="example-org",
+        publication_id=publication,
+        provider_kind=snap.provider_kind,
+        connection_ref=snap.connection_ref,
+        account_ref=f"{publication}/account",
+        connector_revision="simulation-2",
+        lowering_profile=ref("simulated-lowering-profile", publication),
+    )
+
+
+def mapping_digest(publication: str = "publication-a") -> str:
+    return canonical_digest([publication, "simulated-template-mapping"])
+
+
+def release(publication: str = "publication-a") -> EmailCampaignRelease:
+    return finalize_campaign(campaign(publication), (plan(publication),), (), NOW)
+
+
+def lowering_evidence(
+    item: EmailMessageDraft, purpose: Literal["production", "test"] = "production"
+) -> EmailLoweringEvidence:
+    # This fixture has no renderer or subscriber values; it cannot certify tokens.
+    if item.personalization or "{{" in item.html + item.plain_text + item.subject + item.preheader:
+        raise ValueError("simulation cannot render personalization")
+    pub = item.publication_id
+    payload = canonical_digest((item.html, item.plain_text, item.subject, item.preheader))
+    return EmailLoweringEvidence(
+        artifact_id=f"{pub}/simulated-lowering/{purpose}",
+        created_at=NOW,
+        organization_id=item.organization_id,
+        publication_id=pub,
+        receipt=ref(f"simulated-lowering-receipt/{purpose}", pub),
+        issuer=ref("simulated-connector", pub),
+        receipt_contract=CapabilityId(
+            namespace="example.email", name="lowering_receipt", version="2.0.0"
+        ),
+        receipt_contract_digest=canonical_digest("simulated-lowering-receipt-v2"),
+        execution=execution(pub),
+        draft=item.binding(),
+        sender_identity=item.sender_identity,
+        template_mapping_digest=mapping_digest(pub),
+        submitted_payload_digest=payload,
+        observed_payload_digest=payload,
+        rendered_preview_digest=canonical_digest(item.html),
+        covered_snapshot_digest=snapshot(pub, purpose).snapshot_digest,
+        outcome="verified",
+    )
+
+
+def remote_receipt(
+    operation: EmailArtifactRef,
+    campaign_release: EmailArtifactRef,
+    *,
+    kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"] = "broadcast",
+    sequence: EmailArtifactRef | None = None,
+) -> EmailRemoteReceipt:
+    pub = operation.publication_id
+    return EmailRemoteReceipt(
+        artifact_id=f"{pub}/simulated-receipt/{operation.digest[7:23]}",
+        created_at=NOW,
+        organization_id=operation.organization_id,
+        publication_id=pub,
+        operation=operation,
+        campaign_release=campaign_release,
+        execution=execution(pub),
+        issuer=ref("simulated-connector", pub),
+        receipt_contract=CapabilityId(
+            namespace="example.email", name="remote_receipt", version="2.0.0"
+        ),
+        receipt_contract_digest=canonical_digest("simulated-remote-receipt-v2"),
+        remote_ref=f"{pub}/simulated-remote/{operation.digest[7:23]}",
+        remote_revision_digest=canonical_digest(operation),
+        kind=kind,
+        sequence=sequence,
+        outcome="confirmed",
+    )
+
+
+def proposal_request() -> dict[str, object]:
+    from zeo_creator.contracts.email_marketing import EmailEffectIntent, EmailOperationIntent
+    from zeo_creator.reference.email_simulation import operation_contract_digest, operation_identity
+    from zeo_creator.services.email_marketing import prepare_delivery, review_message
+
+    item = draft()
+    released = release()
+    package = prepare_delivery(
+        plan(),
+        item,
+        review_message(profile(), plan(), item, evidence(item), NOW),
+        snapshot(),
+        proofs(item),
+        NOW,
+        release=released,
+        execution=execution(),
+        template_mapping_digest=mapping_digest(),
+    )
+    intent = EmailEffectIntent.CREATE_DRAFT
+    material = EmailOperationIntent(
+        organization_id=item.organization_id,
+        publication_id=item.publication_id,
+        execution=execution(),
+        campaign_release=released.binding(),
+        intent=intent,
+        operation=operation_identity(intent),
+        operation_contract_digest=operation_contract_digest(intent),
+        delivery=package.binding(),
+        delivery_approval_digest=package.approval_digest,
+    )
+    return dict(
+        material=material.model_dump(mode="json"),
+        release=released.model_dump(mode="json"),
+        package=package.model_dump(mode="json"),
+        idempotency_key="example-draft",
+        created_at=NOW.isoformat(),
     )
