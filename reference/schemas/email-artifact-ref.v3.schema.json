@@ -1,0 +1,39 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Digest",
+      "type": "string"
+    },
+    "organization_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "publication_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "ref": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Ref",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "organization_id",
+    "publication_id",
+    "ref",
+    "revision",
+    "digest"
+  ],
+  "title": "EmailArtifactRef",
+  "type": "object"
+}

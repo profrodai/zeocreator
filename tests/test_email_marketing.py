@@ -450,13 +450,20 @@ def test_partial_metrics_stay_partial_and_missing_observations_stay_unknown():
         ("delivered", "cta_conversions"),
         x.NOW,
         release=x.release(),
+        expected_operations=tuple(dict.fromkeys(row.operation_receipt for row in (observation(),))),
     )
     assert assessment.completeness == "partial" and assessment.confidence == "limited"
     assert "Missing metric: cta_conversions" in assessment.data_gaps
     with pytest.raises(ValidationError):
         revised(assessment, completeness="complete", confidence="qualified")
     empty = s.assess_program(
-        x.campaign(), (), x.brief().window, ("delivered",), x.NOW, release=x.release()
+        x.campaign(),
+        (),
+        x.brief().window,
+        ("delivered",),
+        x.NOW,
+        release=x.release(),
+        expected_operations=tuple(dict.fromkeys(row.operation_receipt for row in ())),
     )
     assert empty.completeness == "unknown" and empty.confidence == "limited"
     with pytest.raises((ValidationError, CreatorDomainError)):
@@ -467,6 +474,9 @@ def test_partial_metrics_stay_partial_and_missing_observations_stay_unknown():
             ("delivered",),
             x.NOW,
             release=x.release(),
+            expected_operations=tuple(
+                dict.fromkeys(row.operation_receipt for row in (observation("publication-b"),))
+            ),
         )
 
 

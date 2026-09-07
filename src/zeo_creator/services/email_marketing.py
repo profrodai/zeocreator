@@ -31,6 +31,7 @@ from zeo_creator.contracts.email_marketing import (
     EmailEffectIntent,
     EmailExecutionContext,
     EmailLink,
+    EmailMeasurementPopulation,
     EmailMessageDraft,
     EmailMessagePlan,
     EmailMetricName,
@@ -38,6 +39,7 @@ from zeo_creator.contracts.email_marketing import (
     EmailOperationIntent,
     EmailProgramAssessment,
     EmailProofReceipt,
+    EmailRemoteReceipt,
     EmailReviewEvidence,
     EmailReviewFinding,
     EmailSequencePlan,
@@ -65,11 +67,17 @@ def refuse(reason: str) -> Never:
 def current(*items: object) -> None:
     """Reject unsafe copies and nested mutation before trusting any bound digest."""
     for item in items:
-        if isinstance(item, DurableArtifact) and not digest_is_current(item):
-            refuse("stale_email_artifact")
         if isinstance(item, BaseModel):
-            type(item).model_validate_json(item.model_dump_json())
-            current(*(getattr(item, name) for name in type(item).model_fields))
+            try:
+                payload = item.model_dump_json(warnings="error")
+            except Exception:
+                refuse("stale_email_artifact")
+            if isinstance(item, DurableArtifact) and not digest_is_current(item):
+                refuse("stale_email_artifact")
+            validated = type(item).model_validate_json(payload)
+            # Pydantic validates the entire nested graph once. Reject silent repairs too.
+            if validated.model_dump_json() != payload:
+                refuse("stale_email_artifact")
         elif isinstance(item, (list, tuple)):
             current(*item)
 
@@ -561,8 +569,6 @@ def _review_exact_message(
         )
         and draft.compliance.consent_policy == plan.audience.consent_policy
         and draft.compliance.suppression_policy == plan.audience.suppression_policy,
-        "preview": plan.preview_required,
-        "test_send": plan.test_send_required,
     }
     manifest_urls = {link.url for link in draft.links}
     links_match = (
@@ -685,6 +691,8 @@ def prepare_delivery(
     if len({row.kind for row in proofs}) != len(proofs):
         refuse("duplicate_preview_or_test_proof")
     kinds = {row.kind for row in proofs}
+    if plan.preview_required and "preview" not in kinds:
+        refuse("production_requires_preview_and_test_evidence")
     if snapshot.purpose == "production":
         if (plan.preview_required and "preview" not in kinds) or (
             plan.test_send_required and "test_send" not in kinds
@@ -793,11 +801,40 @@ def propose_operation(
     package: EmailDeliveryPackage | None = None,
     sequence: EmailSequencePlan | None = None,
     source_sequence: EmailSequencePlan | None = None,
+    originating_operation: ProposedEmailOperation | None = None,
 ) -> ProposedEmailOperation:
     """Validate concrete inputs before freezing intent. Host verifies receipt authenticity."""
     scope(material, release)
     if material.campaign_release != release.binding():
         refuse("effect_campaign_release_mismatch")
+    if material.intent in {EmailEffectIntent.CANCEL, EmailEffectIntent.UPDATE_DRAFT}:
+        if originating_operation is None:
+            refuse("originating_operation_required")
+        scope(material, originating_operation)
+        original = originating_operation.material
+        expected_kinds = (
+            {EmailEffectIntent.SCHEDULE}
+            if material.intent == EmailEffectIntent.CANCEL
+            else {EmailEffectIntent.CREATE_DRAFT, EmailEffectIntent.UPDATE_DRAFT}
+        )
+        if (
+            material.originating_operation != originating_operation.binding()
+            or material.prior_receipt is None
+            or material.prior_receipt.operation != originating_operation.binding()
+            or original.delivery != material.target_delivery
+            or original.execution != material.execution
+            or original.campaign_release != material.campaign_release
+            or original.intent not in expected_kinds
+        ):
+            refuse("originating_operation_target_mismatch")
+        if material.intent == EmailEffectIntent.UPDATE_DRAFT and (
+            package is None
+            or material.prior_receipt.message_plan is None
+            or package.material.draft.message_plan.ref != material.prior_receipt.message_plan.ref
+        ):
+            refuse("draft_update_message_target_mismatch")
+    elif originating_operation is not None:
+        refuse("unexpected_originating_operation")
     if material.audience:
         validate_snapshot(material.audience, release.campaign.audience, created_at)
         if (material.audience.provider_kind, material.audience.connection_ref) != (
@@ -826,20 +863,21 @@ def propose_operation(
         )
         if pm.sequence_revision and package_sequence is None:
             refuse("sequence_not_in_campaign_release")
-        # Re-run preparation against actual material; a forged digest is not proof of readiness.
-        prepare_delivery(
-            plans[0],
-            pm.draft,
-            pm.review,
-            pm.audience_snapshot,
-            pm.proofs,
-            created_at,
-            pm.schedule_intent,
-            package_sequence,
-            release=release,
-            execution=pm.execution,
-            template_mapping_digest=pm.template_mapping_digest,
-        )
+        if material.intent != EmailEffectIntent.CANCEL:
+            # Re-run preparation against actual material; a forged digest is not proof of readiness.
+            prepare_delivery(
+                plans[0],
+                pm.draft,
+                pm.review,
+                pm.audience_snapshot,
+                pm.proofs,
+                created_at,
+                pm.schedule_intent,
+                package_sequence,
+                release=release,
+                execution=pm.execution,
+                template_mapping_digest=pm.template_mapping_digest,
+            )
         if material.intent == EmailEffectIntent.TEST and pm.audience_snapshot.purpose != "test":
             refuse("test_requires_test_delivery")
         if (
@@ -920,6 +958,7 @@ def assess_program(
     created_at: datetime,
     *,
     release: EmailCampaignRelease,
+    expected_operations: tuple[EmailRemoteReceipt, ...],
 ) -> EmailProgramAssessment:
     scope(campaign, release, *observations)
     if release.campaign != campaign:
@@ -938,7 +977,17 @@ def assess_program(
         for row in observations
     ):
         refuse("metric_attribution_policy_mismatch")
-    gaps = tuple(dict.fromkeys(gap for row in observations for gap in row.data_gaps))
+    population = EmailMeasurementPopulation(
+        organization_id=campaign.organization_id,
+        publication_id=campaign.publication_id,
+        release=release,
+        operations=expected_operations,
+    )
+    if any(row.operation_receipt not in expected_operations for row in observations):
+        refuse("observation_not_in_expected_population")
+    gaps = tuple(
+        dict.fromkeys(gap for row in observations for gap in row.data_gaps)
+    ) + population.gaps(observations, expected_metrics)
     missing = set(expected_metrics) - {row.metric for row in observations}
     gaps += tuple(f"Missing metric: {metric}" for metric in sorted(missing))
     if not observations:
@@ -955,6 +1004,7 @@ def assess_program(
     )
     return EmailProgramAssessment(
         campaign_release=release.binding(),
+        population=population,
         expected_metrics=expected_metrics,
         stopping_conditions=tuple(
             EmailStoppingConditionFinding(condition=condition)
@@ -964,7 +1014,7 @@ def assess_program(
             "email_assessment",
             campaign.content_digest,
             canonical_digest(observations),
-            canonical_digest((window, expected_metrics, release.binding())),
+            canonical_digest((window, expected_metrics, population)),
         ),
         created_at=created_at,
         organization_id=campaign.organization_id,
@@ -986,12 +1036,19 @@ def assess_program(
         hypotheses=(
             "Consider a separately reviewed future experiment after resolving coverage and attribution gaps.",
         ),
-        generation=trace("assessment", campaign, observations, window, expected_metrics),
+        generation=trace(
+            "assessment", campaign, observations, window, expected_metrics, population
+        ),
     )
 
 
 PUBLIC_REFUSAL_REASONS: frozenset[str] = frozenset(
     (
+        "originating_operation_required",
+        "originating_operation_target_mismatch",
+        "draft_update_message_target_mismatch",
+        "unexpected_originating_operation",
+        "observation_not_in_expected_population",
         "assessment_campaign_release_mismatch",
         "audience_snapshot_drift_or_empty",
         "audience_snapshot_expired_or_not_yet_resolved",

@@ -25,6 +25,7 @@ from zeo_creator.contracts.email_marketing import (
     EmailOperationIntent,
     EmailProgramAssessment,
     EmailProofReceipt,
+    EmailRemoteReceipt,
     EmailReviewEvidence,
     EmailSequencePlan,
     OpaqueRef,
@@ -118,6 +119,7 @@ class PrepareEmailDeliveryResponse(EmailModel):
 
 
 class AssessEmailProgramRequest(EmailModel):
+    expected_operations: tuple[EmailRemoteReceipt, ...]
     release: EmailCampaignRelease
     campaign: EmailCampaignPlan
     observations: tuple[EmailMetricObservation, ...]
@@ -154,7 +156,7 @@ def _result[T: EmailModel](request: EmailModel, transform: Callable[[], T]) -> C
 
 
 @capability(
-    id="creator.plan_email_campaign@2.0.0",
+    id="creator.plan_email_campaign@3.0.0",
     description="Plan a publication-scoped bounded email campaign from supplied editorial intent.",
     effects={EffectKind.READ},
     examples=(
@@ -167,7 +169,7 @@ def _result[T: EmailModel](request: EmailModel, transform: Callable[[], T]) -> C
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_plan_email_campaign_v2",
+    projection_name="creator_plan_email_campaign_v3",
 )
 def plan_email_campaign(
     request: PlanEmailCampaignRequest, ctx: ToolContext
@@ -181,7 +183,7 @@ def plan_email_campaign(
 
 
 @capability(
-    id="creator.plan_email_sequence@2.0.0",
+    id="creator.plan_email_sequence@3.0.0",
     description="Build a bounded linear sequence revision without activation or enrolment.",
     effects={EffectKind.READ},
     examples=(
@@ -201,7 +203,7 @@ def plan_email_campaign(
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_plan_email_sequence_v2",
+    projection_name="creator_plan_email_sequence_v3",
 )
 def plan_email_sequence(
     request: PlanEmailSequenceRequest, ctx: ToolContext
@@ -226,7 +228,7 @@ def plan_email_sequence(
 
 
 @capability(
-    id="creator.plan_email_message@2.0.0",
+    id="creator.plan_email_message@3.0.0",
     description="Plan message content, symbolic personalization, audience and compliance requirements.",
     effects={EffectKind.READ},
     examples=(
@@ -242,7 +244,7 @@ def plan_email_sequence(
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_plan_email_message_v2",
+    projection_name="creator_plan_email_message_v3",
 )
 def plan_email_message(
     request: PlanEmailMessageRequest, ctx: ToolContext
@@ -262,7 +264,7 @@ def plan_email_message(
 
 
 @capability(
-    id="creator.compose_email_message@2.0.0",
+    id="creator.compose_email_message@3.0.0",
     description="Compose exact HTML and plain text from curated evidence using an optional injected strategy.",
     effects={EffectKind.READ},
     examples=(
@@ -276,7 +278,7 @@ def plan_email_message(
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
     metadata={"strategy_service": "creator.email_strategy"},
-    projection_name="creator_compose_email_message_v2",
+    projection_name="creator_compose_email_message_v3",
 )
 def compose_email_message(
     request: ComposeEmailMessageRequest, ctx: ToolContext
@@ -297,7 +299,7 @@ def compose_email_message(
 
 
 @capability(
-    id="creator.review_email_message@2.0.0",
+    id="creator.review_email_message@3.0.0",
     description="Review supplied email artifacts; semantic checks require evidence and never confer approval.",
     effects={EffectKind.READ},
     examples=(
@@ -313,7 +315,7 @@ def compose_email_message(
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_review_email_message_v2",
+    projection_name="creator_review_email_message_v3",
 )
 def review_email_message(
     request: ReviewEmailMessageRequest, ctx: ToolContext
@@ -333,7 +335,7 @@ def review_email_message(
 
 
 @capability(
-    id="creator.prepare_email_delivery@2.0.0",
+    id="creator.prepare_email_delivery@3.0.0",
     description="Freeze exact delivery material bound to a current opaque audience snapshot; never send.",
     effects={EffectKind.READ},
     examples=(
@@ -360,7 +362,7 @@ def review_email_message(
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_prepare_email_delivery_v2",
+    projection_name="creator_prepare_email_delivery_v3",
 )
 def prepare_email_delivery(
     request: PrepareEmailDeliveryRequest, ctx: ToolContext
@@ -386,13 +388,14 @@ def prepare_email_delivery(
 
 
 @capability(
-    id="creator.assess_email_program@2.0.0",
+    id="creator.assess_email_program@3.0.0",
     description="Assess receipt-linked aggregate observations already collected outside Creator.",
     effects={EffectKind.READ},
     examples=(
         CapabilityExample(
             name="missing-observations",
             request=AssessEmailProgramRequest(
+                expected_operations=(),
                 release=sample.release(),
                 campaign=sample.campaign(),
                 observations=(),
@@ -404,7 +407,7 @@ def prepare_email_delivery(
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_assess_email_program_v2",
+    projection_name="creator_assess_email_program_v3",
 )
 def assess_email_program(
     request: AssessEmailProgramRequest, ctx: ToolContext
@@ -419,6 +422,7 @@ def assess_email_program(
                 request.expected_metrics,
                 request.created_at,
                 release=request.release,
+                expected_operations=request.expected_operations,
             )
         ),
     )
@@ -436,6 +440,7 @@ class FinalizeEmailCampaignResponse(EmailModel):
 
 
 class ProposeEmailOperationRequest(EmailModel):
+    originating_operation: ProposedEmailOperation | None = None
     material: EmailOperationIntent
     release: EmailCampaignRelease
     package: EmailDeliveryPackage | None = None
@@ -450,7 +455,7 @@ class ProposeEmailOperationResponse(EmailModel):
 
 
 @capability(
-    id="creator.finalize_email_campaign@2.0.0",
+    id="creator.finalize_email_campaign@3.0.0",
     description="Freeze acyclic campaign membership and measurement requirements.",
     effects={EffectKind.READ},
     examples=(
@@ -465,7 +470,7 @@ class ProposeEmailOperationResponse(EmailModel):
     ),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_finalize_email_campaign_v2",
+    projection_name="creator_finalize_email_campaign_v3",
 )
 def finalize_email_campaign(
     request: FinalizeEmailCampaignRequest, ctx: ToolContext
@@ -481,13 +486,13 @@ def finalize_email_campaign(
 
 
 @capability(
-    id="creator.propose_email_operation@2.0.0",
+    id="creator.propose_email_operation@3.0.0",
     description="Validate exact effect material and freeze a logical operation for separate runtime authorization.",
     effects={EffectKind.READ},
     examples=(CapabilityExample(name="draft", request=sample.proposal_request()),),
     error_codes=("ZEO_CREATOR_EMAIL_INVALID",),
     tags=("creator", "email", "pure"),
-    projection_name="creator_propose_email_operation_v2",
+    projection_name="creator_propose_email_operation_v3",
 )
 def propose_email_operation(
     request: ProposeEmailOperationRequest, ctx: ToolContext
@@ -503,6 +508,7 @@ def propose_email_operation(
                 package=request.package,
                 sequence=request.sequence,
                 source_sequence=request.source_sequence,
+                originating_operation=request.originating_operation,
             )
         ),
     )

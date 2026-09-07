@@ -306,7 +306,13 @@ def test_tracking_and_subscriber_query_parameters_are_refused(query):
 def test_assessment_retains_expectations_window_and_descriptive_values():
     row = observation(completeness="complete", coverage=1, data_gaps=())
     result = s.assess_program(
-        x.campaign(), (row,), x.brief().window, ("delivered",), x.NOW, release=x.release()
+        x.campaign(),
+        (row,),
+        x.brief().window,
+        ("delivered",),
+        x.NOW,
+        release=x.release(),
+        expected_operations=tuple(dict.fromkeys(row.operation_receipt for row in (row,))),
     )
     assert result.expected_metrics == ("delivered",)
     assert any("delivered: 8 count" in text for text in result.conclusions)
@@ -320,7 +326,13 @@ def test_assessment_retains_expectations_window_and_descriptive_values():
         observation(unit="ratio", value=2, numerator=4, denominator=2)
     other = revised(row, artifact_id="conflicting-row", value=99)
     conflict = s.assess_program(
-        x.campaign(), (row, other), x.brief().window, ("delivered",), x.NOW, release=x.release()
+        x.campaign(),
+        (row, other),
+        x.brief().window,
+        ("delivered",),
+        x.NOW,
+        release=x.release(),
+        expected_operations=tuple(dict.fromkeys(row.operation_receipt for row in (row, other))),
     )
     assert conflict.confidence == "limited" and any(
         "Conflicting" in gap for gap in conflict.data_gaps
@@ -333,6 +345,12 @@ def test_assessment_retains_expectations_window_and_descriptive_values():
             ("delivered",),
             x.NOW,
             release=x.release(),
+            expected_operations=tuple(
+                dict.fromkeys(
+                    row.operation_receipt
+                    for row in (row, revised(other, aggregate_segment_ref="other-cohort"))
+                )
+            ),
         )
 
 
@@ -366,7 +384,7 @@ def test_eight_independent_programs_and_every_effect_intent():
         run = next(row for row in runs if row.publication.publication_id == pub)
         family = effect_family(run)
         assert {row.material.intent for row in family.proposals} == set(EmailEffectIntent)
-        assert len({row.approval_digest for row in family.proposals}) == 11
+        assert len({row.approval_digest for row in family.proposals}) == 13
         migration = next(
             row for row in family.proposals if row.material.intent == EmailEffectIntent.MIGRATE
         )

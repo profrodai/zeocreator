@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0.dev0 — 2026-09-07
+
+- Introduce explicit email v3 schemas while preserving all published v1/v2 schemas.
+- Close sequence provisioning and activation provenance, including migration target receipts.
+- Bind cancellation and draft updates to the originating proposal and target delivery.
+- Move preview/test checks exclusively to delivery readiness; coordinate all campaign CTAs.
+- Require expected operation and release-message coverage for complete assessments.
+- Validate root graphs once, preserve nested integrity checks, and remove the example's hardware-dependent deadline.
+- Exercise audience-specific personalized review ordering with supplied evidence.
+
+
 ## 0.3.0.dev0 — 2026-09-07
 
 - Replace email preparation APIs with explicit v2 contracts; preserve all v1 schemas.

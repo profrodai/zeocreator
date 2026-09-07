@@ -1,0 +1,130 @@
+{
+  "$defs": {
+    "EmailArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "ref",
+        "revision",
+        "digest"
+      ],
+      "title": "EmailArtifactRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "delay_anchor": {
+      "const": "preceding_admitted_event",
+      "default": "preceding_admitted_event",
+      "title": "Delay Anchor",
+      "type": "string"
+    },
+    "delay_seconds": {
+      "maximum": 31536000,
+      "minimum": 0,
+      "title": "Delay Seconds",
+      "type": "integer"
+    },
+    "desired_audience_action": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Desired Audience Action",
+      "type": "string"
+    },
+    "exit_policy": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "freshness_max_age_seconds": {
+      "minimum": 1,
+      "title": "Freshness Max Age Seconds",
+      "type": "integer"
+    },
+    "message_plan": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "ordinal": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Ordinal",
+      "type": "integer"
+    },
+    "organization_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "publication_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "purpose": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "required_approval_class": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Required Approval Class",
+      "type": "string"
+    },
+    "send_window_policy": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "skip_policy": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "step_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Step Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "organization_id",
+    "publication_id",
+    "step_id",
+    "ordinal",
+    "message_plan",
+    "delay_seconds",
+    "purpose",
+    "desired_audience_action",
+    "send_window_policy",
+    "skip_policy",
+    "exit_policy",
+    "freshness_max_age_seconds",
+    "required_approval_class"
+  ],
+  "title": "EmailSequenceStepPlan",
+  "type": "object"
+}
