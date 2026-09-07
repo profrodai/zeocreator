@@ -1,30 +1,38 @@
 """Installed-wheel proof: capabilities -> artifacts -> simulated host -> observations."""
 
+from typing import Literal
+
 from zeo_core.contracts import CapabilityResult
 
 from zeo_creator.capabilities.email_marketing import (
     AssessEmailProgramRequest,
     ComposeEmailMessageRequest,
+    FinalizeEmailCampaignRequest,
     PlanEmailCampaignRequest,
     PlanEmailMessageRequest,
     PlanEmailSequenceRequest,
     PrepareEmailDeliveryRequest,
+    ProposeEmailOperationRequest,
     ReviewEmailMessageRequest,
     assess_email_program,
     compose_email_message,
+    finalize_email_campaign,
     plan_email_campaign,
     plan_email_message,
     plan_email_sequence,
     prepare_email_delivery,
+    propose_email_operation,
     review_email_message,
 )
 from zeo_creator.contracts.common import canonical_digest
 from zeo_creator.contracts.email_marketing import (
     EmailArtifactRef,
     EmailCampaignPlan,
+    EmailCampaignRelease,
     EmailDeliveryPackage,
     EmailEditorialReview,
     EmailEffectIntent,
+    EmailLoweringEvidence,
     EmailMessageDraft,
     EmailMessagePlan,
     EmailMetricObservation,
@@ -32,6 +40,7 @@ from zeo_creator.contracts.email_marketing import (
     EmailOperationIntent,
     EmailProgramAssessment,
     EmailProofReceipt,
+    EmailRemoteReceipt,
     EmailSequencePlan,
     ProposedEmailOperation,
 )
@@ -45,12 +54,13 @@ from zeo_creator.reference.email_simulation import (
     operation_identity,
 )
 from zeo_creator.runtime import make_context
-from zeo_creator.services.email_marketing import EmailCampaignBrief, propose_operation
+from zeo_creator.services.email_marketing import EmailCampaignBrief
 
 
 class EmailReferenceRun(EmailModel):
     publication: PublicationProfile
     campaign: EmailCampaignPlan
+    release: EmailCampaignRelease
     sequence: EmailSequencePlan
     plans: tuple[EmailMessagePlan, ...]
     drafts: tuple[EmailMessageDraft, ...]
@@ -69,22 +79,34 @@ def _data[T](result: CapabilityResult[T]) -> T:
 
 
 def _proposal(
-    package: EmailDeliveryPackage, intent: EmailEffectIntent, key: str
+    package: EmailDeliveryPackage,
+    intent: EmailEffectIntent,
+    key: str,
+    release: EmailCampaignRelease,
 ) -> ProposedEmailOperation:
-    return propose_operation(
-        EmailOperationIntent(
-            organization_id=package.organization_id,
-            publication_id=package.publication_id,
-            intent=intent,
-            operation=operation_identity(intent),
-            operation_contract_digest=operation_contract_digest(intent),
-            delivery=package.binding(),
-            delivery_approval_digest=package.approval_digest,
-            audience=package.material.audience_snapshot,
-        ),
-        x.NOW,
-        key,
-    )
+    return _data(
+        propose_email_operation(
+            ProposeEmailOperationRequest(
+                material=EmailOperationIntent(
+                    organization_id=package.organization_id,
+                    publication_id=package.publication_id,
+                    execution=package.material.execution,
+                    campaign_release=release.binding(),
+                    intent=intent,
+                    operation=operation_identity(intent),
+                    operation_contract_digest=operation_contract_digest(intent),
+                    delivery=package.binding(),
+                    delivery_approval_digest=package.approval_digest,
+                    audience=package.material.audience_snapshot,
+                ),
+                created_at=x.NOW,
+                idempotency_key=key,
+                release=release,
+                package=package,
+            ),
+            make_context(capability_name="email_reference"),
+        )
+    ).proposal
 
 
 def run_program(
@@ -98,6 +120,9 @@ def run_program(
     ctx = make_context(capability_name="email_reference")
     data = x.brief(pub).model_dump(mode="python")
     data["campaign_id"] = f"{pub}/{campaign_name}"
+    data["objective"] = (
+        f"Support {campaign_name.replace(chr(45), chr(32))} through consented education"
+    )
     campaign = _data(
         plan_email_campaign(
             PlanEmailCampaignRequest(
@@ -137,6 +162,17 @@ def run_program(
             ctx,
         )
     ).sequence
+    release = _data(
+        finalize_email_campaign(
+            FinalizeEmailCampaignRequest(
+                campaign=campaign,
+                messages=plans,
+                sequences=(sequence,),
+                created_at=x.NOW,
+            ),
+            ctx,
+        )
+    ).release
     host = SimulatedEmailHost(shape)
     drafts: list[EmailMessageDraft] = []
     reviews: list[EmailEditorialReview] = []
@@ -173,7 +209,7 @@ def run_program(
             publication_id=pub,
             draft=draft.binding(),
             kind="preview",
-            receipt_ref=f"{pub}/simulated-preview-{index}",
+            lowering=x.lowering_evidence(draft, "test"),
             personalization_resolved=True,
             successful=True,
             valid_until=x.LATER,
@@ -181,6 +217,9 @@ def run_program(
         test_package = _data(
             prepare_email_delivery(
                 PrepareEmailDeliveryRequest(
+                    release=release,
+                    execution=x.execution(pub),
+                    template_mapping_digest=x.mapping_digest(pub),
                     plan=plan,
                     draft=draft,
                     review=review,
@@ -192,10 +231,14 @@ def run_program(
             )
         ).package
         test_proposal = _proposal(
-            test_package, EmailEffectIntent.TEST, f"{campaign_name}/test-{index}"
+            test_package, EmailEffectIntent.TEST, f"{campaign_name}/test-{index}", release
         )
         test_receipt = host.simulate(
-            test_proposal, test_proposal.approval_digest, x.NOW, package=test_package
+            test_proposal,
+            test_proposal.approval_digest,
+            x.NOW,
+            package=test_package,
+            release=release,
         )
         test_proof = EmailProofReceipt(
             artifact_id=f"{pub}/{campaign_name}/test-proof-{index}",
@@ -205,7 +248,7 @@ def run_program(
             input_refs=(test_proposal.artifact_id,),
             draft=draft.binding(),
             kind="test_send",
-            receipt_ref=test_receipt.receipt_id,
+            lowering=lowering_from_test(test_receipt, test_package),
             audience_snapshot=x.snapshot(pub, "test"),
             personalization_resolved=True,
             successful=True,
@@ -214,11 +257,14 @@ def run_program(
         production_package = _data(
             prepare_email_delivery(
                 PrepareEmailDeliveryRequest(
+                    release=release,
+                    execution=x.execution(pub),
+                    template_mapping_digest=x.mapping_digest(pub),
                     plan=plan,
                     draft=draft,
                     review=review,
                     audience_snapshot=x.snapshot(pub),
-                    proofs=(preview, test_proof),
+                    proofs=(x.proofs(draft)[0], test_proof),
                     sequence=sequence if index else None,
                     created_at=x.NOW,
                 ),
@@ -226,13 +272,14 @@ def run_program(
             )
         ).package
         production_proposal = _proposal(
-            production_package, EmailEffectIntent.SEND, f"{campaign_name}/send-{index}"
+            production_package, EmailEffectIntent.SEND, f"{campaign_name}/send-{index}", release
         )
         production_receipt = host.simulate(
             production_proposal,
             production_proposal.approval_digest,
             x.NOW,
             package=production_package,
+            release=release,
         )
         drafts.append(draft)
         reviews.append(review)
@@ -255,8 +302,10 @@ def run_program(
         publication_id=pub,
         campaign=campaign.binding(),
         operation=proposals[1].binding(),
+        campaign_release=release.binding(),
+        operation_receipt=remote_from_simulation(proposals[1], receipts[1]),
         retrieval_receipt=retrieval,
-        provider_kind="simulation",
+        provider_kind=x.execution(pub).provider_kind,
         connection_ref=f"{pub}/connection",
         aggregate_segment_ref=f"{pub}/aggregate",
         observation_window=campaign.campaign_window,
@@ -273,6 +322,7 @@ def run_program(
     assessment = _data(
         assess_email_program(
             AssessEmailProgramRequest(
+                release=release,
                 campaign=campaign,
                 observations=(observation,),
                 observation_window=campaign.campaign_window,
@@ -285,6 +335,7 @@ def run_program(
     return EmailReferenceRun(
         publication=publication,
         campaign=campaign,
+        release=release,
         sequence=sequence,
         plans=plans,
         drafts=tuple(drafts),
@@ -305,6 +356,57 @@ def three_publications() -> tuple[EmailReferenceRun, ...]:
         run_program(x.profile("publication-b"), "kit-shaped", "membership", "lead-magnet-welcome"),
         run_program(x.profile("publication-c"), "kit-shaped", "product-interest", "orientation"),
     )
+
+
+def lowering_from_test(
+    receipt: SimulatedLoweringReceipt, package: EmailDeliveryPackage
+) -> EmailLoweringEvidence:
+    if (
+        receipt.outcome != "accepted"
+        or receipt.creator_artifact != package.binding()
+        or receipt.provider_observed_payload_digest != receipt.submitted_payload_digest
+    ):
+        raise ValueError("test simulation did not confirm exact material")
+    draft = package.material.draft
+    data = x.lowering_evidence(draft, "test").model_dump(mode="python", exclude={"content_digest"})
+    data.update(
+        receipt=EmailArtifactRef(
+            organization_id=package.organization_id,
+            publication_id=package.publication_id,
+            ref=receipt.receipt_id,
+            revision=1,
+            digest=canonical_digest(receipt),
+        ),
+        submitted_payload_digest=receipt.submitted_payload_digest,
+        observed_payload_digest=receipt.provider_observed_payload_digest,
+    )
+    return EmailLoweringEvidence.model_validate(data)
+
+
+def remote_from_simulation(
+    proposal: ProposedEmailOperation,
+    receipt: SimulatedLoweringReceipt,
+    kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"] = "broadcast",
+) -> EmailRemoteReceipt:
+    if (
+        receipt.outcome != "accepted"
+        or receipt.provider_observed_payload_digest is None
+        or receipt.idempotency_identity != proposal.idempotency_key
+    ):
+        raise ValueError("simulation receipt did not confirm the logical operation")
+    data = x.remote_receipt(
+        proposal.binding(),
+        proposal.material.campaign_release,
+        kind=kind,
+        sequence=proposal.material.sequence,
+    ).model_dump(mode="python", exclude={"content_digest"})
+    data.update(
+        artifact_id=receipt.receipt_id,
+        remote_ref=receipt.remote_ref,
+        execution=proposal.material.execution,
+        remote_revision_digest=receipt.provider_observed_payload_digest,
+    )
+    return EmailRemoteReceipt.model_validate(data)
 
 
 if __name__ == "__main__":

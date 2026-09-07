@@ -18,7 +18,8 @@ def test_public_example_runs(example: Path) -> None:
         check=False,
         capture_output=True,
         text=True,
-        timeout=20,
+        # The email suite exercises eight programs and eleven effects per program.
+        timeout=180 if example.stem == "email_marketing" else 20,
     )
 
     assert completed.returncode == 0, completed.stderr

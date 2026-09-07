@@ -22,14 +22,18 @@ from zeo_creator.contracts.email_marketing import (
     AudienceSnapshotSummary,
     EmailArtifactRef,
     EmailCampaignPlan,
+    EmailCampaignRelease,
     EmailCompliance,
     EmailCTA,
     EmailDeliveryMaterial,
     EmailDeliveryPackage,
     EmailEditorialReview,
+    EmailEffectIntent,
+    EmailExecutionContext,
     EmailLink,
     EmailMessageDraft,
     EmailMessagePlan,
+    EmailMetricName,
     EmailMetricObservation,
     EmailOperationIntent,
     EmailProgramAssessment,
@@ -38,11 +42,14 @@ from zeo_creator.contracts.email_marketing import (
     EmailReviewFinding,
     EmailSequencePlan,
     EmailSequenceStepPlan,
+    EmailStoppingConditionFinding,
     OpaqueRef,
     PersonalizationDeclaration,
     ProposedEmailOperation,
     ScopedEmailModel,
     Text,
+    effect_approval_digest,
+    metric_conflicts,
 )
 from zeo_creator.contracts.evidence import ResearchWindow
 from zeo_creator.contracts.newsletter import NewsletterIssuePlan
@@ -333,7 +340,9 @@ def plan_sequence(
             message_plan=message.binding(),
             delay_seconds=delays[index],
             purpose=message.purpose,
-            desired_audience_action=message.calls_to_action[0].desired_action,
+            desired_audience_action=next(
+                cta.desired_action for cta in message.calls_to_action if cta.primary
+            ),
             send_window_policy=policies.send_window,
             skip_policy=policies.skip,
             exit_policy=policies.exit,
@@ -409,6 +418,8 @@ class _HTMLInspection(HTMLParser):
         self.links: list[str] = []
         self.unsafe = False
         self.inaccessible = False
+        self.anchors: list[tuple[str, str]] = []
+        self.active_anchor: tuple[str, list[str]] | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
@@ -432,16 +443,29 @@ class _HTMLInspection(HTMLParser):
         if any(key not in {"href", "lang"} for key in attributes):
             self.unsafe = True
         if tag == "a":
-            self.links.append(attributes.get("href") or "")
+            href = attributes.get("href") or ""
+            self.links.append(href)
+            if self.active_anchor is not None:
+                self.unsafe = True
+            self.active_anchor = (href, [])
         if tag in {"p", "h1", "h2", "h3", "li", "br", "footer", "div"}:
             self.text.append(" ")
 
     def handle_endtag(self, tag: str) -> None:
+        if tag == "a" and self.active_anchor is not None:
+            href, text = self.active_anchor
+            label = " ".join("".join(text).split())
+            self.anchors.append((label, href))
+            if not label:
+                self.inaccessible = True
+            self.active_anchor = None
         if tag in {"p", "h1", "h2", "h3", "li", "footer", "div"}:
             self.text.append(" ")
 
     def handle_data(self, data: str) -> None:
         self.text.append(data)
+        if self.active_anchor is not None:
+            self.active_anchor[1].append(data)
 
 
 def review_message(
@@ -489,8 +513,10 @@ def _review_exact_message(
         "{{" in draft.html + draft.plain_text + draft.subject + draft.preheader
         or "}}" in draft.html + draft.plain_text + draft.subject + draft.preheader
     )
+    links = {link.link_id: link for link in draft.links}
     cta_ok = draft.calls_to_action == plan.calls_to_action and all(
-        cta.label in draft.plain_text and cta.label in "".join(parser.text)
+        f"{cta.label} {links[cta.link_id].url}" in draft.plain_text
+        and (normalize(cta.label), links[cta.link_id].url) in parser.anchors
         for cta in draft.calls_to_action
     )
     supplied = {item.check: item for item in evidence}
@@ -520,11 +546,16 @@ def _review_exact_message(
                 == 0
                 and "personalization" in supplied
                 and supplied["personalization"].passed
+                and supplied["personalization"].lowering is not None
+                and supplied["personalization"].lowering.draft == draft.binding()
+                and supplied["personalization"].lowering.outcome == "verified"
+                and set(supplied["personalization"].lowering.covered_tokens) == declared
             )
         ),
-        "accessibility": not parser.unsafe and not parser.inaccessible,
         "footer_unsubscribe": draft.compliance.footer_text in draft.plain_text
-        and draft.compliance.footer_text in "".join(parser.text),
+        and draft.compliance.footer_text in "".join(parser.text)
+        and ("Unsubscribe", links[draft.compliance.unsubscribe_link_id].url) in parser.anchors
+        and f"Unsubscribe {links[draft.compliance.unsubscribe_link_id].url}" in draft.plain_text,
         "consent_suppression": bool(
             plan.audience.consent_policy and plan.audience.suppression_policy
         )
@@ -544,6 +575,8 @@ def _review_exact_message(
     for check in REVIEW_CHECKS:
         if check == "links" and not links_match:
             status, reason = "blocked", "link_manifest_mismatch"
+        elif check == "accessibility" and (parser.unsafe or parser.inaccessible):
+            status, reason = "blocked", "accessibility_structure_failed"
         elif check in structural:
             status = "pass" if structural[check] else "blocked"
             reason = "structural_check_passed" if structural[check] else "structural_check_failed"
@@ -597,8 +630,21 @@ def prepare_delivery(
     created_at: datetime,
     schedule_intent: datetime | None = None,
     sequence: EmailSequencePlan | None = None,
+    *,
+    release: EmailCampaignRelease,
+    execution: EmailExecutionContext,
+    template_mapping_digest: str,
 ) -> EmailDeliveryPackage:
-    scope(plan, draft, review, snapshot, *proofs)
+    scope(plan, draft, review, snapshot, release, execution, *proofs)
+    if plan not in release.messages or release.campaign.binding() != plan.campaign:
+        refuse("delivery_not_in_campaign_release")
+    if sequence and sequence not in release.sequences:
+        refuse("sequence_not_in_campaign_release")
+    if (snapshot.provider_kind, snapshot.connection_ref) != (
+        execution.provider_kind,
+        execution.connection_ref,
+    ):
+        refuse("delivery_execution_snapshot_mismatch")
     if (
         draft.message_plan != plan.binding()
         or review.plan != plan.binding()
@@ -645,7 +691,8 @@ def prepare_delivery(
         ):
             refuse("production_requires_preview_and_test_evidence")
         if any(
-            row.audience_snapshot
+            row.kind == "test_send"
+            and row.audience_snapshot
             and (
                 row.audience_snapshot.snapshot_ref == snapshot.snapshot_ref
                 or row.audience_snapshot.snapshot_digest == snapshot.snapshot_digest
@@ -653,7 +700,39 @@ def prepare_delivery(
             for row in proofs
         ):
             refuse("test_audience_must_differ_from_production")
+    for row in review.evidence:
+        if row.check == "personalization" and row.lowering is not None:
+            lowering = row.lowering
+            if (
+                lowering.execution != execution
+                or lowering.template_mapping_digest != template_mapping_digest
+                or lowering.sender_identity != draft.sender_identity
+                or lowering.covered_snapshot_digest != snapshot.snapshot_digest
+            ):
+                refuse("proof_lowering_provenance_mismatch")
+    for proof in proofs:
+        evidence = proof.lowering
+        covered = proof.audience_snapshot or snapshot
+        validate_snapshot(covered, plan.audience, created_at)
+        if (
+            evidence.execution != execution
+            or evidence.draft != draft.binding()
+            or evidence.sender_identity != draft.sender_identity
+            or evidence.template_mapping_digest != template_mapping_digest
+            or evidence.covered_snapshot_digest != covered.snapshot_digest
+            or set(evidence.covered_tokens) != {token.name for token in draft.personalization}
+            or evidence.outcome != "verified"
+            or evidence.created_at > created_at
+            or (covered.provider_kind, covered.connection_ref)
+            != (execution.provider_kind, execution.connection_ref)
+        ):
+            refuse("proof_lowering_provenance_mismatch")
+        if proof.kind == "preview" and covered != snapshot:
+            refuse("preview_must_cover_delivery_snapshot")
     material = EmailDeliveryMaterial(
+        campaign_release=release.binding(),
+        execution=execution,
+        template_mapping_digest=template_mapping_digest,
         organization_id=plan.organization_id,
         publication_id=plan.publication_id,
         draft=draft,
@@ -680,24 +759,150 @@ def prepare_delivery(
     )
 
 
-def propose_operation(
-    material: EmailOperationIntent, created_at: datetime, idempotency_key: str
-) -> ProposedEmailOperation:
-    """Freeze editorial intent referencing a caller-selected public Zeocore operation.
+def finalize_campaign(
+    campaign: EmailCampaignPlan,
+    messages: tuple[EmailMessagePlan, ...],
+    sequences: tuple[EmailSequencePlan, ...],
+    created_at: datetime,
+) -> EmailCampaignRelease:
+    scope(campaign, *messages, *sequences)
+    return EmailCampaignRelease(
+        artifact_id=stable_id(
+            "email_release", campaign.content_digest, canonical_digest((messages, sequences))
+        ),
+        created_at=created_at,
+        organization_id=campaign.organization_id,
+        publication_id=campaign.publication_id,
+        campaign=campaign,
+        messages=messages,
+        sequences=sequences,
+        calls_to_action=tuple(
+            dict.fromkeys(cta for row in messages for cta in row.calls_to_action)
+        ),
+        measurement_plan=campaign.conversion_objectives,
+        generation=trace("release", campaign, messages, sequences),
+    )
 
-    This function does not certify provider support, validate an authorization, or execute.
-    The host must resolve the public operation contract and check its semantics before use.
-    """
-    current(material)
-    if material.audience and (
-        not material.audience.resolved_at <= created_at < material.audience.expires_at
-        or material.audience.drift_status != "unchanged"
-        or material.audience.eligible_count == 0
-    ):
-        refuse("effect_audience_snapshot_not_current")
-    digest = canonical_digest(material)
+
+def propose_operation(
+    material: EmailOperationIntent,
+    created_at: datetime,
+    idempotency_key: str,
+    *,
+    release: EmailCampaignRelease,
+    package: EmailDeliveryPackage | None = None,
+    sequence: EmailSequencePlan | None = None,
+    source_sequence: EmailSequencePlan | None = None,
+) -> ProposedEmailOperation:
+    """Validate concrete inputs before freezing intent. Host verifies receipt authenticity."""
+    scope(material, release)
+    if material.campaign_release != release.binding():
+        refuse("effect_campaign_release_mismatch")
+    if material.audience:
+        validate_snapshot(material.audience, release.campaign.audience, created_at)
+        if (material.audience.provider_kind, material.audience.connection_ref) != (
+            material.execution.provider_kind,
+            material.execution.connection_ref,
+        ):
+            refuse("effect_execution_snapshot_mismatch")
+    if material.delivery:
+        if package is None:
+            refuse("effect_delivery_package_required")
+        scope(material, package)
+        pm = package.material
+        if (
+            package.binding() != material.delivery
+            or package.approval_digest != material.delivery_approval_digest
+            or pm.execution != material.execution
+            or pm.campaign_release != release.binding()
+            or (material.audience is not None and pm.audience_snapshot != material.audience)
+        ):
+            refuse("effect_delivery_or_audience_changed")
+        plans = [row for row in release.messages if row.binding() == pm.draft.message_plan]
+        if len(plans) != 1:
+            refuse("delivery_not_in_campaign_release")
+        package_sequence = next(
+            (row for row in release.sequences if row.binding() == pm.sequence_revision), None
+        )
+        if pm.sequence_revision and package_sequence is None:
+            refuse("sequence_not_in_campaign_release")
+        # Re-run preparation against actual material; a forged digest is not proof of readiness.
+        prepare_delivery(
+            plans[0],
+            pm.draft,
+            pm.review,
+            pm.audience_snapshot,
+            pm.proofs,
+            created_at,
+            pm.schedule_intent,
+            package_sequence,
+            release=release,
+            execution=pm.execution,
+            template_mapping_digest=pm.template_mapping_digest,
+        )
+        if material.intent == EmailEffectIntent.TEST and pm.audience_snapshot.purpose != "test":
+            refuse("test_requires_test_delivery")
+        if (
+            material.intent in {EmailEffectIntent.SEND, EmailEffectIntent.SCHEDULE}
+            and pm.audience_snapshot.purpose != "production"
+        ):
+            refuse("production_requires_production_delivery")
+        if material.intent == EmailEffectIntent.SCHEDULE and (
+            pm.schedule_intent is None or pm.schedule_intent <= created_at
+        ):
+            refuse("schedule_requires_future_delivery")
+        if material.intent == EmailEffectIntent.SEND and pm.schedule_intent is not None:
+            refuse("immediate_send_cannot_reuse_schedule")
+    elif package is not None:
+        refuse("unexpected_effect_delivery")
+    if material.sequence:
+        if sequence is None:
+            refuse("effect_sequence_required")
+        scope(material, sequence)
+        if sequence.binding() != material.sequence or sequence not in release.sequences:
+            refuse("effect_sequence_release_mismatch")
+        if material.intent in {EmailEffectIntent.ENROL, EmailEffectIntent.MIGRATE}:
+            window = sequence.maximum_enrolment_window
+            if not window.starts_at <= created_at < window.ends_at or (
+                material.audience is not None
+                and not window.starts_at <= material.audience.resolved_at < window.ends_at
+            ):
+                refuse("sequence_enrolment_window_closed")
+            if sequence.suppression_policy != release.campaign.audience.suppression_policy:
+                refuse("sequence_audience_policy_mismatch")
+    elif sequence is not None:
+        refuse("unexpected_effect_sequence")
+    if material.intent == EmailEffectIntent.MIGRATE:
+        migration = material.migration
+        if source_sequence is None or sequence is None or migration is None:
+            refuse("migration_requires_both_sequence_revisions")
+        scope(material, source_sequence)
+        if (
+            migration.source_sequence != source_sequence.binding()
+            or source_sequence.binding() == sequence.binding()
+            or sequence.previous_revision != source_sequence.binding()
+            or sequence.migration_policy != migration.policy
+            or material.prior_receipt is None
+            or material.prior_receipt.sequence != source_sequence.binding()
+            or material.prior_receipt.kind != "sequence_revision"
+        ):
+            refuse("migration_sequence_provenance_mismatch")
+        if {step.source_step for step in migration.steps} != {
+            step.step_id for step in source_sequence.steps
+        } or len(migration.steps) != len(source_sequence.steps):
+            refuse("migration_requires_every_source_step_once")
+        targets = {step.step_id for step in sequence.steps}
+        if any(
+            (step.disposition == "skip" and step.target_step is not None)
+            or (step.disposition != "skip" and step.target_step not in targets)
+            for step in migration.steps
+        ):
+            refuse("migration_step_target_mismatch")
+    elif source_sequence is not None:
+        refuse("unexpected_migration_source")
+    digest = effect_approval_digest(material, idempotency_key)
     return ProposedEmailOperation(
-        artifact_id=stable_id("email_operation", digest, idempotency_key),
+        artifact_id=stable_id("email_operation", digest),
         created_at=created_at,
         organization_id=material.organization_id,
         publication_id=material.publication_id,
@@ -711,14 +916,20 @@ def assess_program(
     campaign: EmailCampaignPlan,
     observations: tuple[EmailMetricObservation, ...],
     window: ResearchWindow,
-    expected_metrics: tuple[str, ...],
+    expected_metrics: tuple[EmailMetricName, ...],
     created_at: datetime,
+    *,
+    release: EmailCampaignRelease,
 ) -> EmailProgramAssessment:
-    scope(campaign, *observations)
+    scope(campaign, release, *observations)
+    if release.campaign != campaign:
+        refuse("assessment_campaign_release_mismatch")
     if len({row.artifact_id for row in observations}) != len(observations):
         refuse("duplicate_metric_observation")
     if any(
-        row.campaign != campaign.binding() or row.observation_window != window
+        row.campaign != campaign.binding()
+        or row.campaign_release != release.binding()
+        or row.observation_window != window
         for row in observations
     ):
         refuse("metrics_campaign_or_window_mismatch")
@@ -732,6 +943,8 @@ def assess_program(
     gaps += tuple(f"Missing metric: {metric}" for metric in sorted(missing))
     if not observations:
         gaps += ("No observations supplied.",)
+    if metric_conflicts(observations):
+        gaps += ("Conflicting values for the same metric and operation; no aggregation performed.",)
     qualified = (
         bool(observations)
         and not gaps
@@ -741,11 +954,17 @@ def assess_program(
         )
     )
     return EmailProgramAssessment(
+        campaign_release=release.binding(),
+        expected_metrics=expected_metrics,
+        stopping_conditions=tuple(
+            EmailStoppingConditionFinding(condition=condition)
+            for condition in campaign.stopping_conditions
+        ),
         artifact_id=stable_id(
             "email_assessment",
             campaign.content_digest,
             canonical_digest(observations),
-            canonical_digest(window),
+            canonical_digest((window, expected_metrics, release.binding())),
         ),
         created_at=created_at,
         organization_id=campaign.organization_id,
@@ -757,6 +976,10 @@ def assess_program(
         completeness="complete" if qualified else "partial" if observations else "unknown",
         confidence="qualified" if qualified else "limited",
         conclusions=(
+            *(
+                f"{row.metric}: {row.value:g} {row.unit}; coverage {row.coverage:.0%}; reliability {row.reliability}."
+                for row in observations
+            ),
             "Observed aggregates are descriptive and do not establish causal lift or a winning variant.",
         ),
         data_gaps=gaps,
@@ -765,3 +988,68 @@ def assess_program(
         ),
         generation=trace("assessment", campaign, observations, window, expected_metrics),
     )
+
+
+PUBLIC_REFUSAL_REASONS: frozenset[str] = frozenset(
+    (
+        "assessment_campaign_release_mismatch",
+        "audience_snapshot_drift_or_empty",
+        "audience_snapshot_expired_or_not_yet_resolved",
+        "audience_snapshot_or_policy_changed",
+        "campaign_profile_revision_changed",
+        "campaign_requires_one_primary_cta",
+        "consent_and_suppression_required",
+        "delivery_execution_snapshot_mismatch",
+        "delivery_input_binding_changed",
+        "delivery_not_in_campaign_release",
+        "duplicate_metric_observation",
+        "duplicate_preview_or_test_proof",
+        "duplicate_review_evidence",
+        "editorial_review_from_future",
+        "editorial_review_not_ready",
+        "effect_campaign_release_mismatch",
+        "effect_delivery_or_audience_changed",
+        "effect_delivery_package_required",
+        "effect_execution_snapshot_mismatch",
+        "effect_sequence_release_mismatch",
+        "effect_sequence_required",
+        "email_publication_scope_mismatch",
+        "immediate_send_cannot_reuse_schedule",
+        "message_compliance_must_match_audience",
+        "metric_attribution_policy_mismatch",
+        "metrics_campaign_or_window_mismatch",
+        "migration_requires_both_sequence_revisions",
+        "migration_requires_every_source_step_once",
+        "migration_sequence_provenance_mismatch",
+        "migration_step_target_mismatch",
+        "newsletter_audience_requires_explicit_migration",
+        "newsletter_directions_must_select_existing_variants",
+        "preview_must_cover_delivery_snapshot",
+        "preview_or_test_proof_invalid",
+        "production_requires_preview_and_test_evidence",
+        "production_requires_production_delivery",
+        "proof_lowering_provenance_mismatch",
+        "review_evidence_stale_or_wrong_draft",
+        "review_plan_or_profile_changed",
+        "schedule_must_be_future_and_within_snapshot_validity",
+        "schedule_requires_future_delivery",
+        "sender_identity_changed",
+        "sequence_audience_policy_mismatch",
+        "sequence_does_not_bind_message_revision",
+        "sequence_enrolment_window_closed",
+        "sequence_messages_must_match_campaign_revision",
+        "sequence_not_in_campaign_release",
+        "sequence_predecessor_identity_mismatch",
+        "sequence_requires_one_delay_per_message",
+        "sequence_requires_unique_message_identities",
+        "source_section_evidence_not_in_plan",
+        "source_sections_must_match_plan_order",
+        "stale_email_artifact",
+        "strategy_output_does_not_bind_exact_inputs",
+        "test_audience_must_differ_from_production",
+        "test_requires_test_delivery",
+        "unexpected_effect_delivery",
+        "unexpected_effect_sequence",
+        "unexpected_migration_source",
+    )
+)

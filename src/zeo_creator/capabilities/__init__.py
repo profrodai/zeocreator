@@ -11,10 +11,12 @@ from zeo_creator.capabilities.create_content_brief import create_content_brief
 from zeo_creator.capabilities.email_marketing import (
     assess_email_program,
     compose_email_message,
+    finalize_email_campaign,
     plan_email_campaign,
     plan_email_message,
     plan_email_sequence,
     prepare_email_delivery,
+    propose_email_operation,
     review_email_message,
 )
 from zeo_creator.capabilities.extract_editorial_signals import extract_editorial_signals
@@ -46,6 +48,7 @@ __all__ = [
     "compose_newsletter_issue",
     "create_content_brief",
     "extract_editorial_signals",
+    "finalize_email_campaign",
     "identify_engagement_opportunities",
     "plan_content_portfolio",
     "plan_edition",
@@ -57,6 +60,7 @@ __all__ = [
     "prepare_correction",
     "prepare_distribution",
     "prepare_email_delivery",
+    "propose_email_operation",
     "research_synthesis",
     "review_commentary",
     "review_email_message",

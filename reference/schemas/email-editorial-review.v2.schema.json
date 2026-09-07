@@ -1,0 +1,578 @@
+{
+  "$defs": {
+    "CapabilityId": {
+      "additionalProperties": false,
+      "description": "Immutable capability identity. Mutation after construction is forbidden.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "namespace": {
+          "minLength": 1,
+          "title": "Namespace",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace",
+        "name",
+        "version"
+      ],
+      "title": "CapabilityId",
+      "type": "object"
+    },
+    "EmailArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "ref",
+        "revision",
+        "digest"
+      ],
+      "title": "EmailArtifactRef",
+      "type": "object"
+    },
+    "EmailExecutionContext": {
+      "additionalProperties": false,
+      "properties": {
+        "account_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Account Ref",
+          "type": "string"
+        },
+        "connection_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "connector_revision": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Connector Revision",
+          "type": "string"
+        },
+        "lowering_profile": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "provider_kind": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Provider Kind",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "provider_kind",
+        "connection_ref",
+        "account_ref",
+        "connector_revision",
+        "lowering_profile"
+      ],
+      "title": "EmailExecutionContext",
+      "type": "object"
+    },
+    "EmailLoweringEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "covered_snapshot_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Covered Snapshot Digest",
+          "type": "string"
+        },
+        "covered_tokens": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+            "type": "string"
+          },
+          "title": "Covered Tokens",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "draft": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "execution": {
+          "$ref": "#/$defs/EmailExecutionContext"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "issuer": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "missing_value_behavior": {
+          "const": "refuse",
+          "default": "refuse",
+          "title": "Missing Value Behavior",
+          "type": "string"
+        },
+        "observed_payload_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Observed Payload Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "verified",
+            "needs_review",
+            "ambiguous"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "receipt": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "receipt_contract": {
+          "$ref": "#/$defs/CapabilityId"
+        },
+        "receipt_contract_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Receipt Contract Digest",
+          "type": "string"
+        },
+        "rendered_preview_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Rendered Preview Digest",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "2.0.0",
+          "default": "2.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sender_identity": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "submitted_payload_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Submitted Payload Digest",
+          "type": "string"
+        },
+        "template_mapping_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Template Mapping Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "artifact_id",
+        "receipt",
+        "issuer",
+        "receipt_contract",
+        "receipt_contract_digest",
+        "execution",
+        "draft",
+        "sender_identity",
+        "template_mapping_digest",
+        "submitted_payload_digest",
+        "observed_payload_digest",
+        "rendered_preview_digest",
+        "covered_snapshot_digest",
+        "outcome"
+      ],
+      "title": "EmailLoweringEvidence",
+      "type": "object"
+    },
+    "EmailReviewEvidence": {
+      "additionalProperties": false,
+      "description": "Caller-supplied review evidence; authenticity is verified by the controlling runtime.",
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "check": {
+          "enum": [
+            "source_traceability",
+            "publication_voice",
+            "audience_policy",
+            "subject_body",
+            "html_plain_text",
+            "links",
+            "cta",
+            "personalization",
+            "accessibility",
+            "footer_unsubscribe",
+            "consent_suppression",
+            "claims",
+            "preview",
+            "test_send"
+          ],
+          "title": "Check",
+          "type": "string"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "draft": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "issuer": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "lowering": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailLoweringEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "policy": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "receipt": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "2.0.0",
+          "default": "2.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "valid_until": {
+          "format": "date-time",
+          "title": "Valid Until",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "artifact_id",
+        "draft",
+        "check",
+        "passed",
+        "policy",
+        "receipt",
+        "issuer",
+        "valid_until"
+      ],
+      "title": "EmailReviewEvidence",
+      "type": "object"
+    },
+    "EmailReviewFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "check": {
+          "enum": [
+            "source_traceability",
+            "publication_voice",
+            "audience_policy",
+            "subject_body",
+            "html_plain_text",
+            "links",
+            "cta",
+            "personalization",
+            "accessibility",
+            "footer_unsubscribe",
+            "consent_suppression",
+            "claims",
+            "preview",
+            "test_send"
+          ],
+          "title": "Check",
+          "type": "string"
+        },
+        "reason": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Reason",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "blocked",
+            "human_needed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check",
+        "status",
+        "reason"
+      ],
+      "title": "EmailReviewFinding",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "content_digest": {
+      "default": "",
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "draft": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "evidence": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EmailReviewEvidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/EmailReviewFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "generation": {
+      "$ref": "#/$defs/GenerationTrace"
+    },
+    "input_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "organization_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "plan": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "publication_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "ready_for_human_approval": {
+      "title": "Ready For Human Approval",
+      "type": "boolean"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "2.0.0",
+      "default": "2.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "created_at",
+    "organization_id",
+    "publication_id",
+    "artifact_id",
+    "plan",
+    "draft",
+    "findings",
+    "ready_for_human_approval",
+    "generation"
+  ],
+  "title": "EmailEditorialReview",
+  "type": "object"
+}

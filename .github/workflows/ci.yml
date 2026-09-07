@@ -44,9 +44,10 @@ jobs:
           uv pip install --python .wheel-smoke/bin/python dist/*.whl
           smoke_dir="$(mktemp -d)"
           cd "$smoke_dir"
-          "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -c "from zeo_creator.registry import capability_manifests; assert len(capability_manifests()) == 27"
+          "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -c "from zeo_creator.registry import capability_manifests; assert len(capability_manifests()) == 29"
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/zeo-creator" doctor --json
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/zeo-creator" contracts list --json
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/zeo-creator" contract-schema --name=content-brief --version=1
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/zeo-creator" contracts export --output="$smoke_dir/schemas"
           test -f "$smoke_dir/schemas/artifact-manifest.v1.schema.json"
+          "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -m zeo_creator.reference.email_program_suite

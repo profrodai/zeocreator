@@ -1,0 +1,432 @@
+{
+  "$defs": {
+    "EmailArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "ref",
+        "revision",
+        "digest"
+      ],
+      "title": "EmailArtifactRef",
+      "type": "object"
+    },
+    "EmailCTA": {
+      "additionalProperties": false,
+      "properties": {
+        "cta_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Cta Id",
+          "type": "string"
+        },
+        "desired_action": {
+          "maxLength": 20000,
+          "minLength": 1,
+          "title": "Desired Action",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 20000,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "link_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Link Id",
+          "type": "string"
+        },
+        "primary": {
+          "default": false,
+          "title": "Primary",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "cta_id",
+        "link_id",
+        "label",
+        "desired_action"
+      ],
+      "title": "EmailCTA",
+      "type": "object"
+    },
+    "EmailCompliance": {
+      "additionalProperties": false,
+      "properties": {
+        "consent_policy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailArtifactRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "footer_policy": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "footer_text": {
+          "maxLength": 20000,
+          "minLength": 1,
+          "title": "Footer Text",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "suppression_policy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailArtifactRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unsubscribe_link_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Unsubscribe Link Id",
+          "type": "string"
+        },
+        "unsubscribe_policy": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "footer_policy",
+        "unsubscribe_policy",
+        "consent_policy",
+        "suppression_policy",
+        "footer_text",
+        "unsubscribe_link_id"
+      ],
+      "title": "EmailCompliance",
+      "type": "object"
+    },
+    "EmailLink": {
+      "additionalProperties": false,
+      "properties": {
+        "link_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Link Id",
+          "type": "string"
+        },
+        "purpose": {
+          "enum": [
+            "content",
+            "cta",
+            "unsubscribe"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "tracking_required": {
+          "title": "Tracking Required",
+          "type": "boolean"
+        },
+        "url": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "link_id",
+        "url",
+        "purpose",
+        "tracking_required"
+      ],
+      "title": "EmailLink",
+      "type": "object"
+    },
+    "EmailMessageDraft": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "calls_to_action": {
+          "items": {
+            "$ref": "#/$defs/EmailCTA"
+          },
+          "minItems": 1,
+          "title": "Calls To Action",
+          "type": "array"
+        },
+        "compliance": {
+          "$ref": "#/$defs/EmailCompliance"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "generation": {
+          "$ref": "#/$defs/GenerationTrace"
+        },
+        "html": {
+          "maxLength": 1000000,
+          "minLength": 1,
+          "title": "Html",
+          "type": "string"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/$defs/EmailLink"
+          },
+          "minItems": 1,
+          "title": "Links",
+          "type": "array"
+        },
+        "message_plan": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "personalization": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PersonalizationDeclaration"
+          },
+          "title": "Personalization",
+          "type": "array"
+        },
+        "plain_text": {
+          "maxLength": 1000000,
+          "minLength": 1,
+          "title": "Plain Text",
+          "type": "string"
+        },
+        "preheader": {
+          "maxLength": 998,
+          "minLength": 1,
+          "pattern": "^[^\\r\\n]+$",
+          "title": "Preheader",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "reply_to_identity": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "2.0.0",
+          "default": "2.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sender_identity": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "source_lineage": {
+          "items": {
+            "$ref": "#/$defs/EmailArtifactRef"
+          },
+          "minItems": 1,
+          "title": "Source Lineage",
+          "type": "array"
+        },
+        "subject": {
+          "maxLength": 998,
+          "minLength": 1,
+          "pattern": "^[^\\r\\n]+$",
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "artifact_id",
+        "message_plan",
+        "subject",
+        "preheader",
+        "html",
+        "plain_text",
+        "links",
+        "calls_to_action",
+        "sender_identity",
+        "reply_to_identity",
+        "compliance",
+        "source_lineage",
+        "generation"
+      ],
+      "title": "EmailMessageDraft",
+      "type": "object"
+    },
+    "GenerationTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluator_findings": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evaluator Findings",
+          "type": "array"
+        },
+        "generation_attempt": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Generation Attempt",
+          "type": "integer"
+        },
+        "input_digests": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Input Digests",
+          "type": "array"
+        },
+        "model_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Ref"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "strategy_ref": {
+          "minLength": 1,
+          "title": "Strategy Ref",
+          "type": "string"
+        },
+        "strategy_version": {
+          "minLength": 1,
+          "title": "Strategy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy_ref",
+        "strategy_version",
+        "policy_version",
+        "input_digests"
+      ],
+      "title": "GenerationTrace",
+      "type": "object"
+    },
+    "PersonalizationDeclaration": {
+      "additionalProperties": false,
+      "properties": {
+        "missing_value_behavior": {
+          "const": "refuse",
+          "default": "refuse",
+          "title": "Missing Value Behavior",
+          "type": "string"
+        },
+        "name": {
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "source_policy": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Source Policy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "source_policy"
+      ],
+      "title": "PersonalizationDeclaration",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "draft": {
+      "$ref": "#/$defs/EmailMessageDraft"
+    }
+  },
+  "required": [
+    "draft"
+  ],
+  "title": "ComposeEmailMessageResponse",
+  "type": "object"
+}

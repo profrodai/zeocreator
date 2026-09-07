@@ -235,48 +235,6 @@
       "version": "1"
     },
     {
-      "filename": "email-sequence-plan.v1.schema.json",
-      "name": "email-sequence-plan",
-      "schema_digest": "sha256:0f03a964791632b75ae7d742ef7a165579b2e4e087d755e7eaa8f04bdee77355",
-      "version": "1"
-    },
-    {
-      "filename": "email-sequence-step-plan.v1.schema.json",
-      "name": "email-sequence-step-plan",
-      "schema_digest": "sha256:b6e17f546183470e060ae0355601aa1aa235b597b3aa3f3dabbae725e598a468",
-      "version": "1"
-    },
-    {
-      "filename": "email-message-plan.v1.schema.json",
-      "name": "email-message-plan",
-      "schema_digest": "sha256:e3e4932d376e7fd2b00acd1d26492d7dcb8272995361dd528606cb81e7c363f1",
-      "version": "1"
-    },
-    {
-      "filename": "email-message-draft.v1.schema.json",
-      "name": "email-message-draft",
-      "schema_digest": "sha256:ce6034d4d46bc2aad3d1ef6cd40c7b5fa5bdb078ab6cbadfa36eccd357ec349e",
-      "version": "1"
-    },
-    {
-      "filename": "email-editorial-review.v1.schema.json",
-      "name": "email-editorial-review",
-      "schema_digest": "sha256:f39b6e9b3892a8700c80197d550180ea3b32a8a1169c20832d4e09d0c64d3124",
-      "version": "1"
-    },
-    {
-      "filename": "email-review-evidence.v1.schema.json",
-      "name": "email-review-evidence",
-      "schema_digest": "sha256:38b5fe48e0ca5448ef5b7d8963296f21a78dbae1b591c7e88d275d2b1e428ff0",
-      "version": "1"
-    },
-    {
-      "filename": "email-proof-receipt.v1.schema.json",
-      "name": "email-proof-receipt",
-      "schema_digest": "sha256:b10b1b598b8efac007ea038a27e331d62253f79989b8ae3d9d693a7defe51ff6",
-      "version": "1"
-    },
-    {
       "filename": "email-delivery-material.v1.schema.json",
       "name": "email-delivery-material",
       "schema_digest": "sha256:ebccb52f1dcbb125eace7eb62f7803b28851c5616521fe9917eb5b0fc717b2fa",
@@ -289,15 +247,21 @@
       "version": "1"
     },
     {
-      "filename": "email-operation-intent.v1.schema.json",
-      "name": "email-operation-intent",
-      "schema_digest": "sha256:f09da800fa9006ef0704e02f523ef197d7a46ace71dee66d8bf9ec6898ebd431",
+      "filename": "email-editorial-review.v1.schema.json",
+      "name": "email-editorial-review",
+      "schema_digest": "sha256:f39b6e9b3892a8700c80197d550180ea3b32a8a1169c20832d4e09d0c64d3124",
       "version": "1"
     },
     {
-      "filename": "proposed-email-operation.v1.schema.json",
-      "name": "proposed-email-operation",
-      "schema_digest": "sha256:8a0e1f543465693ab519b699a0f93e5c5f5b3cdf69b6f165172302a84797fa14",
+      "filename": "email-message-draft.v1.schema.json",
+      "name": "email-message-draft",
+      "schema_digest": "sha256:ce6034d4d46bc2aad3d1ef6cd40c7b5fa5bdb078ab6cbadfa36eccd357ec349e",
+      "version": "1"
+    },
+    {
+      "filename": "email-message-plan.v1.schema.json",
+      "name": "email-message-plan",
+      "schema_digest": "sha256:e3e4932d376e7fd2b00acd1d26492d7dcb8272995361dd528606cb81e7c363f1",
       "version": "1"
     },
     {
@@ -307,10 +271,190 @@
       "version": "1"
     },
     {
+      "filename": "email-operation-intent.v1.schema.json",
+      "name": "email-operation-intent",
+      "schema_digest": "sha256:f09da800fa9006ef0704e02f523ef197d7a46ace71dee66d8bf9ec6898ebd431",
+      "version": "1"
+    },
+    {
       "filename": "email-program-assessment.v1.schema.json",
       "name": "email-program-assessment",
       "schema_digest": "sha256:4ac31333423a0a462f43a722b8054f1c1d84c746635252af2987fade0be58b37",
       "version": "1"
+    },
+    {
+      "filename": "email-proof-receipt.v1.schema.json",
+      "name": "email-proof-receipt",
+      "schema_digest": "sha256:b10b1b598b8efac007ea038a27e331d62253f79989b8ae3d9d693a7defe51ff6",
+      "version": "1"
+    },
+    {
+      "filename": "email-review-evidence.v1.schema.json",
+      "name": "email-review-evidence",
+      "schema_digest": "sha256:38b5fe48e0ca5448ef5b7d8963296f21a78dbae1b591c7e88d275d2b1e428ff0",
+      "version": "1"
+    },
+    {
+      "filename": "email-sequence-plan.v1.schema.json",
+      "name": "email-sequence-plan",
+      "schema_digest": "sha256:0f03a964791632b75ae7d742ef7a165579b2e4e087d755e7eaa8f04bdee77355",
+      "version": "1"
+    },
+    {
+      "filename": "email-sequence-step-plan.v1.schema.json",
+      "name": "email-sequence-step-plan",
+      "schema_digest": "sha256:b6e17f546183470e060ae0355601aa1aa235b597b3aa3f3dabbae725e598a468",
+      "version": "1"
+    },
+    {
+      "filename": "proposed-email-operation.v1.schema.json",
+      "name": "proposed-email-operation",
+      "schema_digest": "sha256:8a0e1f543465693ab519b699a0f93e5c5f5b3cdf69b6f165172302a84797fa14",
+      "version": "1"
+    },
+    {
+      "filename": "email-campaign-release.v2.schema.json",
+      "name": "email-campaign-release",
+      "schema_digest": "sha256:d04b93d018f2600da7edcdbd2cf9637135ffaeeac8f537d5abc2b2de8c2b4fa9",
+      "version": "2"
+    },
+    {
+      "filename": "email-execution-context.v2.schema.json",
+      "name": "email-execution-context",
+      "schema_digest": "sha256:23be4026b7a69822de920c556ebb4c3f95cbc26ee34d97228eff7c453ad11fd9",
+      "version": "2"
+    },
+    {
+      "filename": "email-lowering-evidence.v2.schema.json",
+      "name": "email-lowering-evidence",
+      "schema_digest": "sha256:d1af6892805002728787bbd508518508802a29424559831eb1166ffc65a4e076",
+      "version": "2"
+    },
+    {
+      "filename": "email-remote-receipt.v2.schema.json",
+      "name": "email-remote-receipt",
+      "schema_digest": "sha256:5f947e1a571733c4b996b1789814b1cf74a83476fa1b2c20fd519b8bbb3a2c7d",
+      "version": "2"
+    },
+    {
+      "filename": "email-migration-plan.v2.schema.json",
+      "name": "email-migration-plan",
+      "schema_digest": "sha256:51de5c04d1a142fdf1d90a35d4b78060b27896cead846522f8f1c8fd60654065",
+      "version": "2"
+    },
+    {
+      "filename": "email-migration-step.v2.schema.json",
+      "name": "email-migration-step",
+      "schema_digest": "sha256:ffaab3f50242464f255be2b92c3f5c93aeaf5056fd9e43a33e42b91a74587748",
+      "version": "2"
+    },
+    {
+      "filename": "email-stopping-condition-finding.v2.schema.json",
+      "name": "email-stopping-condition-finding",
+      "schema_digest": "sha256:dee47e43d77131c79e168ca504c57dde94ee938cfb9e7879991f7edca218ec06",
+      "version": "2"
+    },
+    {
+      "filename": "audience-intent.v2.schema.json",
+      "name": "audience-intent",
+      "schema_digest": "sha256:00639e7581fee36fe5cd8721c5c7d43451c97cd021318a78d07cca3df8be9ce7",
+      "version": "2"
+    },
+    {
+      "filename": "audience-snapshot-summary.v2.schema.json",
+      "name": "audience-snapshot-summary",
+      "schema_digest": "sha256:a51887dfc15a0607a64038bc72f001f95333ab78ad0952afec2fbda7f31fd9e4",
+      "version": "2"
+    },
+    {
+      "filename": "email-artifact-ref.v2.schema.json",
+      "name": "email-artifact-ref",
+      "schema_digest": "sha256:10d292357553961dff478d39276c21ea879b6971501bc533bd7c8a857e97d986",
+      "version": "2"
+    },
+    {
+      "filename": "email-campaign-plan.v2.schema.json",
+      "name": "email-campaign-plan",
+      "schema_digest": "sha256:fb0af7158d8756cd065d04a165caef82241dff74a776eb3b78303160be58fd28",
+      "version": "2"
+    },
+    {
+      "filename": "email-sequence-plan.v2.schema.json",
+      "name": "email-sequence-plan",
+      "schema_digest": "sha256:9fd2fa66eac463a6776d9904157cbc5efb56069c64ad4e6f91d020338bb49851",
+      "version": "2"
+    },
+    {
+      "filename": "email-sequence-step-plan.v2.schema.json",
+      "name": "email-sequence-step-plan",
+      "schema_digest": "sha256:b6e17f546183470e060ae0355601aa1aa235b597b3aa3f3dabbae725e598a468",
+      "version": "2"
+    },
+    {
+      "filename": "email-message-plan.v2.schema.json",
+      "name": "email-message-plan",
+      "schema_digest": "sha256:12698f61b35745e5b4f7576a814142884c93936ea928e157fa4b0a419b513146",
+      "version": "2"
+    },
+    {
+      "filename": "email-message-draft.v2.schema.json",
+      "name": "email-message-draft",
+      "schema_digest": "sha256:da5b6266651192d0f3ff2101e22db9baf73c5d3cea931989e32680b7b367d31d",
+      "version": "2"
+    },
+    {
+      "filename": "email-editorial-review.v2.schema.json",
+      "name": "email-editorial-review",
+      "schema_digest": "sha256:90811a8ff2c9831e42c43d4b0fa24a1793d7053ba6c8c87a54950da680168719",
+      "version": "2"
+    },
+    {
+      "filename": "email-review-evidence.v2.schema.json",
+      "name": "email-review-evidence",
+      "schema_digest": "sha256:f0682d3f7021b2e333ea36ce914b36d55406ec8862899b9243dc86fa9d3d4b53",
+      "version": "2"
+    },
+    {
+      "filename": "email-proof-receipt.v2.schema.json",
+      "name": "email-proof-receipt",
+      "schema_digest": "sha256:0b726fd6316eb64876820dc1bbbabf45088167b64aa2e0cc2208bdb183f03870",
+      "version": "2"
+    },
+    {
+      "filename": "email-delivery-material.v2.schema.json",
+      "name": "email-delivery-material",
+      "schema_digest": "sha256:b27e3f64cac725abff11a871b3efcbc05602e22cb4dedd801352d9442b2a7981",
+      "version": "2"
+    },
+    {
+      "filename": "email-delivery-package.v2.schema.json",
+      "name": "email-delivery-package",
+      "schema_digest": "sha256:42c5b2de3029e1db71a27b2dbc8de9a6bb84aff541e3d5e6ecf6ff35732236fc",
+      "version": "2"
+    },
+    {
+      "filename": "email-operation-intent.v2.schema.json",
+      "name": "email-operation-intent",
+      "schema_digest": "sha256:5fa5ab17275ec100c94778757b7d7e0d9f4a8bbab435bad4ef5cc689cca2c80d",
+      "version": "2"
+    },
+    {
+      "filename": "proposed-email-operation.v2.schema.json",
+      "name": "proposed-email-operation",
+      "schema_digest": "sha256:5931df2ec080d15758f3528a419c7abffd02f94382392b1b5f3fda081c447ade",
+      "version": "2"
+    },
+    {
+      "filename": "email-metric-observation.v2.schema.json",
+      "name": "email-metric-observation",
+      "schema_digest": "sha256:05287fd455a0a01dd16b10188d67dcfef70144b781b8f84a98b7f81628809b56",
+      "version": "2"
+    },
+    {
+      "filename": "email-program-assessment.v2.schema.json",
+      "name": "email-program-assessment",
+      "schema_digest": "sha256:170864d7d5cb39477b3d22e8cc871f3b1d9c6a830256a3fbe65c7390bf531cd9",
+      "version": "2"
     }
   ]
 }

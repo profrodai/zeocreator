@@ -1,4 +1,4 @@
-"""Additive email marketing v1 artifacts. Intent and evidence confer no effect authority.
+"""Version 2 email marketing artifacts. Intent and evidence confer no effect authority.
 
 All references are opaque, scoped and digest-bound. Subscriber records and provider
 payloads have no representation. Runtime owns reference resolution and authorization.
@@ -9,7 +9,7 @@ from __future__ import annotations
 import re
 from enum import StrEnum
 from typing import Annotated, Literal, Self
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlsplit
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from zeo_core.contracts import CapabilityId
@@ -78,7 +78,7 @@ class ScopedEmailModel(EmailModel):
 class EmailArtifact(ScopedEmailModel, DurableArtifact):
     model_config = ConfigDict(str_strip_whitespace=False)
 
-    schema_version: Literal["1.0.0"] = "1.0.0"
+    schema_version: Literal["2.0.0"] = "2.0.0"
     artifact_id: OpaqueRef
 
     def binding(self) -> EmailArtifactRef:
@@ -164,14 +164,19 @@ class EmailLink(EmailModel):
             or not parsed.hostname
             or parsed.username
             or parsed.password
-            or parsed.query
-            or parsed.fragment
             or "{" in self.url
             or "}" in self.url
         ):
             raise ValueError(
                 "links require absolute HTTPS URLs without userinfo or tracking values"
             )
+        for key, value in parse_qsl(parsed.query, keep_blank_values=True):
+            if (
+                key.casefold().startswith(("utm_", "mc_", "hs", "email", "contact", "subscriber"))
+                or key.casefold() in {"fbclid", "gclid"}
+                or "@" in value
+            ):
+                raise ValueError("links must not carry tracking or subscriber parameters")
         return self
 
 
@@ -196,8 +201,6 @@ class EmailCampaignPlan(EmailArtifact):
     business_objective: Text
     audience: AudienceIntent
     campaign_window: ResearchWindow
-    message_refs: tuple[EmailArtifactRef, ...] = ()
-    sequence_refs: tuple[EmailArtifactRef, ...] = ()
     calls_to_action: tuple[EmailCTA, ...] = Field(min_length=1)
     conversion_objectives: tuple[EmailArtifactRef, ...] = Field(min_length=1)
     attribution_policy: EmailArtifactRef
@@ -295,6 +298,18 @@ class EmailMessagePlan(EmailArtifact):
     newsletter_issue: EmailArtifactRef | None = None
     generation: GenerationTrace
 
+    @model_validator(mode="after")
+    def cta_plan_is_exact(self) -> Self:
+        if sum(row.primary for row in self.calls_to_action) != 1:
+            raise ValueError("message plan requires exactly one primary CTA")
+        links = {row.link_id: row for row in self.links}
+        if any(
+            row.link_id not in links or links[row.link_id].purpose != "cta"
+            for row in self.calls_to_action
+        ):
+            raise ValueError("CTA links must have CTA purpose")
+        return self
+
 
 class EmailMessageDraft(EmailArtifact):
     message_plan: EmailArtifactRef
@@ -321,7 +336,10 @@ class EmailMessageDraft(EmailArtifact):
             if len(set(values)) != len(values):
                 raise ValueError("manifest identities must be unique")
         links = {link.link_id: link for link in self.links}
-        if any(cta.link_id not in links for cta in self.calls_to_action):
+        if any(
+            cta.link_id not in links or links[cta.link_id].purpose != "cta"
+            for cta in self.calls_to_action
+        ):
             raise ValueError("CTA must resolve to the link manifest")
         unsubscribe = links.get(self.compliance.unsubscribe_link_id)
         if not unsubscribe or unsubscribe.purpose != "unsubscribe":
@@ -371,6 +389,43 @@ class EmailReviewFinding(EmailModel):
     reason: OpaqueRef
 
 
+class EmailExecutionContext(ScopedEmailModel):
+    provider_kind: OpaqueRef
+    connection_ref: OpaqueRef
+    account_ref: OpaqueRef
+    connector_revision: OpaqueRef
+    lowering_profile: EmailArtifactRef
+
+
+class EmailLoweringEvidence(EmailArtifact):
+    receipt: EmailArtifactRef
+    issuer: EmailArtifactRef
+    receipt_contract: CapabilityId
+    receipt_contract_digest: Digest
+    execution: EmailExecutionContext
+    draft: EmailArtifactRef
+    sender_identity: EmailArtifactRef
+    template_mapping_digest: Digest
+    submitted_payload_digest: Digest
+    observed_payload_digest: Digest
+    rendered_preview_digest: Digest
+    covered_snapshot_digest: Digest
+    covered_tokens: tuple[OpaqueRef, ...] = ()
+    missing_value_behavior: Literal["refuse"] = "refuse"
+    outcome: Literal["verified", "needs_review", "ambiguous"]
+
+    @model_validator(mode="after")
+    def exact_lowering(self) -> Self:
+        if len(set(self.covered_tokens)) != len(self.covered_tokens):
+            raise ValueError("token coverage must be unique")
+        if (
+            self.outcome == "verified"
+            and self.submitted_payload_digest != self.observed_payload_digest
+        ):
+            raise ValueError("material transformation requires review")
+        return self
+
+
 class EmailReviewEvidence(EmailArtifact):
     """Caller-supplied review evidence; authenticity is verified by the controlling runtime."""
 
@@ -378,7 +433,9 @@ class EmailReviewEvidence(EmailArtifact):
     check: EmailReviewCheck
     passed: bool
     policy: EmailArtifactRef
-    receipt_ref: OpaqueRef
+    receipt: EmailArtifactRef
+    issuer: EmailArtifactRef
+    lowering: EmailLoweringEvidence | None = None
     valid_until: UtcDatetime
 
 
@@ -402,7 +459,7 @@ class EmailEditorialReview(EmailArtifact):
 class EmailProofReceipt(EmailArtifact):
     draft: EmailArtifactRef
     kind: Literal["preview", "test_send"]
-    receipt_ref: OpaqueRef
+    lowering: EmailLoweringEvidence
     audience_snapshot: AudienceSnapshotSummary | None = None
     personalization_resolved: bool
     successful: bool
@@ -418,6 +475,9 @@ class EmailProofReceipt(EmailArtifact):
 
 
 class EmailDeliveryMaterial(ScopedEmailModel):
+    campaign_release: EmailArtifactRef
+    execution: EmailExecutionContext
+    template_mapping_digest: Digest
     draft: EmailMessageDraft
     html_digest: Digest
     plain_text_digest: Digest
@@ -466,9 +526,42 @@ class EmailEffectIntent(StrEnum):
     PAUSE = "pause_future_steps"
     CANCEL = "cancel_scheduled_broadcast"
     RETIRE = "retire_sequence_revision"
+    MIGRATE = "migrate_existing_enrollees"
+
+
+class EmailRemoteReceipt(EmailArtifact):
+    operation: EmailArtifactRef
+    campaign_release: EmailArtifactRef
+    execution: EmailExecutionContext
+    issuer: EmailArtifactRef
+    receipt_contract: CapabilityId
+    receipt_contract_digest: Digest
+    remote_ref: OpaqueRef
+    remote_revision_digest: Digest
+    kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"]
+    sequence: EmailArtifactRef | None = None
+    outcome: Literal["confirmed", "needs_review", "ambiguous"]
+
+
+class EmailMigrationStep(EmailModel):
+    source_step: OpaqueRef
+    target_step: OpaqueRef | None
+    disposition: Literal["retain", "skip", "restart"]
+
+
+class EmailMigrationPlan(ScopedEmailModel):
+    source_sequence: EmailArtifactRef
+    target_sequence: EmailArtifactRef
+    enrollees: AudienceSnapshotSummary
+    policy: EmailArtifactRef
+    steps: tuple[EmailMigrationStep, ...] = Field(min_length=1)
 
 
 class EmailOperationIntent(ScopedEmailModel):
+    execution: EmailExecutionContext
+    campaign_release: EmailArtifactRef
+    prior_receipt: EmailRemoteReceipt | None = None
+    migration: EmailMigrationPlan | None = None
     intent: EmailEffectIntent
     operation: CapabilityId
     operation_contract_digest: Digest
@@ -494,6 +587,7 @@ class EmailOperationIntent(ScopedEmailModel):
             EmailEffectIntent.ENROL,
             EmailEffectIntent.PAUSE,
             EmailEffectIntent.RETIRE,
+            EmailEffectIntent.MIGRATE,
         }
         if self.intent in content_effects and (
             not self.delivery or not self.delivery_approval_digest
@@ -506,6 +600,7 @@ class EmailOperationIntent(ScopedEmailModel):
             EmailEffectIntent.SEND,
             EmailEffectIntent.SCHEDULE,
             EmailEffectIntent.ENROL,
+            EmailEffectIntent.MIGRATE,
         }:
             if not self.audience:
                 raise ValueError("effect requires an exact audience snapshot")
@@ -515,13 +610,57 @@ class EmailOperationIntent(ScopedEmailModel):
         if self.intent == EmailEffectIntent.ACTIVATE and self.audience:
             raise ValueError("activation cannot authorize audience enrolment")
         if self.intent in {
+            EmailEffectIntent.ACTIVATE,
+            EmailEffectIntent.ENROL,
+            EmailEffectIntent.MIGRATE,
             EmailEffectIntent.UPDATE_DRAFT,
             EmailEffectIntent.CANCEL,
             EmailEffectIntent.PAUSE,
             EmailEffectIntent.RETIRE,
         }:
-            if not self.target_remote_ref or not self.expected_remote_revision_digest:
-                raise ValueError("remote mutation requires a target and observed revision digest")
+            if (
+                not self.target_remote_ref
+                or not self.expected_remote_revision_digest
+                or not self.prior_receipt
+            ):
+                raise ValueError("remote mutation requires a target and immutable prior receipt")
+        if self.prior_receipt:
+            receipt = self.prior_receipt
+            if (
+                receipt.execution != self.execution
+                or receipt.remote_ref != self.target_remote_ref
+                or receipt.remote_revision_digest != self.expected_remote_revision_digest
+                or receipt.outcome != "confirmed"
+            ):
+                raise ValueError("remote target and receipt provenance mismatch")
+            if (
+                self.intent != EmailEffectIntent.MIGRATE
+                and receipt.campaign_release != self.campaign_release
+            ):
+                raise ValueError("remote receipt belongs to another campaign release")
+            if self.intent == EmailEffectIntent.UPDATE_DRAFT and receipt.kind != "draft":
+                raise ValueError("draft update requires an original draft receipt")
+            if self.intent == EmailEffectIntent.CANCEL and receipt.kind != "scheduled_broadcast":
+                raise ValueError("cancellation requires the original scheduling receipt")
+            if self.intent in {
+                EmailEffectIntent.ACTIVATE,
+                EmailEffectIntent.ENROL,
+                EmailEffectIntent.PAUSE,
+                EmailEffectIntent.RETIRE,
+            } and (receipt.kind != "sequence_revision" or receipt.sequence != self.sequence):
+                raise ValueError("sequence mutation requires exact remote revision evidence")
+        if self.intent == EmailEffectIntent.MIGRATE:
+            if (
+                not self.migration
+                or self.migration.policy != self.migration_policy
+                or self.migration.target_sequence != self.sequence
+                or self.migration.enrollees != self.audience
+            ):
+                raise ValueError(
+                    "migration requires exact source target population and step policy"
+                )
+        elif self.migration or self.migration_policy:
+            raise ValueError("migration cannot be authorized through another effect")
         return self
 
 
@@ -532,8 +671,44 @@ class ProposedEmailOperation(EmailArtifact):
 
     @model_validator(mode="after")
     def exact_effect_approval(self) -> Self:
-        if self.approval_digest != canonical_digest(self.material):
-            raise ValueError("effect approval digest does not match operation intent")
+        if self.approval_digest != effect_approval_digest(self.material, self.idempotency_key):
+            raise ValueError("effect approval digest does not match logical operation identity")
+        return self
+
+
+def effect_approval_digest(material: EmailOperationIntent, key: str) -> str:
+    return canonical_digest({"material": material, "idempotency_key": key})
+
+
+class EmailCampaignRelease(EmailArtifact):
+    campaign: EmailCampaignPlan
+    messages: tuple[EmailMessagePlan, ...] = Field(min_length=1)
+    sequences: tuple[EmailSequencePlan, ...] = ()
+    calls_to_action: tuple[EmailCTA, ...] = Field(min_length=1)
+    measurement_plan: tuple[EmailArtifactRef, ...] = Field(min_length=1)
+    generation: GenerationTrace
+
+    @model_validator(mode="after")
+    def acyclic_membership(self) -> Self:
+        if len({row.artifact_id for row in self.messages}) != len(self.messages) or len(
+            {row.artifact_id for row in self.sequences}
+        ) != len(self.sequences):
+            raise ValueError("release members must have unique identities")
+        if any(row.audience != self.campaign.audience for row in self.messages):
+            raise ValueError("release messages must use the campaign audience")
+        if any(row.campaign != self.campaign.binding() for row in self.messages) or any(
+            row.campaign_or_lifecycle_program != self.campaign.binding() for row in self.sequences
+        ):
+            raise ValueError("release members must bind the exact campaign plan")
+        members = tuple(row.binding() for row in self.messages)
+        if any(step.message_plan not in members for row in self.sequences for step in row.steps):
+            raise ValueError("sequence steps must belong to release messages")
+        expected = tuple(dict.fromkeys(cta for row in self.messages for cta in row.calls_to_action))
+        if (
+            self.calls_to_action != expected
+            or self.measurement_plan != self.campaign.conversion_objectives
+        ):
+            raise ValueError("release CTA and measurement plan must match members")
         return self
 
 
@@ -557,6 +732,8 @@ EmailMetricName = Literal[
 
 
 class EmailMetricObservation(EmailArtifact):
+    campaign_release: EmailArtifactRef
+    operation_receipt: EmailRemoteReceipt
     campaign: EmailArtifactRef
     operation: EmailArtifactRef
     retrieval_receipt: EmailArtifactRef
@@ -566,7 +743,7 @@ class EmailMetricObservation(EmailArtifact):
     observation_window: ResearchWindow
     metric: EmailMetricName
     value: float = Field(ge=0, allow_inf_nan=False)
-    unit: OpaqueRef
+    unit: Literal["count", "rate", "currency"]
     numerator: float | None = Field(default=None, ge=0, allow_inf_nan=False)
     denominator: float | None = Field(default=None, gt=0, allow_inf_nan=False)
     provider_definition: Text
@@ -581,6 +758,17 @@ class EmailMetricObservation(EmailArtifact):
 
     @model_validator(mode="after")
     def qualified_metrics(self) -> Self:
+        receipt = self.operation_receipt
+        if (
+            receipt.operation != self.operation
+            or receipt.campaign_release != self.campaign_release
+            or receipt.execution.provider_kind != self.provider_kind
+            or receipt.execution.connection_ref != self.connection_ref
+            or receipt.outcome != "confirmed"
+        ):
+            raise ValueError("metric operation receipt provenance mismatch")
+        if self.numerator is not None and self.unit != "rate":
+            raise ValueError("numerator and denominator require rate unit")
         if (self.numerator is None) != (self.denominator is None):
             raise ValueError("ratios require a numerator and nonzero denominator")
         if self.unit == "rate" and (
@@ -598,7 +786,15 @@ class EmailMetricObservation(EmailArtifact):
         return self
 
 
+class EmailStoppingConditionFinding(EmailModel):
+    condition: Text
+    status: Literal["human_needed"] = "human_needed"
+
+
 class EmailProgramAssessment(EmailArtifact):
+    campaign_release: EmailArtifactRef
+    expected_metrics: tuple[EmailMetricName, ...] = Field(min_length=1)
+    stopping_conditions: tuple[EmailStoppingConditionFinding, ...]
     campaign: EmailArtifactRef
     observation_window: ResearchWindow
     observations: tuple[EmailMetricObservation, ...]
@@ -611,9 +807,30 @@ class EmailProgramAssessment(EmailArtifact):
 
     @model_validator(mode="after")
     def no_overstatement(self) -> Self:
-        complete = bool(self.observations) and all(
-            item.completeness == "complete" and item.reliability == "qualified"
-            for item in self.observations
+        if len(set(self.expected_metrics)) != len(self.expected_metrics):
+            raise ValueError("expected metrics must be unique")
+        if any(
+            row.observation_window != self.observation_window
+            or row.campaign_release != self.campaign_release
+            for row in self.observations
+        ):
+            raise ValueError("assessment window or release mismatch")
+        cohorts = {
+            (canonical_digest(row.operation_receipt.execution), row.aggregate_segment_ref)
+            for row in self.observations
+        }
+        if len(cohorts) > 1:
+            raise ValueError("assessment requires one provider connection and aggregate cohort")
+        conflicts = metric_conflicts(self.observations)
+        complete = (
+            bool(self.observations)
+            and not conflicts
+            and not self.data_gaps
+            and set(self.expected_metrics) <= {row.metric for row in self.observations}
+            and all(
+                item.completeness == "complete" and item.reliability == "qualified"
+                for item in self.observations
+            )
         )
         if not complete and (self.completeness == "complete" or self.confidence != "limited"):
             raise ValueError(
@@ -622,3 +839,22 @@ class EmailProgramAssessment(EmailArtifact):
         if any(item.campaign != self.campaign for item in self.observations):
             raise ValueError("assessment observations must bind the same campaign revision")
         return self
+
+
+def metric_conflicts(rows: tuple[EmailMetricObservation, ...]) -> bool:
+    groups: dict[tuple[str, str, str], set[str]] = {}
+    for row in rows:
+        key = (row.metric, row.operation.digest, row.aggregate_segment_ref)
+        groups.setdefault(key, set()).add(
+            canonical_digest(
+                (
+                    row.value,
+                    row.unit,
+                    row.numerator,
+                    row.denominator,
+                    row.provider_definition,
+                    row.provider_definition_version,
+                )
+            )
+        )
+    return any(len(values) > 1 for values in groups.values())

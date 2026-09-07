@@ -141,8 +141,8 @@ def doctor(json_output: bool = typer.Option(False, "--json")) -> None:
     checks = {
         "python_3_14_or_newer": sys.version_info >= (3, 14),
         "zeocore_0_9_0": zeocore_version == "0.9.0",
-        "twenty_seven_manifests": len(capability_manifests()) == 27,
-        "twenty_seven_openai_projections": len(openai_tool_projections()) == 27,
+        "twenty_nine_manifests": len(capability_manifests()) == 29,
+        "twenty_nine_openai_projections": len(openai_tool_projections()) == 29,
     }
     payload = {
         "ok": all(checks.values()),

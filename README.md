@@ -109,11 +109,11 @@ uv run python examples/create_content_brief.py
 | Agenda and production | `plan_editorial_agenda`, `plan_edition`, `plan_content_portfolio`, `create_content_brief` | Select publication work and express producer-neutral intent |
 | Commentary | `identify_engagement_opportunities`, `compose_commentary`, `review_commentary` | Participate selectively with context, stance, expiry and human approval |
 | Newsletters | `plan_newsletter_issue`, `compose_newsletter_issue`, `review_newsletter_issue` | Produce HTML/plain-text issues from editions and dossiers |
-| Email marketing | `plan_email_campaign`, `plan_email_sequence`, `plan_email_message`, `compose_email_message`, `review_email_message`, `prepare_email_delivery`, `assess_email_program` | Design and evaluate exact email programs from supplied inputs |
+| Email marketing | `plan_email_campaign`, `finalize_email_campaign`, `propose_email_operation`, `plan_email_sequence`, `plan_email_message`, `compose_email_message`, `review_email_message`, `prepare_email_delivery`, `assess_email_program` | Design and evaluate exact email programs from supplied inputs |
 | Journalism | `compose_news_article`, `review_news_article`, `prepare_correction` | Draft attributed reporting and represent corrections with risk gates |
 | Delivery and learning | `validate_delivery`, `prepare_distribution`, `assess_performance` | Validate bytes and claims, propose effects, and interpret outcomes |
 
-All 27 capability IDs are independently composable. There is intentionally no
+All 29 capability IDs are independently composable. There is intentionally no
 monolithic workflow capability. Scheduling, retries,
 approval state, persistence, provider execution, and reconciliation belong to
 the controlling runtime.

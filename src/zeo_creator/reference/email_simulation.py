@@ -13,6 +13,7 @@ from zeo_creator.contracts.common import canonical_digest, stable_id
 from zeo_creator.contracts.email_marketing import (
     Digest,
     EmailArtifactRef,
+    EmailCampaignRelease,
     EmailDeliveryPackage,
     EmailEffectIntent,
     EmailModel,
@@ -20,7 +21,7 @@ from zeo_creator.contracts.email_marketing import (
     OpaqueRef,
     ProposedEmailOperation,
 )
-from zeo_creator.services.email_marketing import current, refuse, scope
+from zeo_creator.services.email_marketing import current, propose_operation, refuse, scope
 
 Shape = Literal["hubspot-shaped", "kit-shaped"]
 Outcome = Literal["accepted", "ambiguous", "needs_review"]
@@ -54,6 +55,11 @@ def lower(package: EmailDeliveryPackage, shape: Shape) -> dict[str, object]:
     """Consume the same neutral material into two deliberately fake wire shapes."""
     current(package)
     draft = package.material.draft
+    if (
+        draft.personalization
+        or "{{" in draft.html + draft.plain_text + draft.subject + draft.preheader
+    ):
+        refuse("simulation_personalization_renderer_unavailable")
     if shape == "hubspot-shaped":
         return {
             "subject": draft.subject,
@@ -91,6 +97,8 @@ class SimulatedEmailHost:
         at: datetime,
         *,
         package: EmailDeliveryPackage | None = None,
+        release: EmailCampaignRelease | None = None,
+        source_sequence: EmailSequencePlan | None = None,
         sequence: EmailSequencePlan | None = None,
         supported_semantics: tuple[str, ...] = (),
         outcome: Outcome = "accepted",
@@ -104,7 +112,7 @@ class SimulatedEmailHost:
         ) or material.operation_contract_digest != operation_contract_digest(material.intent):
             refuse("simulation_operation_contract_mismatch")
         # A retry returns the existing logical operation, even after snapshot expiry.
-        key = f"{proposal.organization_id}/{proposal.publication_id}/{proposal.idempotency_key}"
+        key = f"{proposal.organization_id}/{proposal.publication_id}/{canonical_digest(proposal.material.execution)}/{proposal.idempotency_key}"
         previous = self._journal.get(key)
         if previous:
             if previous[0] != proposal.approval_digest:
@@ -116,6 +124,24 @@ class SimulatedEmailHost:
             or material.audience.eligible_count == 0
         ):
             refuse("simulation_snapshot_not_current")
+        expected_shape = (
+            "hubspot-shaped"
+            if material.execution.provider_kind == "hubspot-marketing"
+            else "kit-shaped"
+        )
+        if self.shape != expected_shape:
+            refuse("simulation_execution_provider_mismatch")
+        if release is None:
+            refuse("simulation_campaign_release_required")
+        propose_operation(
+            material,
+            at,
+            proposal.idempotency_key,
+            release=release,
+            package=package,
+            sequence=sequence,
+            source_sequence=source_sequence,
+        )
         payload: dict[str, object] = {
             "intent": material.intent,
             "material": material.model_dump(mode="json"),
@@ -150,8 +176,6 @@ class SimulatedEmailHost:
                 refuse("simulation_sequence_revision_changed")
             if not set(sequence.required_provider_semantics) <= set(supported_semantics):
                 refuse("simulation_provider_semantics_unsupported")
-            if material.migration_policy != sequence.migration_policy:
-                refuse("simulation_migration_requires_separate_policy_and_authority")
             artifact = sequence.binding()
         if artifact is None:
             artifact = proposal.binding()
@@ -179,7 +203,7 @@ class SimulatedEmailHost:
         self, proposal: ProposedEmailOperation, observed_payload_digest: str
     ) -> SimulatedLoweringReceipt:
         current(proposal)
-        key = f"{proposal.organization_id}/{proposal.publication_id}/{proposal.idempotency_key}"
+        key = f"{proposal.organization_id}/{proposal.publication_id}/{canonical_digest(proposal.material.execution)}/{proposal.idempotency_key}"
         entry = self._journal.get(key)
         if not entry or entry[0] != proposal.approval_digest:
             refuse("simulation_reconciliation_operation_mismatch")
