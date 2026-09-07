@@ -88,7 +88,8 @@ nav:
   - Tutorial:
       - Build a content portfolio: tutorials/content-portfolio.md
   - How-to guides:
-      - Inject research connectors: guides/connectors.md
+      - Supply source observations: guides/connectors.md
+      - Email marketing: guides/email-marketing.md
       - Integrate a production engine: guides/production-adapters.md
       - Validate and prepare distribution: guides/delivery-distribution.md
       - Assess performance: guides/performance.md

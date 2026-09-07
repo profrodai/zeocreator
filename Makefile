@@ -45,7 +45,7 @@ capabilities:
 	$(ZEO_CREATOR) capabilities
 
 reference:
-	$(UV) run python -m scripts.export_reference_artifacts
+	$(UV) run python -m scripts.export_reference_artifacts_v2
 
 test:
 	$(UV) run pytest -q
@@ -55,6 +55,9 @@ lint:
 
 typecheck:
 	$(UV) run mypy src/zeo_creator examples
+
+format-check:
+	$(UV) run ruff format --check src tests scripts examples
 
 format:
 	$(UV) run ruff format src tests scripts examples
@@ -72,19 +75,21 @@ examples:
 	$(UV) run python examples/validate_and_prepare.py
 	$(UV) run python examples/assess_performance.py
 	$(UV) run python examples/complete_content_portfolio.py
+	$(UV) run python examples/email_marketing.py
 
 reference-check: reference
-	git diff --exit-code -- reference
+	git diff --exit-code -- reference src/zeo_creator/schemas src/zeo_creator/reference_artifacts
 
-check: lint typecheck test reference-check docs
+check: format-check lint typecheck test reference-check docs
 
 digest-vectors:
 	node contracts/verify-digest-vectors.mjs
+	node contracts/verify-email-digest-vectors-v1.mjs
 
 dist-check:
 	rm -rf dist
 	$(UV) build
-	$(UV) run python scripts/check_distribution.py
+	$(UV) run python -m scripts.check_distribution_v2
 
 verify: check digest-vectors dist-check
 

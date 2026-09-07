@@ -5,9 +5,11 @@ from zeo_core.contracts import CapabilityManifest
 from zeo_core.tools import BoundCapability, CapabilityRegistry, bound_capability_of
 
 from zeo_creator.capabilities import (
+    assess_email_program,
     assess_performance,
     build_story_dossier,
     compose_commentary,
+    compose_email_message,
     compose_news_article,
     compose_newsletter_issue,
     create_content_brief,
@@ -16,11 +18,16 @@ from zeo_creator.capabilities import (
     plan_content_portfolio,
     plan_edition,
     plan_editorial_agenda,
+    plan_email_campaign,
+    plan_email_message,
+    plan_email_sequence,
     plan_newsletter_issue,
     prepare_correction,
     prepare_distribution,
+    prepare_email_delivery,
     research_synthesis,
     review_commentary,
+    review_email_message,
     review_news_article,
     review_newsletter_issue,
     update_story_revisions,
@@ -50,6 +57,13 @@ CAPABILITIES: tuple[BoundCapability, ...] = tuple(
         validate_delivery,
         prepare_distribution,
         assess_performance,
+        plan_email_campaign,
+        plan_email_sequence,
+        plan_email_message,
+        compose_email_message,
+        review_email_message,
+        prepare_email_delivery,
+        assess_email_program,
     )
 )
 

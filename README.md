@@ -45,7 +45,7 @@ flowchart LR
 - **Producer-neutral.** Public briefs express creative intent; adapters own production-specific lowering.
 - **Publication-safe.** Organization and publication scope follow every durable artifact.
 - **Approval-safe.** Artifact, payload, destination, or schedule changes invalidate approval.
-- **Provider-neutral.** Creator code uses injected ports and never owns provider credentials.
+- **Provider-neutral.** Canonical email operations accept supplied artifacts and never own provider credentials.
 - **Runner-ready.** The same capabilities work in a bounded agent workflow or managed runtime.
 - **Portable.** RFC 8785 digests and packaged JSON Schemas support Python, TypeScript, and Go consumers.
 
@@ -109,10 +109,11 @@ uv run python examples/create_content_brief.py
 | Agenda and production | `plan_editorial_agenda`, `plan_edition`, `plan_content_portfolio`, `create_content_brief` | Select publication work and express producer-neutral intent |
 | Commentary | `identify_engagement_opportunities`, `compose_commentary`, `review_commentary` | Participate selectively with context, stance, expiry and human approval |
 | Newsletters | `plan_newsletter_issue`, `compose_newsletter_issue`, `review_newsletter_issue` | Produce HTML/plain-text issues from editions and dossiers |
+| Email marketing | `plan_email_campaign`, `plan_email_sequence`, `plan_email_message`, `compose_email_message`, `review_email_message`, `prepare_email_delivery`, `assess_email_program` | Design and evaluate exact email programs from supplied inputs |
 | Journalism | `compose_news_article`, `review_news_article`, `prepare_correction` | Draft attributed reporting and represent corrections with risk gates |
 | Delivery and learning | `validate_delivery`, `prepare_distribution`, `assess_performance` | Validate bytes and claims, propose effects, and interpret outcomes |
 
-All 20 capability IDs are independently composable. There is intentionally no
+All 27 capability IDs are independently composable. There is intentionally no
 monolithic workflow capability. Scheduling, retries,
 approval state, persistence, provider execution, and reconciliation belong to
 the controlling runtime.
@@ -212,3 +213,17 @@ ZEO Creator is a pre-release contract and reference package. PyPI publication
 and live provider effects require separate operator approval and have not occurred.
 
 MIT licensed.
+
+## Email campaigns and sequences
+
+[Email marketing](docs/guides/email-marketing.md) adds immutable campaigns, linear
+sequence revisions, dual-format messages, audience summaries and exact delivery
+packages. Runtime and Newsroom collect observations before Creator invocation;
+Zeocore and ZEOconnect own provider lowering and execution. Existing newsletter
+v1 schemas and capabilities remain compatible.
+
+Run `uv run python examples/email_marketing.py` for three isolated publications.
+The example uses fake HubSpot-shaped and Kit-shaped hosts; it does not establish
+live interoperability. The public Zeocore email operation contract is still a
+dependency, and example operation IDs are explicitly simulated. No PyPI release
+or live provider effect is part of this change.

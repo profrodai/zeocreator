@@ -14,6 +14,13 @@ from zeo_creator.registry import (
 )
 
 EXPECTED_IDS = {
+    "creator.plan_email_campaign@1.0.0",
+    "creator.plan_email_sequence@1.0.0",
+    "creator.plan_email_message@1.0.0",
+    "creator.compose_email_message@1.0.0",
+    "creator.review_email_message@1.0.0",
+    "creator.prepare_email_delivery@1.0.0",
+    "creator.assess_email_program@1.0.0",
     "creator.research_synthesis@1.0.0",
     "creator.extract_editorial_signals@1.0.0",
     "creator.update_story_revisions@1.0.0",

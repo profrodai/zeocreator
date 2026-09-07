@@ -1,0 +1,390 @@
+{
+  "$defs": {
+    "AudienceSnapshotSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "audience_intent_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Audience Intent Digest",
+          "type": "string"
+        },
+        "connection_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "consent_policy_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Consent Policy Digest",
+          "type": "string"
+        },
+        "drift_status": {
+          "enum": [
+            "unchanged",
+            "changed",
+            "unknown"
+          ],
+          "title": "Drift Status",
+          "type": "string"
+        },
+        "eligible_count": {
+          "minimum": 0,
+          "title": "Eligible Count",
+          "type": "integer"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "provider_kind": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Provider Kind",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "purpose": {
+          "enum": [
+            "production",
+            "test"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "resolved_at": {
+          "format": "date-time",
+          "title": "Resolved At",
+          "type": "string"
+        },
+        "segment_definition_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Segment Definition Digest",
+          "type": "string"
+        },
+        "snapshot_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Snapshot Digest",
+          "type": "string"
+        },
+        "snapshot_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Snapshot Ref",
+          "type": "string"
+        },
+        "suppressed_count": {
+          "minimum": 0,
+          "title": "Suppressed Count",
+          "type": "integer"
+        },
+        "suppression_policy_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Suppression Policy Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "snapshot_ref",
+        "snapshot_digest",
+        "provider_kind",
+        "connection_ref",
+        "audience_intent_digest",
+        "eligible_count",
+        "suppressed_count",
+        "resolved_at",
+        "expires_at",
+        "segment_definition_digest",
+        "consent_policy_digest",
+        "suppression_policy_digest",
+        "drift_status",
+        "purpose"
+      ],
+      "title": "AudienceSnapshotSummary",
+      "type": "object"
+    },
+    "CapabilityId": {
+      "additionalProperties": false,
+      "description": "Immutable capability identity. Mutation after construction is forbidden.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "namespace": {
+          "minLength": 1,
+          "title": "Namespace",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace",
+        "name",
+        "version"
+      ],
+      "title": "CapabilityId",
+      "type": "object"
+    },
+    "EmailArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "ref",
+        "revision",
+        "digest"
+      ],
+      "title": "EmailArtifactRef",
+      "type": "object"
+    },
+    "EmailEffectIntent": {
+      "description": "Editorial intent only. Zeocore owns the executable operation vocabulary.",
+      "enum": [
+        "create_remote_draft",
+        "update_remote_draft",
+        "send_test",
+        "schedule_broadcast",
+        "send_broadcast",
+        "activate_sequence_revision",
+        "enrol_audience_snapshot",
+        "pause_future_steps",
+        "cancel_scheduled_broadcast",
+        "retire_sequence_revision"
+      ],
+      "title": "EmailEffectIntent",
+      "type": "string"
+    },
+    "EmailOperationIntent": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AudienceSnapshotSummary"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "delivery": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailArtifactRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "delivery_approval_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Delivery Approval Digest"
+        },
+        "expected_remote_revision_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Remote Revision Digest"
+        },
+        "intent": {
+          "$ref": "#/$defs/EmailEffectIntent"
+        },
+        "migration_policy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailArtifactRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "operation": {
+          "$ref": "#/$defs/CapabilityId"
+        },
+        "operation_contract_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Operation Contract Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "sequence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EmailArtifactRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "target_remote_ref": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Remote Ref"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "intent",
+        "operation",
+        "operation_contract_digest"
+      ],
+      "title": "EmailOperationIntent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "approval_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "title": "Approval Digest",
+      "type": "string"
+    },
+    "artifact_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Artifact Id",
+      "type": "string"
+    },
+    "content_digest": {
+      "default": "",
+      "title": "Content Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "input_refs": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "material": {
+      "$ref": "#/$defs/EmailOperationIntent"
+    },
+    "organization_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "publication_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "revision": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "created_at",
+    "organization_id",
+    "publication_id",
+    "artifact_id",
+    "material",
+    "approval_digest",
+    "idempotency_key"
+  ],
+  "title": "ProposedEmailOperation",
+  "type": "object"
+}
