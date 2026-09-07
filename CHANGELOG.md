@@ -2,6 +2,17 @@
 
 All notable changes to ZEO Creator are documented here.
 
+## Unreleased — 2026-09-07
+
+- Add versioned provider-neutral email campaigns, linear sequences, messages, reviews,
+  audience snapshots, exact delivery packages, effect intents and aggregate assessments.
+- Register seven input-only email capabilities alongside all existing v1 capabilities.
+- Preserve newsletter schemas and add an explicit common-message specialization path.
+- Ship three-publication offline conformance, schemas, digest vectors and documentation
+  in the wheel. Live Zeocore email interoperability remains pending its public contract.
+- Clarify that Runtime/Newsroom acquire and persist observations before Creator invocation.
+- No dependency upgrade, PyPI publication or live provider execution.
+
 ## 0.2.0.dev0 — 2026-09-05
 
 - Harden evidence lineage, delivery attestations, canonical digests, timestamps,

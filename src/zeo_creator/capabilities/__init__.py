@@ -8,6 +8,15 @@ from zeo_creator.capabilities.commentary_workflows import (
     review_commentary,
 )
 from zeo_creator.capabilities.create_content_brief import create_content_brief
+from zeo_creator.capabilities.email_marketing import (
+    assess_email_program,
+    compose_email_message,
+    plan_email_campaign,
+    plan_email_message,
+    plan_email_sequence,
+    prepare_email_delivery,
+    review_email_message,
+)
 from zeo_creator.capabilities.extract_editorial_signals import extract_editorial_signals
 from zeo_creator.capabilities.journalism_workflows import (
     compose_news_article,
@@ -28,9 +37,11 @@ from zeo_creator.capabilities.update_story_revisions import update_story_revisio
 from zeo_creator.capabilities.validate_delivery import validate_delivery
 
 __all__ = [
+    "assess_email_program",
     "assess_performance",
     "build_story_dossier",
     "compose_commentary",
+    "compose_email_message",
     "compose_news_article",
     "compose_newsletter_issue",
     "create_content_brief",
@@ -39,11 +50,16 @@ __all__ = [
     "plan_content_portfolio",
     "plan_edition",
     "plan_editorial_agenda",
+    "plan_email_campaign",
+    "plan_email_message",
+    "plan_email_sequence",
     "plan_newsletter_issue",
     "prepare_correction",
     "prepare_distribution",
+    "prepare_email_delivery",
     "research_synthesis",
     "review_commentary",
+    "review_email_message",
     "review_news_article",
     "review_newsletter_issue",
     "update_story_revisions",

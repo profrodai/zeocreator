@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "EmailArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "ref",
+        "revision",
+        "digest"
+      ],
+      "title": "EmailArtifactRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "consent_policy": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cross_publication_use_policy": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "frequency_cap_policy": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "jurisdiction_policies": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EmailArtifactRef"
+      },
+      "title": "Jurisdiction Policies",
+      "type": "array"
+    },
+    "lifecycle_states": {
+      "default": [],
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+        "type": "string"
+      },
+      "title": "Lifecycle States",
+      "type": "array"
+    },
+    "organization_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "publication_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "purpose_of_contact": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Purpose Of Contact",
+      "type": "string"
+    },
+    "required_exclusions": {
+      "default": [],
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+        "type": "string"
+      },
+      "title": "Required Exclusions",
+      "type": "array"
+    },
+    "required_inclusions": {
+      "default": [],
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+        "type": "string"
+      },
+      "title": "Required Inclusions",
+      "type": "array"
+    },
+    "segment_refs": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Segment Refs",
+      "type": "array"
+    },
+    "suppression_policy": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "organization_id",
+    "publication_id",
+    "segment_refs",
+    "consent_policy",
+    "suppression_policy",
+    "frequency_cap_policy",
+    "purpose_of_contact",
+    "cross_publication_use_policy"
+  ],
+  "title": "AudienceIntent",
+  "type": "object"
+}

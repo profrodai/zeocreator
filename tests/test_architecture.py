@@ -7,6 +7,12 @@ SOURCE_ROOT = Path("src/zeo_creator")
 DOMAIN_ROOTS = tuple(SOURCE_ROOT / name for name in ("capabilities", "contracts", "services"))
 FORBIDDEN_IMPORT_PREFIXES = (
     "tweepy",
+    "hubspot",
+    "convertkit",
+    "kit_sdk",
+    "zeo_core.integrations.hubspot",
+    "zeo_core.integrations.kit",
+    "zeo_newsroom",
     "linkedin",
     "googleapiclient",
     "google.auth",
@@ -39,7 +45,16 @@ def test_domain_layers_do_not_import_providers_or_runtime_products() -> None:
 
 
 def test_creator_source_has_no_ambient_credentials_or_provider_write_endpoints() -> None:
-    forbidden = ("os.environ", "getenv(", "api.twitter.com", "api.linkedin.com", "access_token")
+    forbidden = (
+        "os.environ",
+        "getenv(",
+        "api.twitter.com",
+        "api.linkedin.com",
+        "api.hubapi.com",
+        "api.kit.com",
+        "api.convertkit.com",
+        "access_token",
+    )
     violations: list[str] = []
     for path in SOURCE_ROOT.rglob("*.py"):
         text = path.read_text().lower()
