@@ -52,3 +52,4 @@ jobs:
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/zeo-creator" contracts export --output="$smoke_dir/schemas"
           test -f "$smoke_dir/schemas/artifact-manifest.v1.schema.json"
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -m zeo_creator.reference.email_program_suite
+          "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -m zeo_creator.reference.email_receipt_conformance

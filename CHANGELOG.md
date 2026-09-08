@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1.dev0 — 2026-09-08
+
+- Bind consumed normalized receipts to exact proposals, content, audience and remote targets.
+- Correct simulated migration receipts to return the target sequence object.
+- Export the existing v4 result union and 36 portable behavioral conformance cases.
+- Verify conformance from the installed wheel; retain every prior schema byte.
+- Preserve uncertain outcomes and historical evidence without authorizing effects.
+
 ## 0.5.0.dev0
 
 - Introduce explicit email v4 receipt results with a kind discriminator, normalized effect,

@@ -193,7 +193,9 @@ class SimulatedEmailHost:
             else "material"
             if outcome == "needs_review"
             else "unknown",
-            remote_ref=material.target_remote_ref
+            remote_ref=material.migration.target_receipt.remote_ref
+            if material.intent == EmailEffectIntent.MIGRATE and material.migration is not None
+            else material.target_remote_ref
             or stable_id("simulated_remote", proposal.approval_digest),
             idempotency_identity=proposal.idempotency_key,
             outcome=outcome,
