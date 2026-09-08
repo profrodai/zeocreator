@@ -1,4 +1,4 @@
-"""Version 2 email marketing artifacts. Intent and evidence confer no effect authority.
+"""Version 3 email marketing artifacts. Intent and evidence confer no effect authority.
 
 All references are opaque, scoped and digest-bound. Subscriber records and provider
 payloads have no representation. Runtime owns reference resolution and authorization.
@@ -78,7 +78,7 @@ class ScopedEmailModel(EmailModel):
 class EmailArtifact(ScopedEmailModel, DurableArtifact):
     model_config = ConfigDict(str_strip_whitespace=False)
 
-    schema_version: Literal["2.0.0"] = "2.0.0"
+    schema_version: Literal["3.0.0"] = "3.0.0"
     artifact_id: OpaqueRef
 
     def binding(self) -> EmailArtifactRef:
@@ -362,8 +362,6 @@ EmailReviewCheck = Literal[
     "footer_unsubscribe",
     "consent_suppression",
     "claims",
-    "preview",
-    "test_send",
 ]
 REVIEW_CHECKS: tuple[EmailReviewCheck, ...] = (
     "source_traceability",
@@ -378,8 +376,6 @@ REVIEW_CHECKS: tuple[EmailReviewCheck, ...] = (
     "footer_unsubscribe",
     "consent_suppression",
     "claims",
-    "preview",
-    "test_send",
 )
 
 
@@ -521,6 +517,7 @@ class EmailEffectIntent(StrEnum):
     TEST = "send_test"
     SCHEDULE = "schedule_broadcast"
     SEND = "send_broadcast"
+    PROVISION = "provision_sequence_revision"
     ACTIVATE = "activate_sequence_revision"
     ENROL = "enrol_audience_snapshot"
     PAUSE = "pause_future_steps"
@@ -530,6 +527,8 @@ class EmailEffectIntent(StrEnum):
 
 
 class EmailRemoteReceipt(EmailArtifact):
+    delivery: EmailArtifactRef | None = None
+    message_plan: EmailArtifactRef | None = None
     operation: EmailArtifactRef
     campaign_release: EmailArtifactRef
     execution: EmailExecutionContext
@@ -550,6 +549,7 @@ class EmailMigrationStep(EmailModel):
 
 
 class EmailMigrationPlan(ScopedEmailModel):
+    target_receipt: EmailRemoteReceipt
     source_sequence: EmailArtifactRef
     target_sequence: EmailArtifactRef
     enrollees: AudienceSnapshotSummary
@@ -560,6 +560,8 @@ class EmailMigrationPlan(ScopedEmailModel):
 class EmailOperationIntent(ScopedEmailModel):
     execution: EmailExecutionContext
     campaign_release: EmailArtifactRef
+    originating_operation: EmailArtifactRef | None = None
+    target_delivery: EmailArtifactRef | None = None
     prior_receipt: EmailRemoteReceipt | None = None
     migration: EmailMigrationPlan | None = None
     intent: EmailEffectIntent
@@ -583,6 +585,7 @@ class EmailOperationIntent(ScopedEmailModel):
             EmailEffectIntent.SEND,
         }
         sequence_effects = {
+            EmailEffectIntent.PROVISION,
             EmailEffectIntent.ACTIVATE,
             EmailEffectIntent.ENROL,
             EmailEffectIntent.PAUSE,
@@ -607,7 +610,10 @@ class EmailOperationIntent(ScopedEmailModel):
             expected = "test" if self.intent == EmailEffectIntent.TEST else "production"
             if self.audience.purpose != expected:
                 raise ValueError("test and production audiences are distinct")
-        if self.intent == EmailEffectIntent.ACTIVATE and self.audience:
+        if (
+            self.intent in {EmailEffectIntent.ACTIVATE, EmailEffectIntent.PROVISION}
+            and self.audience
+        ):
             raise ValueError("activation cannot authorize audience enrolment")
         if self.intent in {
             EmailEffectIntent.ACTIVATE,
@@ -624,6 +630,32 @@ class EmailOperationIntent(ScopedEmailModel):
                 or not self.prior_receipt
             ):
                 raise ValueError("remote mutation requires a target and immutable prior receipt")
+        if self.intent == EmailEffectIntent.PROVISION and (
+            self.prior_receipt or self.delivery or self.target_remote_ref
+        ):
+            raise ValueError(
+                "provisioning creates a sequence revision without activation or a prior target"
+            )
+        if self.intent in {EmailEffectIntent.CANCEL, EmailEffectIntent.UPDATE_DRAFT}:
+            if not self.originating_operation or not self.target_delivery or not self.prior_receipt:
+                raise ValueError(
+                    "delivery mutation requires its originating operation and target delivery"
+                )
+            if (
+                self.prior_receipt.operation != self.originating_operation
+                or self.prior_receipt.delivery != self.target_delivery
+            ):
+                raise ValueError(
+                    "delivery mutation receipt does not bind its originating operation and delivery"
+                )
+            if (
+                self.intent == EmailEffectIntent.CANCEL
+                and self.delivery is not None
+                and self.delivery != self.target_delivery
+            ):
+                raise ValueError("cancellation delivery differs from its target")
+        elif self.originating_operation or self.target_delivery:
+            raise ValueError("originating delivery fields belong only to delivery mutations")
         if self.prior_receipt:
             receipt = self.prior_receipt
             if (
@@ -659,6 +691,21 @@ class EmailOperationIntent(ScopedEmailModel):
                 raise ValueError(
                     "migration requires exact source target population and step policy"
                 )
+            if (
+                self.prior_receipt is None
+                or self.prior_receipt.kind != "sequence_revision"
+                or self.prior_receipt.sequence != self.migration.source_sequence
+            ):
+                raise ValueError("migration source requires an exact sequence receipt")
+            target = self.migration.target_receipt
+            if (
+                target.kind != "sequence_revision"
+                or target.sequence != self.sequence
+                or target.execution != self.execution
+                or target.campaign_release != self.campaign_release
+                or target.outcome != "confirmed"
+            ):
+                raise ValueError("migration target requires an exact provisioned sequence receipt")
         elif self.migration or self.migration_policy:
             raise ValueError("migration cannot be authorized through another effect")
         return self
@@ -704,6 +751,10 @@ class EmailCampaignRelease(EmailArtifact):
         if any(step.message_plan not in members for row in self.sequences for step in row.steps):
             raise ValueError("sequence steps must belong to release messages")
         expected = tuple(dict.fromkeys(cta for row in self.messages for cta in row.calls_to_action))
+        if set(expected) != set(self.campaign.calls_to_action):
+            raise ValueError(
+                "every campaign CTA must be used and every message CTA must be declared"
+            )
         if (
             self.calls_to_action != expected
             or self.measurement_plan != self.campaign.conversion_objectives
@@ -791,7 +842,49 @@ class EmailStoppingConditionFinding(EmailModel):
     status: Literal["human_needed"] = "human_needed"
 
 
+class EmailMeasurementPopulation(ScopedEmailModel):
+    release: EmailCampaignRelease
+    operations: tuple[EmailRemoteReceipt, ...]
+    aggregation_policy: Literal["per_operation_no_pooling"] = "per_operation_no_pooling"
+
+    @model_validator(mode="after")
+    def exact_population(self) -> Self:
+        if len({row.operation for row in self.operations}) != len(self.operations):
+            raise ValueError("expected operations must be unique")
+        members = {row.binding() for row in self.release.messages}
+        sequences = {row.binding() for row in self.release.sequences}
+        for receipt in self.operations:
+            if receipt.campaign_release != self.release.binding() or receipt.outcome != "confirmed":
+                raise ValueError("expected receipt must confirm the exact campaign release")
+            if receipt.message_plan is not None and receipt.message_plan not in members:
+                raise ValueError("expected operation refers to another message")
+            if receipt.sequence is not None and receipt.sequence not in sequences:
+                raise ValueError("expected operation refers to another sequence")
+            if receipt.message_plan is None and receipt.sequence is None:
+                raise ValueError("expected operation requires a message or sequence binding")
+        return self
+
+    def gaps(
+        self, observations: tuple[EmailMetricObservation, ...], metrics: tuple[EmailMetricName, ...]
+    ) -> tuple[str, ...]:
+        covered = {row.message_plan for row in self.operations}
+        missing_messages = tuple(
+            f"Unmeasured release message: {row.artifact_id}"
+            for row in self.release.messages
+            if row.binding() not in covered
+        )
+        present = {(row.operation, row.metric) for row in observations}
+        missing_cells = tuple(
+            f"Missing operation metric: {receipt.operation.ref}/{metric}"
+            for receipt in self.operations
+            for metric in metrics
+            if (receipt.operation, metric) not in present
+        )
+        return (*missing_messages, *missing_cells)
+
+
 class EmailProgramAssessment(EmailArtifact):
+    population: EmailMeasurementPopulation
     campaign_release: EmailArtifactRef
     expected_metrics: tuple[EmailMetricName, ...] = Field(min_length=1)
     stopping_conditions: tuple[EmailStoppingConditionFinding, ...]
@@ -821,10 +914,21 @@ class EmailProgramAssessment(EmailArtifact):
         }
         if len(cohorts) > 1:
             raise ValueError("assessment requires one provider connection and aggregate cohort")
+        if (
+            self.population.release.binding() != self.campaign_release
+            or self.population.release.campaign.binding() != self.campaign
+        ):
+            raise ValueError("assessment population release mismatch")
+        if any(
+            row.operation_receipt not in self.population.operations for row in self.observations
+        ):
+            raise ValueError("observation not in the declared operation population")
+        population_gaps = self.population.gaps(self.observations, self.expected_metrics)
         conflicts = metric_conflicts(self.observations)
         complete = (
             bool(self.observations)
             and not conflicts
+            and not population_gaps
             and not self.data_gaps
             and set(self.expected_metrics) <= {row.metric for row in self.observations}
             and all(

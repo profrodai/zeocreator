@@ -19,7 +19,7 @@ ZEO Creator versions three surfaces independently:
 
 | Axis | Example | Changes when |
 |---|---|---|
-| Package | `0.3.0.dev0` | Code, documentation, or bundled contracts are released |
+| Package | `0.4.0.dev0` | Code, documentation, or bundled contracts are released |
 | Capability | `creator.create_content_brief@1.0.0` | Request/response behavior or orchestration-facing semantics change |
 | Contract schema | `content-brief@1` | Serialized contract compatibility changes |
 

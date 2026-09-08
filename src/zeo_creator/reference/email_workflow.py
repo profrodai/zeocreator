@@ -24,7 +24,7 @@ from zeo_creator.capabilities.email_marketing import (
     propose_email_operation,
     review_email_message,
 )
-from zeo_creator.contracts.common import canonical_digest
+from zeo_creator.contracts.common import canonical_digest, stable_id
 from zeo_creator.contracts.email_marketing import (
     EmailArtifactRef,
     EmailCampaignPlan,
@@ -303,7 +303,7 @@ def run_program(
         campaign=campaign.binding(),
         operation=proposals[1].binding(),
         campaign_release=release.binding(),
-        operation_receipt=remote_from_simulation(proposals[1], receipts[1]),
+        operation_receipt=remote_from_simulation(proposals[1], receipts[1], package=packages[1]),
         retrieval_receipt=retrieval,
         provider_kind=x.execution(pub).provider_kind,
         connection_ref=f"{pub}/connection",
@@ -327,6 +327,10 @@ def run_program(
                 observations=(observation,),
                 observation_window=campaign.campaign_window,
                 expected_metrics=("accepted", "delivered", "cta_conversions"),
+                expected_operations=tuple(
+                    remote_from_simulation(proposals[i], receipts[i], package=packages[i])
+                    for i in range(1, len(proposals), 2)
+                ),
                 created_at=x.NOW,
             ),
             ctx,
@@ -387,13 +391,22 @@ def remote_from_simulation(
     proposal: ProposedEmailOperation,
     receipt: SimulatedLoweringReceipt,
     kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"] = "broadcast",
+    *,
+    package: EmailDeliveryPackage | None = None,
 ) -> EmailRemoteReceipt:
     if (
         receipt.outcome != "accepted"
         or receipt.provider_observed_payload_digest is None
         or receipt.idempotency_identity != proposal.idempotency_key
+        or receipt.receipt_id != stable_id("simulated_receipt", proposal.approval_digest)
+        or receipt.creator_artifact
+        != (proposal.material.delivery or proposal.material.sequence or proposal.binding())
     ):
         raise ValueError("simulation receipt did not confirm the logical operation")
+    if proposal.material.delivery and (
+        package is None or package.binding() != proposal.material.delivery
+    ):
+        raise ValueError("simulation receipt requires the exact delivery package")
     data = x.remote_receipt(
         proposal.binding(),
         proposal.material.campaign_release,
@@ -401,6 +414,8 @@ def remote_from_simulation(
         sequence=proposal.material.sequence,
     ).model_dump(mode="python", exclude={"content_digest"})
     data.update(
+        delivery=proposal.material.delivery,
+        message_plan=package.material.draft.message_plan if package else None,
         artifact_id=receipt.receipt_id,
         remote_ref=receipt.remote_ref,
         execution=proposal.material.execution,

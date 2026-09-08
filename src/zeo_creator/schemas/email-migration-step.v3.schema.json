@@ -1,0 +1,38 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "disposition": {
+      "enum": [
+        "retain",
+        "skip",
+        "restart"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "source_step": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Source Step",
+      "type": "string"
+    },
+    "target_step": {
+      "anyOf": [
+        {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Target Step"
+    }
+  },
+  "required": [
+    "source_step",
+    "target_step",
+    "disposition"
+  ],
+  "title": "EmailMigrationStep",
+  "type": "object"
+}

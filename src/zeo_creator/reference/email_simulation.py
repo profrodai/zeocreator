@@ -99,6 +99,7 @@ class SimulatedEmailHost:
         package: EmailDeliveryPackage | None = None,
         release: EmailCampaignRelease | None = None,
         source_sequence: EmailSequencePlan | None = None,
+        originating_operation: ProposedEmailOperation | None = None,
         sequence: EmailSequencePlan | None = None,
         supported_semantics: tuple[str, ...] = (),
         outcome: Outcome = "accepted",
@@ -141,6 +142,7 @@ class SimulatedEmailHost:
             package=package,
             sequence=sequence,
             source_sequence=source_sequence,
+            originating_operation=originating_operation,
         )
         payload: dict[str, object] = {
             "intent": material.intent,
@@ -191,7 +193,8 @@ class SimulatedEmailHost:
             else "material"
             if outcome == "needs_review"
             else "unknown",
-            remote_ref=stable_id("simulated_remote", proposal.approval_digest),
+            remote_ref=material.target_remote_ref
+            or stable_id("simulated_remote", proposal.approval_digest),
             idempotency_identity=proposal.idempotency_key,
             outcome=outcome,
         )

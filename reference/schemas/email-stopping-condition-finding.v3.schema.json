@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "condition": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Condition",
+      "type": "string"
+    },
+    "status": {
+      "const": "human_needed",
+      "default": "human_needed",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "condition"
+  ],
+  "title": "EmailStoppingConditionFinding",
+  "type": "object"
+}

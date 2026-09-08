@@ -44,7 +44,7 @@ class EmailEffectFamilyRun(EmailModel):
 
 
 def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
-    """Provisioning receipt is a supplied simulation fixture, never a real provider claim."""
+    """Every sequence prerequisite is returned by a distinct approved fake operation."""
     pub = run.publication.publication_id
     host = SimulatedEmailHost("hubspot-shaped" if pub == "publication-a" else "kit-shaped")
     proposals: list[ProposedEmailOperation] = []
@@ -59,6 +59,7 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
         prior: EmailRemoteReceipt | None = None,
         migration: EmailMigrationPlan | None = None,
         source_sequence: EmailSequencePlan | None = None,
+        original: ProposedEmailOperation | None = None,
     ) -> ProposedEmailOperation:
         material = EmailOperationIntent(
             organization_id=run.publication.organization_id,
@@ -77,6 +78,8 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
             else None,
             sequence=sequence.binding() if sequence else None,
             prior_receipt=prior,
+            originating_operation=original.binding() if original else None,
+            target_delivery=original.material.delivery if original else None,
             target_remote_ref=prior.remote_ref if prior else None,
             expected_remote_revision_digest=prior.remote_revision_digest if prior else None,
             migration=migration,
@@ -89,7 +92,8 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
                 package=package,
                 sequence=sequence,
                 source_sequence=source_sequence,
-                idempotency_key=f"family/{intent.value}",
+                originating_operation=original,
+                idempotency_key=f"family/{intent.value}/{len(proposals)}",
                 created_at=x.NOW,
             ),
             make_context(capability_name="email_reference_family"),
@@ -104,6 +108,7 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
             package=package,
             sequence=sequence,
             source_sequence=source_sequence,
+            originating_operation=original,
             release=release,
             supported_semantics=("linear", "retain_existing_revision"),
         )
@@ -116,7 +121,8 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
     propose(
         EmailEffectIntent.UPDATE_DRAFT,
         package=production,
-        prior=remote_from_simulation(created, receipts[0], kind="draft"),
+        prior=remote_from_simulation(created, receipts[0], kind="draft", package=production),
+        original=created,
     )
     propose(EmailEffectIntent.TEST, package=run.packages[0])
     propose(EmailEffectIntent.SEND, package=production)
@@ -135,19 +141,19 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
     scheduled = propose(EmailEffectIntent.SCHEDULE, package=scheduled_package)
     propose(
         EmailEffectIntent.CANCEL,
-        prior=x.remote_receipt(
-            scheduled.binding(), run.release.binding(), kind="scheduled_broadcast"
+        prior=remote_from_simulation(
+            scheduled, receipts[-1], kind="scheduled_broadcast", package=scheduled_package
         ),
+        original=scheduled,
     )
-    provisioned = x.remote_receipt(
-        x.ref("simulated-provisioned-sequence", pub),
-        run.release.binding(),
-        kind="sequence_revision",
-        sequence=run.sequence.binding(),
-    )
-    for intent in (EmailEffectIntent.ACTIVATE, EmailEffectIntent.PAUSE, EmailEffectIntent.RETIRE):
-        propose(intent, sequence=run.sequence, prior=provisioned)
-    propose(EmailEffectIntent.ENROL, sequence=run.sequence, prior=provisioned)
+    provision = propose(EmailEffectIntent.PROVISION, sequence=run.sequence)
+    provisioned = remote_from_simulation(provision, receipts[-1], kind="sequence_revision")
+    activation = propose(EmailEffectIntent.ACTIVATE, sequence=run.sequence, prior=provisioned)
+    activated = remote_from_simulation(activation, receipts[-1], kind="sequence_revision")
+    enrolment = propose(EmailEffectIntent.ENROL, sequence=run.sequence, prior=activated)
+    enrolled = remote_from_simulation(enrolment, receipts[-1], kind="sequence_revision")
+    paused_op = propose(EmailEffectIntent.PAUSE, sequence=run.sequence, prior=enrolled)
+    paused = remote_from_simulation(paused_op, receipts[-1], kind="sequence_revision")
     migrated = s.plan_sequence(
         run.campaign,
         run.sequence.artifact_id,
@@ -161,7 +167,12 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
         x.ref("migration-policy", pub),
     )
     released = s.finalize_campaign(run.campaign, run.plans, (migrated,), x.NOW)
+    target_provision = propose(EmailEffectIntent.PROVISION, sequence=migrated, release=released)
+    target_receipt = remote_from_simulation(
+        target_provision, receipts[-1], kind="sequence_revision"
+    )
     migration = EmailMigrationPlan(
+        target_receipt=target_receipt,
         organization_id=run.publication.organization_id,
         publication_id=pub,
         source_sequence=run.sequence.binding(),
@@ -179,11 +190,12 @@ def effect_family(run: EmailReferenceRun) -> EmailEffectFamilyRun:
         EmailEffectIntent.MIGRATE,
         sequence=migrated,
         release=released,
-        prior=provisioned,
+        prior=paused,
         migration=migration,
         source_sequence=run.sequence,
     )
-    assert host.submissions == len(EmailEffectIntent)
+    propose(EmailEffectIntent.RETIRE, sequence=run.sequence, prior=paused)
+    assert host.submissions == len(EmailEffectIntent) + 1
     return EmailEffectFamilyRun(
         source=run, migration_release=released, proposals=tuple(proposals), receipts=tuple(receipts)
     )

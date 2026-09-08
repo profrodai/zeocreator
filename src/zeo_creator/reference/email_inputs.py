@@ -337,6 +337,8 @@ def remote_receipt(
         organization_id=operation.organization_id,
         publication_id=pub,
         operation=operation,
+        delivery=ref("simulated-delivery", pub) if kind != "sequence_revision" else None,
+        message_plan=plan(pub).binding() if kind != "sequence_revision" else None,
         campaign_release=campaign_release,
         execution=execution(pub),
         issuer=ref("simulated-connector", pub),

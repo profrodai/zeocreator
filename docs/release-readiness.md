@@ -41,7 +41,7 @@ authorized by this readiness report.
 
 ## Email marketing integration status — 2026-09-07
 
-The additive email contracts, nine input-only capabilities, three-publication
+The explicit email v3 contracts, nine input-only capabilities, eight-program
 example, packaged schemas, vectors and documentation support offline conformance.
 The reference hosts simulate lowering, exact approval checks, logical idempotency
 and ambiguous-outcome reconciliation. They are not production adapters or storage.
@@ -52,3 +52,9 @@ semantics are held until that public contract is released and tested. The host
 must refuse unsupported semantics rather than approximate them. An offline green
 gate does not remove this integration dependency. No live effect or PyPI publication
 is authorized by this document.
+
+HubSpot provider implementation PR 53 is now merged in Zeocore at
+`8019154c3e3d911a1736df077fa98d3022f7840d`. It adds provider capabilities but
+contains no package release, completed Creator/Sovereign Agent receipt wiring,
+or Kit parity. The released dependency remains Zeocore 0.9.0; this source merge
+does not establish the shared neutral email contract or live interoperability.
