@@ -59,7 +59,7 @@ Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
 0.9.0. These source changes do not establish a released shared neutral receipt
 contract, completed Creator/Sovereign Agent wiring, or live interoperability.
 
-The installed package also exports the exact v4 result union and 36 portable
+The installed package also exports the exact v4 result union and 135 portable
 receipt/lifecycle cases. Its input-only receipt consumer binds normalized evidence
 to the original proposal and fixes the reference migration target identity. See
 [shared receipt conformance](guides/email-receipt-conformance.md).

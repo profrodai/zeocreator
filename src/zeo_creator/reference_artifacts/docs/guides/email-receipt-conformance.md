@@ -20,6 +20,12 @@ approved remote target. Migration must return the *target* sequence object, whil
 its source remains provenance in the migration plan. A fresh digest does not make
 an unrelated receipt correspond to the approved proposal.
 
+During update/cancellation proposal preparation, Creator also checks that the
+prior receipt's normalized intent equals its originating proposal's exact intent.
+A matching operation reference alone is insufficient: a create-draft origin with
+an update-draft result (or the reverse) refuses with
+`originating_operation_effect_mismatch`, preserved through the public capability.
+
 This function consumes evidence; it does not authenticate an issuer, prove an
 external effect, authorize a retry, or freshen an expired approval. The integrating
 host must validate the trusted issuer and receipt-contract digest, authenticate
@@ -43,12 +49,26 @@ must retain these wire bytes or use an explicit contract migration.
 
 ## Portable behavioral evidence
 
-The wheel contains `reference_artifacts/email-receipt-conformance-v1.json`:
-36 sanitized cases with explicitly authored acceptance verdicts, complete result,
-receipt and intent schemas, and RFC 8785 digests. It covers all 16 lifecycle
-preconditions, all six sequence results, production-audience rejection, and exact
-proposal/release/remote-target correspondence. The corresponding source artifact
-is `reference/email-receipt-conformance-v1.json`.
+The current wheel corpus is `reference_artifacts/email-receipt-conformance-v2.json`:
+135 sanitized cases with explicitly authored verdicts and RFC 8785 digests. Its
+five complete schemas cover result, receipt, intent, proposal and package.
+Every one of the twelve effects has positive result, receipt and correspondence
+cases, including both draft effects and all six result discriminators. Negatives
+cover incompatible effect/kind, contradictory lifecycle state, missing sequence
+audience, account, connector revision, chronology, message, audience, delivery,
+operation, release, remote target and package substitutions. Correspondence
+substitutions carry valid fresh receipt digests, so accidental integrity failure
+cannot stand in for the binding checks. Historical and uncertain evidence has
+positive cases too. The original 16 lifecycle transition cases remain included.
+The source artifact is `reference/email-receipt-conformance-v2.json`.
+
+Corpus v1 remains byte-identical for historical reproduction and is superseded
+for current conformance. The reviewers demonstrated that a validator checking only
+operation, release and migration source, or one omitting four result kinds, could
+pass v1. Both counterfeits fail v2 in regression tests. `packaged_cases()` and the
+module command use v2; `packaged_cases(1)` is for reproducing the historical gap.
+Require the pinned v2 artifact when reporting current conformance. The corpus
+version changes independently of the unchanged email v4 wire contracts.
 
 Run the installed Creator implementation without a checkout or credentials:
 

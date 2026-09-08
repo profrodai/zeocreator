@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.2.dev0 — 2026-09-08
+
+- Reject prior receipts whose normalized draft effect contradicts their originating proposal.
+- Preserve the specific safe refusal through proposal capability results.
+- Publish corpus v2 with 135 cases covering every result kind/effect and portable binding substitutions.
+- Include proposal and package schemas; retain the historical v1 corpus and every existing schema byte.
+- Prove the reviewers' lax and partial validators pass v1 but fail v2. No live effects or release.
+
 ## 0.5.1.dev0 — 2026-09-08
 
 - Bind consumed normalized receipts to exact proposals, content, audience and remote targets.
