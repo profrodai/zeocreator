@@ -243,8 +243,18 @@ def test_activation_is_not_enrolment_and_sequence_capability_refuses_approximati
         sequence=seq.binding(),
     )
     activation = s.propose_operation(activate, x.NOW, "activation", release=released, sequence=seq)
+    active = x.remote_receipt(
+        activation.binding(),
+        released.binding(),
+        kind="sequence_revision",
+        sequence=seq.binding(),
+        intent=EmailEffectIntent.ACTIVATE,
+    )
     enrol = revised(
         activate,
+        prior_receipt=active,
+        target_remote_ref=active.remote_ref,
+        expected_remote_revision_digest=active.remote_revision_digest,
         intent=EmailEffectIntent.ENROL,
         operation=operation_identity(EmailEffectIntent.ENROL),
         operation_contract_digest=operation_contract_digest(EmailEffectIntent.ENROL),

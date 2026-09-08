@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0.dev0
+
+- Introduce explicit email v4 receipt results with a kind discriminator, normalized effect,
+  exact audience and lifecycle state; preserve every existing v1/v2/v3 schema byte.
+- Enforce sequence transition preconditions and prevent migration from activating its target.
+- Restrict production metric observations/populations to applicable broadcast or enrolment results.
+- Validate CTA identity uniqueness and one primary at direct contract construction and release coordination.
+- Return safe stale_email_artifact classification for nested validation failures.
+- Add direct-construction and full lifecycle/metric matrix regression coverage. No live effects or PyPI release.
+
 ## 0.4.0.dev0 — 2026-09-07
 
 - Introduce explicit email v3 schemas while preserving all published v1/v2 schemas.

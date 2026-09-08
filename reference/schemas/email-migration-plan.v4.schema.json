@@ -1,0 +1,753 @@
+{
+  "$defs": {
+    "AudienceSnapshotSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "audience_intent_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Audience Intent Digest",
+          "type": "string"
+        },
+        "connection_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "consent_policy_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Consent Policy Digest",
+          "type": "string"
+        },
+        "drift_status": {
+          "enum": [
+            "unchanged",
+            "changed",
+            "unknown"
+          ],
+          "title": "Drift Status",
+          "type": "string"
+        },
+        "eligible_count": {
+          "minimum": 0,
+          "title": "Eligible Count",
+          "type": "integer"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "provider_kind": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Provider Kind",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "purpose": {
+          "enum": [
+            "production",
+            "test"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "resolved_at": {
+          "format": "date-time",
+          "title": "Resolved At",
+          "type": "string"
+        },
+        "segment_definition_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Segment Definition Digest",
+          "type": "string"
+        },
+        "snapshot_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Snapshot Digest",
+          "type": "string"
+        },
+        "snapshot_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Snapshot Ref",
+          "type": "string"
+        },
+        "suppressed_count": {
+          "minimum": 0,
+          "title": "Suppressed Count",
+          "type": "integer"
+        },
+        "suppression_policy_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Suppression Policy Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "snapshot_ref",
+        "snapshot_digest",
+        "provider_kind",
+        "connection_ref",
+        "audience_intent_digest",
+        "eligible_count",
+        "suppressed_count",
+        "resolved_at",
+        "expires_at",
+        "segment_definition_digest",
+        "consent_policy_digest",
+        "suppression_policy_digest",
+        "drift_status",
+        "purpose"
+      ],
+      "title": "AudienceSnapshotSummary",
+      "type": "object"
+    },
+    "CapabilityId": {
+      "additionalProperties": false,
+      "description": "Immutable capability identity. Mutation after construction is forbidden.",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "namespace": {
+          "minLength": 1,
+          "title": "Namespace",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "namespace",
+        "name",
+        "version"
+      ],
+      "title": "CapabilityId",
+      "type": "object"
+    },
+    "EmailArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Digest",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "ref",
+        "revision",
+        "digest"
+      ],
+      "title": "EmailArtifactRef",
+      "type": "object"
+    },
+    "EmailBroadcastResult": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/AudienceSnapshotSummary"
+        },
+        "delivery": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "intent": {
+          "const": "send_broadcast",
+          "default": "send_broadcast",
+          "title": "Intent",
+          "type": "string"
+        },
+        "kind": {
+          "const": "broadcast",
+          "default": "broadcast",
+          "title": "Kind",
+          "type": "string"
+        },
+        "message_plan": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "delivery",
+        "message_plan",
+        "audience"
+      ],
+      "title": "EmailBroadcastResult",
+      "type": "object"
+    },
+    "EmailCancelledResult": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/AudienceSnapshotSummary"
+        },
+        "delivery": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "intent": {
+          "const": "cancel_scheduled_broadcast",
+          "default": "cancel_scheduled_broadcast",
+          "title": "Intent",
+          "type": "string"
+        },
+        "kind": {
+          "const": "cancelled_broadcast",
+          "default": "cancelled_broadcast",
+          "title": "Kind",
+          "type": "string"
+        },
+        "message_plan": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "delivery",
+        "message_plan",
+        "audience"
+      ],
+      "title": "EmailCancelledResult",
+      "type": "object"
+    },
+    "EmailDraftResult": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/AudienceSnapshotSummary"
+        },
+        "delivery": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "intent": {
+          "enum": [
+            "create_remote_draft",
+            "update_remote_draft"
+          ],
+          "title": "Intent",
+          "type": "string"
+        },
+        "kind": {
+          "const": "draft",
+          "default": "draft",
+          "title": "Kind",
+          "type": "string"
+        },
+        "message_plan": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "delivery",
+        "message_plan",
+        "audience",
+        "intent"
+      ],
+      "title": "EmailDraftResult",
+      "type": "object"
+    },
+    "EmailExecutionContext": {
+      "additionalProperties": false,
+      "properties": {
+        "account_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Account Ref",
+          "type": "string"
+        },
+        "connection_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Connection Ref",
+          "type": "string"
+        },
+        "connector_revision": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Connector Revision",
+          "type": "string"
+        },
+        "lowering_profile": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "provider_kind": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Provider Kind",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "provider_kind",
+        "connection_ref",
+        "account_ref",
+        "connector_revision",
+        "lowering_profile"
+      ],
+      "title": "EmailExecutionContext",
+      "type": "object"
+    },
+    "EmailMigrationStep": {
+      "additionalProperties": false,
+      "properties": {
+        "disposition": {
+          "enum": [
+            "retain",
+            "skip",
+            "restart"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "source_step": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Source Step",
+          "type": "string"
+        },
+        "target_step": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Target Step"
+        }
+      },
+      "required": [
+        "source_step",
+        "target_step",
+        "disposition"
+      ],
+      "title": "EmailMigrationStep",
+      "type": "object"
+    },
+    "EmailRemoteReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "campaign_release": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "content_digest": {
+          "default": "",
+          "title": "Content Digest",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "execution": {
+          "$ref": "#/$defs/EmailExecutionContext"
+        },
+        "input_refs": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "issuer": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "operation": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "confirmed",
+            "needs_review",
+            "ambiguous"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "receipt_contract": {
+          "$ref": "#/$defs/CapabilityId"
+        },
+        "receipt_contract_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Receipt Contract Digest",
+          "type": "string"
+        },
+        "remote_ref": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Remote Ref",
+          "type": "string"
+        },
+        "remote_revision_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Remote Revision Digest",
+          "type": "string"
+        },
+        "result": {
+          "discriminator": {
+            "mapping": {
+              "broadcast": "#/$defs/EmailBroadcastResult",
+              "cancelled_broadcast": "#/$defs/EmailCancelledResult",
+              "draft": "#/$defs/EmailDraftResult",
+              "scheduled_broadcast": "#/$defs/EmailScheduledResult",
+              "sequence_revision": "#/$defs/EmailSequenceResult",
+              "test_send": "#/$defs/EmailTestResult"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/EmailDraftResult"
+            },
+            {
+              "$ref": "#/$defs/EmailScheduledResult"
+            },
+            {
+              "$ref": "#/$defs/EmailBroadcastResult"
+            },
+            {
+              "$ref": "#/$defs/EmailTestResult"
+            },
+            {
+              "$ref": "#/$defs/EmailCancelledResult"
+            },
+            {
+              "$ref": "#/$defs/EmailSequenceResult"
+            }
+          ],
+          "title": "Result"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": "4.0.0",
+          "default": "4.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "organization_id",
+        "publication_id",
+        "artifact_id",
+        "result",
+        "operation",
+        "campaign_release",
+        "execution",
+        "issuer",
+        "receipt_contract",
+        "receipt_contract_digest",
+        "remote_ref",
+        "remote_revision_digest",
+        "outcome"
+      ],
+      "title": "EmailRemoteReceipt",
+      "type": "object"
+    },
+    "EmailScheduledResult": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/AudienceSnapshotSummary"
+        },
+        "delivery": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "intent": {
+          "const": "schedule_broadcast",
+          "default": "schedule_broadcast",
+          "title": "Intent",
+          "type": "string"
+        },
+        "kind": {
+          "const": "scheduled_broadcast",
+          "default": "scheduled_broadcast",
+          "title": "Kind",
+          "type": "string"
+        },
+        "message_plan": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "delivery",
+        "message_plan",
+        "audience"
+      ],
+      "title": "EmailScheduledResult",
+      "type": "object"
+    },
+    "EmailSequenceResult": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AudienceSnapshotSummary"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "intent": {
+          "enum": [
+            "provision_sequence_revision",
+            "activate_sequence_revision",
+            "enrol_audience_snapshot",
+            "pause_future_steps",
+            "retire_sequence_revision",
+            "migrate_existing_enrollees"
+          ],
+          "title": "Intent",
+          "type": "string"
+        },
+        "kind": {
+          "const": "sequence_revision",
+          "default": "sequence_revision",
+          "title": "Kind",
+          "type": "string"
+        },
+        "lifecycle_state": {
+          "enum": [
+            "provisioned",
+            "active",
+            "paused",
+            "retired"
+          ],
+          "title": "Lifecycle State",
+          "type": "string"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        },
+        "sequence": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "intent",
+        "sequence",
+        "lifecycle_state"
+      ],
+      "title": "EmailSequenceResult",
+      "type": "object"
+    },
+    "EmailTestResult": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "$ref": "#/$defs/AudienceSnapshotSummary"
+        },
+        "delivery": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "intent": {
+          "const": "send_test",
+          "default": "send_test",
+          "title": "Intent",
+          "type": "string"
+        },
+        "kind": {
+          "const": "test_send",
+          "default": "test_send",
+          "title": "Kind",
+          "type": "string"
+        },
+        "message_plan": {
+          "$ref": "#/$defs/EmailArtifactRef"
+        },
+        "organization_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Organization Id",
+          "type": "string"
+        },
+        "publication_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+          "title": "Publication Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "organization_id",
+        "publication_id",
+        "delivery",
+        "message_plan",
+        "audience"
+      ],
+      "title": "EmailTestResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "enrollees": {
+      "$ref": "#/$defs/AudienceSnapshotSummary"
+    },
+    "organization_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Organization Id",
+      "type": "string"
+    },
+    "policy": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "publication_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,199}$",
+      "title": "Publication Id",
+      "type": "string"
+    },
+    "source_sequence": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/EmailMigrationStep"
+      },
+      "minItems": 1,
+      "title": "Steps",
+      "type": "array"
+    },
+    "target_receipt": {
+      "$ref": "#/$defs/EmailRemoteReceipt"
+    },
+    "target_sequence": {
+      "$ref": "#/$defs/EmailArtifactRef"
+    }
+  },
+  "required": [
+    "organization_id",
+    "publication_id",
+    "target_receipt",
+    "source_sequence",
+    "target_sequence",
+    "enrollees",
+    "policy",
+    "steps"
+  ],
+  "title": "EmailMigrationPlan",
+  "type": "object"
+}

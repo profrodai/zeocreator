@@ -205,11 +205,17 @@ def test_campaign_completeness_covers_every_declared_operation_and_message():
     release = s.finalize_campaign(x.campaign(), (x.plan(), x.plan(message="second")), (), x.NOW)
     first_receipt = revised(
         x.remote_receipt(x.ref("first-operation"), release.binding()),
-        message_plan=release.messages[0].binding(),
+        result=revised(
+            x.remote_receipt(x.ref("first-operation"), release.binding()).result,
+            message_plan=release.messages[0].binding(),
+        ),
     )
     second_receipt = revised(
         x.remote_receipt(x.ref("second-operation"), release.binding()),
-        message_plan=release.messages[1].binding(),
+        result=revised(
+            x.remote_receipt(x.ref("second-operation"), release.binding()).result,
+            message_plan=release.messages[1].binding(),
+        ),
     )
     first = observation(
         operation=first_receipt.operation,
@@ -290,12 +296,16 @@ def test_migration_receipt_kind_and_source_checked_by_direct_construction(family
     material = next(
         row.material for row in family.proposals if row.material.intent == EmailEffectIntent.MIGRATE
     )
-    for prior in (
-        revised(material.prior_receipt, kind="draft"),
-        revised(material.prior_receipt, sequence=x.ref("another-source")),
-    ):
-        with pytest.raises(ValidationError, match="migration source"):
-            revised(material, prior_receipt=prior)
+    with pytest.raises(ValidationError):
+        revised(material.prior_receipt, result=revised(material.prior_receipt.result, kind="draft"))
+    with pytest.raises(ValidationError, match="migration source"):
+        revised(
+            material,
+            prior_receipt=revised(
+                material.prior_receipt,
+                result=revised(material.prior_receipt.result, sequence=x.ref("another-source")),
+            ),
+        )
     with pytest.raises(ValidationError, match="migration target"):
         revised(
             material,
@@ -307,7 +317,9 @@ def test_migration_receipt_kind_and_source_checked_by_direct_construction(family
 
 
 def test_campaign_and_message_ctas_must_form_one_coordinating_set():
-    extra = revised(x.brief().calls_to_action[0], cta_id="orphan", primary=False)
+    extra = revised(
+        x.brief().calls_to_action[0], cta_id="orphan", link_id="orphan-link", primary=False
+    )
     campaign = s.plan_campaign(
         x.profile(), revised(x.brief(), calls_to_action=(*x.brief().calls_to_action, extra)), x.NOW
     )

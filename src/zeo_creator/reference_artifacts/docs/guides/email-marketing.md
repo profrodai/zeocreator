@@ -1,6 +1,6 @@
 # Email marketing
 
-<!-- Reviewed 2026-09-07. Email v3 closes the sequence lifecycle and observation population; v1/v2 preparation APIs are retired; original schemas remain archived. -->
+<!-- Reviewed 2026-09-08. Email v4 discriminates receipt results, lifecycle states and admissible metrics; v1/v2/v3 preparation APIs are retired; original schemas remain archived. -->
 
 Creator designs and evaluates email programs. Zeocore owns the public provider
 contracts and lowering; ZEOconnect executes provider effects; Runtime owns
@@ -26,7 +26,7 @@ responsibilities without importing private ZEO packages.
 
 A newsletter is a periodic editorial issue sent as a one-off broadcast. A campaign
 need not correspond to a provider-side campaign object. A lifecycle program is
-the broader journey containing entry/exit/conversion/suppression policies; v3 can
+the broader journey containing entry/exit/conversion/suppression policies; v4 can
 represent it through one linear sequence. HubSpot Sales Sequences are outside
 this model; the integration target is HubSpot Marketing.
 
@@ -38,15 +38,15 @@ Zeocore's conservative `read` effect, carry a `pure` tag, and have no required
 acquisition services or network access:
 
 ```text
-creator.plan_email_campaign@3.0.0
-creator.finalize_email_campaign@3.0.0
-creator.propose_email_operation@3.0.0
-creator.plan_email_sequence@3.0.0
-creator.plan_email_message@3.0.0
-creator.compose_email_message@3.0.0
-creator.review_email_message@3.0.0
-creator.prepare_email_delivery@3.0.0
-creator.assess_email_program@3.0.0
+creator.plan_email_campaign@4.0.0
+creator.finalize_email_campaign@4.0.0
+creator.propose_email_operation@4.0.0
+creator.plan_email_sequence@4.0.0
+creator.plan_email_message@4.0.0
+creator.compose_email_message@4.0.0
+creator.review_email_message@4.0.0
+creator.prepare_email_delivery@4.0.0
+creator.assess_email_program@4.0.0
 ```
 
 Composition accepts an optional `creator.email_strategy` implementing
@@ -104,7 +104,7 @@ not enrol anyone; test success does not approve production; later or larger
 audiences require new proposals. Remote update/cancel/pause/retire intents require
 an opaque target, observed remote revision digest and normalized `EmailRemoteReceipt` binding issuer, operation, release and exact execution context. Activation also requires the exact provisioned sequence receipt. Cancellation accepts only a scheduling receipt; update accepts only a draft receipt. Both bind `originating_operation` and `target_delivery`, and proposal preparation receives the complete originating proposal. The receipt operation and originating proposal must match exactly. Cancellation cannot name another delivery; draft updates may supply new content only for the same logical message as the target. Cancellation does not require an expired audience or old preview proof to become fresh again.
 
-`creator.propose_email_operation@3.0.0` and `services.email_marketing.propose_operation` inspect the actual release, package and sequence. New content effects re-run delivery preparation; cancellation validates its historical target without reauthorizing a send. They enforce exact package/audience/context bindings and schedule semantics, and check enrolment policy and both proposal/resolution times against the enrolment window. The capability does not
+`creator.propose_email_operation@4.0.0` and `services.email_marketing.propose_operation` inspect the actual release, package and sequence. New content effects re-run delivery preparation; cancellation validates its historical target without reauthorizing a send. They enforce exact package/audience/context bindings and schedule semantics, and check enrolment policy and both proposal/resolution times against the enrolment window. The capability does not
 certify support, inspect a provider account, validate a human authorization or
 execute anything. At the handoff the host must resolve every digest-bound artifact,
 check stored revision uniqueness and the receipt-to-provider-object mapping, authenticate evidence issuers and contract digests, recheck audience authorization/freshness/drift at dispatch, resolve the public operation
@@ -115,7 +115,7 @@ through `plan_email_sequence` requires the previous revision and increments it.
 A separate `provision_sequence_revision` operation binds the exact revision and returns the normalized receipt required for activation. Provisioning cannot activate or enrol anyone. The fake lifecycle produces that receipt through an approved simulated operation; it is no longer supplied out of thin air. Existing enrollees retain their original revision by default. Migration requires
 a separate `migrate_existing_enrollees` effect containing source and target sequence revisions, an exact enrollee snapshot, an explicit policy, and a retain/skip/restart disposition for every source step. The source receipt, provisioned target receipt, and target previous-revision binding must agree. Source kind/sequence and target kind/sequence/context/outcome are checked by direct contract construction as well as the service. Activation and enrolment reject migration material. Runtime determines current remote state and grants separate authority.
 Conditional graphs, CRM mutations, lead scoring and arbitrary workflows are
-outside the linear v3 model.
+outside the linear v4 model.
 
 ## Publication isolation and data handling
 
@@ -220,8 +220,8 @@ and verify the real mapping/render/snapshot coverage before authorizing effects.
 
 ## Email contract migration and release policy
 
-The package is `0.4.0.dev0`; its nine email capabilities and durable email artifacts use
-major version 3. Published email v1 and v2 schemas remain byte-for-byte available for
+The package is `0.5.0.dev0`; its nine email capabilities and durable email artifacts use
+major version 4. Published email v1, v2 and v3 schemas remain byte-for-byte available for
 audit. Their preparation APIs are retired from discovery; the twenty original non-email
 capabilities remain unchanged. This explicitly affirms the earlier email v1 retirement:
 these email families existed only as unreleased development commits, and unsafe approvals
@@ -254,8 +254,75 @@ consent/suppression references, and supply the new message directions, complianc
 and scoped evidence. The resulting plan binds the original newsletter revision.
 No old schema is silently reinterpreted.
 
-HubSpot provider implementation PR 53 is now merged in Zeocore at
-`8019154c3e3d911a1736df077fa98d3022f7840d`. It adds provider capabilities but
-contains no package release, completed Creator/Sovereign Agent receipt wiring,
-or Kit parity. The released dependency remains Zeocore 0.9.0; this source merge
-does not establish the shared neutral email contract or live interoperability.
+HubSpot PR 53 and Kit PR 54 are now merged in Zeocore; current merged provider
+work is `ccedd94ac729e52758eaba43d771e3b6458f9fb9`. Follow-up PR 55 validates
+Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
+0.9.0. These source changes do not establish a released shared neutral receipt
+contract, completed Creator/Sovereign Agent wiring, or live interoperability.
+
+
+## Receipt results and lifecycle preconditions
+
+Email v4 replaces independent optional receipt fields with a required `result`, a
+JSON-Schema/Pydantic union discriminated by `kind`. `draft`, `scheduled_broadcast`,
+`broadcast`, `test_send` and `cancelled_broadcast` carry exact delivery, message-plan
+and audience-snapshot bindings. `sequence_revision` carries an exact sequence binding,
+effect intent and lifecycle state; only enrolment/migration carry an audience. Result
+variants reject unrelated fields. Each result binds its normalized effect intent;
+test results require test audiences and broadcast results require production audiences.
+Receipt audience provider/connection must match its execution context. Preview evidence
+remains a separate proof contract and cannot masquerade as a remote operation receipt.
+
+The receipt's `operation` binds the originating Creator proposal; `result.intent`
+and its audience/state describe that operation's normalized outcome. The synthetic
+normalizer derives these fields from the actual proposal and package and refuses a
+caller-supplied contradictory kind. Runtime must authenticate the receipt and verify
+all those claims against the real originating operation and provider state. A matching
+local digest alone cannot authenticate any of them.
+
+| Proposed effect | Required prior state | Confirmed result state |
+| --- | --- | --- |
+| Provision revision | No prior remote target | provisioned |
+| Activate revision | provisioned | active |
+| Enrol snapshot | active | active |
+| Pause future steps | active | paused |
+| Retire revision | active or paused | retired |
+| Migrate existing enrollees | paused source and provisioned target | target remains provisioned |
+
+Migration never activates its target. The explicit migration policy and per-step
+retain/skip/restart dispositions remain required; later activation needs its own
+proposal and authority. A runtime/provider that cannot retain migrated enrolments
+without activating the target must refuse these semantics. The bounded contract has
+no resume-paused effect; activation cannot be repurposed as resume or reactivation.
+Retries reuse the same logical operation, rather than creating another activation.
+Current remote state, revocation and stale receipt reconciliation remain runtime checks.
+
+## Metric applicability
+
+A message-bound expected population entry must be a confirmed production `broadcast`
+result from `send_broadcast`. Draft, scheduled, test, cancelled, provisioned, activated,
+paused, retired and migrated results cannot establish delivery or engagement metrics.
+A test audience cannot satisfy production coverage, even with a full observation matrix.
+
+| Eligible operation result | Admissible metrics |
+| --- | --- |
+| Production broadcast | attempted, accepted, delivered, deferred, bounced, complained, unsubscribed, opened, unique_link_clicks, cta_conversions, campaign_conversion, attributed_revenue |
+| Production enrolment | sequence_enrolments, step_completion, step_exit |
+
+Observations reject inadmissible pairs during direct construction. The population rejects
+nonmeasurable operations. Its expected matrix contains each operation's applicable metric
+cells only; a requested metric with no observations still leaves an explicit gap. Every
+released message still needs its own production broadcast coverage, so sequence aggregates
+cannot silently cover missing messages. No values are pooled across operations. Provider
+definitions, retrieval provenance, observation windows, coverage, reliability and attribution
+qualifications remain required; a confirmed broadcast receipt alone proves no delivered count.
+
+Campaign and message CTA plans require unique CTA and CTA-link identities and exactly one
+primary CTA. Message link manifests also require unique link identities. Release coordination
+compares identity-keyed CTA definitions; the same identity may recur unchanged across messages,
+but conflicting definitions and undeclared/unused identities refuse during construction.
+
+For v3-to-v4 migration, rebuild artifacts and obtain receipts with explicit result, effect,
+audience and lifecycle evidence. Never infer production status or lifecycle state merely
+from a legacy receipt kind, and never relabel a historical approval. Published v3 schemas
+remain frozen for audit. This is an explicit breaking development-contract migration.

@@ -14,6 +14,7 @@ from zeo_creator.contracts.email_marketing import (
     EmailCampaignRelease,
     EmailCompliance,
     EmailCTA,
+    EmailEffectIntent,
     EmailExecutionContext,
     EmailLink,
     EmailLoweringEvidence,
@@ -327,30 +328,72 @@ def remote_receipt(
     operation: EmailArtifactRef,
     campaign_release: EmailArtifactRef,
     *,
-    kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"] = "broadcast",
+    kind: Literal[
+        "draft",
+        "scheduled_broadcast",
+        "sequence_revision",
+        "broadcast",
+        "test_send",
+        "cancelled_broadcast",
+    ] = "broadcast",
     sequence: EmailArtifactRef | None = None,
+    intent: EmailEffectIntent | None = None,
+    audience: AudienceSnapshotSummary | None = None,
 ) -> EmailRemoteReceipt:
+    """Supplied synthetic evidence only; production normalization uses actual proposals."""
     pub = operation.publication_id
-    return EmailRemoteReceipt(
-        artifact_id=f"{pub}/simulated-receipt/{operation.digest[7:23]}",
-        created_at=NOW,
-        organization_id=operation.organization_id,
-        publication_id=pub,
-        operation=operation,
-        delivery=ref("simulated-delivery", pub) if kind != "sequence_revision" else None,
-        message_plan=plan(pub).binding() if kind != "sequence_revision" else None,
-        campaign_release=campaign_release,
-        execution=execution(pub),
-        issuer=ref("simulated-connector", pub),
-        receipt_contract=CapabilityId(
-            namespace="example.email", name="remote_receipt", version="2.0.0"
-        ),
-        receipt_contract_digest=canonical_digest("simulated-remote-receipt-v2"),
-        remote_ref=f"{pub}/simulated-remote/{operation.digest[7:23]}",
-        remote_revision_digest=canonical_digest(operation),
-        kind=kind,
-        sequence=sequence,
-        outcome="confirmed",
+    intent = (
+        intent
+        or {
+            "draft": EmailEffectIntent.CREATE_DRAFT,
+            "scheduled_broadcast": EmailEffectIntent.SCHEDULE,
+            "broadcast": EmailEffectIntent.SEND,
+            "test_send": EmailEffectIntent.TEST,
+            "cancelled_broadcast": EmailEffectIntent.CANCEL,
+            "sequence_revision": EmailEffectIntent.PROVISION,
+        }[kind]
+    )
+    result: dict[str, object] = dict(
+        kind=kind, intent=intent, organization_id=operation.organization_id, publication_id=pub
+    )
+    if kind == "sequence_revision":
+        result.update(
+            sequence=sequence,
+            lifecycle_state={
+                EmailEffectIntent.PROVISION: "provisioned",
+                EmailEffectIntent.ACTIVATE: "active",
+                EmailEffectIntent.ENROL: "active",
+                EmailEffectIntent.PAUSE: "paused",
+                EmailEffectIntent.RETIRE: "retired",
+                EmailEffectIntent.MIGRATE: "provisioned",
+            }[intent],
+            audience=audience,
+        )
+    else:
+        result.update(
+            delivery=ref("simulated-delivery", pub),
+            message_plan=plan(pub).binding(),
+            audience=audience or snapshot(pub, "test" if kind == "test_send" else "production"),
+        )
+    return EmailRemoteReceipt.model_validate(
+        dict(
+            artifact_id=f"{pub}/simulated-receipt/{operation.digest[7:23]}",
+            created_at=NOW,
+            organization_id=operation.organization_id,
+            publication_id=pub,
+            operation=operation,
+            result=result,
+            campaign_release=campaign_release,
+            execution=execution(pub),
+            issuer=ref("simulated-connector", pub),
+            receipt_contract=CapabilityId(
+                namespace="example.email", name="remote_receipt", version="4.0.0"
+            ),
+            receipt_contract_digest=canonical_digest("simulated-remote-receipt-v4"),
+            remote_ref=f"{pub}/simulated-remote/{operation.digest[7:23]}",
+            remote_revision_digest=canonical_digest(operation),
+            outcome="confirmed",
+        )
     )
 
 

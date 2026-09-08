@@ -39,9 +39,9 @@ PyPI publication, repository-history rewriting, live provider effects, and
 production credential use each require a separate operator ruling. None is
 authorized by this readiness report.
 
-## Email marketing integration status — 2026-09-07
+## Email marketing integration status — 2026-09-08
 
-The explicit email v3 contracts, nine input-only capabilities, eight-program
+The explicit email v4 contracts, nine input-only capabilities, eight-program
 example, packaged schemas, vectors and documentation support offline conformance.
 The reference hosts simulate lowering, exact approval checks, logical idempotency
 and ambiguous-outcome reconciliation. They are not production adapters or storage.
@@ -53,8 +53,8 @@ must refuse unsupported semantics rather than approximate them. An offline green
 gate does not remove this integration dependency. No live effect or PyPI publication
 is authorized by this document.
 
-HubSpot provider implementation PR 53 is now merged in Zeocore at
-`8019154c3e3d911a1736df077fa98d3022f7840d`. It adds provider capabilities but
-contains no package release, completed Creator/Sovereign Agent receipt wiring,
-or Kit parity. The released dependency remains Zeocore 0.9.0; this source merge
-does not establish the shared neutral email contract or live interoperability.
+HubSpot PR 53 and Kit PR 54 are now merged in Zeocore; current merged provider
+work is `ccedd94ac729e52758eaba43d771e3b6458f9fb9`. Follow-up PR 55 validates
+Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
+0.9.0. These source changes do not establish a released shared neutral receipt
+contract, completed Creator/Sovereign Agent wiring, or live interoperability.

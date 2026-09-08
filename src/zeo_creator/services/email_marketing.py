@@ -8,7 +8,7 @@ from html import escape
 from html.parser import HTMLParser
 from typing import Never, Protocol
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 
 from zeo_creator.contracts.common import (
     DurableArtifact,
@@ -74,7 +74,10 @@ def current(*items: object) -> None:
                 refuse("stale_email_artifact")
             if isinstance(item, DurableArtifact) and not digest_is_current(item):
                 refuse("stale_email_artifact")
-            validated = type(item).model_validate_json(payload)
+            try:
+                validated = type(item).model_validate_json(payload)
+            except ValidationError:
+                refuse("stale_email_artifact")
             # Pydantic validates the entire nested graph once. Reject silent repairs too.
             if validated.model_dump_json() != payload:
                 refuse("stale_email_artifact")
