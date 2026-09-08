@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.3.dev0 — 2026-09-09
+
+- Require explicit corpus version selection so legacy exporters cannot overwrite v1 with v2 data.
+- Add exporter v8 for the current build while retaining historical script and corpus bytes.
+- Clarify when cancellation proposal preparation must omit its package argument.
+- Preserve the reviewed v4 contracts and all 135 v2 conformance cases unchanged.
+
 ## 0.5.2.dev0 — 2026-09-08
 
 - Reject prior receipts whose normalized draft effect contradicts their originating proposal.

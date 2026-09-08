@@ -45,7 +45,7 @@ capabilities:
 	$(ZEO_CREATOR) capabilities
 
 reference:
-	$(UV) run python -m scripts.export_reference_artifacts_v7
+	$(UV) run python -m scripts.export_reference_artifacts_v8
 
 test:
 	$(UV) run pytest -q

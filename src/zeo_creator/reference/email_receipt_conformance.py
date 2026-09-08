@@ -38,7 +38,14 @@ def result_schema() -> JsonObject:
     return TypeAdapter(EmailRemoteResult).json_schema()
 
 
-def build_cases() -> JsonObject:
+def build_cases(*, version: int | None = None) -> JsonObject:
+    """Build only an explicitly selected corpus; implicit legacy exports are retired."""
+    if version is None:
+        raise ValueError(
+            "Unversioned receipt export is retired; use make reference or build_cases(version=2)"
+        )
+    if version != 2:
+        raise ValueError("Only corpus v2 can be rebuilt; corpus v1 is a frozen artifact")
     run = run_program(x.profile(), "hubspot-shaped")
     family = effect_family(run)
     cases: list[JsonObject] = []
