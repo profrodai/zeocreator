@@ -25,6 +25,7 @@ from zeo_creator.contracts.email_marketing import (
 )
 from zeo_creator.reference import email_inputs as x
 from zeo_creator.reference.email_program_suite import effect_family
+from zeo_creator.reference.email_receipt_cases_v2 import extend_cases
 from zeo_creator.reference.email_workflow import remote_from_simulation, run_program
 from zeo_creator.services.email_receipts import validate_operation_receipt
 
@@ -126,13 +127,16 @@ def build_cases() -> JsonObject:
         bad["receipt"].pop("content_digest")
         bad["receipt"][field] = replacement
         add(f"broadcast-wrong-{field}", "correspondence", bad, False)
+    extend_cases(cases, run, family)
     documents = {
         "result": result_schema(),
         "receipt": EmailRemoteReceipt.model_json_schema(),
         "intent": EmailOperationIntent.model_json_schema(),
+        "proposal": ProposedEmailOperation.model_json_schema(),
+        "package": EmailDeliveryPackage.model_json_schema(),
     }
     return dict(
-        format_version=1,
+        format_version=2,
         email_artifact_version="4.0.0",
         canonicalization="RFC8785 with Creator UTC datetime and artifact digest rules",
         schemas=documents,
@@ -168,7 +172,7 @@ def verify_cases(bundle: JsonObject, validators: Mapping[str, Validator]) -> tup
     Missing validators or a changed corpus fail closed rather than skipping cases.
     """
     if (
-        bundle.get("format_version") != 1
+        bundle.get("format_version") not in {1, 2}
         or canonical_digest(bundle["cases"]) != bundle["cases_digest"]
     ):
         raise ValueError("receipt conformance corpus digest mismatch")
@@ -193,10 +197,12 @@ def verify_cases(bundle: JsonObject, validators: Mapping[str, Validator]) -> tup
     return tuple(failures)
 
 
-def packaged_cases() -> JsonObject:
+def packaged_cases(version: int = 2) -> JsonObject:
+    if version not in {1, 2}:
+        raise ValueError("unsupported receipt corpus version")
     result: JsonObject = json.loads(
         files("zeo_creator")
-        .joinpath("reference_artifacts/email-receipt-conformance-v1.json")
+        .joinpath(f"reference_artifacts/email-receipt-conformance-v{version}.json")
         .read_text()
     )
     return result

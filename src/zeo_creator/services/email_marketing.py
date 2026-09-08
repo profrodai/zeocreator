@@ -830,6 +830,8 @@ def propose_operation(
             or original.intent not in expected_kinds
         ):
             refuse("originating_operation_target_mismatch")
+        if material.prior_receipt.result.intent != original.intent:
+            refuse("originating_operation_effect_mismatch")
         if material.intent == EmailEffectIntent.UPDATE_DRAFT and (
             package is None
             or material.prior_receipt.message_plan is None
@@ -1049,6 +1051,7 @@ PUBLIC_REFUSAL_REASONS: frozenset[str] = frozenset(
     (
         "originating_operation_required",
         "originating_operation_target_mismatch",
+        "originating_operation_effect_mismatch",
         "draft_update_message_target_mismatch",
         "unexpected_originating_operation",
         "observation_not_in_expected_population",
