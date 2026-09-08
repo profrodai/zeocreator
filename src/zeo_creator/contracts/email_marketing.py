@@ -1,4 +1,4 @@
-"""Version 3 email marketing artifacts. Intent and evidence confer no effect authority.
+"""Version 4 email marketing artifacts. Intent and evidence confer no effect authority.
 
 All references are opaque, scoped and digest-bound. Subscriber records and provider
 payloads have no representation. Runtime owns reference resolution and authorization.
@@ -78,7 +78,7 @@ class ScopedEmailModel(EmailModel):
 class EmailArtifact(ScopedEmailModel, DurableArtifact):
     model_config = ConfigDict(str_strip_whitespace=False)
 
-    schema_version: Literal["3.0.0"] = "3.0.0"
+    schema_version: Literal["4.0.0"] = "4.0.0"
     artifact_id: OpaqueRef
 
     def binding(self) -> EmailArtifactRef:
@@ -150,6 +150,16 @@ class EmailCTA(EmailModel):
     primary: bool = False
 
 
+def exact_ctas(rows: tuple[EmailCTA, ...]) -> dict[str, EmailCTA]:
+    if len({row.cta_id for row in rows}) != len(rows):
+        raise ValueError("CTA identities must be unique")
+    if len({row.link_id for row in rows}) != len(rows):
+        raise ValueError("CTA link identities must be unique")
+    if sum(row.primary for row in rows) != 1:
+        raise ValueError("CTA plan requires exactly one primary CTA")
+    return {row.cta_id: row for row in rows}
+
+
 class EmailLink(EmailModel):
     link_id: OpaqueRef
     url: Annotated[str, Field(min_length=1, max_length=2048)]
@@ -210,6 +220,11 @@ class EmailCampaignPlan(EmailArtifact):
     risks: tuple[Text, ...] = ()
     stopping_conditions: tuple[Text, ...] = Field(min_length=1)
     generation: GenerationTrace
+
+    @model_validator(mode="after")
+    def campaign_ctas_are_exact(self) -> Self:
+        exact_ctas(self.calls_to_action)
+        return self
 
 
 class EmailSequenceStepPlan(ScopedEmailModel):
@@ -300,9 +315,10 @@ class EmailMessagePlan(EmailArtifact):
 
     @model_validator(mode="after")
     def cta_plan_is_exact(self) -> Self:
-        if sum(row.primary for row in self.calls_to_action) != 1:
-            raise ValueError("message plan requires exactly one primary CTA")
+        exact_ctas(self.calls_to_action)
         links = {row.link_id: row for row in self.links}
+        if len(links) != len(self.links):
+            raise ValueError("message link identities must be unique")
         if any(
             row.link_id not in links or links[row.link_id].purpose != "cta"
             for row in self.calls_to_action
@@ -526,9 +542,84 @@ class EmailEffectIntent(StrEnum):
     MIGRATE = "migrate_existing_enrollees"
 
 
+class EmailContentResult(ScopedEmailModel):
+    delivery: EmailArtifactRef
+    message_plan: EmailArtifactRef
+    audience: AudienceSnapshotSummary
+
+
+class EmailDraftResult(EmailContentResult):
+    kind: Literal["draft"] = "draft"
+    intent: Literal[EmailEffectIntent.CREATE_DRAFT, EmailEffectIntent.UPDATE_DRAFT]
+
+
+class EmailScheduledResult(EmailContentResult):
+    kind: Literal["scheduled_broadcast"] = "scheduled_broadcast"
+    intent: Literal[EmailEffectIntent.SCHEDULE] = EmailEffectIntent.SCHEDULE
+
+
+class EmailBroadcastResult(EmailContentResult):
+    kind: Literal["broadcast"] = "broadcast"
+    intent: Literal[EmailEffectIntent.SEND] = EmailEffectIntent.SEND
+
+
+class EmailTestResult(EmailContentResult):
+    kind: Literal["test_send"] = "test_send"
+    intent: Literal[EmailEffectIntent.TEST] = EmailEffectIntent.TEST
+
+
+class EmailCancelledResult(EmailContentResult):
+    kind: Literal["cancelled_broadcast"] = "cancelled_broadcast"
+    intent: Literal[EmailEffectIntent.CANCEL] = EmailEffectIntent.CANCEL
+
+
+class EmailSequenceResult(ScopedEmailModel):
+    kind: Literal["sequence_revision"] = "sequence_revision"
+    intent: Literal[
+        EmailEffectIntent.PROVISION,
+        EmailEffectIntent.ACTIVATE,
+        EmailEffectIntent.ENROL,
+        EmailEffectIntent.PAUSE,
+        EmailEffectIntent.RETIRE,
+        EmailEffectIntent.MIGRATE,
+    ]
+    sequence: EmailArtifactRef
+    lifecycle_state: Literal["provisioned", "active", "paused", "retired"]
+    audience: AudienceSnapshotSummary | None = None
+
+    @model_validator(mode="after")
+    def exact_sequence_result(self) -> Self:
+        states = {
+            EmailEffectIntent.PROVISION: "provisioned",
+            EmailEffectIntent.ACTIVATE: "active",
+            EmailEffectIntent.ENROL: "active",
+            EmailEffectIntent.PAUSE: "paused",
+            EmailEffectIntent.RETIRE: "retired",
+            EmailEffectIntent.MIGRATE: "provisioned",
+        }
+        if self.lifecycle_state != states[self.intent]:
+            raise ValueError("sequence result state contradicts its effect")
+        needs_audience = self.intent in {EmailEffectIntent.ENROL, EmailEffectIntent.MIGRATE}
+        if needs_audience != (self.audience is not None):
+            raise ValueError("sequence result audience contradicts its effect")
+        if self.audience is not None and self.audience.purpose != "production":
+            raise ValueError("sequence result requires a production audience")
+        return self
+
+
+EmailRemoteResult = Annotated[
+    EmailDraftResult
+    | EmailScheduledResult
+    | EmailBroadcastResult
+    | EmailTestResult
+    | EmailCancelledResult
+    | EmailSequenceResult,
+    Field(discriminator="kind"),
+]
+
+
 class EmailRemoteReceipt(EmailArtifact):
-    delivery: EmailArtifactRef | None = None
-    message_plan: EmailArtifactRef | None = None
+    result: EmailRemoteResult
     operation: EmailArtifactRef
     campaign_release: EmailArtifactRef
     execution: EmailExecutionContext
@@ -537,9 +628,45 @@ class EmailRemoteReceipt(EmailArtifact):
     receipt_contract_digest: Digest
     remote_ref: OpaqueRef
     remote_revision_digest: Digest
-    kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"]
-    sequence: EmailArtifactRef | None = None
     outcome: Literal["confirmed", "needs_review", "ambiguous"]
+
+    @model_validator(mode="after")
+    def exact_result_context(self) -> Self:
+        audience = self.result.audience
+        if audience is not None and (
+            audience.provider_kind != self.execution.provider_kind
+            or audience.connection_ref != self.execution.connection_ref
+        ):
+            raise ValueError("receipt audience execution mismatch")
+        if isinstance(self.result, EmailContentResult):
+            expected = "test" if self.result.intent == EmailEffectIntent.TEST else "production"
+            if (
+                self.result.intent
+                not in {EmailEffectIntent.CREATE_DRAFT, EmailEffectIntent.UPDATE_DRAFT}
+                and self.result.audience.purpose != expected
+            ):
+                raise ValueError("receipt effect and audience purpose mismatch")
+        return self
+
+    @property
+    def kind(self) -> str:
+        return self.result.kind
+
+    @property
+    def delivery(self) -> EmailArtifactRef | None:
+        return self.result.delivery if isinstance(self.result, EmailContentResult) else None
+
+    @property
+    def message_plan(self) -> EmailArtifactRef | None:
+        return self.result.message_plan if isinstance(self.result, EmailContentResult) else None
+
+    @property
+    def sequence(self) -> EmailArtifactRef | None:
+        return self.result.sequence if isinstance(self.result, EmailSequenceResult) else None
+
+    @property
+    def lifecycle_state(self) -> str | None:
+        return self.result.lifecycle_state if isinstance(self.result, EmailSequenceResult) else None
 
 
 class EmailMigrationStep(EmailModel):
@@ -681,6 +808,18 @@ class EmailOperationIntent(ScopedEmailModel):
                 EmailEffectIntent.RETIRE,
             } and (receipt.kind != "sequence_revision" or receipt.sequence != self.sequence):
                 raise ValueError("sequence mutation requires exact remote revision evidence")
+        required_states = {
+            EmailEffectIntent.ACTIVATE: {"provisioned"},
+            EmailEffectIntent.ENROL: {"active"},
+            EmailEffectIntent.PAUSE: {"active"},
+            EmailEffectIntent.RETIRE: {"active", "paused"},
+            EmailEffectIntent.MIGRATE: {"paused"},
+        }
+        if self.intent in required_states and (
+            self.prior_receipt is None
+            or self.prior_receipt.lifecycle_state not in required_states[self.intent]
+        ):
+            raise ValueError("sequence transition requires the declared prior lifecycle state")
         if self.intent == EmailEffectIntent.MIGRATE:
             if (
                 not self.migration
@@ -700,6 +839,7 @@ class EmailOperationIntent(ScopedEmailModel):
             target = self.migration.target_receipt
             if (
                 target.kind != "sequence_revision"
+                or target.lifecycle_state != "provisioned"
                 or target.sequence != self.sequence
                 or target.execution != self.execution
                 or target.campaign_release != self.campaign_release
@@ -750,8 +890,15 @@ class EmailCampaignRelease(EmailArtifact):
         members = tuple(row.binding() for row in self.messages)
         if any(step.message_plan not in members for row in self.sequences for step in row.steps):
             raise ValueError("sequence steps must belong to release messages")
-        expected = tuple(dict.fromkeys(cta for row in self.messages for cta in row.calls_to_action))
-        if set(expected) != set(self.campaign.calls_to_action):
+        declared = exact_ctas(self.campaign.calls_to_action)
+        used: dict[str, EmailCTA] = {}
+        for message in self.messages:
+            for identity, cta in exact_ctas(message.calls_to_action).items():
+                if identity not in declared or declared[identity] != cta:
+                    raise ValueError("release CTA identity has conflicting definitions")
+                used[identity] = cta
+        expected = tuple(used.values())
+        if used != declared:
             raise ValueError(
                 "every campaign CTA must be used and every message CTA must be declared"
             )
@@ -782,6 +929,36 @@ EmailMetricName = Literal[
 ]
 
 
+def admissible_metrics(receipt: EmailRemoteReceipt) -> frozenset[str]:
+    result = receipt.result
+    if (
+        receipt.outcome != "confirmed"
+        or result.audience is None
+        or result.audience.purpose != "production"
+    ):
+        return frozenset()
+    if isinstance(result, EmailBroadcastResult):
+        return frozenset(
+            {
+                "attempted",
+                "accepted",
+                "delivered",
+                "deferred",
+                "bounced",
+                "complained",
+                "unsubscribed",
+                "opened",
+                "unique_link_clicks",
+                "cta_conversions",
+                "campaign_conversion",
+                "attributed_revenue",
+            }
+        )
+    if isinstance(result, EmailSequenceResult) and result.intent == EmailEffectIntent.ENROL:
+        return frozenset({"sequence_enrolments", "step_completion", "step_exit"})
+    return frozenset()
+
+
 class EmailMetricObservation(EmailArtifact):
     campaign_release: EmailArtifactRef
     operation_receipt: EmailRemoteReceipt
@@ -810,6 +987,8 @@ class EmailMetricObservation(EmailArtifact):
     @model_validator(mode="after")
     def qualified_metrics(self) -> Self:
         receipt = self.operation_receipt
+        if self.metric not in admissible_metrics(receipt):
+            raise ValueError("metric is not admissible for this production effect receipt")
         if (
             receipt.operation != self.operation
             or receipt.campaign_release != self.campaign_release
@@ -854,6 +1033,10 @@ class EmailMeasurementPopulation(ScopedEmailModel):
         members = {row.binding() for row in self.release.messages}
         sequences = {row.binding() for row in self.release.sequences}
         for receipt in self.operations:
+            if not admissible_metrics(receipt):
+                raise ValueError(
+                    "measurement population requires an eligible production effect receipt"
+                )
             if receipt.campaign_release != self.release.binding() or receipt.outcome != "confirmed":
                 raise ValueError("expected receipt must confirm the exact campaign release")
             if receipt.message_plan is not None and receipt.message_plan not in members:
@@ -878,7 +1061,7 @@ class EmailMeasurementPopulation(ScopedEmailModel):
             f"Missing operation metric: {receipt.operation.ref}/{metric}"
             for receipt in self.operations
             for metric in metrics
-            if (receipt.operation, metric) not in present
+            if metric in admissible_metrics(receipt) and (receipt.operation, metric) not in present
         )
         return (*missing_messages, *missing_cells)
 

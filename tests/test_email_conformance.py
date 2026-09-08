@@ -10,7 +10,7 @@ import pytest
 from zeo_core.contracts import CapabilityStatus, EffectKind
 from zeo_core.tools import invoke_sync
 
-from scripts.export_reference_artifacts_v4 import MODELS
+from scripts.export_reference_artifacts_v5 import MODELS
 from tests.test_email_marketing import reviewed, revised
 from zeo_creator.contract_schemas import read_contract_schema
 from zeo_creator.contracts.common import canonical_digest
@@ -72,7 +72,7 @@ def test_three_publication_reference_records_the_complete_data_flow():
 
 def test_packaged_email_schemas_match_python_and_include_every_new_contract():
     for name, model in MODELS:
-        assert read_contract_schema(name, "3") == model.model_json_schema()
+        assert read_contract_schema(name, "4") == model.model_json_schema()
     root = files("zeo_creator").joinpath("reference_artifacts")
     examples = json.loads(root.joinpath("email-marketing.json").read_text())
     runs = [EmailReferenceRun.model_validate(row) for row in examples]

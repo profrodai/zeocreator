@@ -108,6 +108,7 @@ def enrolment(seq, snapshot):
         released.binding(),
         kind="sequence_revision",
         sequence=seq.binding(),
+        intent=EmailEffectIntent.ACTIVATE,
     )
     intent = EmailEffectIntent.ENROL
     material = EmailOperationIntent(
@@ -259,9 +260,18 @@ def test_cta_and_unsubscribe_anchor_relationships_are_checked(mutation):
 def test_primary_cta_can_be_second_but_cannot_be_unsubscribe():
     directions = x.directions()
     secondary = revised(
-        directions.calls_to_action[0], cta_id="secondary", primary=False, desired_action="Secondary"
+        directions.calls_to_action[0],
+        cta_id="secondary",
+        link_id="secondary-link",
+        primary=False,
+        desired_action="Secondary",
     )
-    directions = revised(directions, calls_to_action=(secondary, directions.calls_to_action[0]))
+    secondary_link = revised(directions.links[0], link_id="secondary-link", purpose="cta")
+    directions = revised(
+        directions,
+        calls_to_action=(secondary, directions.calls_to_action[0]),
+        links=(*directions.links, secondary_link),
+    )
     plan = s.plan_message(x.profile(), x.campaign(), directions, x.NOW)
     seq = s.plan_sequence(
         x.campaign(), "welcome", (plan,), (0,), x.policies(), x.brief().window, ("linear",), x.NOW

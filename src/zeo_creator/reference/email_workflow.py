@@ -29,6 +29,7 @@ from zeo_creator.contracts.email_marketing import (
     EmailArtifactRef,
     EmailCampaignPlan,
     EmailCampaignRelease,
+    EmailContentResult,
     EmailDeliveryPackage,
     EmailEditorialReview,
     EmailEffectIntent,
@@ -390,7 +391,15 @@ def lowering_from_test(
 def remote_from_simulation(
     proposal: ProposedEmailOperation,
     receipt: SimulatedLoweringReceipt,
-    kind: Literal["draft", "scheduled_broadcast", "sequence_revision", "broadcast"] = "broadcast",
+    kind: Literal[
+        "draft",
+        "scheduled_broadcast",
+        "sequence_revision",
+        "broadcast",
+        "test_send",
+        "cancelled_broadcast",
+    ]
+    | None = None,
     *,
     package: EmailDeliveryPackage | None = None,
 ) -> EmailRemoteReceipt:
@@ -407,15 +416,41 @@ def remote_from_simulation(
         package is None or package.binding() != proposal.material.delivery
     ):
         raise ValueError("simulation receipt requires the exact delivery package")
-    data = x.remote_receipt(
+    expected_kind = {
+        EmailEffectIntent.CREATE_DRAFT: "draft",
+        EmailEffectIntent.UPDATE_DRAFT: "draft",
+        EmailEffectIntent.SEND: "broadcast",
+        EmailEffectIntent.SCHEDULE: "scheduled_broadcast",
+        EmailEffectIntent.TEST: "test_send",
+        EmailEffectIntent.CANCEL: "cancelled_broadcast",
+    }.get(proposal.material.intent, "sequence_revision")
+    if kind is not None and kind != expected_kind:
+        raise ValueError("simulation receipt kind contradicts the originating effect")
+    base = x.remote_receipt(
         proposal.binding(),
         proposal.material.campaign_release,
-        kind=kind,
+        kind=expected_kind,  # type: ignore[arg-type]
         sequence=proposal.material.sequence,
-    ).model_dump(mode="python", exclude={"content_digest"})
+        intent=proposal.material.intent,
+        audience=package.material.audience_snapshot if package else proposal.material.audience,
+    )
+    data = base.model_dump(mode="python", exclude={"content_digest"})
+    if isinstance(base.result, EmailContentResult):
+        prior = proposal.material.prior_receipt
+        data["result"].update(
+            delivery=package.binding() if package else prior.delivery if prior else None,
+            message_plan=package.material.draft.message_plan
+            if package
+            else prior.message_plan
+            if prior
+            else None,
+            audience=package.material.audience_snapshot
+            if package
+            else prior.result.audience
+            if prior
+            else None,
+        )
     data.update(
-        delivery=proposal.material.delivery,
-        message_plan=package.material.draft.message_plan if package else None,
         artifact_id=receipt.receipt_id,
         remote_ref=receipt.remote_ref,
         execution=proposal.material.execution,
