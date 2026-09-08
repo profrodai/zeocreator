@@ -38,4 +38,14 @@ def test_reference_briefs_match_deterministic_fixture() -> None:
 def test_reference_contract_schemas_are_objects() -> None:
     schemas = tuple((REFERENCE / "schemas").glob("*.schema.json"))
     assert len(schemas) >= 20
-    assert all(_load(str(path.relative_to(REFERENCE)))["type"] == "object" for path in schemas)
+    for path in schemas:
+        schema = _load(str(path.relative_to(REFERENCE)))
+        if path.name == "email-remote-result.v4.schema.json":
+            assert schema["discriminator"]["propertyName"] == "kind"
+            assert len(schema["oneOf"]) == 6
+            assert all(
+                schema["$defs"][branch["$ref"].removeprefix("#/$defs/")]["type"] == "object"
+                for branch in schema["oneOf"]
+            )
+        else:
+            assert schema["type"] == "object"

@@ -755,6 +755,12 @@
       "name": "email-program-assessment",
       "schema_digest": "sha256:e0682a1110acadf503e16553339119ee992185e05f4916784e868a21713b34db",
       "version": "4"
+    },
+    {
+      "filename": "email-remote-result.v4.schema.json",
+      "name": "email-remote-result",
+      "schema_digest": "sha256:a7b3f8e3e3e0c61c119773ab8ed2dbe73c5f865ff5442f678f4936ee7245c2a8",
+      "version": "4"
     }
   ]
 }

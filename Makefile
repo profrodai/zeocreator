@@ -45,7 +45,7 @@ capabilities:
 	$(ZEO_CREATOR) capabilities
 
 reference:
-	$(UV) run python -m scripts.export_reference_artifacts_v5
+	$(UV) run python -m scripts.export_reference_artifacts_v6
 
 test:
 	$(UV) run pytest -q
@@ -89,7 +89,7 @@ digest-vectors:
 dist-check:
 	rm -rf dist
 	$(UV) build
-	$(UV) run python -m scripts.check_distribution_v5
+	$(UV) run python -m scripts.check_distribution_v6
 
 verify: check digest-vectors dist-check
 

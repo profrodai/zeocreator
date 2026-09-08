@@ -90,6 +90,7 @@ nav:
   - How-to guides:
       - Supply source observations: guides/connectors.md
       - Email marketing: guides/email-marketing.md
+      - Shared email receipts: guides/email-receipt-conformance.md
       - Integrate a production engine: guides/production-adapters.md
       - Validate and prepare distribution: guides/delivery-distribution.md
       - Assess performance: guides/performance.md

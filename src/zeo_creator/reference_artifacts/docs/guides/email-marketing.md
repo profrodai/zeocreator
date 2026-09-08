@@ -220,7 +220,7 @@ and verify the real mapping/render/snapshot coverage before authorizing effects.
 
 ## Email contract migration and release policy
 
-The package is `0.5.0.dev0`; its nine email capabilities and durable email artifacts use
+The package is `0.5.1.dev0`; its nine email capabilities and durable email artifacts use
 major version 4. Published email v1, v2 and v3 schemas remain byte-for-byte available for
 audit. Their preparation APIs are retired from discovery; the twenty original non-email
 capabilities remain unchanged. This explicitly affirms the earlier email v1 retirement:
@@ -254,8 +254,8 @@ consent/suppression references, and supply the new message directions, complianc
 and scoped evidence. The resulting plan binds the original newsletter revision.
 No old schema is silently reinterpreted.
 
-HubSpot PR 53 and Kit PR 54 are now merged in Zeocore; current merged provider
-work is `ccedd94ac729e52758eaba43d771e3b6458f9fb9`. Follow-up PR 55 validates
+HubSpot PR 53, Kit PR 54 and follow-up PR 55 are merged in Zeocore; the current
+provider merge is `e2b55aa6b1751afb95614e7b5cbab9f339f5f9e6`. PR 55 validates
 Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
 0.9.0. These source changes do not establish a released shared neutral receipt
 contract, completed Creator/Sovereign Agent wiring, or live interoperability.
@@ -326,3 +326,6 @@ For v3-to-v4 migration, rebuild artifacts and obtain receipts with explicit resu
 audience and lifecycle evidence. Never infer production status or lifecycle state merely
 from a legacy receipt kind, and never relabel a historical approval. Published v3 schemas
 remain frozen for audit. This is an explicit breaking development-contract migration.
+
+For receipt ingestion, the exact shared result schema and portable host validation
+cases, see [shared receipt conformance](email-receipt-conformance.md).

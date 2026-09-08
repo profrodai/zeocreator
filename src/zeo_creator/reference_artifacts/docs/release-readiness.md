@@ -53,8 +53,13 @@ must refuse unsupported semantics rather than approximate them. An offline green
 gate does not remove this integration dependency. No live effect or PyPI publication
 is authorized by this document.
 
-HubSpot PR 53 and Kit PR 54 are now merged in Zeocore; current merged provider
-work is `ccedd94ac729e52758eaba43d771e3b6458f9fb9`. Follow-up PR 55 validates
+HubSpot PR 53, Kit PR 54 and follow-up PR 55 are merged in Zeocore; the current
+provider merge is `e2b55aa6b1751afb95614e7b5cbab9f339f5f9e6`. PR 55 validates
 Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
 0.9.0. These source changes do not establish a released shared neutral receipt
 contract, completed Creator/Sovereign Agent wiring, or live interoperability.
+
+The installed package also exports the exact v4 result union and 36 portable
+receipt/lifecycle cases. Its input-only receipt consumer binds normalized evidence
+to the original proposal and fixes the reference migration target identity. See
+[shared receipt conformance](guides/email-receipt-conformance.md).

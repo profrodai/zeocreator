@@ -56,6 +56,7 @@ from zeo_creator.reference.email_simulation import (
 )
 from zeo_creator.runtime import make_context
 from zeo_creator.services.email_marketing import EmailCampaignBrief
+from zeo_creator.services.email_receipts import validate_operation_receipt
 
 
 class EmailReferenceRun(EmailModel):
@@ -456,7 +457,9 @@ def remote_from_simulation(
         execution=proposal.material.execution,
         remote_revision_digest=receipt.provider_observed_payload_digest,
     )
-    return EmailRemoteReceipt.model_validate(data)
+    return validate_operation_receipt(
+        proposal, EmailRemoteReceipt.model_validate(data), package=package
+    )
 
 
 if __name__ == "__main__":
