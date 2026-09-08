@@ -6,6 +6,24 @@ Creator consumes normalized evidence through
 `EmailDeliveryPackage`. Cancellation can consume its historical target without
 requiring a fresh package. Sequence effects do not take a delivery package.
 
+For **proposal preparation**, the package argument follows `material.delivery`.
+The reference cancellation material has only `target_delivery`, so omit `package`
+when calling `propose_operation` or `creator.propose_email_operation` for it:
+
+```python
+from zeo_creator.services.email_marketing import propose_operation
+
+cancel = propose_operation(
+    cancel_material, created_at, idempotency_key,
+    release=release, originating_operation=scheduling_proposal,
+)
+```
+
+Supplying a package when `material.delivery` is absent refuses with
+`unexpected_effect_delivery`. A cancellation material that explicitly includes a
+`delivery` requires its matching package. This proposal rule is distinct from
+receipt consumption below, which may validate a supplied historical target package.
+
 ```python
 from zeo_creator.services.email_receipts import validate_operation_receipt
 
@@ -69,6 +87,14 @@ pass v1. Both counterfeits fail v2 in regression tests. `packaged_cases()` and t
 module command use v2; `packaged_cases(1)` is for reproducing the historical gap.
 Require the pinned v2 artifact when reporting current conformance. The corpus
 version changes independently of the unchanged email v4 wire contracts.
+
+Regenerate current resources with `make reference`, which uses the v8 exporter
+and `build_cases(version=2)`. Unversioned builder calls now refuse with a retirement
+explanation, preventing preserved v6/v7 scripts from writing current data under a
+historical corpus filename. Those legacy scripts may regenerate their earlier
+schema/example outputs before reaching that refusal, but cannot write either
+corpus. Their source stays unchanged for the historical record. Rebuilding v1 is
+unsupported; read the frozen v1 resource for historical reproduction.
 
 Run the installed Creator implementation without a checkout or credentials:
 
