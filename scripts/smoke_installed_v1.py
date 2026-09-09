@@ -5,9 +5,8 @@ import pkgutil
 import runpy
 import sys
 
-import zeo_creator.examples
-
 import zeo_creator
+import zeo_creator.examples
 from zeo_creator.registry import capability_manifests
 
 

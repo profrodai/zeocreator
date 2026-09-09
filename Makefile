@@ -51,7 +51,7 @@ test:
 	$(UV) run pytest -q
 
 lint:
-	$(UV) run ruff check src tests scripts examples
+	$(UV) run ruff check --no-cache src tests scripts examples
 
 typecheck:
 	$(UV) run mypy src/zeo_creator examples
