@@ -1,0 +1,150 @@
+[
+  {
+    "artifact_refs": [
+      "artifact_0536061154dfab8c4242"
+    ],
+    "assessment_id": "assessment_8f18a8f561e75a93dbfb",
+    "confidence": "medium",
+    "content_digest": "sha256:f61d08fcff88b4dde9eee015e8bab845d8d4847fec58f43f5b7649a5ee17933d",
+    "created_at": "2026-09-05T08:00:00Z",
+    "data_gaps": [
+      "Only one metric observation is available"
+    ],
+    "hypotheses": [
+      "Hypothesis: the normalized engagement_rate signal may reflect audience-format fit; causal evidence is not available."
+    ],
+    "input_refs": [
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "metrics_publication-a.example",
+      "operation_dc3d2b3d5684d329e209"
+    ],
+    "metrics": [
+      {
+        "aggregation": "rate",
+        "artifact_ref": "artifact_0536061154dfab8c4242",
+        "attribution_window": {
+          "ends_at": "2026-09-05T08:00:00Z",
+          "starts_at": "2026-08-29T08:00:00Z"
+        },
+        "baseline": 0.08,
+        "connection_ref": "connection_publication-a.example_website",
+        "content_digest": "sha256:6c59aef578b659c36104e543ce1b9d1eb3f95e9938205028fc16db2eb8ac6e31",
+        "created_at": "2026-09-05T08:00:00Z",
+        "denominator": "impressions",
+        "destination_account_ref": "destination_publication-a.example_website",
+        "input_refs": [],
+        "metric_name": "engagement_rate",
+        "metric_value": 0.12,
+        "normalized_rate": 0.12,
+        "objective_mapping": "audience_engagement",
+        "observation_id": "observation_publication-a.example",
+        "observed_at": "2026-09-05T08:00:00Z",
+        "organization_id": "example-organization",
+        "provider_definition": "Example provider engagement rate",
+        "provider_definition_version": "1",
+        "provider_kind": "example.website",
+        "publication_id": "publication-a.example",
+        "publication_operation_ref": "operation_dc3d2b3d5684d329e209",
+        "revision": 1,
+        "schema_version": "1.0.0",
+        "target": 0.1,
+        "unit": "ratio"
+      }
+    ],
+    "observation_window": {
+      "ends_at": "2026-09-05T08:00:00Z",
+      "starts_at": "2026-08-29T08:00:00Z"
+    },
+    "organization_id": "example-organization",
+    "performance_relative_to_objective": "Observed engagement_rate=0.12 relative to objective: Teach one bounded creator practice.",
+    "proposed_follow_up_work": [
+      "Runtime may consider testing another Example Publication A format."
+    ],
+    "provider_account_provenance": [
+      "example.website:connection_publication-a.example_website:destination_publication-a.example_website"
+    ],
+    "publication_id": "publication-a.example",
+    "publication_operation_refs": [
+      "operation_dc3d2b3d5684d329e209"
+    ],
+    "reusable_learnings": [
+      "Strongest normalized signal: engagement_rate (0.12 ratio)."
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0"
+  },
+  {
+    "artifact_refs": [
+      "artifact_04375c00a716604ae876"
+    ],
+    "assessment_id": "assessment_3a529644c3e16b0f19f0",
+    "confidence": "medium",
+    "content_digest": "sha256:0bba16c07c4fd2b9c7033e93dfca98911282dbc56d37dcb6fc468a731b1dcab2",
+    "created_at": "2026-09-05T08:00:00Z",
+    "data_gaps": [
+      "Only one metric observation is available"
+    ],
+    "hypotheses": [
+      "Hypothesis: the normalized engagement_rate signal may reflect audience-format fit; causal evidence is not available."
+    ],
+    "input_refs": [
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "metrics_publication-b.example",
+      "operation_0fff6f6e4749b31e27de"
+    ],
+    "metrics": [
+      {
+        "aggregation": "rate",
+        "artifact_ref": "artifact_04375c00a716604ae876",
+        "attribution_window": {
+          "ends_at": "2026-09-05T08:00:00Z",
+          "starts_at": "2026-08-29T08:00:00Z"
+        },
+        "baseline": 0.08,
+        "connection_ref": "connection_publication-b.example_newsletter",
+        "content_digest": "sha256:03852183c14689066f123ed5ecedd629a3b78344a7accb1a99ad2412784a2d38",
+        "created_at": "2026-09-05T08:00:00Z",
+        "denominator": "impressions",
+        "destination_account_ref": "destination_publication-b.example_newsletter",
+        "input_refs": [],
+        "metric_name": "engagement_rate",
+        "metric_value": 0.12,
+        "normalized_rate": 0.12,
+        "objective_mapping": "audience_engagement",
+        "observation_id": "observation_publication-b.example",
+        "observed_at": "2026-09-05T08:00:00Z",
+        "organization_id": "example-organization",
+        "provider_definition": "Example provider engagement rate",
+        "provider_definition_version": "1",
+        "provider_kind": "example.newsletter",
+        "publication_id": "publication-b.example",
+        "publication_operation_ref": "operation_0fff6f6e4749b31e27de",
+        "revision": 1,
+        "schema_version": "1.0.0",
+        "target": 0.1,
+        "unit": "ratio"
+      }
+    ],
+    "observation_window": {
+      "ends_at": "2026-09-05T08:00:00Z",
+      "starts_at": "2026-08-29T08:00:00Z"
+    },
+    "organization_id": "example-organization",
+    "performance_relative_to_objective": "Observed engagement_rate=0.12 relative to objective: Teach one bounded creator practice.",
+    "proposed_follow_up_work": [
+      "Runtime may consider testing another Example Publication B format."
+    ],
+    "provider_account_provenance": [
+      "example.newsletter:connection_publication-b.example_newsletter:destination_publication-b.example_newsletter"
+    ],
+    "publication_id": "publication-b.example",
+    "publication_operation_refs": [
+      "operation_0fff6f6e4749b31e27de"
+    ],
+    "reusable_learnings": [
+      "Strongest normalized signal: engagement_rate (0.12 ratio)."
+    ],
+    "revision": 1,
+    "schema_version": "1.0.0"
+  }
+]

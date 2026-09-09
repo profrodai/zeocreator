@@ -1,0 +1,279 @@
+{
+  "assignments": [
+    {
+      "assignment_id": "assignment_6884486f095674cb1cbb",
+      "audience": "Independent builders improving reliable workflows",
+      "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "content_digest": "sha256:a3e297ad0e94ead26c9c6cc2a1cab9dca0dd0c1d240ee5e8c55ccf1e1857c97c",
+      "content_kind": "article",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_3c86da8702bccabf81a7"
+      ],
+      "hook": "Example Publication A: Evidence-led explanations",
+      "input_refs": [
+        "synthesis_f36814841f69e9ad7db9",
+        "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+        "claim_37415c11022314610393"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach practice through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-a.example",
+      "relationship_to_other_assignments": "Complements Reusable content atoms, Typed handoffs, Bounded retries without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "website",
+        "social.network-a"
+      ],
+      "thesis": "Evidence supporting evidence-led explanations in creator operations.",
+      "topic": "Evidence-led explanations"
+    },
+    {
+      "assignment_id": "assignment_ea4216990a0b2e71fd31",
+      "audience": "Independent builders improving reliable workflows",
+      "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "content_digest": "sha256:573283831567cddea6830ba71cad204e6cf32ba189cd3e9a74e51ed0dfb882c3",
+      "content_kind": "video.short",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_cec30701b7bb04a13aae"
+      ],
+      "hook": "Example Publication A: Reusable content atoms",
+      "input_refs": [
+        "synthesis_f36814841f69e9ad7db9",
+        "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+        "claim_3ceb1145d4eed7d7d424"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach practice through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-a.example",
+      "relationship_to_other_assignments": "Complements Evidence-led explanations, Typed handoffs, Bounded retries without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "website",
+        "social.network-a"
+      ],
+      "thesis": "Evidence supporting reusable content atoms in creator operations.",
+      "topic": "Reusable content atoms"
+    },
+    {
+      "assignment_id": "assignment_b2b225c2ee3afd1cf1da",
+      "audience": "Independent builders improving reliable workflows",
+      "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "content_digest": "sha256:818544b354f15325729d85e3bf63116428b0d672e09e3fb87460ffdd7d12ceff",
+      "content_kind": "image.carousel",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_e6c5edca04c382538dca"
+      ],
+      "hook": "Example Publication A: Typed handoffs",
+      "input_refs": [
+        "synthesis_f36814841f69e9ad7db9",
+        "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+        "claim_c14499a1ff2a4cb0b8da"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach practice through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-a.example",
+      "relationship_to_other_assignments": "Complements Evidence-led explanations, Reusable content atoms, Bounded retries without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "website",
+        "social.network-a"
+      ],
+      "thesis": "Evidence supporting typed handoffs in creator operations.",
+      "topic": "Typed handoffs"
+    },
+    {
+      "assignment_id": "assignment_1c43d713e6c5d7b51c1b",
+      "audience": "Independent builders improving reliable workflows",
+      "brand_profile_ref": "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "content_digest": "sha256:4188fb9d1f9ca7432fd651559c2992799579e45c6fd8eaa0932e7420d82ae972",
+      "content_kind": "newsletter.issue",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_ffe800ce51ebd407d307"
+      ],
+      "hook": "Example Publication A: Bounded retries",
+      "input_refs": [
+        "synthesis_f36814841f69e9ad7db9",
+        "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+        "claim_409b606af91faa7457a7"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach practice through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-a.example",
+      "relationship_to_other_assignments": "Complements Evidence-led explanations, Reusable content atoms, Typed handoffs without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "website",
+        "social.network-a"
+      ],
+      "thesis": "Evidence supporting bounded retries in creator operations.",
+      "topic": "Bounded retries"
+    },
+    {
+      "assignment_id": "assignment_22676e243bd164f0ec00",
+      "audience": "Teams governing dependable automation",
+      "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "content_digest": "sha256:804902af436a7c66ccdde10877b09256e98d9cebc03e995fd3d4446583ba0f0c",
+      "content_kind": "article",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_3eb46ecc100a13817624"
+      ],
+      "hook": "Example Publication B: Digest-bound decisions",
+      "input_refs": [
+        "synthesis_a6dbacd803b90cd871fb",
+        "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+        "claim_d24cdac7d3b71def0f9b"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach governance through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-b.example",
+      "relationship_to_other_assignments": "Complements Reconciliation evidence, Normalized performance, Explicit approvals without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "newsletter",
+        "video.platform-b"
+      ],
+      "thesis": "Evidence supporting digest-bound decisions in creator operations.",
+      "topic": "Digest-bound decisions"
+    },
+    {
+      "assignment_id": "assignment_ef147776185aff7bc6bc",
+      "audience": "Teams governing dependable automation",
+      "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "content_digest": "sha256:d03267c25ab94fb99a741a603176dd4536d54dcba6ab89449834bc5c7c91d6f4",
+      "content_kind": "video.short",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_520773db12ea887ff565"
+      ],
+      "hook": "Example Publication B: Reconciliation evidence",
+      "input_refs": [
+        "synthesis_a6dbacd803b90cd871fb",
+        "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+        "claim_83d0f87772ac65e26636"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach governance through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-b.example",
+      "relationship_to_other_assignments": "Complements Digest-bound decisions, Normalized performance, Explicit approvals without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "newsletter",
+        "video.platform-b"
+      ],
+      "thesis": "Evidence supporting reconciliation evidence in creator operations.",
+      "topic": "Reconciliation evidence"
+    },
+    {
+      "assignment_id": "assignment_d7f86b520d01406214cc",
+      "audience": "Teams governing dependable automation",
+      "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "content_digest": "sha256:f0a64e13a601eff550ba2ac7998153fac89e43d22b9eeea37e5777612599674d",
+      "content_kind": "image.carousel",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_69aca31fa14338f92629"
+      ],
+      "hook": "Example Publication B: Normalized performance",
+      "input_refs": [
+        "synthesis_a6dbacd803b90cd871fb",
+        "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+        "claim_1e403f563a0eb6072592"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach governance through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-b.example",
+      "relationship_to_other_assignments": "Complements Digest-bound decisions, Reconciliation evidence, Explicit approvals without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "newsletter",
+        "video.platform-b"
+      ],
+      "thesis": "Evidence supporting normalized performance in creator operations.",
+      "topic": "Normalized performance"
+    },
+    {
+      "assignment_id": "assignment_502aec2f9b78efa357aa",
+      "audience": "Teams governing dependable automation",
+      "brand_profile_ref": "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "content_digest": "sha256:f11389b3a558247f3de410a3323241407207a3a959430f4a23fbdd27077bf7a0",
+      "content_kind": "newsletter.issue",
+      "created_at": "2026-09-05T08:00:00Z",
+      "desired_audience_action": "Apply one bounded practice",
+      "due_at": "2026-09-05T18:00:00Z",
+      "evidence_refs": [
+        "evidence_8422ad48da06d0b80604"
+      ],
+      "hook": "Example Publication B: Explicit approvals",
+      "input_refs": [
+        "synthesis_a6dbacd803b90cd871fb",
+        "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+        "claim_ac42679f6221a6b755bc"
+      ],
+      "novelty_rationale": "Not present in the supplied publication history.",
+      "objective": "Teach governance through useful content",
+      "organization_id": "example-organization",
+      "publication_id": "publication-b.example",
+      "relationship_to_other_assignments": "Complements Digest-bound decisions, Reconciliation evidence, Normalized performance without duplication.",
+      "revision": 1,
+      "schema_version": "1.0.0",
+      "target_channels": [
+        "newsletter",
+        "video.platform-b"
+      ],
+      "thesis": "Evidence supporting explicit approvals in creator operations.",
+      "topic": "Explicit approvals"
+    }
+  ],
+  "content_digest": "sha256:74a70785b0400904f1d2992283ff17c05a182193636f29dae598928a7d19b0c3",
+  "created_at": "2026-09-05T08:00:00Z",
+  "input_refs": [
+    "synthesis_f36814841f69e9ad7db9",
+    "synthesis_a6dbacd803b90cd871fb",
+    "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "history_publication-a.example",
+    "history_publication-b.example"
+  ],
+  "organization_id": "example-organization",
+  "plan_id": "plan_214519641717eddbb6a3",
+  "planning_window": {
+    "ends_at": "2026-09-12T08:00:00Z",
+    "starts_at": "2026-09-05T08:00:00Z"
+  },
+  "publication_id": "portfolio:publication-a.example+publication-b.example",
+  "revision": 1,
+  "schema_version": "1.0.0"
+}

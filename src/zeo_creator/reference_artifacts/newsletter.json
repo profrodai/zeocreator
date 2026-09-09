@@ -1,0 +1,98 @@
+[
+  {
+    "audience": {
+      "consent_policy_ref": "audience.consent@1",
+      "segment_refs": [
+        "audience.example"
+      ],
+      "selection_policy_ref": "audience.selection@1",
+      "suppression_policy_ref": "audience.suppression@1"
+    },
+    "campaign_ref": null,
+    "content_digest": "sha256:a3e6e4981e2ed5d4c06f11f3901fc3122536503d71bf4d8d61e632016ed91cd9",
+    "created_at": "2026-09-05T12:00:00Z",
+    "edition_plan_ref": "edition_1a41cead2e7abf460ea6",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:f1b298e5dd43cc2aa7a33326890bfcb5eb69a9c18f00cba41b88683fd88de1e9",
+        "sha256:bf2906676e1f94d6132c79265bba83817e712c8c2ce99d293975a3a889f9e674"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.newsletter-planning",
+      "strategy_version": "1.0.0"
+    },
+    "input_refs": [
+      "edition_1a41cead2e7abf460ea6",
+      "dossier_67e79748fd7d0122cbb3"
+    ],
+    "issue_plan_id": "newsletter_plan_2140a44e3bac414b6b25",
+    "link_tracking_plan_ref": "tracking.standard@1",
+    "organization_id": "org_example",
+    "preheader_variants": [
+      "Verified developments and useful context."
+    ],
+    "preview_required": true,
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "sections": [
+      {
+        "call_to_action": null,
+        "dossier_refs": [
+          "dossier_67e79748fd7d0122cbb3"
+        ],
+        "heading": "official.notice",
+        "purpose": "Readers need a verified explanation.",
+        "section_id": "section_e04f770126ae727e7f73"
+      }
+    ],
+    "sequence_ref": null,
+    "subject_variants": [
+      "newsletter.issue: what matters"
+    ],
+    "test_send_required": true,
+    "working_title": "newsletter.issue briefing"
+  },
+  {
+    "content_digest": "sha256:aca0406387d25aa0451916ae221920dc4487ebcb2ebbd3acf7b6824f3deb329b",
+    "created_at": "2026-09-05T12:00:00Z",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:a3e6e4981e2ed5d4c06f11f3901fc3122536503d71bf4d8d61e632016ed91cd9",
+        "sha256:bf2906676e1f94d6132c79265bba83817e712c8c2ce99d293975a3a889f9e674"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.newsletter-composition",
+      "strategy_version": "1.0.0"
+    },
+    "html_content": {
+      "content": "<section><h2>official.notice</h2><p>Explain official.notice using verified evidence.</p></section>",
+      "media_type": "text/html"
+    },
+    "input_refs": [
+      "newsletter_plan_2140a44e3bac414b6b25",
+      "dossier_67e79748fd7d0122cbb3"
+    ],
+    "issue_draft_id": "newsletter_draft_d8048e0485e33f13821d",
+    "issue_plan_ref": "newsletter_plan_2140a44e3bac414b6b25",
+    "organization_id": "org_example",
+    "plain_text_content": {
+      "content": "official.notice\nExplain official.notice using verified evidence.",
+      "media_type": "text/plain"
+    },
+    "preheader": "Verified developments and useful context.",
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_refs": [
+      "observation_example"
+    ],
+    "subject": "newsletter.issue: what matters"
+  }
+]

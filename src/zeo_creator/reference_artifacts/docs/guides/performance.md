@@ -3,13 +3,15 @@
 Canonical email assessment is input-only. Runtime retrieves aggregate provider
 metrics through Zeocore/ZEOconnect, Newsroom persists normalized observations and
 retrieval receipts, and Creator receives those artifacts in
-`creator.assess_email_program@1.0.0`.
+`creator.assess_email_program@4.0.0`.
 
 ## Supply observations
 
-Use `AssessEmailProgramRequest` with the exact `EmailCampaignPlan`, a tuple of
+Use `AssessEmailProgramRequest` with the exact `EmailCampaignPlan` and finalized
+`EmailCampaignRelease`, the expected normalized operation receipts, a tuple of
 `EmailMetricObservation`, the observation window, expected metric names and an
-explicit timestamp. No connector service is required or consulted. The
+explicit timestamp. The expected operation set and released messages define the
+coverage denominator; missing observations must remain partial. No connector service is required or consulted. The
 [installed reference workflow](email-marketing.md#offline-proof) demonstrates the
 complete acquisition-boundary simulation and capability invocation.
 
@@ -45,5 +47,5 @@ email-marketing path. Do not pass a live connector or ZEOconnect proxy into the
 new email capabilities.
 
 The old credential-free example remains available as
-`uv run python examples/assess_performance.py`. New email integrations should run
-`uv run python examples/email_marketing.py` and use the input-only request above.
+`python -m zeo_creator.examples.assess_performance`. New email integrations should run
+`python -m zeo_creator.examples.email_marketing` and use the input-only request above.

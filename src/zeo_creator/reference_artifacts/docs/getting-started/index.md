@@ -8,9 +8,9 @@ when you need recurring commitments and authorized provider effects.
 
 === "I am evaluating the package"
 
-    1. [Install from Git](installation.md).
+    1. [Install from PyPI](installation.md).
     2. [Invoke your first capability](first-capability.md).
-    3. Run `make examples` in a clone.
+    3. Run `python -m zeo_creator.examples.email_marketing` in your environment.
 
 === "I am building a creator workflow"
 

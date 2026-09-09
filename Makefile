@@ -1,6 +1,6 @@
 .PHONY: help setup sync test lint typecheck format check verify clean lock update \
 	cli version doctor capabilities reference reference-check docs docs-serve examples \
-	digest-vectors dist-check
+	digest-vectors dist-check release-check
 
 UV ?= uv
 ZEO_CREATOR := $(UV) run zeo-creator
@@ -45,13 +45,13 @@ capabilities:
 	$(ZEO_CREATOR) capabilities
 
 reference:
-	$(UV) run python -m scripts.export_reference_artifacts_v8
+	$(UV) run python -m scripts.export_reference_artifacts_v9
 
 test:
 	$(UV) run pytest -q
 
 lint:
-	$(UV) run ruff check src tests scripts examples
+	$(UV) run ruff check --no-cache src tests scripts examples
 
 typecheck:
 	$(UV) run mypy src/zeo_creator examples
@@ -78,7 +78,7 @@ examples:
 	$(UV) run python examples/email_marketing.py
 
 reference-check: reference
-	git diff --exit-code -- reference src/zeo_creator/schemas src/zeo_creator/reference_artifacts
+	git diff --exit-code -- reference src/zeo_creator/schemas src/zeo_creator/reference_artifacts src/zeo_creator/examples
 
 check: format-check lint typecheck test reference-check docs
 
@@ -89,9 +89,12 @@ digest-vectors:
 dist-check:
 	rm -rf dist
 	$(UV) build
-	$(UV) run python -m scripts.check_distribution_v7
+	$(UV) run python -m scripts.check_distribution_v8
 
-verify: check digest-vectors dist-check
+release-check:
+	$(UV) run python -m scripts.check_release_v1
+
+verify: release-check check digest-vectors dist-check
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache .coverage coverage.xml htmlcov dist build site

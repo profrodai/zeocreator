@@ -141,8 +141,8 @@ ownership or human approval; those attestations are host responsibilities.
 ## Offline proof
 
 ```console
-uv run python examples/email_marketing.py
-# After installing the wheel, outside the source checkout:
+python -m zeo_creator.examples.email_marketing
+# Compact three-publication workflow:
 python -m zeo_creator.reference.email_workflow
 ```
 
@@ -220,12 +220,13 @@ and verify the real mapping/render/snapshot coverage before authorizing effects.
 
 ## Email contract migration and release policy
 
-The package is `0.5.3.dev0`; its nine email capabilities and durable email artifacts use
+The PyPI package is `zeocreator==0.5.3`; its nine email capabilities and durable email artifacts use
 major version 4. Published email v1, v2 and v3 schemas remain byte-for-byte available for
 audit. Their preparation APIs are retired from discovery; the twenty original non-email
 capabilities remain unchanged. This explicitly affirms the earlier email v1 retirement:
 these email families existed only as unreleased development commits, and unsafe approvals
-cannot carry forward. This is not a PyPI release or a claim of stable API compatibility.
+cannot carry forward. Version 0.5.3 is the first PyPI release; it does not make a
+1.x API stability promise or establish authenticated provider interoperability.
 
 Rebuild current campaign/message/sequence artifacts, finalize a release with a fully
 coordinated CTA set, obtain current audience-specific proof evidence, provision sequence

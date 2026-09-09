@@ -1,0 +1,558 @@
+[
+  {
+    "approval_digest": "sha256:d5023b76f7d06ec116f331faf4af477d3495e7cbf4d4507aac3e07e5419839e7",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_0536061154dfab8c4242"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_1a25a061f24771474f29",
+    "content_digest": "sha256:4a7abdec99efa286467119d0fc68c2343109d4f074923835ac18c4e34db8c802",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_1a25a061f24771474f29",
+      "manifest_4e9bcf76f69c52795155",
+      "artifact_0536061154dfab8c4242",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "synthesis_f36814841f69e9ad7db9",
+      "channels_4e9bcf76f69c52795155"
+    ],
+    "manifest_id": "manifest_4e9bcf76f69c52795155",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "article: Example Publication A: Evidence-led explanations",
+        "content": {
+          "content": "# Example Publication A: Evidence-led explanations\n\nEvidence supporting evidence-led explanations in creator operations.\n\nChannel: website",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "website",
+          "connection_ref": "connection_publication-a.example_website",
+          "destination_account_ref": "destination_publication-a.example_website",
+          "provider_kind": "example.website",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_0536061154dfab8c4242"
+        ]
+      },
+      {
+        "accessibility_text": "article: Example Publication A: Evidence-led explanations",
+        "content": {
+          "content": "# Example Publication A: Evidence-led explanations\n\nEvidence supporting evidence-led explanations in creator operations.\n\nChannel: social.network-a",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "social.network-a",
+          "connection_ref": "connection_publication-a.example_social.network-a",
+          "destination_account_ref": "destination_publication-a.example_social.network-a",
+          "provider_kind": "example.social.network-a",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_0536061154dfab8c4242"
+        ]
+      }
+    ],
+    "publication_id": "publication-a.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_e75b86c9bc194ffe043e",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:899795becc69d9e3f5b08a0e0240f796bf99624ed86c4c43b1e04816a234f0cc",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_c18f113e7da46678bc67",
+      "artifact_ce6d5e9927d23852d265"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_dae90cadc90ec5f09cd4",
+    "content_digest": "sha256:2e83a39b7bba900fcb499485dd5feca5d7fd56ad08300accfa52e8fe82b58ee6",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_dae90cadc90ec5f09cd4",
+      "manifest_1988b4efe8f157629f92",
+      "artifact_c18f113e7da46678bc67",
+      "artifact_ce6d5e9927d23852d265",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "synthesis_f36814841f69e9ad7db9",
+      "channels_1988b4efe8f157629f92"
+    ],
+    "manifest_id": "manifest_1988b4efe8f157629f92",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "video.short: Example Publication A: Reusable content atoms",
+        "content": {
+          "content": "# Example Publication A: Reusable content atoms\n\nEvidence supporting reusable content atoms in creator operations.\n\nChannel: website",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "website",
+          "connection_ref": "connection_publication-a.example_website",
+          "destination_account_ref": "destination_publication-a.example_website",
+          "provider_kind": "example.website",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_c18f113e7da46678bc67"
+        ]
+      },
+      {
+        "accessibility_text": "video.short: Example Publication A: Reusable content atoms",
+        "content": {
+          "content": "# Example Publication A: Reusable content atoms\n\nEvidence supporting reusable content atoms in creator operations.\n\nChannel: social.network-a",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "social.network-a",
+          "connection_ref": "connection_publication-a.example_social.network-a",
+          "destination_account_ref": "destination_publication-a.example_social.network-a",
+          "provider_kind": "example.social.network-a",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_ce6d5e9927d23852d265"
+        ]
+      }
+    ],
+    "publication_id": "publication-a.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_af776cdb12fa4459ab77",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:6f292bcd8dc1207cf9f4602b6a5262c0bfbfcbfadb5906d5b2142355d0904f1f",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_fbe60ad5155560f78486",
+      "artifact_ebfbfef3883f6b3518d6"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_a7cc9c0ed7d2235f752a",
+    "content_digest": "sha256:5a6c9feb450cd74645462622da28f48e31621ab6b499206bdd6434cdfd6882d3",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_a7cc9c0ed7d2235f752a",
+      "manifest_f90ad2e4786178abd18f",
+      "artifact_fbe60ad5155560f78486",
+      "artifact_ebfbfef3883f6b3518d6",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "synthesis_f36814841f69e9ad7db9",
+      "channels_f90ad2e4786178abd18f"
+    ],
+    "manifest_id": "manifest_f90ad2e4786178abd18f",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "image.carousel: Example Publication A: Typed handoffs",
+        "content": {
+          "content": "# Example Publication A: Typed handoffs\n\nEvidence supporting typed handoffs in creator operations.\n\nChannel: website",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "website",
+          "connection_ref": "connection_publication-a.example_website",
+          "destination_account_ref": "destination_publication-a.example_website",
+          "provider_kind": "example.website",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_fbe60ad5155560f78486"
+        ]
+      },
+      {
+        "accessibility_text": "image.carousel: Example Publication A: Typed handoffs",
+        "content": {
+          "content": "# Example Publication A: Typed handoffs\n\nEvidence supporting typed handoffs in creator operations.\n\nChannel: social.network-a",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "social.network-a",
+          "connection_ref": "connection_publication-a.example_social.network-a",
+          "destination_account_ref": "destination_publication-a.example_social.network-a",
+          "provider_kind": "example.social.network-a",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_ebfbfef3883f6b3518d6"
+        ]
+      }
+    ],
+    "publication_id": "publication-a.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_9379b6d5fab6e6db6d0a",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:2cdc63f39226c0df31a4854291820304cef0e64b6959695dd358529a0d578a4d",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_3f7f2544d2d079cb61a5",
+      "artifact_2bce15f77a9586b8f00b"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_65b9e1dcb4942f44a6b9",
+    "content_digest": "sha256:2cfb1c01ca740e051dd9981ad100badf258b68a0b7a3201907bce8f830d5bb77",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_65b9e1dcb4942f44a6b9",
+      "manifest_14166c47bf73d3859372",
+      "artifact_3f7f2544d2d079cb61a5",
+      "artifact_2bce15f77a9586b8f00b",
+      "profile_publication_a@1:sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+      "synthesis_f36814841f69e9ad7db9",
+      "channels_14166c47bf73d3859372"
+    ],
+    "manifest_id": "manifest_14166c47bf73d3859372",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "newsletter.issue: Example Publication A: Bounded retries",
+        "content": {
+          "content": "# Example Publication A: Bounded retries\n\nEvidence supporting bounded retries in creator operations.\n\nChannel: website",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "website",
+          "connection_ref": "connection_publication-a.example_website",
+          "destination_account_ref": "destination_publication-a.example_website",
+          "provider_kind": "example.website",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_3f7f2544d2d079cb61a5"
+        ]
+      },
+      {
+        "accessibility_text": "newsletter.issue: Example Publication A: Bounded retries",
+        "content": {
+          "content": "# Example Publication A: Bounded retries\n\nEvidence supporting bounded retries in creator operations.\n\nChannel: social.network-a",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "social.network-a",
+          "connection_ref": "connection_publication-a.example_social.network-a",
+          "destination_account_ref": "destination_publication-a.example_social.network-a",
+          "provider_kind": "example.social.network-a",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_2bce15f77a9586b8f00b"
+        ]
+      }
+    ],
+    "publication_id": "publication-a.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_a4120ec4112dab7ab94e",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:44d15472eba76afddcf889bd6eb258ebcb7ef820d16ebd7372a2eb36e9d47a4f",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_04375c00a716604ae876"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_802732cc9c8eb5fab319",
+    "content_digest": "sha256:e9dec1a235bbbacbf9c7d22ac3bfbf7e7ba7195ea5b036422c0c4ad6c8aad8ac",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_802732cc9c8eb5fab319",
+      "manifest_a4dd16fd4d954a67d273",
+      "artifact_04375c00a716604ae876",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "synthesis_a6dbacd803b90cd871fb",
+      "channels_a4dd16fd4d954a67d273"
+    ],
+    "manifest_id": "manifest_a4dd16fd4d954a67d273",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "article: Example Publication B: Digest-bound decisions",
+        "content": {
+          "content": "# Example Publication B: Digest-bound decisions\n\nEvidence supporting digest-bound decisions in creator operations.\n\nChannel: newsletter",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "newsletter",
+          "connection_ref": "connection_publication-b.example_newsletter",
+          "destination_account_ref": "destination_publication-b.example_newsletter",
+          "provider_kind": "example.newsletter",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_04375c00a716604ae876"
+        ]
+      },
+      {
+        "accessibility_text": "article: Example Publication B: Digest-bound decisions",
+        "content": {
+          "content": "# Example Publication B: Digest-bound decisions\n\nEvidence supporting digest-bound decisions in creator operations.\n\nChannel: video.platform-b",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "video.platform-b",
+          "connection_ref": "connection_publication-b.example_video.platform-b",
+          "destination_account_ref": "destination_publication-b.example_video.platform-b",
+          "provider_kind": "example.video.platform-b",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_04375c00a716604ae876"
+        ]
+      }
+    ],
+    "publication_id": "publication-b.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_76a0b26d2cad02b235e7",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:1a57fb9a63b9532020fc0fb383deb31c387cf287ae07b805bd57a32592c10670",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_5059f30e1684ac046ba0",
+      "artifact_1c98f0065b1956ab948e"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_69d691ebb8b8f95e730b",
+    "content_digest": "sha256:8d196ef4e0824c346460e4388ad3523e5ea10a31ce3f948b54a822e6c2d32b6c",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_69d691ebb8b8f95e730b",
+      "manifest_91779aa1ec8dae583548",
+      "artifact_5059f30e1684ac046ba0",
+      "artifact_1c98f0065b1956ab948e",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "synthesis_a6dbacd803b90cd871fb",
+      "channels_91779aa1ec8dae583548"
+    ],
+    "manifest_id": "manifest_91779aa1ec8dae583548",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "video.short: Example Publication B: Reconciliation evidence",
+        "content": {
+          "content": "# Example Publication B: Reconciliation evidence\n\nEvidence supporting reconciliation evidence in creator operations.\n\nChannel: newsletter",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "newsletter",
+          "connection_ref": "connection_publication-b.example_newsletter",
+          "destination_account_ref": "destination_publication-b.example_newsletter",
+          "provider_kind": "example.newsletter",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_5059f30e1684ac046ba0"
+        ]
+      },
+      {
+        "accessibility_text": "video.short: Example Publication B: Reconciliation evidence",
+        "content": {
+          "content": "# Example Publication B: Reconciliation evidence\n\nEvidence supporting reconciliation evidence in creator operations.\n\nChannel: video.platform-b",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "video.platform-b",
+          "connection_ref": "connection_publication-b.example_video.platform-b",
+          "destination_account_ref": "destination_publication-b.example_video.platform-b",
+          "provider_kind": "example.video.platform-b",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_1c98f0065b1956ab948e"
+        ]
+      }
+    ],
+    "publication_id": "publication-b.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_308eed215c7e84b0076e",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:e226930947166886db6575c7c2028c353e51923ecb928ab5cb727f44ec9213e5",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_fffc70d28bf506d616ea",
+      "artifact_f009283e9444386a1a5e"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_f9f59a2e0cb86955a7c9",
+    "content_digest": "sha256:2245fa83a2d4a177dfbd8440cd127b3a18c15821412780956a9b692f1cf8fc48",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_f9f59a2e0cb86955a7c9",
+      "manifest_b56bbdc4a4bab0fabb0b",
+      "artifact_fffc70d28bf506d616ea",
+      "artifact_f009283e9444386a1a5e",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "synthesis_a6dbacd803b90cd871fb",
+      "channels_b56bbdc4a4bab0fabb0b"
+    ],
+    "manifest_id": "manifest_b56bbdc4a4bab0fabb0b",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "image.carousel: Example Publication B: Normalized performance",
+        "content": {
+          "content": "# Example Publication B: Normalized performance\n\nEvidence supporting normalized performance in creator operations.\n\nChannel: newsletter",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "newsletter",
+          "connection_ref": "connection_publication-b.example_newsletter",
+          "destination_account_ref": "destination_publication-b.example_newsletter",
+          "provider_kind": "example.newsletter",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_fffc70d28bf506d616ea"
+        ]
+      },
+      {
+        "accessibility_text": "image.carousel: Example Publication B: Normalized performance",
+        "content": {
+          "content": "# Example Publication B: Normalized performance\n\nEvidence supporting normalized performance in creator operations.\n\nChannel: video.platform-b",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "video.platform-b",
+          "connection_ref": "connection_publication-b.example_video.platform-b",
+          "destination_account_ref": "destination_publication-b.example_video.platform-b",
+          "provider_kind": "example.video.platform-b",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_f009283e9444386a1a5e"
+        ]
+      }
+    ],
+    "publication_id": "publication-b.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_a4433136d8aff0324edd",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  },
+  {
+    "approval_digest": "sha256:f74faff1a6f14a047874c758ece8896a7e32fcf484746544e414bca68dfad456",
+    "artifact_integrity_pass": true,
+    "artifact_refs": [
+      "artifact_32e99822061392acc5c7",
+      "artifact_09fea16aeb1d343388b5"
+    ],
+    "brand_constraints_pass": true,
+    "brief_id": "brief_c218aa83930db38cdbc9",
+    "content_digest": "sha256:2c89ae01e11471a2cbe0b7d2ed1456410e7e6d5239b73cd025688eeb0233e61c",
+    "created_at": "2026-09-05T08:00:00Z",
+    "findings": [],
+    "identity_match": true,
+    "input_refs": [
+      "brief_c218aa83930db38cdbc9",
+      "manifest_7d8438a507b73dd51922",
+      "artifact_32e99822061392acc5c7",
+      "artifact_09fea16aeb1d343388b5",
+      "profile_publication_b@1:sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+      "synthesis_a6dbacd803b90cd871fb",
+      "channels_7d8438a507b73dd51922"
+    ],
+    "manifest_id": "manifest_7d8438a507b73dd51922",
+    "organization_id": "example-organization",
+    "proposed_variants": [
+      {
+        "accessibility_text": "newsletter.issue: Example Publication B: Explicit approvals",
+        "content": {
+          "content": "# Example Publication B: Explicit approvals\n\nEvidence supporting explicit approvals in creator operations.\n\nChannel: newsletter",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "newsletter",
+          "connection_ref": "connection_publication-b.example_newsletter",
+          "destination_account_ref": "destination_publication-b.example_newsletter",
+          "provider_kind": "example.newsletter",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_32e99822061392acc5c7"
+        ]
+      },
+      {
+        "accessibility_text": "newsletter.issue: Example Publication B: Explicit approvals",
+        "content": {
+          "content": "# Example Publication B: Explicit approvals\n\nEvidence supporting explicit approvals in creator operations.\n\nChannel: video.platform-b",
+          "media_type": "text/markdown"
+        },
+        "destination": {
+          "channel": "video.platform-b",
+          "connection_ref": "connection_publication-b.example_video.platform-b",
+          "destination_account_ref": "destination_publication-b.example_video.platform-b",
+          "provider_kind": "example.video.platform-b",
+          "scheduled_for": "2026-09-06T08:00:00Z"
+        },
+        "extension": null,
+        "selected_artifact_refs": [
+          "artifact_09fea16aeb1d343388b5"
+        ]
+      }
+    ],
+    "publication_id": "publication-b.example",
+    "ready_for_approval": true,
+    "required_attestations_pass": true,
+    "review_id": "review_b296f8a77357e70105e2",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_claim_traceability": true
+  }
+]

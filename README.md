@@ -8,11 +8,12 @@ Turn source observations into evolving stories, frozen dossiers, editorial agend
 editions, production briefs, reviewed artifacts, commentary, newsletters and corrections.
 
 [![CI](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml/badge.svg)](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/zeocreator)](https://pypi.org/project/zeocreator/)
 [![Python 3.14+](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Zeocore 0.9](https://img.shields.io/badge/Zeocore-0.9.0-087f75)](https://pypi.org/project/zeocore/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/profrodai/zeocreator/blob/v0.5.3/LICENSE)
 
-[Documentation](docs/index.md) · [Quickstart](docs/getting-started/first-capability.md) · [Examples](examples/README.md) · [API reference](docs/reference/contracts.md)
+[Documentation](https://profrodai.github.io/zeocreator/) · [Quickstart](https://profrodai.github.io/zeocreator/getting-started/installation/) · [Examples](https://github.com/profrodai/zeocreator/tree/v0.5.3/examples) · [API reference](https://profrodai.github.io/zeocreator/reference/contracts/)
 
 </div>
 
@@ -51,19 +52,30 @@ flowchart LR
 
 ## Install
 
-The distribution is currently pre-release and installs from Git:
+Install the public `zeocreator` distribution on Python 3.14 or newer:
 
 ```console
-uv add "zeo-creator @ git+https://github.com/profrodai/zeocreator.git"
+uv add "zeocreator==0.5.3"
 ```
 
 or:
 
 ```console
-python -m pip install "git+https://github.com/profrodai/zeocreator.git"
+python -m pip install "zeocreator==0.5.3"
 ```
 
-ZEO Creator requires Python 3.14+ and Zeocore 0.9.0.
+Zeocore 0.9.0 is installed automatically. The distribution is `zeocreator`, the
+Python import is `zeo_creator`, and the CLI is `zeo-creator`. Earlier Git-only
+installations used the distribution name `zeo-creator`; remove that distribution
+before installing this release, or use a fresh virtual environment.
+
+```console
+zeo-creator doctor --json
+python -m zeo_creator.examples.create_content_brief
+python -m zeo_creator.examples.email_marketing
+```
+
+All examples run without provider credentials or network calls.
 
 ## First capability
 
@@ -92,14 +104,13 @@ print(result.data.brief.content_kind)    # article
 print(result.data.brief.content_digest)  # sha256:...
 ```
 
-Run it locally:
+Run the packaged example after installation:
 
 ```console
-git clone https://github.com/profrodai/zeocreator.git
-cd zeocreator
-uv sync --frozen
-uv run python examples/create_content_brief.py
+python -m zeo_creator.examples.create_content_brief
 ```
+
+In a uv-managed project, prefix Python and CLI commands with `uv run`.
 
 ## Capability families
 
@@ -141,7 +152,7 @@ turn dossiers into coherent publication decisions.
 One dossier can support a breaking update, a daily briefing, a video brief, a
 social reply and a later newsletter section without silently sharing voice,
 policy or approval across publications. See the
-[continuous editorial model](docs/concepts/continuous-editorial-operations.md).
+[continuous editorial model](https://profrodai.github.io/zeocreator/concepts/continuous-editorial-operations/).
 
 ```mermaid
 flowchart LR
@@ -164,7 +175,7 @@ zeo-creator contracts export --output=./schemas
 
 Each catalog entry includes the schema's RFC 8785 canonical SHA-256 digest.
 Package, capability, and contract versions evolve independently; the
-[compatibility policy](docs/reference/contracts.md#compatibility-and-version-axes)
+[compatibility policy](https://profrodai.github.io/zeocreator/reference/contracts/#compatibility-and-version-axes)
 defines when each one changes.
 
 ## The authority boundary
@@ -185,12 +196,12 @@ multi-channel proposals, and separate performance assessments without encoding
 any private production taxonomy.
 
 ```console
-uv run python examples/complete_content_portfolio.py
+python -m zeo_creator.examples.complete_content_portfolio
 ```
 
-Explore [`reference/examples`](reference/examples), follow the
-[portfolio tutorial](docs/tutorials/content-portfolio.md), or read the
-[production adapter guide](docs/guides/production-adapters.md).
+Explore [`reference/examples`](https://github.com/profrodai/zeocreator/tree/v0.5.3/reference/examples), follow the
+[portfolio tutorial](https://profrodai.github.io/zeocreator/tutorials/content-portfolio/), or read the
+[production adapter guide](https://profrodai.github.io/zeocreator/guides/production-adapters/).
 
 ## Development
 
@@ -203,20 +214,22 @@ make doctor      # verify Python, Zeocore, manifests, and projections
 ```
 
 The repository enforces architectural import boundaries and tests installed
-wheel behavior. See [architecture](docs/concepts/architecture.md),
-[canonical digests](docs/concepts/canonical-digests.md), and
-[contributing](docs/contributing.md).
+wheel behavior. See [architecture](https://profrodai.github.io/zeocreator/concepts/architecture/),
+[canonical digests](https://profrodai.github.io/zeocreator/concepts/canonical-digests/), and
+[contributing](https://profrodai.github.io/zeocreator/contributing/).
 
 ## Status
 
-ZEO Creator is a pre-release contract and reference package. PyPI publication
-and live provider effects require separate operator approval and have not occurred.
+Version 0.5.3 is the first PyPI release, with independently reviewed email v4
+contracts and 135 portable receipt cases. This remains an early 0.x API: pin the
+package and contract versions. Release publication does not establish live
+HubSpot/Kit interoperability; execution and account qualification belong to the host.
 
 MIT licensed.
 
 ## Email campaigns and sequences
 
-[Email marketing](docs/guides/email-marketing.md) adds immutable campaigns, linear
+[Email marketing](https://profrodai.github.io/zeocreator/guides/email-marketing/) adds immutable campaigns, linear
 sequence revisions, dual-format messages, audience summaries and exact delivery
 packages. Runtime and Newsroom collect observations before Creator invocation;
 Zeocore and ZEOconnect own provider lowering and execution. Existing newsletter
@@ -225,5 +238,5 @@ v1 schemas and capabilities remain compatible.
 Run `uv run python examples/email_marketing.py` for three isolated publications.
 The example uses fake HubSpot-shaped and Kit-shaped hosts; it does not establish
 live interoperability. The public Zeocore email operation contract is still a
-dependency, and example operation IDs are explicitly simulated. No PyPI release
-or live provider effect is part of this change.
+dependency, and example operation IDs are explicitly simulated. The same example
+is installed as `python -m zeo_creator.examples.email_marketing`.
