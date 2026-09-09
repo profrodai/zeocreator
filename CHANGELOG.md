@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.3 — 2026-09-09
+
+- First PyPI release as `zeocreator`; preserve the `zeo_creator` import and `zeo-creator` CLI.
+- Ship the independently accepted email v4 implementation: nine input-only email capabilities, exact receipt validation and 135 portable conformance cases.
+- Preserve all prior schema and corpus bytes and the twenty original non-email capabilities.
+- Package all seven runnable examples and their reference data for use without a checkout.
+- Add PyPI installation, migration, quickstart and release documentation plus complete release notes.
+- Add tag-bound OIDC publishing, full pre-publication verification, exact-version index smoke tests and automatic GitHub Releases following Zeocore.
+- Keep Zeocore pinned to 0.9.0; no live HubSpot/Kit interoperability or effects are claimed.
+
+The entries below record the earlier Git-only development history.
+
 ## 0.5.3.dev0 — 2026-09-09
 
 - Require explicit corpus version selection so legacy exporters cannot overwrite v1 with v2 data.
@@ -56,7 +68,7 @@
 
 All notable changes to ZEO Creator are documented here.
 
-## Unreleased — 2026-09-07
+## Development inception — 2026-09-07
 
 - Add versioned provider-neutral email campaigns, linear sequences, messages, reviews,
   audience snapshots, exact delivery packages, effect intents and aggregate assessments.

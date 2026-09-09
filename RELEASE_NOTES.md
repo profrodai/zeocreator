@@ -1,0 +1,55 @@
+# zeocreator 0.5.3
+
+**The first PyPI release brings independently reviewed, provider-neutral email
+campaigns, newsletters and linear sequences to ZEO Creator.**
+
+## Get started
+
+```console
+uv venv --python 3.14 .venv
+uv pip install --python .venv/bin/python "zeocreator==0.5.3"
+.venv/bin/zeo-creator doctor --json
+.venv/bin/python -m zeo_creator.examples.create_content_brief
+.venv/bin/python -m zeo_creator.examples.email_marketing
+```
+
+With pip, install `zeocreator==0.5.3` in a Python 3.14+ virtual environment.
+The distribution is `zeocreator`, the import is `zeo_creator`, and the CLI is
+`zeo-creator`. Zeocore 0.9.0 is installed automatically. Remove the older Git-only
+`zeo-creator` distribution first, or start in a fresh environment.
+
+## What ships
+
+- 29 independently composable capabilities, including nine input-only email v4
+  capabilities for campaigns, releases, sequences, messages, review, exact
+  delivery preparation, operation proposals and aggregate assessment.
+- Immutable publication-scoped artifacts with RFC 8785 digests; distinct test,
+  broadcast, activation, enrolment, cancellation and migration proposals.
+- Exact normalized receipt validation and 135 portable conformance cases covering
+  all six result kinds and twelve effects, with lifecycle and binding negatives.
+- Seven runnable installed examples, including eight email programs across three
+  isolated publications, producing 104 simulated proposals without credentials.
+- Packaged JSON Schemas, reference data, digest vectors, documentation and typed APIs.
+- An OIDC publish workflow with verification, exact-version index smoke tests and
+  GitHub release notes, following Zeocore's release pattern.
+
+The final email implementation and follow-ups received independent approval with
+no remaining findings. All prior schema and corpus bytes remain preserved.
+
+## Compatibility and boundaries
+
+This is an early 0.x release, not a 1.x stability commitment. Existing non-email
+v1 capabilities remain available. Email preparation uses v4; historical v1/v2/v3
+schemas are retained for audit, not approval reuse. The package rename changes
+installer metadata only; Python imports and CLI spelling are preserved.
+
+Creator plans, composes, validates and evaluates supplied artifacts. It does not
+send mail, authenticate accounts, authorize effects or schedule workflows.
+HubSpot-shaped and Kit-shaped examples are offline conformance hosts. Live
+HubSpot Marketing/Kit interoperability still requires Zeocore/ZEOconnect/Runtime
+integration and qualification; installing this release does not establish it.
+
+[Documentation](https://profrodai.github.io/zeocreator/) ·
+[Installation](https://profrodai.github.io/zeocreator/getting-started/installation/) ·
+[Email guide](https://profrodai.github.io/zeocreator/guides/email-marketing/) ·
+[Changelog](https://github.com/profrodai/zeocreator/blob/v0.5.3/CHANGELOG.md)

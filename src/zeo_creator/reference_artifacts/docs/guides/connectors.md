@@ -19,7 +19,7 @@ bodies stay outside Creator. An opaque connection reference is provenance, not
 permission to resolve or use a credential.
 
 For email performance, supply `EmailMetricObservation` to
-`creator.assess_email_program@1.0.0`. See [performance](performance.md).
+`creator.assess_email_program@4.0.0`. See [performance](performance.md).
 
 ## Legacy evidence port
 
@@ -30,7 +30,8 @@ that returns previously acquired `EvidenceItem` values. This preserves older
 applications without teaching Creator to acquire new source observations.
 
 The existing `examples/research_connector.py` uses synthetic in-memory evidence
-and remains executable. New canonical workflows acquire and persist observations
+and is installed as `python -m zeo_creator.examples.research_connector`.
+New canonical workflows acquire and persist observations
 before Creator invocation; they do not inject a live connector into Creator's
 `ToolContext`.
 

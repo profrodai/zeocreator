@@ -88,7 +88,7 @@ module command use v2; `packaged_cases(1)` is for reproducing the historical gap
 Require the pinned v2 artifact when reporting current conformance. The corpus
 version changes independently of the unchanged email v4 wire contracts.
 
-Regenerate current resources with `make reference`, which uses the v8 exporter
+Regenerate current resources with `make reference`, which uses the v9 exporter
 and `build_cases(version=2)`. Unversioned builder calls now refuse with a retirement
 explanation, preventing preserved v6/v7 scripts from writing current data under a
 historical corpus filename. Those legacy scripts may regenerate their earlier

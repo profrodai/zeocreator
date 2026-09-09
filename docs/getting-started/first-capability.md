@@ -4,8 +4,12 @@ This example invokes `creator.create_content_brief@1.0.0`. It is deterministic,
 credential-free, and uses the capability's own schema-valid example request.
 
 ```console
-uv run python examples/create_content_brief.py
+python -m zeo_creator.examples.create_content_brief
 ```
+
+After [installation](installation.md), the command above works from any directory.
+In a uv project, use `uv run python`. You can also save the complete code below as
+`first_capability.py` and run it with your environment’s Python.
 
 ```python
 --8<-- "examples/create_content_brief.py"

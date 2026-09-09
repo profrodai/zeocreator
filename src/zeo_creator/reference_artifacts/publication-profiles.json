@@ -1,0 +1,76 @@
+[
+  {
+    "approval_policy_ref": "approval_publication_a@1",
+    "audience_definition": "Independent builders improving reliable workflows",
+    "content_digest": "sha256:7ebcba8310e7fc5eb0e25243dda7613fe19c8314825338e7517241c5a34a8d5d",
+    "created_at": "2026-09-05T08:00:00Z",
+    "cta_policy": "Invite the audience to test one bounded technique.",
+    "default_channels": [
+      "website",
+      "social.network-a"
+    ],
+    "display_name": "Example Publication A",
+    "editorial_pillars": [
+      "practice",
+      "evidence",
+      "craft"
+    ],
+    "input_refs": [],
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.a"
+    ],
+    "profile_id": "profile_publication_a",
+    "prohibited_claims": [
+      "guaranteed outcomes"
+    ],
+    "prohibited_topics": [
+      "private correspondence"
+    ],
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "style_ref": "style_publication_a@1",
+    "voice_rules": [
+      "Be concrete",
+      "Show provenance"
+    ]
+  },
+  {
+    "approval_policy_ref": "approval_publication_b@1",
+    "audience_definition": "Teams governing dependable automation",
+    "content_digest": "sha256:382e6c0be1a086e6210510fe8a6b015ea8528f1bc4905199c24cbe833cbc4378",
+    "created_at": "2026-09-05T08:00:00Z",
+    "cta_policy": "Invite the audience to define an explicit approval boundary.",
+    "default_channels": [
+      "newsletter",
+      "video.platform-b"
+    ],
+    "display_name": "Example Publication B",
+    "editorial_pillars": [
+      "governance",
+      "operations",
+      "measurement"
+    ],
+    "input_refs": [],
+    "organization_id": "example-organization",
+    "participant_refs": [
+      "host.b"
+    ],
+    "profile_id": "profile_publication_b",
+    "prohibited_claims": [
+      "fully autonomous"
+    ],
+    "prohibited_topics": [
+      "unverified personnel claims"
+    ],
+    "publication_id": "publication-b.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "style_ref": "style_publication_b@1",
+    "voice_rules": [
+      "Name uncertainty",
+      "Separate evidence from hypotheses"
+    ]
+  }
+]

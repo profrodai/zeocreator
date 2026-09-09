@@ -1055,8 +1055,25 @@ wheels = [
 ]
 
 [[package]]
-name = "zeo-creator"
-version = "0.5.3.dev0"
+name = "zeocore"
+version = "0.9.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jinja2" },
+    { name = "pydantic", extra = ["email"] },
+    { name = "python-dotenv" },
+    { name = "pyyaml" },
+    { name = "rich" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d7/fe/782ae5ad64df46f5cad912321bdf8f472fc106c4b3df43df5c0aea3e7b5f/zeocore-0.9.0.tar.gz", hash = "sha256:f64fb9bc678da875fe5339192990873da131166d6270be6dbe31888daa5cdc18", size = 1271921, upload-time = "2026-09-06T03:10:06.773Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/1f/3abb38f7870bb0abb876e957a6c5e840d6baacfba01b8cd90b8f15549f15/zeocore-0.9.0-py3-none-any.whl", hash = "sha256:fb725aa0357db702e931ca7ca7ef4eebc5a7284214bd00fb652e70832a311ee2", size = 628198, upload-time = "2026-09-06T03:10:04.79Z" },
+]
+
+[[package]]
+name = "zeocreator"
+version = "0.5.3"
 source = { editable = "." }
 dependencies = [
     { name = "pydantic" },
@@ -1093,21 +1110,4 @@ dev = [
     { name = "pytest", specifier = ">=7.0.0" },
     { name = "pytest-cov", specifier = ">=4.1.0" },
     { name = "ruff", specifier = ">=0.2.0" },
-]
-
-[[package]]
-name = "zeocore"
-version = "0.9.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "jinja2" },
-    { name = "pydantic", extra = ["email"] },
-    { name = "python-dotenv" },
-    { name = "pyyaml" },
-    { name = "rich" },
-    { name = "tqdm" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/d7/fe/782ae5ad64df46f5cad912321bdf8f472fc106c4b3df43df5c0aea3e7b5f/zeocore-0.9.0.tar.gz", hash = "sha256:f64fb9bc678da875fe5339192990873da131166d6270be6dbe31888daa5cdc18", size = 1271921, upload-time = "2026-09-06T03:10:06.773Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/33/1f/3abb38f7870bb0abb876e957a6c5e840d6baacfba01b8cd90b8f15549f15/zeocore-0.9.0-py3-none-any.whl", hash = "sha256:fb725aa0357db702e931ca7ca7ef4eebc5a7284214bd00fb652e70832a311ee2", size = 628198, upload-time = "2026-09-06T03:10:04.79Z" },
 ]

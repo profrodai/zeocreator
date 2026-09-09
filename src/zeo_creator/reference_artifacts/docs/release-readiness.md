@@ -1,65 +1,76 @@
-# Release readiness
+# Releases and readiness
 
-## Current status
+## Version 0.5.3
 
-ZEO Creator is a pre-release contract and reference package. The source exposes
-twenty-nine producer-neutral capabilities, strict domain contracts, RFC 8785 digests,
-packaged JSON Schemas, neutral fixtures, and credential-free examples.
+The first PyPI release uses the distribution name `zeocreator`, import
+`zeo_creator` and CLI `zeo-creator`. Python 3.14+ and Zeocore 0.9.0 are required.
+The Operator authorized PyPI publication on 2026-09-09 after both independent
+reviewers accepted the complete Creator email commission and its follow-ups.
 
-The deterministic reference workflow produces two publication syntheses, a
-caller-defined portfolio, eight briefs across four public content kinds, eight
-artifact bundles, eight delivery reviews, sixteen multi-channel proposals, and
-two separate performance assessments.
+Install with `python -m pip install "zeocreator==0.5.3"` in a Python 3.14+
+environment. Follow the [installation guide](getting-started/installation.md)
+for a complete isolated setup and migration from the older Git-only distribution.
 
-## Proven gates
+## What the release verifies
 
-- Ruff and strict mypy pass.
-- Unit, contract, invariant, example, and architecture tests pass.
-- Reference schemas and examples regenerate deterministically.
-- JavaScript verifies the canonical digest vectors.
-- Documentation builds in strict mode.
-- Wheel and source distribution checks install into a clean environment.
-- Offline doctor verifies Python, Zeocore, manifests, and projections.
-- CI performs no live provider write.
+The package exposes 29 capabilities, including nine input-only email v4 capabilities.
+Verification covers formatting, Ruff, strict typing, tests, deterministic schema,
+corpus and example exports, strict documentation, JavaScript digests, wheel and
+sdist metadata, and installed-wheel behavior outside the checkout. All seven
+examples are installed; email programs exercise three isolated publications,
+eight programs and 104 simulated proposals. The portable receipt corpus has 135 cases.
 
-## Remaining product evidence
+The accepted schema and corpus bytes are unchanged by packaging this release.
+Package, capability and schema versions remain independent. Historical email
+v1/v2/v3 schemas are archived; current preparation uses v4. An early 0.x release
+does not promise 1.x API stability.
 
-A private production adapter has already consumed the installed wheel boundary,
-verified existing artifact bytes, emitted conforming manifests, passed delivery
-validation and produced destination-specific proposals. The expanded editorial
-kernel now needs equivalent private integration evidence: resumable real-source
-collection, multi-day story revision, publication-specific agendas, qualified
-human review, one fresh producer run and a newsletter issue as a materially
-different format. Those proofs belong in the integrating newsroom and producers,
-not in this public package.
+## Publishing workflow
 
-## Explicit blockers
+`.github/workflows/publish.yml` follows
+[Zeocore's release workflow](https://github.com/profrodai/zeocore/blob/e630cc5c785f7e527bd597bde6d0949f4a7cc9a9/.github/workflows/publish.yml):
+verify first, build and retain one wheel/sdist pair, publish with OIDC, test the
+exact uploaded version on the minimum Python version, and create the GitHub
+Release from `RELEASE_NOTES.md`. Creator also checks tag/metadata/notes agreement
+before upload and waits for index smoke tests before announcing the release.
 
-PyPI publication, repository-history rewriting, live provider effects, and
-production credential use each require a separate operator ruling. None is
-authorized by this readiness report.
+The configured pending publisher is project `zeocreator`, owner `profrodai`,
+repository `zeocreator`, workflow filename `publish.yml`, environment unrestricted
+(`Any`). The publishing job therefore omits an environment constraint. No PyPI
+API token is stored. See [PyPI trusted publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/).
 
-## Email marketing integration status — 2026-09-08
+For each authorized release:
 
-The explicit email v4 contracts, nine input-only capabilities, eight-program
-example, packaged schemas, vectors and documentation support offline conformance.
-The reference hosts simulate lowering, exact approval checks, logical idempotency
-and ambiguous-outcome reconciliation. They are not production adapters or storage.
+1. Update `pyproject.toml`, `uv.lock`, `CHANGELOG.md`, `RELEASE_NOTES.md`, examples
+   and current guides. Keep historical schemas and artifacts intact.
+2. Run `make reference`, stage intended generated resources, then run
+   `make verify`, `make doctor` and all installed-wheel examples.
+3. Merge the verified candidate through a ready PR after hosted checks pass.
+4. Tag that main commit as `vX.Y.Z`, exactly matching the package version, and
+   push the tag. The publish workflow runs the gates again before PyPI upload.
+5. Verify the index's exact version, artifact hashes, installed CLI/examples,
+   documentation site and GitHub Release. Never move a published tag or overwrite
+   an uploaded version; corrections require a new release.
 
-Public Zeocore 0.9.0 does not yet contain the commissioned neutral email operation
-vocabulary and lowering receipts. Real HubSpot/Kit interoperability and sequence
-semantics are held until that public contract is released and tested. The host
-must refuse unsupported semantics rather than approximate them. An offline green
-gate does not remove this integration dependency. No live effect or PyPI publication
-is authorized by this document.
+Manual dispatch supports `testpypi`, `pypi` or `both`, like Zeocore. Production
+publication requires a matching version-tag ref even when dispatched manually.
+TestPyPI requires a separately configured publisher; no TestPyPI binding or upload
+is assumed. Its smoke test downloads the exact staged wheel and resolves other
+dependencies from PyPI, avoiding mixed-index dependency resolution.
 
-HubSpot PR 53, Kit PR 54 and follow-up PR 55 are merged in Zeocore; the current
-provider merge is `e2b55aa6b1751afb95614e7b5cbab9f339f5f9e6`. PR 55 validates
-Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
-0.9.0. These source changes do not establish a released shared neutral receipt
-contract, completed Creator/Sovereign Agent wiring, or live interoperability.
+## Production integration remains separate
 
-The installed package also exports the exact v4 result union and 135 portable
-receipt/lifecycle cases. Its input-only receipt consumer binds normalized evidence
-to the original proposal and fixes the reference migration target identity. See
-[shared receipt conformance](guides/email-receipt-conformance.md).
+Creator designs and evaluates email programs. Zeocore owns public provider
+contracts/lowering; ZEOconnect owns execution and credential custody; Runtime owns
+authority, schedules and durable reconciliation. Newsroom owns persisted observations.
+The released dependency is Zeocore 0.9.0. Later source adapters are not proof of a
+released shared contract or authenticated interoperability with this package.
+
+Hosts must pass the pinned 135-case v2 corpus with their own validators, authenticate
+issuers and account/effect authority, verify current remote state, and qualify
+real HubSpot Marketing/Kit behavior. The fake hosts are not production journals
+or providers. Unsupported sequence semantics must refuse; ambiguous effects must
+reconcile before retry. No live provider effect is authorized by releasing to PyPI.
+
+See [email marketing](guides/email-marketing.md) and
+[receipt conformance](guides/email-receipt-conformance.md).

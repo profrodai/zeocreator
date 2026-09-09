@@ -56,7 +56,7 @@ Only a review with no blocking findings can enter
 ```
 
 ```console
-uv run python examples/validate_and_prepare.py
+python -m zeo_creator.examples.validate_and_prepare
 ```
 
 The example always reports `"executed_operations": 0`. Proposal construction has
@@ -79,9 +79,11 @@ demo.
 
 ## Exact email delivery
 
-For email use `creator.prepare_email_delivery@1.0.0` with an `EmailMessagePlan`,
+For email use `creator.prepare_email_delivery@4.0.0` with an `EmailMessagePlan`,
 `EmailMessageDraft`, `EmailEditorialReview`, opaque audience snapshot and externally
-supplied preview/test receipts. The package binds subject, preheader, both body
+supplied preview/test receipts. Supply the exact `EmailCampaignRelease`,
+`EmailExecutionContext`, template mapping digest and preparation timestamp as well.
+The package binds subject, preheader, both body
 representations, links, sender/reply-to, audience, tracking, schedule intent, campaign
 and sequence revisions, review and compliance. Each change requires a new digest.
 

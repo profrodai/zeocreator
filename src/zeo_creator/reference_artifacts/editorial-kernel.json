@@ -1,0 +1,302 @@
+[
+  {
+    "access_policy_ref": "access.public@1",
+    "author_or_origin": "Example Service",
+    "availability": "available",
+    "canonical_url": "https://example.invalid/update",
+    "completeness": "COMPLETE",
+    "content_digest": "sha256:db2dea299bb4497e99625b8d13a4cbcd89505146a7f817faf748fea2addc24fe",
+    "created_at": "2026-09-05T12:00:00Z",
+    "extracted_content_digest": "sha256:4ca89049e13f4056f97047a876b1556a101c3a6b65f3a6f29948e9a97823ca2b",
+    "extracted_content_ref": "artifact://extracted/example",
+    "extracted_text": "The service published an update.",
+    "extraction_method": "example.text",
+    "extraction_version": "1.0.0",
+    "geography": [
+      "example-region"
+    ],
+    "input_refs": [],
+    "language": "en",
+    "observation_id": "observation_example",
+    "organization_id": "org_example",
+    "parent_observation_ref": null,
+    "provider_ref": null,
+    "publication_id": "publication-a.example",
+    "publication_scope": "publication-a.example",
+    "raw_artifact_digest": "sha256:405cbc99286dd41e50069d50af88d5340fa745ba6d4b56a0e9bff624b3c823c6",
+    "raw_artifact_ref": "artifact://raw/example",
+    "retention_policy_ref": "retention.example@1",
+    "retrieved_at": "2026-09-05T12:00:00Z",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "source_identity": "source_example",
+    "source_kind": "official.notice",
+    "source_published_at": "2026-09-05T11:00:00Z",
+    "thread_ref": null
+  },
+  {
+    "candidate_claims": [
+      {
+        "claim_id": "claim_f5cc3b19870c71f1c821",
+        "evidence_refs": [
+          "observation_example"
+        ],
+        "text": "The service published an update."
+      }
+    ],
+    "confidence": 0.8,
+    "content_digest": "sha256:9180c73b1f149dab387aa7c0ac98bd4a804d8cf4e28e393a83972da11b4714d0",
+    "created_at": "2026-09-05T12:00:00Z",
+    "entities": [],
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:db2dea299bb4497e99625b8d13a4cbcd89505146a7f817faf748fea2addc24fe"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.signal-extraction",
+      "strategy_version": "1.0.0"
+    },
+    "geography": [
+      "example-region"
+    ],
+    "input_refs": [
+      "observation_example"
+    ],
+    "novelty": 0.5,
+    "organization_id": "org_example",
+    "publication_id": "publication-a.example",
+    "relevance": 0.5,
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "signal_id": "signal_3beb21f4339e0ec6ea4e",
+    "signal_type": "DEVELOPMENT",
+    "source_refs": [
+      "observation_example"
+    ],
+    "topic": "official.notice",
+    "urgency": "DAILY",
+    "why_it_matters": "New official.notice observation for this publication."
+  },
+  {
+    "affected_communities": [],
+    "community_reaction_refs": [],
+    "content_digest": "sha256:c18d0ba532d677e3a37081b9d64c72dbe8b18d932bad19de785857931088919f",
+    "created_at": "2026-09-05T12:00:00Z",
+    "disputed_claims": [],
+    "editorial_risk": "MEDIUM",
+    "freshness_at": "2026-09-05T12:00:00Z",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:9180c73b1f149dab387aa7c0ac98bd4a804d8cf4e28e393a83972da11b4714d0"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.story-revision",
+      "strategy_version": "1.0.0"
+    },
+    "geography": [
+      "example-region"
+    ],
+    "input_refs": [
+      "signal_3beb21f4339e0ec6ea4e"
+    ],
+    "material_developments": [],
+    "organization_id": "org_example",
+    "previous_revision_ref": null,
+    "primary_source_refs": [
+      "observation_example"
+    ],
+    "publication_id": "publication-a.example",
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "secondary_source_refs": [],
+    "signal_refs": [
+      "signal_3beb21f4339e0ec6ea4e"
+    ],
+    "status": "DETECTED",
+    "story_id": "story_31b04dcb83aa6de1143b",
+    "story_revision_id": "story_revision_75caab73f2b6659bb464",
+    "title": "official.notice",
+    "unknowns": [],
+    "verified_claims": [
+      {
+        "claim_id": "claim_f5cc3b19870c71f1c821",
+        "evidence_refs": [
+          "observation_example"
+        ],
+        "text": "The service published an update."
+      }
+    ]
+  },
+  {
+    "audience_significance": "Readers need a verified explanation.",
+    "community_conversation_refs": [],
+    "content_digest": "sha256:bf2906676e1f94d6132c79265bba83817e712c8c2ce99d293975a3a889f9e674",
+    "contradictions": [],
+    "created_at": "2026-09-05T12:00:00Z",
+    "dossier_id": "dossier_67e79748fd7d0122cbb3",
+    "evidence_lineage": [
+      "observation_example"
+    ],
+    "frozen_at": "2026-09-05T12:00:00Z",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:c18d0ba532d677e3a37081b9d64c72dbe8b18d932bad19de785857931088919f"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.story-dossier",
+      "strategy_version": "1.0.0"
+    },
+    "input_refs": [
+      "story_revision_75caab73f2b6659bb464"
+    ],
+    "organization_id": "org_example",
+    "possible_angles": [
+      "official.notice"
+    ],
+    "prior_coverage_refs": [],
+    "publication_id": "publication-a.example",
+    "quotation_refs": [],
+    "recommended_framing": "Explain official.notice using verified evidence.",
+    "rejected_framings": [
+      "Treat observed popularity as verification."
+    ],
+    "revision": 1,
+    "risk_level": "MEDIUM",
+    "risk_notes": [],
+    "schema_version": "1.0.0",
+    "story_id": "story_31b04dcb83aa6de1143b",
+    "story_revision_ref": "story_revision_75caab73f2b6659bb464",
+    "suggested_follow_up": [],
+    "timeline": [],
+    "unknowns": [],
+    "verified_claims": [
+      {
+        "claim_id": "claim_f5cc3b19870c71f1c821",
+        "evidence_refs": [
+          "observation_example"
+        ],
+        "text": "The service published an update."
+      }
+    ],
+    "visual_opportunities": []
+  },
+  {
+    "agenda_id": "agenda_d16d91f7584e5521bd72",
+    "commentary_opportunities": [],
+    "content_digest": "sha256:cecb0e92592a8a8e54fc689e5cb307b74dac5e9ee5583b58ead96e17c49927e2",
+    "coverage_gaps": [],
+    "coverage_window": {
+      "ends_at": "2026-09-05T12:00:00Z",
+      "starts_at": "2026-09-04T12:00:00Z"
+    },
+    "created_at": "2026-09-05T12:00:00Z",
+    "deferred_stories": [],
+    "desk_id": "desk_general",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:bf2906676e1f94d6132c79265bba83817e712c8c2ce99d293975a3a889f9e674"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.agenda-planning",
+      "strategy_version": "1.0.0"
+    },
+    "input_refs": [
+      "dossier_67e79748fd7d0122cbb3"
+    ],
+    "lead_stories": [
+      {
+        "dossier_ref": "dossier_67e79748fd7d0122cbb3",
+        "rationale": "Readers need a verified explanation."
+      }
+    ],
+    "organization_id": "org_example",
+    "publication_id": "publication-a.example",
+    "publication_slots": [
+      {
+        "approval_policy_ref": "approval.editor@1",
+        "content_kind": "news.article",
+        "desired_audience_action": "Understand what changed",
+        "desk_id": "desk_general",
+        "due_at": "2026-09-05T14:00:00Z",
+        "freshness_max_age_seconds": null,
+        "publication_id": "publication-a.example",
+        "purpose": "Explain the verified update",
+        "risk_policy_ref": "risk.general@1",
+        "slot_id": "slot_example",
+        "story_dossier_refs": [
+          "dossier_67e79748fd7d0122cbb3"
+        ],
+        "target_channels": [
+          "website"
+        ],
+        "urgency": "DAILY"
+      }
+    ],
+    "rejected_stories": [],
+    "required_follow_ups": [],
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "secondary_stories": [],
+    "watch_list": []
+  },
+  {
+    "agenda_ref": "agenda_d16d91f7584e5521bd72",
+    "content_digest": "sha256:f1b298e5dd43cc2aa7a33326890bfcb5eb69a9c18f00cba41b88683fd88de1e9",
+    "correction_refs": [],
+    "created_at": "2026-09-05T12:00:00Z",
+    "edition_id": "edition_1a41cead2e7abf460ea6",
+    "edition_kind": "newsletter.issue",
+    "generation": {
+      "evaluator_findings": [],
+      "generation_attempt": 1,
+      "input_digests": [
+        "sha256:cecb0e92592a8a8e54fc689e5cb307b74dac5e9ee5583b58ead96e17c49927e2"
+      ],
+      "model_ref": null,
+      "policy_version": "1.0.0",
+      "strategy_ref": "zeo-creator.reference.edition-planning",
+      "strategy_version": "1.0.0"
+    },
+    "human_editor_requirements": [
+      "newsletter-editor"
+    ],
+    "input_refs": [
+      "agenda_d16d91f7584e5521bd72"
+    ],
+    "lead_items": [
+      {
+        "dossier_refs": [
+          "dossier_67e79748fd7d0122cbb3"
+        ],
+        "prominence": 1,
+        "required_content_kinds": [
+          "news.article"
+        ],
+        "slot_ref": "slot_example"
+      }
+    ],
+    "organization_id": "org_example",
+    "publication_id": "publication-a.example",
+    "publication_window": {
+      "ends_at": "2026-09-05T12:00:00Z",
+      "starts_at": "2026-09-04T12:00:00Z"
+    },
+    "revision": 1,
+    "schema_version": "1.0.0",
+    "shared_relationship_ref": null,
+    "supporting_items": [],
+    "update_policy_ref": "updates.immutable-issue@1"
+  }
+]

@@ -71,12 +71,15 @@ After an authorized runtime executes proposals, invoke
 provider definitions, units, attribution windows, baselines, targets, and
 normalized rates. The assessment reports hypotheses rather than invented causes.
 
-Run the complete reference workflow:
+After [installation](../getting-started/installation.md), validate the packaged
+reference portfolio from any directory:
 
 ```console
-make reference
-uv run python examples/complete_content_portfolio.py
+python -m zeo_creator.examples.complete_content_portfolio
 ```
+
+In a source checkout, `make reference` rebuilds the fixtures from the deterministic
+strategies. The installed example validates the bundled artifacts without regenerating them.
 
 Inspect the generated JSON in
 [`reference/examples`](https://github.com/profrodai/zeocreator/tree/main/reference/examples).
