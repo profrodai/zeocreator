@@ -170,14 +170,14 @@ Python-generated canonical vector bytes and SHA-256 values.
 
 ## Public Zeocore integration dependency
 
-The pinned public Zeocore 0.9.0 supplies `CapabilityId` and capability manifests,
-but not the commissioned neutral email effect vocabulary, lowering contracts and
-receipt family. Creator therefore references caller-selected public operation
-identities; it does not define executable provider operations or copy HubSpot/Kit
-request bodies. The example uses clearly marked `example.email` identities.
+Creator pins Zeocore 0.11.0 with its shared Runtime host. The host can invoke
+Creator's supplied-input email capabilities; it does not turn Creator proposals
+into authenticated provider execution. Creator references caller-selected public
+operation identities and does not define executable provider operations or copy
+HubSpot/Kit request bodies. The example uses clearly marked `example.email` identities.
 
-Live interoperability is unverified until the public Zeocore contract is available
-and conformance is run against it. A production host must not treat the fake shapes
+Live interoperability remains unverified until the shared email contract and
+actual provider lowering are integrated and qualified with this package. A production host must not treat the fake shapes
 or example operation IDs as a connector protocol. Lowering must record Creator
 artifact/revision/digest, connector revision, submitted and observed payload
 digests, transformations/refusals, remote references, idempotency and safe ambiguity.
@@ -220,7 +220,7 @@ and verify the real mapping/render/snapshot coverage before authorizing effects.
 
 ## Email contract migration and release policy
 
-The PyPI package is `zeocreator==0.5.3`; its nine email capabilities and durable email artifacts use
+The PyPI package is `zeocreator==0.5.4`; its nine email capabilities and durable email artifacts use
 major version 4. Published email v1, v2 and v3 schemas remain byte-for-byte available for
 audit. Their preparation APIs are retired from discovery; the twenty original non-email
 capabilities remain unchanged. This explicitly affirms the earlier email v1 retirement:
@@ -255,11 +255,11 @@ consent/suppression references, and supply the new message directions, complianc
 and scoped evidence. The resulting plan binds the original newsletter revision.
 No old schema is silently reinterpreted.
 
-HubSpot PR 53, Kit PR 54 and follow-up PR 55 are merged in Zeocore; the current
-provider merge is `e2b55aa6b1751afb95614e7b5cbab9f339f5f9e6`. PR 55 validates
-Kit mutation identities and HubSpot workflow metadata. Released Zeocore remains
-0.9.0. These source changes do not establish a released shared neutral receipt
-contract, completed Creator/Sovereign Agent wiring, or live interoperability.
+Historical provider integration work includes Zeocore HubSpot PR 53, Kit PR 54
+and follow-up PR 55 at `e2b55aa6b1751afb95614e7b5cbab9f339f5f9e6`.
+Creator now installs released Zeocore 0.11.0. Those provider changes and the
+shared host do not by themselves establish completed Creator/Runtime email
+wiring or authenticated live interoperability.
 
 
 ## Receipt results and lifecycle preconditions

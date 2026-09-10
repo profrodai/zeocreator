@@ -25,7 +25,7 @@ zeo-creator capabilities --projection openai
 
 ## `zeo-creator runtime-provider`
 
-Added in the 0.5.4 source candidate. Emit the complete installed inventory as
+Added in 0.5.4. Emit the complete installed inventory as
 one canonical JSON document for trusted Runtime provisioning:
 
 ```console

@@ -10,10 +10,10 @@ editions, production briefs, reviewed artifacts, commentary, newsletters and cor
 [![CI](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml/badge.svg)](https://github.com/profrodai/zeocreator/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/zeocreator)](https://pypi.org/project/zeocreator/)
 [![Python 3.14+](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Zeocore 0.9](https://img.shields.io/badge/Zeocore-0.9.0-087f75)](https://pypi.org/project/zeocore/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/profrodai/zeocreator/blob/v0.5.3/LICENSE)
+[![Zeocore 0.11](https://img.shields.io/badge/Zeocore-0.11.0-087f75)](https://pypi.org/project/zeocore/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/profrodai/zeocreator/blob/v0.5.4/LICENSE)
 
-[Documentation](https://profrodai.github.io/zeocreator/) · [Quickstart](https://profrodai.github.io/zeocreator/getting-started/installation/) · [Examples](https://github.com/profrodai/zeocreator/tree/v0.5.3/examples) · [API reference](https://profrodai.github.io/zeocreator/reference/contracts/)
+[Documentation](https://profrodai.github.io/zeocreator/) · [Quickstart](https://profrodai.github.io/zeocreator/getting-started/installation/) · [Examples](https://github.com/profrodai/zeocreator/tree/v0.5.4/examples) · [API reference](https://profrodai.github.io/zeocreator/reference/contracts/)
 
 </div>
 
@@ -50,30 +50,29 @@ flowchart LR
 - **Runner-ready.** The same capabilities work in a bounded agent workflow or managed runtime.
 - **Portable.** RFC 8785 digests and packaged JSON Schemas support Python, TypeScript, and Go consumers.
 
-## Runtime integration candidate
+## Runtime integration
 
-The current 0.5.4 source candidate upgrades to Zeocore 0.11.0 and its shared
-Runtime host. Use the [Runtime integration guide](docs/guides/runtime-host.md)
-to build the candidate wheel, export its provider inventory, and prepare the
-real portfolio request. Creator/Core conformance is separate from Runtime's
-Go supervision and managed-agent acceptance. The PyPI instructions below
-remain for the released 0.5.3 package.
+Version 0.5.4 installs Zeocore 0.11.0 with its shared Runtime host. Use the
+[Runtime integration guide](https://profrodai.github.io/zeocreator/guides/runtime-host/)
+to export the provider inventory and prepare the real portfolio request.
+Creator/Core conformance is verified; Runtime's Go supervision, durable recovery
+and managed-agent acceptance remain separate integration work.
 
 ## Install
 
 Install the public `zeocreator` distribution on Python 3.14 or newer:
 
 ```console
-uv add "zeocreator==0.5.3"
+uv add "zeocreator==0.5.4"
 ```
 
 or:
 
 ```console
-python -m pip install "zeocreator==0.5.3"
+python -m pip install "zeocreator==0.5.4"
 ```
 
-Zeocore 0.9.0 is installed automatically. The distribution is `zeocreator`, the
+Zeocore 0.11.0 is installed automatically. The distribution is `zeocreator`, the
 Python import is `zeo_creator`, and the CLI is `zeo-creator`. Earlier Git-only
 installations used the distribution name `zeo-creator`; remove that distribution
 before installing this release, or use a fresh virtual environment.
@@ -208,7 +207,7 @@ any private production taxonomy.
 python -m zeo_creator.examples.complete_content_portfolio
 ```
 
-Explore [`reference/examples`](https://github.com/profrodai/zeocreator/tree/v0.5.3/reference/examples), follow the
+Explore [`reference/examples`](https://github.com/profrodai/zeocreator/tree/v0.5.4/reference/examples), follow the
 [portfolio tutorial](https://profrodai.github.io/zeocreator/tutorials/content-portfolio/), or read the
 [production adapter guide](https://profrodai.github.io/zeocreator/guides/production-adapters/).
 
@@ -229,8 +228,8 @@ wheel behavior. See [architecture](https://profrodai.github.io/zeocreator/concep
 
 ## Status
 
-Version 0.5.3 is the first PyPI release, with independently reviewed email v4
-contracts and 135 portable receipt cases. This remains an early 0.x API: pin the
+Version 0.5.4 adds the shared Runtime host integration while preserving all 29
+capability IDs, independently reviewed email v4 contracts and 135 portable receipt cases. This remains an early 0.x API: pin the
 package and contract versions. Release publication does not establish live
 HubSpot/Kit interoperability; execution and account qualification belong to the host.
 
