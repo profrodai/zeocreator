@@ -1,13 +1,14 @@
 # Releases and readiness
 
-## Version 0.5.3
+## Version 0.5.4
 
-The first PyPI release uses the distribution name `zeocreator`, import
-`zeo_creator` and CLI `zeo-creator`. Python 3.14+ and Zeocore 0.9.0 are required.
-The Operator authorized PyPI publication on 2026-09-09 after both independent
-reviewers accepted the complete Creator email commission and its follow-ups.
+This release adds the shared Runtime host integration using
+`zeocore[runtime-host]==0.11.0`. The distribution remains `zeocreator`, import
+`zeo_creator` and CLI `zeo-creator`, on Python 3.14+.
+The Operator authorized publication on 2026-09-10. The previous
+[0.5.3 release notes](releases/0.5.3.md) remain available as historical evidence.
 
-Install with `python -m pip install "zeocreator==0.5.3"` in a Python 3.14+
+Install with `python -m pip install "zeocreator==0.5.4"` in a Python 3.14+
 environment. Follow the [installation guide](getting-started/installation.md)
 for a complete isolated setup and migration from the older Git-only distribution.
 
@@ -16,9 +17,14 @@ for a complete isolated setup and migration from the older Git-only distribution
 The package exposes 29 capabilities, including nine input-only email v4 capabilities.
 Verification covers formatting, Ruff, strict typing, tests, deterministic schema,
 corpus and example exports, strict documentation, JavaScript digests, wheel and
-sdist metadata, and installed-wheel behavior outside the checkout. All seven
+sdist metadata, and installed-wheel behavior outside the checkout. All eight
 examples are installed; email programs exercise three isolated publications,
 eight programs and 104 simulated proposals. The portable receipt corpus has 135 cases.
+
+The source gate runs 355 tests. Another 34 conformance tests run outside the
+checkout against the installed Core host and Creator wheel, including real
+planner execution, artifact acceptance and refusal paths through a labelled
+IPC test peer. These establish Creator/Core behavior, not deployed Runtime acceptance.
 
 The accepted schema and corpus bytes are unchanged by packaging this release.
 Package, capability and schema versions remain independent. Historical email
@@ -34,7 +40,7 @@ exact uploaded version on the minimum Python version, and create the GitHub
 Release from `RELEASE_NOTES.md`. Creator also checks tag/metadata/notes agreement
 before upload and waits for index smoke tests before announcing the release.
 
-The configured pending publisher is project `zeocreator`, owner `profrodai`,
+The configured trusted publisher is project `zeocreator`, owner `profrodai`,
 repository `zeocreator`, workflow filename `publish.yml`, environment unrestricted
 (`Any`). The publishing job therefore omits an environment constraint. No PyPI
 API token is stored. See [PyPI trusted publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/).
@@ -63,8 +69,11 @@ dependencies from PyPI, avoiding mixed-index dependency resolution.
 Creator designs and evaluates email programs. Zeocore owns public provider
 contracts/lowering; ZEOconnect owns execution and credential custody; Runtime owns
 authority, schedules and durable reconciliation. Newsroom owns persisted observations.
-The released dependency is Zeocore 0.9.0. Later source adapters are not proof of a
-released shared contract or authenticated interoperability with this package.
+The released dependency is Zeocore 0.11.0. Creator exposes inventory and request
+preparation for its shared host. Runtime still owns Go supervision, durable
+operation recovery, artifact retrieval and managed-agent acceptance. See the
+[Runtime host guide](guides/runtime-host.md) for the exact boundary.
+Publication does not establish authenticated email-provider interoperability.
 
 Hosts must pass the pinned 135-case v2 corpus with their own validators, authenticate
 issuers and account/effect authority, verify current remote state, and qualify

@@ -1,19 +1,16 @@
 # Call Creator through the shared Runtime host
 
-Creator 0.5.4 is the source candidate for Zeocore **0.11.0** and its
-`runtime-host` extra. Creator 0.5.3 on PyPI pins Core 0.9.0 and cannot use this
-host. Until 0.5.4 is published, install the verified candidate wheel; do not
-override 0.5.3's dependency or install an implicitly selected latest version.
+Creator **0.5.4** installs Zeocore **0.11.0** and its `runtime-host` extra from
+PyPI. Install the exact Creator release in a fresh environment. Upgrading from
+0.5.3 also upgrades Core; do not override the older package's dependency pin.
 
 ## Install a pinned provider
 
-Build in the candidate checkout, then install outside it:
+Install from PyPI, then export the installed provider and sample request:
 
 ```console
-uv sync --frozen
-make verify
 uv venv --python 3.14 /tmp/creator-host
-uv pip install --python /tmp/creator-host/bin/python dist/zeocreator-0.5.4-py3-none-any.whl
+uv pip install --python /tmp/creator-host/bin/python "zeocreator==0.5.4"
 /tmp/creator-host/bin/zeo-creator doctor --json
 /tmp/creator-host/bin/zeo-creator runtime-provider > /tmp/creator-inventory.json
 /tmp/creator-host/bin/python -m zeo_creator.examples.runtime_portfolio > /tmp/creator-request.json
@@ -28,7 +25,7 @@ factory; execution uses Core's `zeo-capability` entry point.
 | Provider field | Value |
 | --- | --- |
 | Distribution | `zeocreator` |
-| Candidate version | `0.5.4` |
+| Released version | `0.5.4` |
 | Factory | `zeo_creator.registry:capability_registry` |
 | Core dependency | `zeocore[runtime-host]==0.11.0` |
 | Host protocol | `1` |
