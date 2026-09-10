@@ -95,6 +95,7 @@ nav:
       - Validate and prepare distribution: guides/delivery-distribution.md
       - Assess performance: guides/performance.md
       - Integrate a runner: guides/runner-integration.md
+      - Call through Runtime: guides/runtime-host.md
   - Concepts:
       - Architecture: concepts/architecture.md
       - Continuous editorial operations: concepts/continuous-editorial-operations.md
@@ -108,5 +109,6 @@ nav:
   - Project:
       - Contributing: contributing.md
       - Zeocore boundary: adr/0001-zeocore-version-and-runtime-boundary.md
+      - Runtime host decision: adr/0002-zeocore-runtime-host.md
       - Release readiness: release-readiness.md
       - Legacy removal: removal-report.md

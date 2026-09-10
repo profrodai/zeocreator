@@ -76,6 +76,7 @@ examples:
 	$(UV) run python examples/assess_performance.py
 	$(UV) run python examples/complete_content_portfolio.py
 	$(UV) run python examples/email_marketing.py
+	$(UV) run python examples/runtime_portfolio.py
 
 reference-check: reference
 	git diff --exit-code -- reference src/zeo_creator/schemas src/zeo_creator/reference_artifacts src/zeo_creator/examples
@@ -89,7 +90,7 @@ digest-vectors:
 dist-check:
 	rm -rf dist
 	$(UV) build
-	$(UV) run python -m scripts.check_distribution_v8
+	$(UV) run python -m scripts.check_distribution_v9
 
 release-check:
 	$(UV) run python -m scripts.check_release_v1

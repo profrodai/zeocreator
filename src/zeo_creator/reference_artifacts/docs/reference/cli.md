@@ -23,6 +23,19 @@ Emit OpenAI-compatible function projections:
 zeo-creator capabilities --projection openai
 ```
 
+## `zeo-creator runtime-provider`
+
+Added in the 0.5.4 source candidate. Emit the complete installed inventory as
+one canonical JSON document for trusted Runtime provisioning:
+
+```console
+zeo-creator runtime-provider
+```
+
+This performs no invocation or admission. Runtime supplies the verified
+`environment_digest` and `generation` to form Core's `ProviderBinding`, then
+uses the [shared host](../guides/runtime-host.md) for scoped discovery and calls.
+
 ## `zeo-creator doctor`
 
 Check the interpreter, exact Zeocore version, manifest discovery, and projection

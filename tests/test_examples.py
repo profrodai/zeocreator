@@ -37,5 +37,6 @@ def test_expected_example_set_is_present() -> None:
         "create_content_brief.py",
         "inspect_capabilities.py",
         "research_connector.py",
+        "runtime_portfolio.py",
         "validate_and_prepare.py",
     }
