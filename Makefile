@@ -90,7 +90,7 @@ digest-vectors:
 dist-check:
 	rm -rf dist
 	$(UV) build
-	$(UV) run python -m scripts.check_distribution_v9
+	$(UV) run python -m scripts.check_distribution_v10
 
 release-check:
 	$(UV) run python -m scripts.check_release_v1

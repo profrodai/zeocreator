@@ -52,4 +52,4 @@ jobs:
           "$GITHUB_WORKSPACE/.wheel-smoke/bin/zeo-creator" contracts export --output="$smoke_dir/schemas"
           test -f "$smoke_dir/schemas/artifact-manifest.v1.schema.json"
           version=$("$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -c "import zeo_creator; print(zeo_creator.__version__)")
-          "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" "$GITHUB_WORKSPACE/scripts/smoke_installed_v1.py" "$version"
+          "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" "$GITHUB_WORKSPACE/scripts/smoke_installed_v2.py" "$version"
