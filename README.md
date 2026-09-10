@@ -50,6 +50,15 @@ flowchart LR
 - **Runner-ready.** The same capabilities work in a bounded agent workflow or managed runtime.
 - **Portable.** RFC 8785 digests and packaged JSON Schemas support Python, TypeScript, and Go consumers.
 
+## Runtime integration candidate
+
+The current 0.5.4 source candidate upgrades to Zeocore 0.11.0 and its shared
+Runtime host. Use the [Runtime integration guide](docs/guides/runtime-host.md)
+to build the candidate wheel, export its provider inventory, and prepare the
+real portfolio request. Creator/Core conformance is separate from Runtime's
+Go supervision and managed-agent acceptance. The PyPI instructions below
+remain for the released 0.5.3 package.
+
 ## Install
 
 Install the public `zeocreator` distribution on Python 3.14 or newer:

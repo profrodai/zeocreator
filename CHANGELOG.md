@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.4 — 2026-09-10
+
+Source candidate; not yet published.
+
+- Upgrade to the released `zeocore[runtime-host]==0.11.0` dependency.
+- Add canonical installed-provider inventory and strict normalized request helpers.
+- Expose the existing 29-capability factory to the shared Runtime host.
+- Package an offline portfolio invocation example and document exact launch/artifact bindings.
+- Exercise the installed host, real Creator planner and refusal paths through a labelled test peer.
+- Preserve business schemas, email receipt cases and the boundary to Runtime authority.
+
 ## 0.5.3 — 2026-09-09
 
 - First PyPI release as `zeocreator`; preserve the `zeo_creator` import and `zeo-creator` CLI.

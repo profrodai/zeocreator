@@ -66,7 +66,7 @@ jobs:
           smoke_dir=$(mktemp -d)
           cd "$smoke_dir"
           "$RUNNER_TEMP/creator-wheel/bin/zeo-creator" doctor --json
-          "$RUNNER_TEMP/creator-wheel/bin/python" "$GITHUB_WORKSPACE/scripts/smoke_installed_v1.py" "$version"
+          "$RUNNER_TEMP/creator-wheel/bin/python" "$GITHUB_WORKSPACE/scripts/smoke_installed_v2.py" "$version"
       - name: Read and verify built release metadata
         id: metadata
         run: |
@@ -136,10 +136,10 @@ jobs:
         run: sleep 30
       - name: Smoke-test PyPI
         if: needs.publish-pypi.result == 'success'
-        run: uv run --no-project --python "$PYTHON_FLOOR" python scripts/smoke_index_v1.py pypi "$EXPECTED_VERSION" "$PYTHON_FLOOR"
+        run: uv run --no-project --python "$PYTHON_FLOOR" python scripts/smoke_index_v2.py pypi "$EXPECTED_VERSION" "$PYTHON_FLOOR"
       - name: Smoke-test TestPyPI
         if: needs.publish-testpypi.result == 'success'
-        run: uv run --no-project --python "$PYTHON_FLOOR" python scripts/smoke_index_v1.py testpypi "$EXPECTED_VERSION" "$PYTHON_FLOOR"
+        run: uv run --no-project --python "$PYTHON_FLOOR" python scripts/smoke_index_v2.py testpypi "$EXPECTED_VERSION" "$PYTHON_FLOOR"
 
   github-release:
     name: create the GitHub Release

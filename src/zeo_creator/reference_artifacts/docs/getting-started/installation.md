@@ -1,5 +1,9 @@
 # Installation
 
+For the **0.5.4 source candidate with Zeocore 0.11.0**, follow the
+[Runtime host integration guide](../guides/runtime-host.md). That candidate
+is not yet on PyPI. The instructions below describe released 0.5.3.
+
 Install `zeocreator==0.5.3` from PyPI with Python 3.14 or newer. Zeocore 0.9.0 is
 installed automatically; no provider extras, credentials or accounts are needed.
 

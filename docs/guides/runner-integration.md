@@ -3,6 +3,14 @@
 ZEO Creator is deliberately runner-neutral. Sovereign Agent and a managed ZEO
 runtime use the same capability registry, request models, and results.
 
+## Managed Runtime host
+
+For Creator 0.5.4 with Zeocore 0.11.0, use the
+[shared host integration](runtime-host.md). It exports an exact installed
+inventory and normalizes requests before Runtime admission. Production managed
+invocation goes through Core's host and the live Runtime channel. The direct
+Python construction below describes the library boundary, not an alternate grant.
+
 ## Discover capabilities
 
 ```python

@@ -1,3 +1,23 @@
+# zeocreator 0.5.4
+
+**Source candidate — not yet published.** Creator now consumes
+`zeocore[runtime-host]==0.11.0` and exposes its complete provider inventory and
+canonical request preparation for Runtime. The shared Core host invokes the
+existing factory `zeo_creator.registry:capability_registry`.
+
+The installed `runtime_portfolio` example emits the real planner request. The
+Creator/Core subprocess conformance gate exercises actual planner invocation,
+artifact acceptance and negative paths with a labelled test IPC peer. Runtime's
+Go supervisor, durable operation recovery and managed-agent proof remain its
+integration acceptance work. Two acquisition capabilities require service ports
+not injected by Core's first host and correctly remain unavailable.
+
+All 29 capability IDs, business schemas and email receipt corpus remain compatible.
+Build/install the candidate wheel as described in
+[the integration guide](docs/guides/runtime-host.md); publication is a separate act.
+
+The previous release notes are retained below as historical release evidence.
+
 # zeocreator 0.5.3
 
 **The first PyPI release brings independently reviewed, provider-neutral email

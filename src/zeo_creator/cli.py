@@ -140,7 +140,7 @@ def doctor(json_output: bool = typer.Option(False, "--json")) -> None:
     zeocore_version = importlib.metadata.version("zeocore")
     checks = {
         "python_3_14_or_newer": sys.version_info >= (3, 14),
-        "zeocore_0_9_0": zeocore_version == "0.9.0",
+        "zeocore_0_11_0": zeocore_version == "0.11.0",
         "twenty_nine_manifests": len(capability_manifests()) == 29,
         "twenty_nine_openai_projections": len(openai_tool_projections()) == 29,
     }
@@ -157,6 +157,20 @@ def doctor(json_output: bool = typer.Option(False, "--json")) -> None:
             console.print(f"{'ready' if passed else 'failed':>6}  {name}")
     if not payload["ok"]:
         raise typer.Exit(1)
+
+
+@app.command("runtime-provider")
+def runtime_provider() -> None:
+    """Emit canonical installed-provider JSON for trusted Runtime provisioning.
+
+    Runtime supplies environment_digest and generation to form ProviderBinding.
+    This is offline metadata preparation, not scoped discovery or authorization.
+    """
+    from zeo_core.adapters.runtime_host.canonical import canonical_bytes
+
+    from zeo_creator.provider import provider_inventory
+
+    typer.echo(canonical_bytes(provider_inventory()).decode())
 
 
 def main() -> None:
